@@ -1,3 +1,6 @@
+
+![20250327_2252_Novara Engine Logo Design_simple_compose_01jqcsekc6enfvefw5tn10rgxx](https://github.com/user-attachments/assets/1abc67da-a420-488d-920a-dbb4683bfeb9)
+
 # Novara Engine 🚀  
 
 Novara Engine is a **DirectX-based** game engine built from the ground up, inspired by the Overlord Engine from the Graphics Programming 2 course. The goal of this project is to **modernize and fully recreate** the engine while implementing best practices and up-to-date technologies.
