@@ -21,7 +21,7 @@ Novara Engine is a **DirectX-based** game engine built from the ground up, inspi
 
 ## 🛠️ **Building & Running**
 1. Clone the repository:
-git clone https://github.com/realdcoutinho/NovaraEngine.git
+git clone https://github.com/realdcoutinho/Novara-Engine.git
 2. Open `NovaraEngine.sln` in **Visual Studio 2022**.
 3. Build the solution in **Debug x64**.
 4. Run the engine!
