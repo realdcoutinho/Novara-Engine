@@ -5,7 +5,6 @@ if(TARGET NovaraEngine)
     return()
 endif()
 
-project(NovaraEngine LANGUAGES CXX)
 
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 20)
@@ -62,7 +61,7 @@ target_include_directories(NovaraEngine PUBLIC
 )
 
 # External dependencies
-set(EXTERNAL_DIR "${CMAKE_SOURCE_DIR}/GP2_Libraries")
+set(EXTERNAL_DIR "${CMAKE_SOURCE_DIR}/Libraries")
 
 message(STATUS "External Libraries Directory: ${EXTERNAL_DIR}")
 
@@ -78,7 +77,7 @@ include_directories(
 )
 
 
-set(vld_include "${CMAKE_SOURCE_DIR}/GP2_Libraries/vld/include")
+set(vld_include "${CMAKE_SOURCE_DIR}/Libraries/vld/include")
 
 
 message(STATUS "External Libraries Directory: ${vld_include}")

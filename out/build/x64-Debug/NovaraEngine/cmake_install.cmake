@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/DiogoCoutinho/Documents/GitHub/Novara/NovaraEngine
+# Install script for directory: C:/Users/DiogoCoutinho/Documents/GitHub/Novara-Engine/NovaraEngine
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Users/DiogoCoutinho/Documents/GitHub/Novara/out/install/x64-Debug")
+  set(CMAKE_INSTALL_PREFIX "C:/Users/DiogoCoutinho/Documents/GitHub/Novara-Engine/out/install/x64-Debug")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

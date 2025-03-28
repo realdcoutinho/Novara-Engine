@@ -2,5 +2,5 @@
 
 #pragma system_header
 #ifdef __cplusplus
-#include "C:/Users/DiogoCoutinho/Documents/GitHub/Novara/NovaraProject/stdafx.h"
+#include "C:/Users/DiogoCoutinho/Documents/GitHub/Novara-Engine/NovaraProject/stdafx.h"
 #endif // __cplusplus

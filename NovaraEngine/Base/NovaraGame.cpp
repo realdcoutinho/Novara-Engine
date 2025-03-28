@@ -113,8 +113,8 @@ HRESULT NovaraGame::InitializeWindow()
 {
 	//1. Create Windowclass
 	//*********************
-	const auto className = L"NovaraWindowClass";
-	WNDCLASSW windowClass;
+	const auto className = "NovaraWindowClass";
+	WNDCLASS windowClass;
 	ZeroMemory(&windowClass, sizeof(WNDCLASS));
 	windowClass.hCursor = LoadCursor(nullptr, IDC_ARROW);
 	windowClass.hIcon = nullptr;
@@ -143,7 +143,7 @@ HRESULT NovaraGame::InitializeWindow()
 	const int x = outputDesc.DesktopCoordinates.left + ((outputDesc.DesktopCoordinates.right - outputDesc.DesktopCoordinates.left)/2) - winWidth/2;
 	const int y = (outputDesc.DesktopCoordinates.bottom - outputDesc.DesktopCoordinates.top)/2 - winHeight/2;
 
-	m_GameContext.windowHandle = CreateWindowW(className,
+	m_GameContext.windowHandle = CreateWindow(className,
 									m_GameContext.windowTitle.c_str(),
 									WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX, 
 									x, 
