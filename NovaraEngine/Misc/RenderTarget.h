@@ -16,7 +16,7 @@ struct RENDERTARGET_DESC
 	//as a ShaderResourceView (Texture in a shader)
 	bool enableColorSRV{false};
 	//Generate MipMaps (ColorSRV Only)
-	bool generateMipMaps_Color;
+	bool generateMipMaps_Color{false};
 
 	//Depth buffer format (DepthStencil)
 	DXGI_FORMAT depthFormat{ DXGI_FORMAT_D32_FLOAT };

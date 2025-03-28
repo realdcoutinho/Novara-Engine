@@ -16,37 +16,37 @@ ParticleEmitterComponent::ParticleEmitterComponent(const std::wstring& assetFile
 
 ParticleEmitterComponent::~ParticleEmitterComponent()
 {
-	TODO_W9(L"Implement Destructor")
+	//TODO_W9(L"Implement Destructor")
 }
 
 void ParticleEmitterComponent::Initialize(const SceneContext& /*sceneContext*/)
 {
-	TODO_W9(L"Implement Initialize")
+	//TODO_W9(L"Implement Initialize")
 }
 
 void ParticleEmitterComponent::CreateVertexBuffer(const SceneContext& /*sceneContext*/)
 {
-	TODO_W9(L"Implement CreateVertexBuffer")
+	//TODO_W9(L"Implement CreateVertexBuffer")
 }
 
 void ParticleEmitterComponent::Update(const SceneContext& /*sceneContext*/)
 {
-	TODO_W9(L"Implement Update")
+	//TODO_W9(L"Implement Update")
 }
 
 void ParticleEmitterComponent::UpdateParticle(Particle& /*p*/, float /*elapsedTime*/) const
 {
-	TODO_W9(L"Implement UpdateParticle")
+	//TODO_W9(L"Implement UpdateParticle")
 }
 
 void ParticleEmitterComponent::SpawnParticle(Particle& /*p*/)
 {
-	TODO_W9(L"Implement SpawnParticle")
+	//TODO_W9(L"Implement SpawnParticle")
 }
 
 void ParticleEmitterComponent::PostDraw(const SceneContext& /*sceneContext*/)
 {
-	TODO_W9(L"Implement PostDraw")
+	//TODO_W9(L"Implement PostDraw")
 }
 
 void ParticleEmitterComponent::DrawImGui()

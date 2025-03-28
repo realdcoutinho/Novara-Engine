@@ -108,7 +108,7 @@ void PostProcessingMaterial::UpdateBaseEffectVariables(const SceneContext& /*sce
 
 void PostProcessingMaterial::DrawPass(const SceneContext& /*sceneContext*/, ID3DX11EffectTechnique* /*pTechnique*/, RenderTarget* /*pDestination*/)
 {
-	TODO_W10(L"Implement PostProcessingMaterial Draw function")
+	//TODO_W10(L"Implement PostProcessingMaterial Draw function")
 	//This function invokes a Draw Call for our full screen quad
 	//The draw call uses pTechnique for rendering and renders to the given destination RenderTarget (pDestination)
 

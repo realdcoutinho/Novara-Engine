@@ -1,0 +1,10 @@
+C:/Users/DiogoCoutinho/Documents/GitHub/Novara/out/build/x64-Debug/CMakeFiles/edit_cache.dir
+C:/Users/DiogoCoutinho/Documents/GitHub/Novara/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
+C:/Users/DiogoCoutinho/Documents/GitHub/Novara/out/build/x64-Debug/NovaraEngine/CMakeFiles/NovaraEngine.dir
+C:/Users/DiogoCoutinho/Documents/GitHub/Novara/out/build/x64-Debug/NovaraEngine/CMakeFiles/edit_cache.dir
+C:/Users/DiogoCoutinho/Documents/GitHub/Novara/out/build/x64-Debug/NovaraEngine/CMakeFiles/rebuild_cache.dir
+C:/Users/DiogoCoutinho/Documents/GitHub/Novara/out/build/x64-Debug/NovaraProject/CMakeFiles/NovaraProject.dir
+C:/Users/DiogoCoutinho/Documents/GitHub/Novara/out/build/x64-Debug/NovaraProject/CMakeFiles/edit_cache.dir
+C:/Users/DiogoCoutinho/Documents/GitHub/Novara/out/build/x64-Debug/NovaraProject/CMakeFiles/rebuild_cache.dir
+C:/Users/DiogoCoutinho/Documents/GitHub/Novara/out/build/x64-Debug/NovaraProject/NovaraEngine/CMakeFiles/edit_cache.dir
+C:/Users/DiogoCoutinho/Documents/GitHub/Novara/out/build/x64-Debug/NovaraProject/NovaraEngine/CMakeFiles/rebuild_cache.dir

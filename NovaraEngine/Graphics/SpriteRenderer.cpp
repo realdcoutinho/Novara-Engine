@@ -46,7 +46,7 @@ SpriteRenderer::~SpriteRenderer()
 
 void SpriteRenderer::UpdateBuffer(const SceneContext& /*sceneContext*/)
 {
-	TODO_W4(L"Complete UpdateBuffer")
+	//TODO_W4(L"Complete UpdateBuffer")
 
 	if (!m_pVertexBuffer || m_Sprites.size() > m_BufferSize)
 	{

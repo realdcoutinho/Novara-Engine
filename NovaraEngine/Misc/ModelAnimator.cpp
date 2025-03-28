@@ -9,7 +9,7 @@ ModelAnimator::ModelAnimator(MeshFilter* pMeshFilter):
 
 void ModelAnimator::Update(const SceneContext& /*sceneContext*/)
 {
-	TODO_W6_();
+	//TODO_W6_();
 
 	//We only update the transforms if the animation is running and the clip is set
 	if (m_IsPlaying && m_ClipSet)
@@ -52,7 +52,7 @@ void ModelAnimator::Update(const SceneContext& /*sceneContext*/)
 
 void ModelAnimator::SetAnimation(const std::wstring& /*clipName*/)
 {
-	TODO_W6_()
+	//TODO_W6_()
 	//Set m_ClipSet to false
 	//Iterate the m_AnimationClips vector and search for an AnimationClip with the given name (clipName)
 	//If found,
@@ -64,7 +64,7 @@ void ModelAnimator::SetAnimation(const std::wstring& /*clipName*/)
 
 void ModelAnimator::SetAnimation(UINT /*clipNumber*/)
 {
-	TODO_W6_()
+	//TODO_W6_()
 	//Set m_ClipSet to false
 	//Check if clipNumber is smaller than the actual m_AnimationClips vector size
 	//If not,
@@ -78,7 +78,7 @@ void ModelAnimator::SetAnimation(UINT /*clipNumber*/)
 
 void ModelAnimator::SetAnimation(const AnimationClip& /*clip*/)
 {
-	TODO_W6_()
+	//TODO_W6_()
 	//Set m_ClipSet to true
 	//Set m_CurrentClip
 
@@ -87,7 +87,7 @@ void ModelAnimator::SetAnimation(const AnimationClip& /*clip*/)
 
 void ModelAnimator::Reset(bool /*pause*/)
 {
-	TODO_W6_()
+	//TODO_W6_()
 	//If pause is true, set m_IsPlaying to false
 
 	//Set m_TickCount to zero
