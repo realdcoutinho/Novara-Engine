@@ -22,12 +22,27 @@ Novara Engine is a **DirectX-based** game engine built from the ground up, inspi
 - Audio integration
 - Playable Game
 
-## 🛠️ **Building & Running**
-1. Clone the repository:
-git clone https://github.com/realdcoutinho/Novara-Engine.git
-2. Open `NovaraEngine.sln` in **Visual Studio 2022**.
-3. Build the solution in **Debug x64**.
-4. Run the engine!
+🛠️ Building & Running
+✅ Requirements
+CMake (v3.10 or higher)
+MSVC Toolchain (via Visual Studio 2022 or Build Tools for Visual Studio)
+Windows SDK
+⚠️ GCC and Clang are not supported. This project requires the MSVC compiler due to its reliance on Windows-specific features and DirectX.
+
+🚀 Building the Engine
+You can build and run Novara Engine using your preferred workflow:
+
+🧩 Option 1: CLion (Recommended)
+Open the project folder in CLion
+Go to File > Settings > Build, Execution, Deployment > Toolchains
+Set the toolchain to use Visual Studio (MSVC)
+CLion will automatically detect CMake and generate all necessary build files
+
+🎯 Option 2: Visual Studio (CMake-based Workflow)
+Open Visual Studio 2022
+Select "Open a local folder" and choose the root of the project
+Visual Studio will detect the CMakeLists.txt file and configure the project automatically
+
 
 ## 🔥 **Contributing**
 This is an ongoing personal project, but contributions, feedback, and suggestions are welcome!
