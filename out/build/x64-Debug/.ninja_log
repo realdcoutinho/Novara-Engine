@@ -1,0 +1,8 @@
+# ninja log v6
+19	61	7650073754404778	NovaraProject/CMakeFiles/MyGame.dir/MainGame.cpp.obj	afa8e62820f8096f
+14	782	7650073754368757	NovaraProject/CMakeFiles/MyGame.dir/Main.cpp.obj	e4e325c75f723f77
+9	1088	7650073754318743	NovaraEngine/CMakeFiles/NovaraEngine.dir/cmake_pch.cxx.obj	e31cdba5c325d3c1
+1088	1143	7650073765092267	NovaraEngine/CMakeFiles/NovaraEngine.dir/Base/NovaraGame.cpp.obj	f35ede8023f4b681
+1092	1222	7650073765149932	NovaraEngine/CMakeFiles/NovaraEngine.dir/Scenegraph/GameObject.cpp.obj	21572fba519d77fa
+1222	1264	7650073766450809	NovaraEngine/NovaraEngine.lib	73d1ce2ab2b71886
+1264	1547	7650073766866283	NovaraProject/MyGame.exe	9542e478d68aff7c
