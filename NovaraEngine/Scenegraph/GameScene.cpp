@@ -154,7 +154,7 @@ void GameScene::RootDraw()
 #pragma region SHADOW PASS
 	//SHADOW_PASS
 	//+++++++++++
-	TODO_W8(L"Implement Shadow Pass")
+	//TODO_W8(L"Implement Shadow Pass")
 	//1. BEGIN > ShadowMapRenderer::Begin (Initiate the ShadowPass)
 	//2. DRAW_LOOP > For every GameObject (m_pChildren), call GameObject::RootShadowMapDraw
 	//3. END > ShadowMapRenderer::End (Terminate the ShadowPass)
@@ -196,7 +196,7 @@ void GameScene::RootDraw()
 	//POST-PROCESSING_PASS
 	//++++++++++++++++++++
 
-	TODO_W10(L"Add Post-Processing PASS logic")
+	//TODO_W10(L"Add Post-Processing PASS logic")
 
 	//No need to swap RenderTargets is there aren't any PP Effects...
 	if (m_PostProcessingMaterials.size() > 0)

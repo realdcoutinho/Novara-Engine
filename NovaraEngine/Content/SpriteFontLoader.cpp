@@ -12,7 +12,7 @@ SpriteFont* SpriteFontLoader::LoadContent(const ContentLoadInfo& loadInfo)
 		return nullptr;
 	}
 
-	TODO_W7(L"Implement SpriteFontLoader >> Parse .fnt file")
+	//TODO_W7(L"Implement SpriteFontLoader >> Parse .fnt file")
 	//See BMFont Documentation for Binary Layout
 
 	//Parse the Identification bytes (B,M,F)

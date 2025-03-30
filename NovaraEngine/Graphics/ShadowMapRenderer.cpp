@@ -9,7 +9,7 @@ ShadowMapRenderer::~ShadowMapRenderer()
 
 void ShadowMapRenderer::Initialize()
 {
-	TODO_W8(L"Implement Initialize")
+	//TODO_W8(L"Implement Initialize")
 	//1. Create a separate RenderTarget (see RenderTarget class), store in m_pShadowRenderTarget
 	//	- RenderTargets are initialized with the RenderTarget::Create function, requiring a RENDERTARGET_DESC
 	//	- Initialize the relevant fields of the RENDERTARGET_DESC (enableColorBuffer:false, enableDepthSRV:true, width & height)
@@ -22,7 +22,7 @@ void ShadowMapRenderer::Initialize()
 
 void ShadowMapRenderer::UpdateMeshFilter(const SceneContext& /*sceneContext*/, MeshFilter* /*pMeshFilter*/) const
 {
-	TODO_W8(L"Implement UpdateMeshFilter")
+	//TODO_W8(L"Implement UpdateMeshFilter")
 	//Here we want to Update the MeshFilter of ModelComponents that need to be rendered to the ShadowMap
 	//Updating the MeshFilter means that we want to create a corresponding VertexBuffer for our ShadowGenerator material
 
@@ -33,7 +33,7 @@ void ShadowMapRenderer::UpdateMeshFilter(const SceneContext& /*sceneContext*/, M
 
 void ShadowMapRenderer::Begin(const SceneContext& /*sceneContext*/)
 {
-	TODO_W8(L"Implement Begin")
+	//TODO_W8(L"Implement Begin")
 	//This function is called once right before we start the Shadow Pass (= generating the ShadowMap)
 	//This function is responsible for setting the pipeline into the correct state, meaning
 	//	- Making sure the ShadowMap is unbound from the pipeline as a ShaderResource (SRV), so we can bind it as a RenderTarget (RTV)
@@ -66,7 +66,7 @@ void ShadowMapRenderer::Begin(const SceneContext& /*sceneContext*/)
 
 void ShadowMapRenderer::DrawMesh(const SceneContext& /*sceneContext*/, MeshFilter* /*pMeshFilter*/, const XMFLOAT4X4& /*meshWorld*/, const std::vector<XMFLOAT4X4>& /*meshBones*/)
 {
-	TODO_W8(L"Implement DrawMesh")
+	//TODO_W8(L"Implement DrawMesh")
 	//This function is called for every mesh that needs to be rendered on the shadowmap (= cast shadows)
 
 	//1. Figure out the correct ShadowGeneratorType (Static or Skinned)
@@ -87,7 +87,7 @@ void ShadowMapRenderer::DrawMesh(const SceneContext& /*sceneContext*/, MeshFilte
 
 void ShadowMapRenderer::End(const SceneContext&) const
 {
-	TODO_W8(L"Implement End")
+	//TODO_W8(L"Implement End")
 	//This function is called at the end of the Shadow-pass, all shadow-casting meshes should be drawn to the ShadowMap at this point.
 	//Now we can reset the Main Game Rendertarget back to the original RenderTarget, this also Unbinds the ShadowMapRenderTarget as RTV from the Pipeline, and can safely use it as a ShaderResourceView after this point.
 

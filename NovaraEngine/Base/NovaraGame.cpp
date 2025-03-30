@@ -113,7 +113,7 @@ HRESULT NovaraGame::InitializeWindow()
 {
 	//1. Create Windowclass
 	//*********************
-	const auto className = L"NovaraWindowClass";
+	const auto className = "NovaraWindowClass";
 	WNDCLASS windowClass;
 	ZeroMemory(&windowClass, sizeof(WNDCLASS));
 	windowClass.hCursor = LoadCursor(nullptr, IDC_ARROW);

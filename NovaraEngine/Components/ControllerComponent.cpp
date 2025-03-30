@@ -10,7 +10,7 @@ void ControllerComponent::Initialize(const SceneContext& /*sceneContext*/)
 {
 	if(!m_IsInitialized)
 	{
-		TODO_W7(L"Complete the ControllerComponent Intialization")
+		//TODO_W7(L"Complete the ControllerComponent Intialization")
 	}
 }
 
