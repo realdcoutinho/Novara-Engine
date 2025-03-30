@@ -406,5 +406,5 @@ FodyWeavers.xsd
 cmake-build-debug
 
 
-.out
+*out/
 
