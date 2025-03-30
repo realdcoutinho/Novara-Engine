@@ -1,13 +1,14 @@
 //#include "stdafx.h"
-#include "GameObject.h"
-#include <algorithm>
+#include "EnginePCH.h"
 
-//GameObject::GameObject() :
-//	m_IsActive(true),
-//	m_pTransform(new TransformComponent{})
-//{
-//	AddComponent(m_pTransform);
-//}
+
+GameObject::GameObject() :
+	m_IsActive(true),
+	m_pTransform(new TransformComponent{})
+{
+	//AddComponent(m_pTransform);
+}
+
 GameObject::~GameObject()
 {
 	/*for (BaseComponent* pComp : m_pComponents)
@@ -21,32 +22,32 @@ GameObject::~GameObject()
 	}*/
 }
 
-//void GameObject::RootInitialize(const SceneContext& sceneContext)
-//{
-//	//We don't want to call init again for performances, but this is a safety net we we do a early exit instead. Could be fixed by separate objects that still need init.
-//	//assert(!m_IsInitialized); 
-//
-//	if (m_IsInitialized)
-//		return;
-//
-//	//User-Object Initialization
-//	Initialize(sceneContext);
-//
-//
-//	//Root-Component Initialization
-//	for (BaseComponent* pComp : m_pComponents)
-//	{
-//		pComp->RootInitialize(sceneContext);
-//	}
-//
-//	//Root-Object Initialization
-//	for (GameObject* pChild : m_pChildren)
-//	{
-//		pChild->RootInitialize(sceneContext);
-//	}
-//
-//	m_IsInitialized = true;
-//}
+void GameObject::RootInitialize(const SceneContext& sceneContext)
+{
+	//We don't want to call init again for performances, but this is a safety net we we do a early exit instead. Could be fixed by separate objects that still need init.
+	//assert(!m_IsInitialized); 
+
+	if (m_IsInitialized)
+		return;
+
+	//User-Object Initialization
+	Initialize(sceneContext);
+
+
+	//Root-Component Initialization
+	for (BaseComponent* pComp : m_pComponents)
+	{
+		pComp->RootInitialize(sceneContext);
+	}
+
+	//Root-Object Initialization
+	for (GameObject* pChild : m_pChildren)
+	{
+		pChild->RootInitialize(sceneContext);
+	}
+
+	m_IsInitialized = true;
+}
 //
 //void GameObject::RootPostInitialize(const SceneContext& sceneContext)
 //{
@@ -247,66 +248,66 @@ void GameObject::RemoveChild(GameObject* obj, bool deleteObject)
 		SafeDelete(obj);
 	}*/
 }
-//
-//void GameObject::AddComponent_(BaseComponent* pComponent)
-//{
-//#if _DEBUG
-//	if (typeid(*pComponent) == typeid(TransformComponent) && HasComponent<TransformComponent>())
-//	{
-//		Logger::LogWarning(L"GameObject::AddComponent > GameObject can contain only one TransformComponent!");
-//		return;
-//	}
-//
-//	for (auto* pComp : m_pComponents)
-//	{
-//		if (pComp == pComponent)
-//		{
-//			Logger::LogWarning(L"GameObject::AddComponent > GameObject already contains this component!");
-//			return;
-//		}
-//	}
-//#endif
-//
-//	m_pComponents.push_back(pComponent);
-//	pComponent->m_pGameObject = this;
-//
-//	//Signal Component (Attached to GameObject)
-//	pComponent->OnOwnerAttach(this);
-//
-//	//If object is already part of scenegraph, signal component about the 'new' scene
-//	if (GameScene* pScene = GetScene())
-//		pComponent->RootOnSceneAttach(pScene);
-//}
-//
-//void GameObject::RemoveComponent(BaseComponent* pComponent, bool deleteObject)
-//{
-//	auto it = find(m_pComponents.begin(), m_pComponents.end(), pComponent);
-//
-//#if _DEBUG
-//	if (it == m_pComponents.end())
-//	{
-//		Logger::LogWarning(L"GameObject::RemoveComponent > Component is not attached to this GameObject!");
-//		return;
-//	}
-//
-//	if (typeid(*pComponent) == typeid(TransformComponent))
-//	{
-//		Logger::LogWarning(L"GameObject::RemoveComponent > TransformComponent can't be removed!");
-//		return;
-//	}
-//#endif
-//
-//	m_pComponents.erase(it);
-//	pComponent->m_pGameObject = nullptr;
-//
-//	//Signal about GameObject detach
-//	pComponent->OnOwnerDetach(this);
-//
-//	if (deleteObject)
-//	{
-//		SafeDelete(pComponent);
-//	}
-//}
+
+void GameObject::AddComponent_(BaseComponent* pComponent)
+{
+#if _DEBUG
+	if (typeid(*pComponent) == typeid(TransformComponent) && HasComponent<TransformComponent>())
+	{
+		//Logger::LogWarning(L"GameObject::AddComponent > GameObject can contain only one TransformComponent!");
+		return;
+	}
+
+	for (auto* pComp : m_pComponents)
+	{
+		if (pComp == pComponent)
+		{
+			//Logger::LogWarning(L"GameObject::AddComponent > GameObject already contains this component!");
+			return;
+		}
+	}
+#endif
+
+	m_pComponents.push_back(pComponent);
+	pComponent->m_pGameObject = this;
+
+	//Signal Component (Attached to GameObject)
+	pComponent->OnOwnerAttach(this);
+
+	////If object is already part of scenegraph, signal component about the 'new' scene
+	//if (GameScene* pScene = GetScene())
+	//	pComponent->RootOnSceneAttach(pScene);
+}
+
+void GameObject::RemoveComponent(BaseComponent* pComponent, bool deleteObject)
+{
+	auto it = find(m_pComponents.begin(), m_pComponents.end(), pComponent);
+
+#if _DEBUG
+	if (it == m_pComponents.end())
+	{
+		//Logger::LogWarning(L"GameObject::RemoveComponent > Component is not attached to this GameObject!");
+		return;
+	}
+
+	if (typeid(*pComponent) == typeid(TransformComponent))
+	{
+		//Logger::LogWarning(L"GameObject::RemoveComponent > TransformComponent can't be removed!");
+		return;
+	}
+#endif
+
+	m_pComponents.erase(it);
+	pComponent->m_pGameObject = nullptr;
+
+	//Signal about GameObject detach
+	pComponent->OnOwnerDetach(this);
+
+	if (deleteObject)
+	{
+		//SafeDelete(pComponent);
+	}
+}
 
 void GameObject::OnTrigger(GameObject* pTriggerObject, GameObject* pOtherObject, PxTriggerAction action) const
 {

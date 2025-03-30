@@ -1,5 +1,8 @@
 #pragma once
-#include "EnginePCH.h"
+
+class BaseComponent;
+class TransformComponent;
+class SceneContext;
 
 enum class PxTriggerAction
 {
@@ -28,20 +31,20 @@ public:
 	}
 	void RemoveChild(GameObject* obj, bool deleteObject = false);
 
-	//template<typename T>
-	//std::enable_if_t<std::is_base_of_v<BaseComponent, T>, T*>
-	//	AddComponent(T* pComp)
-	//{
-	//	AddComponent_(pComp);
-	//	return pComp;
-	//}
-	//void RemoveComponent(BaseComponent* pComponent, bool deleteObject = false);
+	template<typename T>
+	std::enable_if_t<std::is_base_of_v<BaseComponent, T>, T*>
+		AddComponent(T* pComp)
+	{
+		AddComponent_(pComp);
+		return pComp;
+	}
+	void RemoveComponent(BaseComponent* pComponent, bool deleteObject = false);
 	void OnTrigger(GameObject* pTriggerObject, GameObject* pOtherObject, PxTriggerAction action) const;
 
-	//const std::wstring& GetTag() const { return m_Tag; }
-	//void SetTag(const std::wstring& tag) { m_Tag = tag; }
+	const std::wstring& GetTag() const { return m_Tag; }
+	void SetTag(const std::wstring& tag) { m_Tag = tag; }
 
-	//TransformComponent* GetTransform() const { return m_pTransform; }
+	TransformComponent* GetTransform() const { return m_pTransform; }
 
 //	GameScene* GetScene() const;
 	GameObject* GetParent() const { return m_pParentObject; }
@@ -58,50 +61,50 @@ public:
 	template <class T>
 	T* GetComponent(bool searchChildren = false)
 	{
-		//const type_info& ti = typeid(T);
-		//for (auto* component : m_pComponents)
-		//{
-		//	if (component && typeid(*component) == ti)
-		//		return static_cast<T*>(component);
-		//}
+		const type_info& ti = typeid(T);
+		for (auto* component : m_pComponents)
+		{
+			if (component && typeid(*component) == ti)
+				return static_cast<T*>(component);
+		}
 
-		//if (searchChildren)
-		//{
-		//	for (auto* child : m_pChildren)
-		//	{
-		//		if (child->GetComponent<T>(searchChildren) != nullptr)
-		//			return child->GetComponent<T>(searchChildren);
-		//	}
-		//}
+		if (searchChildren)
+		{
+			for (auto* child : m_pChildren)
+			{
+				if (child->GetComponent<T>(searchChildren) != nullptr)
+					return child->GetComponent<T>(searchChildren);
+			}
+		}
 
 		return nullptr;
 	}
 
-	//template <class T>
-	//std::vector<T*> GetComponents(bool searchChildren = false)
-	//{
-	//	/*const type_info& ti = typeid(T);
-	//	std::vector<T*> components;
+	template <class T>
+	std::vector<T*> GetComponents(bool searchChildren = false)
+	{
+		const type_info& ti = typeid(T);
+		std::vector<T*> components;
 
-	//	for (auto* component : m_pComponents)
-	//	{
-	//		if (component && typeid(*component) == ti)
-	//			components.push_back(static_cast<T*>(component));
-	//	}
+		for (auto* component : m_pComponents)
+		{
+			if (component && typeid(*component) == ti)
+				components.push_back(static_cast<T*>(component));
+		}
 
-	//	if (searchChildren)
-	//	{
-	//		for (auto* child : m_pChildren)
-	//		{
-	//			auto childComponents = child->GetComponents<T>(searchChildren);
+		if (searchChildren)
+		{
+			for (auto* child : m_pChildren)
+			{
+				auto childComponents = child->GetComponents<T>(searchChildren);
 
-	//			for (auto* childComp : childComponents)
-	//				components.push_back(static_cast<T*>(childComp));
-	//		}
-	//	}*/
+				for (auto* childComp : childComponents)
+					components.push_back(static_cast<T*>(childComp));
+			}
+		}
 
-	//	//return components;
-	//}
+		return components;
+	}
 
 	template <class T>
 	T* GetChild()
@@ -131,8 +134,8 @@ public:
 #pragma endregion Template Methods
 
 protected:
-	/*virtual void Initialize(const SceneContext&) {};
-	virtual void PostInitialize(const SceneContext&) {}
+	virtual void Initialize(const SceneContext&) {};
+	/*virtual void PostInitialize(const SceneContext&) {}
 	virtual void Draw(const SceneContext&) {}
 	virtual void PostDraw(const SceneContext&) {}
 	virtual void Update(const SceneContext&) {}*/
@@ -144,7 +147,7 @@ protected:
 private:
 	friend class GameScene; //Handles private interface
 
-	//void RootInitialize(const SceneContext& sceneContext);
+	void RootInitialize(const SceneContext& sceneContext);
 	//void RootPostInitialize(const SceneContext& sceneContext);
 	//void RootUpdate(const SceneContext& sceneContext);
 	//void RootDraw(const SceneContext& sceneContext);
@@ -154,15 +157,15 @@ private:
 	//void RootOnSceneDetach(GameScene* pScene);
 
 	void AddChild_(GameObject* pObject);
-	//void AddComponent_(BaseComponent* pComponent);
+	void AddComponent_(BaseComponent* pComponent);
 
 	std::vector<GameObject*> m_pChildren{};
-	//std::vector<BaseComponent*> m_pComponents{};
+	std::vector<BaseComponent*> m_pComponents{};
 
 	bool m_IsInitialized{}, m_IsActive{};
-	//GameScene* m_pParentScene{};
+	GameScene* m_pParentScene{};
 	GameObject* m_pParentObject{};
-	//TransformComponent* m_pTransform{};
+	TransformComponent* m_pTransform{};
 	PhysicsCallback m_OnTriggerCallback{};
-	//std::wstring m_Tag{};
+	std::wstring m_Tag{};
 };

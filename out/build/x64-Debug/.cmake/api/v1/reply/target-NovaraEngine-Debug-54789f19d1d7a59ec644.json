@@ -21,12 +21,14 @@
 		"commands" : 
 		[
 			"add_library",
+			"include_directories",
 			"target_include_directories",
 			"target_precompile_headers"
 		],
 		"files" : 
 		[
-			"NovaraEngine/CMakeLists.txt"
+			"NovaraEngine/CMakeLists.txt",
+			"CMakeLists.txt"
 		],
 		"nodes" : 
 		[
@@ -40,15 +42,24 @@
 				"parent" : 0
 			},
 			{
+				"file" : 1
+			},
+			{
 				"command" : 1,
+				"file" : 1,
+				"line" : 9,
+				"parent" : 2
+			},
+			{
+				"command" : 2,
 				"file" : 0,
 				"line" : 7,
 				"parent" : 0
 			},
 			{
-				"command" : 2,
+				"command" : 3,
 				"file" : 0,
-				"line" : 13,
+				"line" : 26,
 				"parent" : 0
 			}
 		]
@@ -68,19 +79,47 @@
 			"includes" : 
 			[
 				{
-					"backtrace" : 2,
+					"backtrace" : 3,
+					"path" : "C:/Users/diogo/Documents/GitHub/Novara-Engine/Libraries/FX11/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "C:/Users/diogo/Documents/GitHub/Novara-Engine/Libraries/DirectXTex/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "C:/Users/diogo/Documents/GitHub/Novara-Engine/Libraries/imgui/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "C:/Users/diogo/Documents/GitHub/Novara-Engine/Libraries/PhysX/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "C:/Users/diogo/Documents/GitHub/Novara-Engine/Libraries/FMOD/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "C:/Users/diogo/Documents/GitHub/Novara-Engine/Libraries/vld/include"
+				},
+				{
+					"backtrace" : 4,
 					"path" : "C:/Users/diogo/Documents/GitHub/Novara-Engine/NovaraEngine,"
 				},
 				{
-					"backtrace" : 2,
+					"backtrace" : 4,
 					"path" : "C:/Users/diogo/Documents/GitHub/Novara-Engine/NovaraEngine/Base"
 				},
 				{
-					"backtrace" : 2,
+					"backtrace" : 4,
+					"path" : "C:/Users/diogo/Documents/GitHub/Novara-Engine/NovaraEngine/Components"
+				},
+				{
+					"backtrace" : 4,
 					"path" : "C:/Users/diogo/Documents/GitHub/Novara-Engine/NovaraEngine/PCH"
 				},
 				{
-					"backtrace" : 2,
+					"backtrace" : 4,
 					"path" : "C:/Users/diogo/Documents/GitHub/Novara-Engine/NovaraEngine/Scenegraph"
 				}
 			],
@@ -96,7 +135,7 @@
 			"precompileHeaders" : 
 			[
 				{
-					"backtrace" : 3,
+					"backtrace" : 5,
 					"header" : "C:/Users/diogo/Documents/GitHub/Novara-Engine/NovaraEngine/PCH/EnginePCH.h"
 				}
 			],
@@ -118,19 +157,47 @@
 			"includes" : 
 			[
 				{
-					"backtrace" : 2,
+					"backtrace" : 3,
+					"path" : "C:/Users/diogo/Documents/GitHub/Novara-Engine/Libraries/FX11/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "C:/Users/diogo/Documents/GitHub/Novara-Engine/Libraries/DirectXTex/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "C:/Users/diogo/Documents/GitHub/Novara-Engine/Libraries/imgui/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "C:/Users/diogo/Documents/GitHub/Novara-Engine/Libraries/PhysX/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "C:/Users/diogo/Documents/GitHub/Novara-Engine/Libraries/FMOD/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "C:/Users/diogo/Documents/GitHub/Novara-Engine/Libraries/vld/include"
+				},
+				{
+					"backtrace" : 4,
 					"path" : "C:/Users/diogo/Documents/GitHub/Novara-Engine/NovaraEngine,"
 				},
 				{
-					"backtrace" : 2,
+					"backtrace" : 4,
 					"path" : "C:/Users/diogo/Documents/GitHub/Novara-Engine/NovaraEngine/Base"
 				},
 				{
-					"backtrace" : 2,
+					"backtrace" : 4,
+					"path" : "C:/Users/diogo/Documents/GitHub/Novara-Engine/NovaraEngine/Components"
+				},
+				{
+					"backtrace" : 4,
 					"path" : "C:/Users/diogo/Documents/GitHub/Novara-Engine/NovaraEngine/PCH"
 				},
 				{
-					"backtrace" : 2,
+					"backtrace" : 4,
 					"path" : "C:/Users/diogo/Documents/GitHub/Novara-Engine/NovaraEngine/Scenegraph"
 				}
 			],
@@ -146,14 +213,18 @@
 			"precompileHeaders" : 
 			[
 				{
-					"backtrace" : 3,
+					"backtrace" : 5,
 					"header" : "C:/Users/diogo/Documents/GitHub/Novara-Engine/NovaraEngine/PCH/EnginePCH.h"
 				}
 			],
 			"sourceIndexes" : 
 			[
 				1,
-				3
+				3,
+				5,
+				6,
+				8,
+				11
 			]
 		}
 	],
@@ -173,21 +244,29 @@
 			[
 				0,
 				1,
-				3
+				3,
+				5,
+				6,
+				8,
+				11
 			]
 		},
 		{
 			"name" : "Header Files",
 			"sourceIndexes" : 
 			[
-				2
+				2,
+				4,
+				7,
+				9,
+				10
 			]
 		},
 		{
 			"name" : "Precompile Header File",
 			"sourceIndexes" : 
 			[
-				4
+				12
 			]
 		}
 	],
@@ -214,6 +293,50 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 1,
 			"path" : "NovaraEngine/Scenegraph/GameObject.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "NovaraEngine/Components/BaseComponent.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 1,
+			"path" : "NovaraEngine/Components/BaseComponent.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 1,
+			"path" : "NovaraEngine/Components/TransformComponent.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "NovaraEngine/Scenegraph/GameScene.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 1,
+			"path" : "NovaraEngine/Scenegraph/GameScene.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "NovaraEngine/Base/Structs.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "NovaraEngine/Components/ControllerComponent.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 1,
+			"path" : "NovaraEngine/Components/ControllerComponent.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{

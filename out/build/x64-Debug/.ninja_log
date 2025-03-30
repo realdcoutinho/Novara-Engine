@@ -1,8 +1,17 @@
 # ninja log v6
-19	61	7650073754404778	NovaraProject/CMakeFiles/MyGame.dir/MainGame.cpp.obj	afa8e62820f8096f
-14	782	7650073754368757	NovaraProject/CMakeFiles/MyGame.dir/Main.cpp.obj	e4e325c75f723f77
-9	1088	7650073754318743	NovaraEngine/CMakeFiles/NovaraEngine.dir/cmake_pch.cxx.obj	e31cdba5c325d3c1
-1088	1143	7650073765092267	NovaraEngine/CMakeFiles/NovaraEngine.dir/Base/NovaraGame.cpp.obj	f35ede8023f4b681
-1092	1222	7650073765149932	NovaraEngine/CMakeFiles/NovaraEngine.dir/Scenegraph/GameObject.cpp.obj	21572fba519d77fa
-1222	1264	7650073766450809	NovaraEngine/NovaraEngine.lib	73d1ce2ab2b71886
-1264	1547	7650073766866283	NovaraProject/MyGame.exe	9542e478d68aff7c
+37	201	7650564957192796	build.ninja	ff834408ad71d39d
+1758	1879	7650467556589166	NovaraEngine/CMakeFiles/NovaraEngine.dir/Scenegraph/GameScene.cpp.obj	21d730c180bef24a
+22	37	7650467538770147	clean	21a4d0550fd2b6b1
+16	1741	7650467539163075	NovaraEngine/CMakeFiles/NovaraEngine.dir/cmake_pch.cxx.obj	dc14b1f320d13bb5
+25	64	7650467539253880	NovaraProject/CMakeFiles/MyGame.dir/MainGame.cpp.obj	30e7d3be58155c75
+1750	1805	7650467556499151	NovaraEngine/CMakeFiles/NovaraEngine.dir/Components/BaseComponent.cpp.obj	b5cb762d7c7202fb
+1741	1805	7650467556417876	NovaraEngine/CMakeFiles/NovaraEngine.dir/Base/NovaraGame.cpp.obj	8ea9f1b2d578196
+21	1255	7650467539213062	NovaraProject/CMakeFiles/MyGame.dir/Main.cpp.obj	6ad776a7e2cd8168
+1754	1810	7650467556539171	NovaraEngine/CMakeFiles/NovaraEngine.dir/Components/TransformComponent.cpp.obj	3b69a7b78e79985e
+1745	1896	7650467556457875	NovaraEngine/CMakeFiles/NovaraEngine.dir/Scenegraph/GameObject.cpp.obj	67e1767f1e9a6489
+1896	1940	7650467557962046	NovaraEngine/NovaraEngine.lib	571b8fe276b4ce92
+1940	2102	7650467558402251	NovaraProject/MyGame.exe	9542e478d68aff7c
+22	465	7650565186795710	NovaraEngine/CMakeFiles/NovaraEngine.dir/Components/ControllerComponent.cpp.obj	8ed80c663e37ca50
+17	514	7650565186740107	NovaraEngine/CMakeFiles/NovaraEngine.dir/Components/TransformComponent.cpp.obj	3b69a7b78e79985e
+515	569	7650565191719344	NovaraEngine/NovaraEngine.lib	3f7b256901f57618
+569	739	7650565192259021	NovaraProject/MyGame.exe	9542e478d68aff7c

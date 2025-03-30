@@ -73,14 +73,14 @@
 				{
 					"directoryIndex" : 2,
 					"id" : "MyGame::@5a12170759f0f1da234e",
-					"jsonFile" : "target-MyGame-Debug-505a7edac37812f76c55.json",
+					"jsonFile" : "target-MyGame-Debug-700bc6f09ba53d5c6cba.json",
 					"name" : "MyGame",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 1,
 					"id" : "NovaraEngine::@0476d16e4a9e6436486e",
-					"jsonFile" : "target-NovaraEngine-Debug-73a027029bfc09bdbcea.json",
+					"jsonFile" : "target-NovaraEngine-Debug-54789f19d1d7a59ec644.json",
 					"name" : "NovaraEngine",
 					"projectIndex" : 0
 				}
