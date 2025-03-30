@@ -31,7 +31,7 @@ int NovaraGame::Run(HINSTANCE hInstance)
     HWND hwnd = CreateWindowExW(
         0,                          // Optional window styles
         CLASS_NAME,                 // Window class
-        L"T",          // Window text
+        L"o",          // Window text
         WS_OVERLAPPEDWINDOW,        // Window style
 
         // Position and size

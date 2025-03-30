@@ -56,6 +56,7 @@ namespace fs = std::filesystem;
 #include "GameObject.h"
 #include "TransformComponent.h"
 #include "GameScene.h"
+#include "CameraComponent.h"
 //#include "Structs.h"
 
 //#include "Logger.h"
