@@ -46,7 +46,7 @@ public:
 
 	TransformComponent* GetTransform() const { return m_pTransform; }
 
-//	GameScene* GetScene() const;
+	GameScene* GetScene() const;
 	GameObject* GetParent() const { return m_pParentObject; }
 
 	void SetOnTriggerCallBack(PhysicsCallback callback);
@@ -135,26 +135,26 @@ public:
 
 protected:
 	virtual void Initialize(const SceneContext&) {};
-	/*virtual void PostInitialize(const SceneContext&) {}
+	virtual void PostInitialize(const SceneContext&) {}
 	virtual void Draw(const SceneContext&) {}
 	virtual void PostDraw(const SceneContext&) {}
-	virtual void Update(const SceneContext&) {}*/
-	virtual void OnParentAttach(GameObject* /*pParent*/) {}
-	virtual void OnParentDetach(GameObject* /*pPreviousParent*/) {}
-	//virtual void OnSceneAttach(GameScene* /*pScene*/) {}
-	//virtual void OnSceneDetach(GameScene* /*pScene*/) {}
+	virtual void Update(const SceneContext&) {}
+	virtual void OnParentAttach(GameObject* pParent) {}
+	virtual void OnParentDetach(GameObject* pPreviousParent) {}
+	virtual void OnSceneAttach(GameScene* pScene) {}
+	virtual void OnSceneDetach(GameScene* pScene) {}
 
 private:
 	friend class GameScene; //Handles private interface
 
 	void RootInitialize(const SceneContext& sceneContext);
-	//void RootPostInitialize(const SceneContext& sceneContext);
-	//void RootUpdate(const SceneContext& sceneContext);
-	//void RootDraw(const SceneContext& sceneContext);
-	//void RootPostDraw(const SceneContext& sceneContext); //TODO: collapse in single Draw with context
-	//void RootShadowMapDraw(const SceneContext& sceneContext) const; //TODO: collapse in single Draw with context
-	//void RootOnSceneAttach(GameScene* pScene);
-	//void RootOnSceneDetach(GameScene* pScene);
+	void RootPostInitialize(const SceneContext& sceneContext);
+	void RootUpdate(const SceneContext& sceneContext);
+	void RootDraw(const SceneContext& sceneContext);
+	void RootPostDraw(const SceneContext& sceneContext); //TODO: collapse in single Draw with context
+	void RootShadowMapDraw(const SceneContext& sceneContext) const; //TODO: collapse in single Draw with context
+	void RootOnSceneAttach(GameScene* pScene);
+	void RootOnSceneDetach(GameScene* pScene);
 
 	void AddChild_(GameObject* pObject);
 	void AddComponent_(BaseComponent* pComponent);

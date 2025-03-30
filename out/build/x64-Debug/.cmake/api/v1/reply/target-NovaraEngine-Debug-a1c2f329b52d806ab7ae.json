@@ -59,7 +59,7 @@
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 26,
+				"line" : 27,
 				"parent" : 0
 			}
 		]
@@ -121,6 +121,10 @@
 				{
 					"backtrace" : 4,
 					"path" : "C:/Users/diogo/Documents/GitHub/Novara-Engine/NovaraEngine/Scenegraph"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "C:/Users/diogo/Documents/GitHub/Novara-Engine/NovaraEngine/PhysX"
 				}
 			],
 			"language" : "CXX",
@@ -199,6 +203,10 @@
 				{
 					"backtrace" : 4,
 					"path" : "C:/Users/diogo/Documents/GitHub/Novara-Engine/NovaraEngine/Scenegraph"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "C:/Users/diogo/Documents/GitHub/Novara-Engine/NovaraEngine/PhysX"
 				}
 			],
 			"language" : "CXX",
@@ -224,7 +232,11 @@
 				5,
 				6,
 				8,
-				11
+				11,
+				13,
+				14,
+				17,
+				19
 			]
 		}
 	],
@@ -248,7 +260,11 @@
 				5,
 				6,
 				8,
-				11
+				11,
+				13,
+				14,
+				17,
+				19
 			]
 		},
 		{
@@ -259,14 +275,19 @@
 				4,
 				7,
 				9,
-				10
+				10,
+				12,
+				15,
+				16,
+				18,
+				20
 			]
 		},
 		{
 			"name" : "Precompile Header File",
 			"sourceIndexes" : 
 			[
-				12
+				21
 			]
 		}
 	],
@@ -338,6 +359,55 @@
 			"compileGroupIndex" : 1,
 			"path" : "NovaraEngine/Components/ControllerComponent.cpp",
 			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "NovaraEngine/Components/CameraComponent.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 1,
+			"path" : "NovaraEngine/Components/CameraComponent.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 1,
+			"path" : "NovaraEngine/Base/Logger.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "NovaraEngine/Base/Logger.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "NovaraEngine/PhysX/PhysxProxy.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 1,
+			"path" : "NovaraEngine/PhysX/PhysxProxy.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "NovaraEngine/PhysX/NovaraSimulationFilterShader.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 1,
+			"path" : "NovaraEngine/PhysX/PhysxErrorCallback.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "NovaraEngine/PhysX/PhysxErrorCallback.h",
+			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 0,

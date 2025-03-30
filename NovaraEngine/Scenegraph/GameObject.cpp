@@ -48,164 +48,165 @@ void GameObject::RootInitialize(const SceneContext& sceneContext)
 
 	m_IsInitialized = true;
 }
-//
-//void GameObject::RootPostInitialize(const SceneContext& sceneContext)
-//{
-//	PostInitialize(sceneContext);
-//
-//	//Root-Component Initialization
-//	for (BaseComponent* pComp : m_pComponents)
-//	{
-//		pComp->PostInitialize(sceneContext);
-//	}
-//
-//	//Root-Object Initialization
-//	for (GameObject* pChild : m_pChildren)
-//	{
-//		pChild->RootPostInitialize(sceneContext);
-//	}
-//}
-//
-//void GameObject::RootUpdate(const SceneContext& sceneContext)
-//{
-//	//User-Object Update
-//	Update(sceneContext);
-//
-//	//Component Update
-//	for (BaseComponent* pComp : m_pComponents)
-//	{
-//		pComp->Update(sceneContext);
-//	}
-//
-//	//Root-Object Update
-//	for (GameObject* pChild : m_pChildren)
-//	{
-//		pChild->RootUpdate(sceneContext);
-//	}
-//}
-//void GameObject::RootDraw(const SceneContext& sceneContext)
-//{
-//	//User-Object Draw
-//	Draw(sceneContext);
-//
-//	//Component Draw
-//	for (BaseComponent* pComp : m_pComponents)
-//	{
-//		pComp->Draw(sceneContext);
-//	}
-//
-//	//Root-Object Draw
-//	for (GameObject* pChild : m_pChildren)
-//	{
-//		pChild->RootDraw(sceneContext);
-//	}
-//}
-//void GameObject::RootPostDraw(const SceneContext& sceneContext)
-//{
-//	//Post-Draw
-//	PostDraw(sceneContext);
-//
-//	//Component Post-Draw
-//	for (BaseComponent* pComp : m_pComponents)
-//	{
-//		if (pComp->m_enablePostDraw)
-//			pComp->PostDraw(sceneContext);
-//	}
-//
-//	//Root-Object Post-Draw
-//	for (GameObject* pChild : m_pChildren)
-//	{
-//		pChild->RootPostDraw(sceneContext);
-//	}
-//}
-//
-//void GameObject::RootShadowMapDraw(const SceneContext& sceneContext) const
-//{
-//	//Component Shadow-Draw
-//	for (BaseComponent* pComp : m_pComponents)
-//	{
-//		if (pComp->m_enableShadowMapDraw)
-//			pComp->ShadowMapDraw(sceneContext);
-//	}
-//
-//	//Root-Object Shadow-Draw
-//	for (GameObject* pChild : m_pChildren)
-//	{
-//		pChild->RootShadowMapDraw(sceneContext);
-//	}
-//}
 
-//void GameObject::RootOnSceneAttach(GameScene* pScene)
-//{
-//	//ASSERT_NULL(pScene, L"OnSceneAttach called but GameScene is NULL");
-//
-//	////Set Scene
-//	//m_pParentScene = pScene;
-//
-//	////Initialize Object if not yet initialized
-//	//if (!m_IsInitialized)
-//	//{
-//	//	RootInitialize(pScene->GetSceneContext());
-//	//}
-//
-//	////Call derived OnSceneAttach
-//	//OnSceneAttach(pScene);
-//
-//	////Signal Components
-//	//for (BaseComponent* pComponent : m_pComponents)
-//	//{
-//	//	pComponent->RootOnSceneAttach(pScene);
-//	//}
-//
-//	//Signal Children
-//	for (GameObject* pChild : m_pChildren)
-//	{
-//		pChild->RootOnSceneAttach(pScene);
-//	}
-//}
+void GameObject::RootPostInitialize(const SceneContext& sceneContext)
+{
+	PostInitialize(sceneContext);
 
-//void GameObject::RootOnSceneDetach(GameScene* pScene)
-//{
-//	//ASSERT_IF(pScene == nullptr, L"OnSceneDetach called but GameScene is NULL");
-//
-//	////Signal derived OnSceneDetach
-//	//OnSceneDetach(pScene);
-//
-//	////Signal Components
-//	//for (BaseComponent* pComponent : m_pComponents)
-//	//{
-//	//	pComponent->RootOnSceneDetach(pScene);
-//	//}
-//
-//	//Signal Children
-//	for (GameObject* pChild : m_pChildren)
-//	{
-//		pChild->RootOnSceneDetach(pScene);
-//	}
-//
-//	//Reset Scene
-//	m_pParentScene = nullptr;
-//}
+	//Root-Component Initialization
+	for (BaseComponent* pComp : m_pComponents)
+	{
+		pComp->PostInitialize(sceneContext);
+	}
+
+	//Root-Object Initialization
+	for (GameObject* pChild : m_pChildren)
+	{
+		pChild->RootPostInitialize(sceneContext);
+	}
+}
+
+void GameObject::RootUpdate(const SceneContext& sceneContext)
+{
+	//User-Object Update
+	Update(sceneContext);
+
+	//Component Update
+	for (BaseComponent* pComp : m_pComponents)
+	{
+		pComp->Update(sceneContext);
+	}
+
+	//Root-Object Update
+	for (GameObject* pChild : m_pChildren)
+	{
+		pChild->RootUpdate(sceneContext);
+	}
+}
+void GameObject::RootDraw(const SceneContext& sceneContext)
+{
+	//User-Object Draw
+	Draw(sceneContext);
+
+	//Component Draw
+	for (BaseComponent* pComp : m_pComponents)
+	{
+		pComp->Draw(sceneContext);
+	}
+
+	//Root-Object Draw
+	for (GameObject* pChild : m_pChildren)
+	{
+		pChild->RootDraw(sceneContext);
+	}
+}
+
+void GameObject::RootPostDraw(const SceneContext& sceneContext)
+{
+	//Post-Draw
+	PostDraw(sceneContext);
+
+	//Component Post-Draw
+	for (BaseComponent* pComp : m_pComponents)
+	{
+		if (pComp->m_enablePostDraw)
+			pComp->PostDraw(sceneContext);
+	}
+
+	//Root-Object Post-Draw
+	for (GameObject* pChild : m_pChildren)
+	{
+		pChild->RootPostDraw(sceneContext);
+	}
+}
+
+void GameObject::RootShadowMapDraw(const SceneContext& sceneContext) const
+{
+	//Component Shadow-Draw
+	for (BaseComponent* pComp : m_pComponents)
+	{
+		if (pComp->m_enableShadowMapDraw)
+			pComp->ShadowMapDraw(sceneContext);
+	}
+
+	//Root-Object Shadow-Draw
+	for (GameObject* pChild : m_pChildren)
+	{
+		pChild->RootShadowMapDraw(sceneContext);
+	}
+}
+
+void GameObject::RootOnSceneAttach(GameScene* pScene)
+{
+	//ASSERT_NULL(pScene, L"OnSceneAttach called but GameScene is NULL");
+
+	//Set Scene
+	m_pParentScene = pScene;
+
+	//Initialize Object if not yet initialized
+	if (!m_IsInitialized)
+	{
+		RootInitialize(pScene->GetSceneContext());
+	}
+
+	//Call derived OnSceneAttach
+	OnSceneAttach(pScene);
+
+	//Signal Components
+	for (BaseComponent* pComponent : m_pComponents)
+	{
+		pComponent->RootOnSceneAttach(pScene);
+	}
+
+	//Signal Children
+	for (GameObject* pChild : m_pChildren)
+	{
+		pChild->RootOnSceneAttach(pScene);
+	}
+}
+
+void GameObject::RootOnSceneDetach(GameScene* pScene)
+{
+	//ASSERT_IF(pScene == nullptr, L"OnSceneDetach called but GameScene is NULL");
+
+	//Signal derived OnSceneDetach
+	OnSceneDetach(pScene);
+
+	//Signal Components
+	for (BaseComponent* pComponent : m_pComponents)
+	{
+		pComponent->RootOnSceneDetach(pScene);
+	}
+
+	//Signal Children
+	for (GameObject* pChild : m_pChildren)
+	{
+		pChild->RootOnSceneDetach(pScene);
+	}
+
+	//Reset Scene
+	m_pParentScene = nullptr;
+}
 
 void GameObject::AddChild_(GameObject* pObject)
 {
-//#if _DEBUG
-//	if (pObject->m_pParentObject)
-//	{
-//		if (pObject->m_pParentObject == this)
-//			Logger::LogWarning(L"GameObject::AddChild > GameObject to add is already attached to this parent");
-//		else
-//			Logger::LogWarning(L"GameObject::AddChild > GameObject to add is already attached to another GameObject. Detach it from it's current parent before attaching it to another one.");
-//
-//		return;
-//	}
-//
-//	if (pObject->m_pParentScene)
-//	{
-//		Logger::LogWarning(L"GameObject::AddChild > GameObject is currently attached to a GameScene. Detach it from it's current parent before attaching it to another one.");
-//		return;
-//	}
-//#endif
+#if _DEBUG
+	if (pObject->m_pParentObject)
+	{
+		if (pObject->m_pParentObject == this)
+			//Logger::LogWarning(L"GameObject::AddChild > GameObject to add is already attached to this parent");
+		//else
+			//Logger::LogWarning(L"GameObject::AddChild > GameObject to add is already attached to another GameObject. Detach it from it's current parent before attaching it to another one.");
+
+		return;
+	}
+
+	if (pObject->m_pParentScene)
+	{
+		//Logger::LogWarning(L"GameObject::AddChild > GameObject is currently attached to a GameScene. Detach it from it's current parent before attaching it to another one.");
+		return;
+	}
+#endif
 
 	//Set parent & add to Children list
 	pObject->m_pParentObject = this;
@@ -214,22 +215,22 @@ void GameObject::AddChild_(GameObject* pObject)
 	//Signal object (Attached to parent)
 	pObject->OnParentAttach(this);
 
-	////Signal object & children (Attached to scenegraph)
-	//if (GameScene* pScene = GetScene())
-	//	pObject->RootOnSceneAttach(pScene);
+	//Signal object & children (Attached to scenegraph)
+	if (GameScene* pScene = GetScene())
+		pObject->RootOnSceneAttach(pScene);
 }
 
 void GameObject::RemoveChild(GameObject* obj, bool deleteObject)
 {
 	const auto it = std::ranges::find(m_pChildren, obj);
 //
-//#if _DEBUG
-//	if (it == m_pChildren.end())
-//	{
-//		Logger::LogWarning(L"GameObject::RemoveChild > GameObject to remove is not attached to this GameObject!");
-//		return;
-//	}
-//#endif
+#if _DEBUG
+	if (it == m_pChildren.end())
+	{
+		//Logger::LogWarning(L"GameObject::RemoveChild > GameObject to remove is not attached to this GameObject!");
+		return;
+	}
+#endif
 
 	m_pChildren.erase(it);
 
@@ -240,8 +241,8 @@ void GameObject::RemoveChild(GameObject* obj, bool deleteObject)
 	obj->OnParentDetach(this);
 
 	//Signal object and children if detached from scenegraph (Scene Detached)
-	//if (GameScene* pScene = GetScene())
-	//	obj->RootOnSceneDetach(pScene);
+	if (GameScene* pScene = GetScene())
+		obj->RootOnSceneDetach(pScene);
 
 	/*if (deleteObject)
 	{
@@ -274,9 +275,9 @@ void GameObject::AddComponent_(BaseComponent* pComponent)
 	//Signal Component (Attached to GameObject)
 	pComponent->OnOwnerAttach(this);
 
-	////If object is already part of scenegraph, signal component about the 'new' scene
-	//if (GameScene* pScene = GetScene())
-	//	pComponent->RootOnSceneAttach(pScene);
+	//If object is already part of scenegraph, signal component about the 'new' scene
+	if (GameScene* pScene = GetScene())
+		pComponent->RootOnSceneAttach(pScene);
 }
 
 void GameObject::RemoveComponent(BaseComponent* pComponent, bool deleteObject)
@@ -315,15 +316,15 @@ void GameObject::OnTrigger(GameObject* pTriggerObject, GameObject* pOtherObject,
 		m_OnTriggerCallback(pTriggerObject, pOtherObject, action);
 }
 
-//GameScene* GameObject::GetScene() const
-//{
-//	if (!m_pParentScene && m_pParentObject)
-//	{
-//		return m_pParentObject->GetScene();
-//	}
-//
-//	return m_pParentScene;
-//}
+GameScene* GameObject::GetScene() const
+{
+	if (!m_pParentScene && m_pParentObject)
+	{
+		return m_pParentObject->GetScene();
+	}
+
+	return m_pParentScene;
+}
 
 void GameObject::SetOnTriggerCallBack(PhysicsCallback callback)
 {

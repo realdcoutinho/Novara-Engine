@@ -115,6 +115,10 @@
 				{
 					"backtrace" : 2,
 					"path" : "C:/Users/diogo/Documents/GitHub/Novara-Engine/NovaraEngine/Scenegraph"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "C:/Users/diogo/Documents/GitHub/Novara-Engine/NovaraEngine/PhysX"
 				}
 			],
 			"language" : "CXX",
