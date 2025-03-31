@@ -137,6 +137,21 @@ namespace fs = std::filesystem;
 #include "EffectLoader.h"
 #include "ImguiHelper.h"
 #include "Enumerations.h"
+#include "ModelComponent.h"
+#include "TextureData.h"
+#include "MeshFilter.h"
+#include "MeshDrawComponent.h"
+#include "MeshIndexedDrawComponent.h"
+#include "BaseMaterial.h"
+#include "ModelAnimator.h"
+#include "BinaryReader.h"
+#include "SpriteFont.h"
+#include "Material.h"
+#include "ShadowMapMaterial.h"
+#include "ShadowMapRenderer.h"
+#include "PostProcessingMaterial.h"
+
+
 
 
 

@@ -1,4 +1,6 @@
 #pragma once
+//#include "../Utils/EffectHelper.h"
+
 class BaseMaterial
 {
 public:
@@ -12,8 +14,8 @@ public:
 
 	virtual void Initialize(const D3D11Context& d3d11Context, UINT materialId) = 0;
 
-	//const MaterialTechniqueContext& GetTechniqueContext() const { return m_TechniqueContext; }
-	//const MaterialTechniqueContext& GetTechniqueContext(int index) const;
+	const MaterialTechniqueContext& GetTechniqueContext() const { return m_TechniqueContext; }
+	const MaterialTechniqueContext& GetTechniqueContext(int index) const;
 
 	UINT GetMaterialId() const { return m_MaterialId; }
 	bool HasValidMaterialId() const { return m_MaterialId != UINT_MAX; }
@@ -41,7 +43,7 @@ public:
 
 	void SetMaterialName(const std::wstring& name) { m_MaterialName = name; m_MaterialNameUtf8 = StringUtil::utf8_encode(name); }
 
-	//void UpdateEffectVariables(const SceneContext& sceneContext, const ModelComponent* pModelComponent);
+	void UpdateEffectVariables(const SceneContext& sceneContext, const ModelComponent* pModelComponent);
 	//void UpdateEffectVariables(const SceneContext& sceneContext, const RenderTarget* pSourceTarget);
 
 	void DrawImGui();
@@ -64,16 +66,16 @@ protected:
 
 	virtual const std::map<size_t, UINT>& GetVariableIndexLUT() const = 0;
 	virtual int GetRootVariableIndex(eRootVariable rootVariable) const = 0;
-	//virtual const std::map<size_t, MaterialTechniqueContext>& GetTechniques() const = 0;
+	virtual const std::map<size_t, MaterialTechniqueContext>& GetTechniques() const = 0;
 	virtual const std::wstring& GetEffectName() const = 0;
 
 	//Internal Material Implementation
 	void _baseInitialize(ID3DX11Effect* pRootEffect, UINT materialId);
 
 	virtual void InitializeEffectVariables() = 0;
-	//virtual void OnUpdateModelVariables(const SceneContext& /*sceneContext*/, const ModelComponent* /*pModel*/) const {};
+	virtual void OnUpdateModelVariables(const SceneContext& sceneContext, const ModelComponent* pModel) const {};
 
-	//MaterialTechniqueContext m_TechniqueContext{};
+	MaterialTechniqueContext m_TechniqueContext{};
 	UINT m_numTechniques{};
 	std::wstring m_MaterialName;
 	std::string m_MaterialNameUtf8;

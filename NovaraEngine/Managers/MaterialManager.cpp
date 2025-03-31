@@ -110,30 +110,30 @@ void MaterialManager::RemoveMaterial(UINT materialId, bool deleteObj)
 
 void MaterialManager::RemoveMaterial(BaseMaterial* pMaterial, bool deleteObj)
 {
-	//const auto materialId = pMaterial->GetMaterialId();
-	//if (!IsValid(materialId) || m_Materials.size() < materialId || !m_Materials[materialId])
-	//{
-	//	Logger::LogWarning(L"MaterialManager::RemoveMaterial >> Invalid Material ID");
-	//	return;
-	//}
+	const auto materialId = pMaterial->GetMaterialId();
+	if (!IsValid(materialId) || m_Materials.size() < materialId || !m_Materials[materialId])
+	{
+		Logger::LogWarning(L"MaterialManager::RemoveMaterial >> Invalid Material ID");
+		return;
+	}
 
-	//if (m_Materials[materialId] == pMaterial)
-	//{
-	//	RemoveMaterial(materialId, deleteObj);
-	//}
+	if (m_Materials[materialId] == pMaterial)
+	{
+		RemoveMaterial(materialId, deleteObj);
+	}
 }
 
 void MaterialManager::RemoveMaterial(PostProcessingMaterial* pMaterial, bool deleteObj)
 {
-	//const auto materialId = pMaterial->GetMaterialId();
-	//if (!IsValid(materialId) || m_MaterialsPP.size() < materialId || !m_MaterialsPP[materialId])
-	//{
-	//	Logger::LogWarning(L"MaterialManager::RemoveMaterial >> Invalid Material ID");
-	//	return;
-	//}
+	const auto materialId = pMaterial->GetMaterialId();
+	if (!IsValid(materialId) || m_MaterialsPP.size() < materialId || !m_MaterialsPP[materialId])
+	{
+		Logger::LogWarning(L"MaterialManager::RemoveMaterial >> Invalid Material ID");
+		return;
+	}
 
-	//if (m_MaterialsPP[materialId] == pMaterial)
-	//{
-	//	RemoveMaterial(materialId, deleteObj);
-	//}
+	if (m_MaterialsPP[materialId] == pMaterial)
+	{
+		RemoveMaterial(materialId, deleteObj);
+	}
 }

@@ -63,7 +63,7 @@ add_library(NovaraEngine
  "Contents/EffectLoader.h" 
  "Contents/EffectLoader.cpp" 
  "Utils/ImguiHelper.h" 
- "Utils/ImguiHelper.cpp")
+ "Utils/ImguiHelper.cpp" "Components/MeshDrawComponent.h" "Components/MeshDrawComponent.cpp" "Components/MeshIndexedDrawComponent.h" "Components/MeshIndexedDrawComponent.cpp" "Components/ModelComponent.h" "Components/ModelComponent.cpp" "Misc/MeshFilter.h" "Misc/MeshFilter.cpp" "Misc/TextureData.h" "Misc/TextureData.cpp" "Misc/ModelAnimator.h" "Misc/ModelAnimator.cpp" "Components/ParticleEmitterComponent.h" "Components/ParticleEmitterComponent.cpp" "Components/RigidBodyComponent.h" "Components/RigidBodyComponent.cpp" "Components/SpriteComponent.h" "Components/SpriteComponent.CPP" "Contents/MeshFilterLoader.h" "Contents/MeshFilterLoader.CPP" "Utils/BinaryReader.h" "Utils/BinaryReader.cpp" "Contents/PxMeshLoader.h" "Contents/PxMeshLoader.cpp" "Contents/SpriteFontLoader.h" "Contents/SpriteFontLoader.cpp" "Misc/SpriteFont.h" "Misc/SpriteFont.cpp" "Contents/TextureDataLoader.h" "Contents/TextureDataLoader.cpp" "Graphics/ShadowMapRenderer.h" "Graphics/ShadowMapRenderer.cpp" "Misc/ShadowMapMaterial.h" "Misc/ShadowMapMaterial.cpp" "Graphics/SpriteRenderer.h" "Graphics/SpriteRenderer.cpp" "Graphics/TextRenderer.h" "Graphics/TextRenderer.cpp" "Misc/PostProcessingMaterial.h" "Misc/PostProcessingMaterial.cpp" "Misc/ParticleMaterial.h" "Misc/ParticleMaterial.cpp")
 
 # Optional: Add include directories for engine users
 target_include_directories(NovaraEngine PUBLIC 
