@@ -1,17 +1,16 @@
-//#include "stdafx.h"
 #include "EnginePCH.h"
-
+#include "GameObject.h"
+#include <algorithm>
 
 GameObject::GameObject() :
 	m_IsActive(true),
 	m_pTransform(new TransformComponent{})
 {
-	//AddComponent(m_pTransform);
+	AddComponent(m_pTransform);
 }
-
 GameObject::~GameObject()
 {
-	/*for (BaseComponent* pComp : m_pComponents)
+	for (BaseComponent* pComp : m_pComponents)
 	{
 		SafeDelete(pComp);
 	}
@@ -19,7 +18,7 @@ GameObject::~GameObject()
 	for (GameObject* pChild : m_pChildren)
 	{
 		SafeDelete(pChild);
-	}*/
+	}
 }
 
 void GameObject::RootInitialize(const SceneContext& sceneContext)
@@ -100,7 +99,6 @@ void GameObject::RootDraw(const SceneContext& sceneContext)
 		pChild->RootDraw(sceneContext);
 	}
 }
-
 void GameObject::RootPostDraw(const SceneContext& sceneContext)
 {
 	//Post-Draw
@@ -138,7 +136,7 @@ void GameObject::RootShadowMapDraw(const SceneContext& sceneContext) const
 
 void GameObject::RootOnSceneAttach(GameScene* pScene)
 {
-	//ASSERT_NULL(pScene, L"OnSceneAttach called but GameScene is NULL");
+	ASSERT_NULL(pScene, L"OnSceneAttach called but GameScene is NULL");
 
 	//Set Scene
 	m_pParentScene = pScene;
@@ -167,7 +165,7 @@ void GameObject::RootOnSceneAttach(GameScene* pScene)
 
 void GameObject::RootOnSceneDetach(GameScene* pScene)
 {
-	//ASSERT_IF(pScene == nullptr, L"OnSceneDetach called but GameScene is NULL");
+	ASSERT_IF(pScene == nullptr, L"OnSceneDetach called but GameScene is NULL");
 
 	//Signal derived OnSceneDetach
 	OnSceneDetach(pScene);
@@ -194,16 +192,16 @@ void GameObject::AddChild_(GameObject* pObject)
 	if (pObject->m_pParentObject)
 	{
 		if (pObject->m_pParentObject == this)
-			//Logger::LogWarning(L"GameObject::AddChild > GameObject to add is already attached to this parent");
-		//else
-			//Logger::LogWarning(L"GameObject::AddChild > GameObject to add is already attached to another GameObject. Detach it from it's current parent before attaching it to another one.");
+			Logger::LogWarning(L"GameObject::AddChild > GameObject to add is already attached to this parent");
+		else
+			Logger::LogWarning(L"GameObject::AddChild > GameObject to add is already attached to another GameObject. Detach it from it's current parent before attaching it to another one.");
 
 		return;
 	}
 
 	if (pObject->m_pParentScene)
 	{
-		//Logger::LogWarning(L"GameObject::AddChild > GameObject is currently attached to a GameScene. Detach it from it's current parent before attaching it to another one.");
+		Logger::LogWarning(L"GameObject::AddChild > GameObject is currently attached to a GameScene. Detach it from it's current parent before attaching it to another one.");
 		return;
 	}
 #endif
@@ -223,11 +221,11 @@ void GameObject::AddChild_(GameObject* pObject)
 void GameObject::RemoveChild(GameObject* obj, bool deleteObject)
 {
 	const auto it = std::ranges::find(m_pChildren, obj);
-//
+
 #if _DEBUG
 	if (it == m_pChildren.end())
 	{
-		//Logger::LogWarning(L"GameObject::RemoveChild > GameObject to remove is not attached to this GameObject!");
+		Logger::LogWarning(L"GameObject::RemoveChild > GameObject to remove is not attached to this GameObject!");
 		return;
 	}
 #endif
@@ -244,10 +242,10 @@ void GameObject::RemoveChild(GameObject* obj, bool deleteObject)
 	if (GameScene* pScene = GetScene())
 		obj->RootOnSceneDetach(pScene);
 
-	/*if (deleteObject)
+	if (deleteObject)
 	{
 		SafeDelete(obj);
-	}*/
+	}
 }
 
 void GameObject::AddComponent_(BaseComponent* pComponent)
@@ -255,7 +253,7 @@ void GameObject::AddComponent_(BaseComponent* pComponent)
 #if _DEBUG
 	if (typeid(*pComponent) == typeid(TransformComponent) && HasComponent<TransformComponent>())
 	{
-		//Logger::LogWarning(L"GameObject::AddComponent > GameObject can contain only one TransformComponent!");
+		Logger::LogWarning(L"GameObject::AddComponent > GameObject can contain only one TransformComponent!");
 		return;
 	}
 
@@ -263,7 +261,7 @@ void GameObject::AddComponent_(BaseComponent* pComponent)
 	{
 		if (pComp == pComponent)
 		{
-			//Logger::LogWarning(L"GameObject::AddComponent > GameObject already contains this component!");
+			Logger::LogWarning(L"GameObject::AddComponent > GameObject already contains this component!");
 			return;
 		}
 	}
@@ -287,13 +285,13 @@ void GameObject::RemoveComponent(BaseComponent* pComponent, bool deleteObject)
 #if _DEBUG
 	if (it == m_pComponents.end())
 	{
-		//Logger::LogWarning(L"GameObject::RemoveComponent > Component is not attached to this GameObject!");
+		Logger::LogWarning(L"GameObject::RemoveComponent > Component is not attached to this GameObject!");
 		return;
 	}
 
 	if (typeid(*pComponent) == typeid(TransformComponent))
 	{
-		//Logger::LogWarning(L"GameObject::RemoveComponent > TransformComponent can't be removed!");
+		Logger::LogWarning(L"GameObject::RemoveComponent > TransformComponent can't be removed!");
 		return;
 	}
 #endif
@@ -306,7 +304,7 @@ void GameObject::RemoveComponent(BaseComponent* pComponent, bool deleteObject)
 
 	if (deleteObject)
 	{
-		//SafeDelete(pComponent);
+		SafeDelete(pComponent);
 	}
 }
 

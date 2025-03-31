@@ -1,8 +1,5 @@
 #pragma once
-
-class BaseComponent;
-class TransformComponent;
-class SceneContext;
+#include <functional>
 
 enum class PxTriggerAction
 {

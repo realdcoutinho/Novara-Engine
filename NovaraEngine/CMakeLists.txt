@@ -68,7 +68,7 @@ add_library(NovaraEngine
 # Optional: Add include directories for engine users
 target_include_directories(NovaraEngine PUBLIC 
 
-    ${CMAKE_CURRENT_SOURCE_DIR},
+    ${CMAKE_CURRENT_SOURCE_DIR}
     
     ${CMAKE_CURRENT_SOURCE_DIR}/Base
     ${CMAKE_CURRENT_SOURCE_DIR}/Components
@@ -149,7 +149,7 @@ target_link_libraries(NovaraEngine PUBLIC
 
     "${PHYSX_LIB_PATH}/PhysX_64.lib"
     "${PHYSX_LIB_PATH}/PhysXCharacterKinematic_static_64.lib"
-    "${PHYSX_LIB_PATH}/PhysXCommon_64.lib" # <- nota: não tem _static no nome, mas parece ser release
+    "${PHYSX_LIB_PATH}/PhysXCommon_64.lib" # <- nota: nï¿½o tem _static no nome, mas parece ser release
     "${PHYSX_LIB_PATH}/PhysXExtensions_static_64.lib"
     "${PHYSX_LIB_PATH}/PhysXFoundation_64.lib"
     "${PHYSX_LIB_PATH}/PhysXPvdSDK_static_64.lib"

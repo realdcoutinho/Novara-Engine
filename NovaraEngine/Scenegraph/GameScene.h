@@ -1,11 +1,7 @@
 #pragma once
-//#include "EnginePCH.h"
 #include "../Base/Structs.h"
-
-
-
-//class PostProcessingMaterial;
-//class BaseMaterial;
+class PostProcessingMaterial;
+class BaseMaterial;
 class PhysxProxy;
 class CameraComponent;
 class GameObject;
@@ -58,7 +54,7 @@ protected:
 private:
 	friend class SceneManager;
 
-	void RootInitialize(const GameContext& gameContext);
+	void RootInitialize(const GameContext& /*gameContext*/);
 	void RootPostInitialize();
 	void RootUpdate();
 	void RootDraw();

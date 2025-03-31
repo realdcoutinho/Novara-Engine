@@ -1,5 +1,5 @@
 #include "EnginePCH.h"
-
+#include "GameScene.h"
 
 GameScene::GameScene(std::wstring sceneName) :
 	m_SceneName(std::move(sceneName))
@@ -35,7 +35,8 @@ void GameScene::AddChild_(GameObject* pObject)
 
 	if (pObject->m_pParentObject)
 	{
-		Logger::LogWarning(L"GameObject is currently attached to a GameObject. Detach it from it's current parent before attaching it to another one.");
+		Logger::LogWarning(
+			L"GameObject is currently attached to a GameObject. Detach it from it's current parent before attaching it to another one.");
 		return;
 	}
 #endif
@@ -154,16 +155,16 @@ void GameScene::RootDraw()
 	//SHADOW_PASS
 	//+++++++++++
 	//TODO_W8(L"Implement Shadow Pass")
-	//1. BEGIN > ShadowMapRenderer::Begin (Initiate the ShadowPass)
-	//2. DRAW_LOOP > For every GameObject (m_pChildren), call GameObject::RootShadowMapDraw
-	//3. END > ShadowMapRenderer::End (Terminate the ShadowPass)
+		//1. BEGIN > ShadowMapRenderer::Begin (Initiate the ShadowPass)
+		//2. DRAW_LOOP > For every GameObject (m_pChildren), call GameObject::RootShadowMapDraw
+		//3. END > ShadowMapRenderer::End (Terminate the ShadowPass)
 #pragma endregion
 
 #pragma region USER PASS
 	//USER_PASS
 	//+++++++++
 	//User-Scene Draw
-	Draw();
+		Draw();
 
 	//Object-Scene Draw
 	for (const auto pChild : m_pChildren)
@@ -197,24 +198,24 @@ void GameScene::RootDraw()
 
 	//TODO_W10(L"Add Post-Processing PASS logic")
 
-	//No need to swap RenderTargets is there aren't any PP Effects...
-	//if (m_PostProcessingMaterials.size() > 0)
-	//{
-	//	1. [PREV_RT & INIT_RT] Retrieve the current RenderTarget (NovaraGame::GetRenderTarget, every scene has access to the NovaraGame > m_pGame)
+		//No need to swap RenderTargets is there aren't any PP Effects...
+		//if (m_PostProcessingMaterials.size() > 0)
+		//{
+		//	//1. [PREV_RT & INIT_RT] Retrieve the current RenderTarget (NovaraGame::GetRenderTarget, every scene has access to the NovaraGame > m_pGame)
 
-	//	2. Iterate the vector of PostProcessingMaterials (m_PostProcessingMaterials)
-	//			For Each Material
-	//				- If the material is disabled, skip
-	//				- Call the Draw function, the Source RenderTarget is our PREV_RT
-	//				- After drawing the effect, we want to swap PREV_RT with output from material we just used to draw with
+		//	//2. Iterate the vector of PostProcessingMaterials (m_PostProcessingMaterials)
+		//	//		For Each Material
+		//	//			- If the material is disabled, skip
+		//	//			- Call the Draw function, the Source RenderTarget is our PREV_RT
+		//	//			- After drawing the effect, we want to swap PREV_RT with output from material we just used to draw with
 
-	//	3. All Materials are applied after each other, time to draw the final result to the screen
-	//			- If PREV_RT is still equal to INIT_RT, do nothing (means no PP effect was applied, nothing has changed)
-	//			- Else, reset the RenderTarget of the game to default (NovaraGame::SetRenderTarget)
-	//			- Use SpriteRenderer::DrawImmediate to render the ShaderResourceView from PREV_RT to the screen
+		//	//3. All Materials are applied after each other, time to draw the final result to the screen
+		//	//		- If PREV_RT is still equal to INIT_RT, do nothing (means no PP effect was applied, nothing has changed)
+		//	//		- Else, reset the RenderTarget of the game to default (NovaraGame::SetRenderTarget)
+		//	//		- Use SpriteRenderer::DrawImmediate to render the ShaderResourceView from PREV_RT to the screen
 
-	//	Done!
-	//}
+		//	//Done!
+		//}
 #pragma endregion
 }
 
@@ -240,8 +241,8 @@ void GameScene::RootOnGUI()
 #pragma region Main Overlay Begin
 #pragma region Window Config
 	static int corner = 0;
-	ImGuiIO& io = ImGui::GetIO();
-	ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoSavedSettings;
+	//ImGuiIO& io = ImGui::GetIO();
+	ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav;// | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoSavedSettings;
 	if (corner != -1)
 	{
 		constexpr float PAD = 10.0f;
@@ -264,7 +265,7 @@ void GameScene::RootOnGUI()
 		ImGui::PushFont(ImguiFonts::pFont_DIN_Black_18);
 		if (ImGui::CollapsingHeader(StringUtil::utf8_encode(m_SceneName).c_str()))
 		{
-			ImGui::Text("%s", StringUtil::utf8_encode(m_SceneName).c_str());
+			/*ImGui::Text("%s", utf8_encode(m_SceneName).c_str());*/
 
 			ImGui::Separator();
 
@@ -345,28 +346,26 @@ void GameScene::RootWindowStateChanged(int state, bool active) const
 	//TIMER
 	if (state == 0)
 	{
-		if (active)
-			m_SceneContext.pGameTime->Start();
-		else 
-			m_SceneContext.pGameTime->Stop();
+		if (active)m_SceneContext.pGameTime->Start();
+		else m_SceneContext.pGameTime->Stop();
 	}
 }
 
 //void GameScene::AddPostProcessingEffect(PostProcessingMaterial* pMaterial)
 //{
-//	//m_PostProcessingMaterials.push_back(pMaterial);
+//	m_PostProcessingMaterials.push_back(pMaterial);
 //}
-
-void GameScene::AddPostProcessingEffect(UINT materialId)
-{
-	//AddPostProcessingEffect(MaterialManager::Get()->GetMaterial<PostProcessingMaterial>(materialId));
-}
-
-void GameScene::RemovePostProcessingEffect(UINT materialId)
-{
-	//RemovePostProcessingEffect(MaterialManager::Get()->GetMaterial<PostProcessingMaterial>(materialId));
-}
-
+//
+//void GameScene::AddPostProcessingEffect(UINT materialId)
+//{
+//	AddPostProcessingEffect(MaterialManager::Get()->GetMaterial<PostProcessingMaterial>(materialId));
+//}
+//
+//void GameScene::RemovePostProcessingEffect(UINT materialId)
+//{
+//	RemovePostProcessingEffect(MaterialManager::Get()->GetMaterial<PostProcessingMaterial>(materialId));
+//}
+//
 //void GameScene::RemovePostProcessingEffect(PostProcessingMaterial* pMaterial)
 //{
 //	if (std::ranges::find(m_PostProcessingMaterials, pMaterial) != m_PostProcessingMaterials.end())

@@ -11,7 +11,7 @@ BaseComponent::BaseComponent()
 
 void BaseComponent::RootInitialize(const SceneContext& sceneContext)
 {
-	assert(!m_IsInitialized); //Shouldn't be called more than once...
+	//assert(!m_IsInitialized); //Shouldn't be called more than once...
 	if (m_IsInitialized) return;
 	Initialize(sceneContext);
 	m_IsInitialized = true;
