@@ -68,6 +68,24 @@ using namespace physx;
 
 
 
+#pragma region FMOD
+//FMOD (v1.10)
+//https://www.fmod.com/
+#pragma warning(push)
+//#pragma warning ( disable : ALL_CODE_ANALYSIS_WARNINGS )
+#pragma warning(disable: 4505 26812)
+#include "fmod.hpp" //Precompiled Header
+#include "fmod_errors.h"
+#pragma warning(pop)
+
+#if defined(DEBUG) || defined(_DEBUG)
+#pragma comment(lib, "fmodL64_vc.lib")
+#else
+#pragma comment(lib, "fmod64_vc.lib")
+#endif
+#pragma endregion
+
+
 
 
 //Core

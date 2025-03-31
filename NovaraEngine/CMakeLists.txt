@@ -63,7 +63,51 @@ add_library(NovaraEngine
  "Contents/EffectLoader.h" 
  "Contents/EffectLoader.cpp" 
  "Utils/ImguiHelper.h" 
- "Utils/ImguiHelper.cpp" "Components/MeshDrawComponent.h" "Components/MeshDrawComponent.cpp" "Components/MeshIndexedDrawComponent.h" "Components/MeshIndexedDrawComponent.cpp" "Components/ModelComponent.h" "Components/ModelComponent.cpp" "Misc/MeshFilter.h" "Misc/MeshFilter.cpp" "Misc/TextureData.h" "Misc/TextureData.cpp" "Misc/ModelAnimator.h" "Misc/ModelAnimator.cpp" "Components/ParticleEmitterComponent.h" "Components/ParticleEmitterComponent.cpp" "Components/RigidBodyComponent.h" "Components/RigidBodyComponent.cpp" "Components/SpriteComponent.h" "Components/SpriteComponent.CPP" "Contents/MeshFilterLoader.h" "Contents/MeshFilterLoader.CPP" "Utils/BinaryReader.h" "Utils/BinaryReader.cpp" "Contents/PxMeshLoader.h" "Contents/PxMeshLoader.cpp" "Contents/SpriteFontLoader.h" "Contents/SpriteFontLoader.cpp" "Misc/SpriteFont.h" "Misc/SpriteFont.cpp" "Contents/TextureDataLoader.h" "Contents/TextureDataLoader.cpp" "Graphics/ShadowMapRenderer.h" "Graphics/ShadowMapRenderer.cpp" "Misc/ShadowMapMaterial.h" "Misc/ShadowMapMaterial.cpp" "Graphics/SpriteRenderer.h" "Graphics/SpriteRenderer.cpp" "Graphics/TextRenderer.h" "Graphics/TextRenderer.cpp" "Misc/PostProcessingMaterial.h" "Misc/PostProcessingMaterial.cpp" "Misc/ParticleMaterial.h" "Misc/ParticleMaterial.cpp")
+ "Utils/ImguiHelper.cpp"
+        "Components/MeshDrawComponent.h"
+        "Components/MeshDrawComponent.cpp"
+        "Components/MeshIndexedDrawComponent.h"
+        "Components/MeshIndexedDrawComponent.cpp"
+        "Components/ModelComponent.h"
+        "Components/ModelComponent.cpp"
+        "Misc/MeshFilter.h"
+        "Misc/MeshFilter.cpp"
+        "Misc/TextureData.h"
+        "Misc/TextureData.cpp"
+        "Misc/ModelAnimator.h"
+        "Misc/ModelAnimator.cpp"
+        "Components/ParticleEmitterComponent.h"
+        "Components/ParticleEmitterComponent.cpp"
+        "Components/RigidBodyComponent.h"
+        "Components/RigidBodyComponent.cpp"
+        "Components/SpriteComponent.h"
+        "Components/SpriteComponent.CPP"
+        "Contents/MeshFilterLoader.h"
+        "Contents/MeshFilterLoader.CPP"
+        "Utils/BinaryReader.h"
+        "Utils/BinaryReader.cpp"
+        "Contents/PxMeshLoader.h"
+        "Contents/PxMeshLoader.cpp"
+        "Contents/SpriteFontLoader.h"
+        "Contents/SpriteFontLoader.cpp"
+        "Misc/SpriteFont.h"
+        "Misc/SpriteFont.cpp"
+        "Contents/TextureDataLoader.h"
+        "Contents/TextureDataLoader.cpp"
+        "Graphics/ShadowMapRenderer.h"
+        "Graphics/ShadowMapRenderer.cpp"
+        "Misc/ShadowMapMaterial.h"
+        "Misc/ShadowMapMaterial.cpp"
+        "Graphics/SpriteRenderer.h"
+        "Graphics/SpriteRenderer.cpp"
+        "Graphics/TextRenderer.h"
+        "Graphics/TextRenderer.cpp"
+        "Misc/PostProcessingMaterial.h"
+        "Misc/PostProcessingMaterial.cpp"
+        "Misc/ParticleMaterial.h"
+        "Misc/ParticleMaterial.cpp"
+        "Managers/SoundManager.cpp"
+        "Managers/SoundManager.h")
 
 # Optional: Add include directories for engine users
 target_include_directories(NovaraEngine PUBLIC 
@@ -137,6 +181,18 @@ set(IMGUI_LIB_PATH "${CMAKE_SOURCE_DIR}/Libraries/imgui/lib/${IMGUI_LIB_SUBDIR}"
 message(STATUS "IMGUI lib path: ${IMGUI_LIB_PATH}")
 
 
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    set(FMOD_LIB_SUBDIR "debug")
+elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
+    set(FMOD_LIB_SUBDIR "release")
+else()
+    set(FMOD_LIB_SUBDIR "debug")  # fallback
+endif()
+
+set(FMOD_LIB_SUBDIR "${CMAKE_SOURCE_DIR}/Libraries/FMOD/lib/${IMGUI_LIB_SUBDIR}")
+message(STATUS "FMOD lib path: ${FMOD_LIB_SUBDIR}")
+
+
 target_link_libraries(NovaraEngine PUBLIC
     d3d11
     dxgi
@@ -146,6 +202,7 @@ target_link_libraries(NovaraEngine PUBLIC
     "${FX11_LIB_PATH}/Effects11.lib"
 
     "${IMGUI_LIB_PATH}/ImGui_x64.lib"
+        "${FMOD_LIB_SUBDIR}/fmodL64_vc.lib"
 
     "${PHYSX_LIB_PATH}/PhysX_64.lib"
     "${PHYSX_LIB_PATH}/PhysXCharacterKinematic_static_64.lib"

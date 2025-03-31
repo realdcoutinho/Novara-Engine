@@ -2,7 +2,20 @@ add_executable(MyGame
     main.cpp
     MainGame.cpp
     MainGame.h
- "pch.h" "MinionScene.cpp" "MinionScene.h")
+         "pch.h"
+         "Scenes/MinionScene.cpp"
+         "Scenes/MinionScene.h"
+        "ColorMaterial.cpp"
+        "ColorMaterial.h"
+        "Prefabs/CubePrefab.cpp"
+        "Prefabs/CubePrefab.h"
+        "Prefabs/SpherePrefab.h"
+        "Prefabs/TorusPrefab.h"
+        "Resources/Effects/PosNorm3D.fx"
+        "Resources/Effects/PosNormCol3D.fx"
+        "Resources/Effects/SpriteRenderer.fx"
+        "Resources/Effects/TextRenderer.fx"
+)
 
 # Link engine
 target_link_libraries(MyGame PRIVATE NovaraEngine)

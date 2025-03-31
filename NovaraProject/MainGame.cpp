@@ -17,7 +17,7 @@
 //
 //#pragma region Lab/Milestone Includes
 //#ifdef W3
-#include "MinionScene.h"
+#include "Scenes/MinionScene.h"
 
 
 ////#include "Scenes/Week 3/ComponentTestScene.h"
