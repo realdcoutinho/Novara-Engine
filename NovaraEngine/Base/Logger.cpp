@@ -1,4 +1,3 @@
-
 #include "EnginePCH.h"
 
 #include "Logger.h"
@@ -83,8 +82,8 @@ void Logger::Initialize()
 
 void Logger::Release()
 {
-	//SafeDelete(m_ConsoleLogger);
-	//SafeDelete(m_FileLogger);
+	SafeDelete(m_ConsoleLogger);
+	SafeDelete(m_FileLogger);
 }
 
 int Logger::StartPerformanceTimer()
@@ -128,68 +127,68 @@ void Logger::ClearConsole()
 
 void Logger::StartFileLogging(const std::wstring& fileName)
 {
-	//SafeDelete(m_FileLogger);
+	SafeDelete(m_FileLogger);
 
 	m_FileLogger = new FileLogger(fileName);
 }
 
 void Logger::StopFileLogging()
 {
-	//SafeDelete(m_FileLogger);
+	SafeDelete(m_FileLogger);
 }
-//
-//bool Logger::ProcessLog(LogLevel level, const LogString& fmt, std::wformat_args args)
-//{
-//	//Validate True Error
-//	if (level == LogLevel::Error) //Skip if non-error
-//	{
-//		//if (fmt.type == LogString::LogStringType::Fmod && fmt.fmodResult == FMOD_OK) return false;
-//		if (fmt.type == LogString::LogStringType::HResult && SUCCEEDED(fmt.hresult)) return false;
-//	}
-//
-//	//Skip Debug/T0d0 message in release build
-//#ifdef NDEBUG
-//	if (level == LogLevel::Debug || level == LogLevel::Todo) return false;
-//#endif
-//
-//	//Gather source intel
-//	const auto& levelStr = m_LevelToStr[level];
-//	const auto filename = fs::path{ fmt.location.file_name() }.filename().wstring();
-//	const auto functionName = StringUtil::utf8_decode(fmt.location.function_name());
-//
-//	//Generate Message
-//	std::wstring logMsg{ std::vformat(fmt.format, args) }; //DEFAULT FORMATTING
-//	if (level == LogLevel::Error) logMsg = ProcessError(fmt, logMsg, filename, functionName);
-//
-//	const auto full_log = std::format(L"[{}] @ {}::{} (line {})\n **{}\n\n", levelStr, filename, functionName, fmt.location.line(), logMsg);
-//
-//
-//	//Console Log
-//	if (m_ConsoleLogger)
-//	{
-//		SetConsoleTextAttribute(m_ConsoleHandle, m_LevelToConsoleStyle[level]);
-//		m_ConsoleLogger->Log(full_log);
-//	}
-//
-//	//File Log
-//	if (m_FileLogger)
-//	{
-//		m_FileLogger->Log(full_log, true);
-//	}
-//
-//	//Show MessageBox
-//	if (level == LogLevel::Error)
-//	{
-//		MessageBoxW(0, logMsg.c_str(), L"ERROR", MB_OK | MB_ICONERROR);
-//
-//#ifdef NDEBUG
-//		//Shutdown if Release Build
-//		exit(-1);
-//#endif
-//	}
-//
-//	return true;
-//}
+
+bool Logger::ProcessLog(LogLevel level, const LogString& fmt, std::wformat_args args)
+{
+	//Validate True Error
+	if (level == LogLevel::Error) //Skip if non-error
+	{
+		//if (fmt.type == LogString::LogStringType::Fmod && fmt.fmodResult == FMOD_OK) return false;
+		if (fmt.type == LogString::LogStringType::HResult && SUCCEEDED(fmt.hresult)) return false;
+	}
+
+	//Skip Debug/T0d0 message in release build
+#ifdef NDEBUG
+	if (level == LogLevel::Debug || level == LogLevel::Todo) return false;
+#endif
+
+	//Gather source intel
+	const auto& levelStr = m_LevelToStr[level];
+	const auto filename = fs::path{ fmt.location.file_name() }.filename().wstring();
+	const auto functionName = StringUtil::utf8_decode(fmt.location.function_name());
+
+	//Generate Message
+	std::wstring logMsg{ std::vformat(fmt.format, args) }; //DEFAULT FORMATTING
+	if (level == LogLevel::Error) logMsg = ProcessError(fmt, logMsg, filename, functionName);
+
+	const auto full_log = std::format(L"[{}] @ {}::{} (line {})\n **{}\n\n", levelStr, filename, functionName, fmt.location.line(), logMsg);
+
+
+	//Console Log
+	if (m_ConsoleLogger)
+	{
+		SetConsoleTextAttribute(m_ConsoleHandle, m_LevelToConsoleStyle[level]);
+		m_ConsoleLogger->Log(full_log);
+	}
+
+	//File Log
+	if (m_FileLogger)
+	{
+		m_FileLogger->Log(full_log, true);
+	}
+
+	//Show MessageBox
+	if (level == LogLevel::Error)
+	{
+		MessageBoxW(0, logMsg.c_str(), L"ERROR", MB_OK | MB_ICONERROR);
+
+#ifdef NDEBUG
+		//Shutdown if Release Build
+		exit(-1);
+#endif
+	}
+
+	return true;
+}
 
 std::wstring Logger::ProcessError(const LogString& fmt, const std::wstring& msg, const std::wstring& filename, const std::wstring& functionName)
 {

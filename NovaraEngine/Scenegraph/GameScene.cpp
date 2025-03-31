@@ -8,41 +8,40 @@ GameScene::GameScene(std::wstring sceneName) :
 
 GameScene::~GameScene()
 {
-	//SafeDelete(m_SceneContext.pGameTime);
-	//SafeDelete(m_SceneContext.pInput);
-	//SafeDelete(m_SceneContext.pLights);
+	SafeDelete(m_SceneContext.pGameTime);
+	SafeDelete(m_SceneContext.pInput);
+	SafeDelete(m_SceneContext.pLights);
 
 	for (auto pChild : m_pChildren)
 	{
-		//SafeDelete(pChild);
+		SafeDelete(pChild);
 	}
 
-	//SafeDelete(m_pPhysxProxy);
+	SafeDelete(m_pPhysxProxy);
 }
 
 void GameScene::AddChild_(GameObject* pObject)
 {
 #if _DEBUG
-	//if (pObject->m_pParentScene)
-	//{
-	//	if (pObject->m_pParentScene == this)
-	//		Logger::LogWarning(L"GameObject is already attached to this GameScene");
-	//	else
-	//		Logger::LogWarning(L"GameObject is already attached to another GameScene.Detach it from it's current scene before attaching it to another one.");
+	if (pObject->m_pParentScene)
+	{
+		if (pObject->m_pParentScene == this)
+			//Logger::LogWarning(L"GameObject is already attached to this GameScene");
+		//else
+			//Logger::LogWarning(L"GameObject is already attached to another GameScene.Detach it from it's current scene before attaching it to another one.");
 
-	//	return;
-	//}
+		return;
+	}
 
-	//if (pObject->m_pParentObject)
-	//{
-	//	Logger::LogWarning(
-	//		L"GameObject is currently attached to a GameObject. Detach it from it's current parent before attaching it to another one.");
-	//	return;
-	//}
+	if (pObject->m_pParentObject)
+	{
+		//Logger::LogWarning(L"GameObject is currently attached to a GameObject. Detach it from it's current parent before attaching it to another one.");
+		return;
+	}
 #endif
 
 	m_pChildren.push_back(pObject);
-	//pObject->RootOnSceneAttach(this);
+	pObject->RootOnSceneAttach(this);
 }
 
 void GameScene::RemoveChild(GameObject* pObject, bool deleteObject)
@@ -58,13 +57,13 @@ void GameScene::RemoveChild(GameObject* pObject, bool deleteObject)
 #endif
 
 	m_pChildren.erase(it);
-	//pObject->m_pParentScene = nullptr;
-	//pObject->RootOnSceneDetach(this);
+	pObject->m_pParentScene = nullptr;
+	pObject->RootOnSceneDetach(this);
 
-	//if (deleteObject)
-	//{
-	//	SafeDelete(pObject);
-	//}
+	if (deleteObject)
+	{
+		SafeDelete(pObject);
+	}
 }
 
 void GameScene::RootInitialize(const GameContext& gameContext)
@@ -80,27 +79,27 @@ void GameScene::RootInitialize(const GameContext& gameContext)
 	m_SceneContext.windowHeight = static_cast<float>(gameContext.windowHeight);
 	m_SceneContext.aspectRatio = m_SceneContext.windowWidth / m_SceneContext.windowHeight;
 
-	/*m_SceneContext.pGameTime = new GameTime();
+	//m_SceneContext.pGameTime = new GameTime();
 	m_SceneContext.pGameTime->Reset();
 	m_SceneContext.pGameTime->Stop();
 
 	m_SceneContext.pInput = new InputManager();
-	m_SceneContext.pLights = new LightManager();*/
+	//m_SceneContext.pLights = new LightManager();
 
 	m_SceneContext.d3dContext = gameContext.d3dContext;
 
-	//// Initialize Physx
-	//m_pPhysxProxy = new PhysxProxy();
-	//m_pPhysxProxy->Initialize(this);
+	// Initialize Physx
+	m_pPhysxProxy = new PhysxProxy();
+	m_pPhysxProxy->Initialize(this);
 
 	//Create DefaultCamera
-	//const auto pFreeCamera = new FreeCamera();
-	//pFreeCamera->SetRotation(30, 0);
-	//pFreeCamera->GetTransform()->Translate(0, 50, -80);
-	//AddChild(pFreeCamera);
+	const auto pFreeCamera = new FreeCamera();
+	pFreeCamera->SetRotation(30, 0);
+	pFreeCamera->GetTransform()->Translate(0, 50, -80);
+	AddChild(pFreeCamera);
 
-	//m_pDefaultCamera = pFreeCamera->GetComponent<CameraComponent>();
-	//SetActiveCamera(m_pDefaultCamera); //Also sets pCamera in SceneContext
+	m_pDefaultCamera = pFreeCamera->GetComponent<CameraComponent>();
+	SetActiveCamera(m_pDefaultCamera); //Also sets pCamera in SceneContext
 
 	//User-Scene Initialize
 	Initialize();
@@ -108,7 +107,7 @@ void GameScene::RootInitialize(const GameContext& gameContext)
 	//Root-Scene Initialize
 	for (const auto pChild : m_pChildren)
 	{
-		//pChild->RootInitialize(m_SceneContext);
+		pChild->RootInitialize(m_SceneContext);
 	}
 
 	m_IsInitialized = true;
@@ -116,20 +115,20 @@ void GameScene::RootInitialize(const GameContext& gameContext)
 
 void GameScene::RootPostInitialize()
 {
-	////Root-Scene Initialize
-	//for (const auto pChild : m_pChildren)
-	//{
-	//	pChild->RootPostInitialize(m_SceneContext);
-	//}
+	//Root-Scene Initialize
+	for (const auto pChild : m_pChildren)
+	{
+		pChild->RootPostInitialize(m_SceneContext);
+	}
 
 	PostInitialize();
 }
 
 void GameScene::RootUpdate()
 {
-	//m_SceneContext.pGameTime->Update();
-	//m_SceneContext.pInput->Update();
-	//m_SceneContext.pCamera = m_pActiveCamera;
+	m_SceneContext.pGameTime->Update();
+	m_SceneContext.pInput->Update();
+	m_SceneContext.pCamera = m_pActiveCamera;
 	//m_SceneContext.frameNumber = static_cast<UINT>(GameStats::GetStats().frameNr);
 
 #pragma warning(push)
@@ -143,10 +142,10 @@ void GameScene::RootUpdate()
 	//Root-Scene Update
 	for (const auto pChild : m_pChildren)
 	{
-		//pChild->RootUpdate(m_SceneContext);
+		pChild->RootUpdate(m_SceneContext);
 	}
 
-	//m_pPhysxProxy->Update(m_SceneContext);
+	m_pPhysxProxy->Update(m_SceneContext);
 }
 
 void GameScene::RootDraw()
@@ -169,7 +168,7 @@ void GameScene::RootDraw()
 	//Object-Scene Draw
 	for (const auto pChild : m_pChildren)
 	{
-		//pChild->RootDraw(m_SceneContext);
+		pChild->RootDraw(m_SceneContext);
 	}
 
 	//SpriteRenderer Draw
@@ -182,11 +181,11 @@ void GameScene::RootDraw()
 	PostDraw();
 	for (const auto pChild : m_pChildren)
 	{
-		//pChild->RootPostDraw(m_SceneContext);
+		pChild->RootPostDraw(m_SceneContext);
 	}
 
 	//Draw PhysX
-	//m_pPhysxProxy->Draw(m_SceneContext);
+	m_pPhysxProxy->Draw(m_SceneContext);
 
 	//Draw Debug Stuff
 	//DebugRenderer::Draw(m_SceneContext);
@@ -222,15 +221,15 @@ void GameScene::RootDraw()
 void GameScene::RootOnSceneActivated()
 {
 	//Start Timer
-	//m_SceneContext.pGameTime->Start();
+	m_SceneContext.pGameTime->Start();
 	OnSceneActivated();
 }
 
 void GameScene::RootOnSceneDeactivated()
 {
-	////Stop Timer
-	//m_SceneContext.pGameTime->Stop();
-	//OnSceneDeactivated();
+	//Stop Timer
+	m_SceneContext.pGameTime->Stop();
+	OnSceneDeactivated();
 }
 
 void GameScene::RootOnGUI()
@@ -341,15 +340,17 @@ void GameScene::RootOnGUI()
 //#pragma endregion
 }
 
-//void GameScene::RootWindowStateChanged(int state, bool active) const
-//{
-//	//TIMER
-//	if (state == 0)
-//	{
-//		if (active)m_SceneContext.pGameTime->Start();
-//		else m_SceneContext.pGameTime->Stop();
-//	}
-//}
+void GameScene::RootWindowStateChanged(int state, bool active) const
+{
+	//TIMER
+	if (state == 0)
+	{
+		if (active)
+			m_SceneContext.pGameTime->Start();
+		else 
+			m_SceneContext.pGameTime->Stop();
+	}
+}
 
 //void GameScene::AddPostProcessingEffect(PostProcessingMaterial* pMaterial)
 //{
@@ -374,18 +375,18 @@ void GameScene::RemovePostProcessingEffect(UINT materialId)
 
 void GameScene::SetActiveCamera(CameraComponent* pCameraComponent)
 {
-	////Prevent recursion!
-	//if (pCameraComponent == m_pActiveCamera)
-	//	return;
+	//Prevent recursion!
+	if (pCameraComponent == m_pActiveCamera)
+		return;
 
-	////Disable current active camera (if set)
-	//const auto currActiveCamera = m_pActiveCamera;
-	//m_pActiveCamera = nullptr;
-	//if (currActiveCamera)
-	//	currActiveCamera->SetActive(false);
+	//Disable current active camera (if set)
+	const auto currActiveCamera = m_pActiveCamera;
+	m_pActiveCamera = nullptr;
+	if (currActiveCamera)
+		currActiveCamera->SetActive(false);
 
-	////Set new camera
-	//m_pActiveCamera = (pCameraComponent) ? pCameraComponent : m_pDefaultCamera;
-	//m_pActiveCamera->SetActive(true);
-	//m_SceneContext.pCamera = m_pActiveCamera; //Change SceneContext
+	//Set new camera
+	m_pActiveCamera = (pCameraComponent) ? pCameraComponent : m_pDefaultCamera;
+	m_pActiveCamera->SetActive(true);
+	m_SceneContext.pCamera = m_pActiveCamera; //Change SceneContext
 }

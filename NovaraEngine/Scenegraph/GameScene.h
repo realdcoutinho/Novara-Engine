@@ -6,7 +6,7 @@
 
 //class PostProcessingMaterial;
 //class BaseMaterial;
-//class PhysxProxy;
+class PhysxProxy;
 class CameraComponent;
 class GameObject;
 
@@ -31,7 +31,7 @@ public:
 	void RemoveChild(GameObject* pObject, bool deleteObject = false);
 
 	const SceneContext& GetSceneContext() const { return m_SceneContext; }
-	//SceneSettings& GetSceneSettings() { return m_SceneContext.settings; }
+	SceneSettings& GetSceneSettings() { return m_SceneContext.settings; }
 	CameraComponent* GetActiveCamera() const { return m_pActiveCamera; }
 
 	//void AddPostProcessingEffect(PostProcessingMaterial* pMaterial);
@@ -39,7 +39,7 @@ public:
 	//void RemovePostProcessingEffect(PostProcessingMaterial* pMaterial);
 	void RemovePostProcessingEffect(UINT materialId);
 
-	//PhysxProxy* GetPhysxProxy() const { return m_pPhysxProxy; }
+	PhysxProxy* GetPhysxProxy() const { return m_pPhysxProxy; }
 	void SetActiveCamera(CameraComponent* pCameraComponent);
 
 protected:
@@ -65,13 +65,13 @@ private:
 	void RootOnSceneActivated();
 	void RootOnSceneDeactivated();
 	void RootOnGUI();
-	//void RootWindowStateChanged(int state, bool active) const;
+	void RootWindowStateChanged(int state, bool active) const;
 
 	std::vector<GameObject*> m_pChildren{};
 	bool m_IsInitialized{};
 	std::wstring m_SceneName{};
 	CameraComponent* m_pDefaultCamera{}, * m_pActiveCamera{};
-	//PhysxProxy* m_pPhysxProxy{};
+	PhysxProxy* m_pPhysxProxy{};
 
 	//std::vector<PostProcessingMaterial*> m_PostProcessingMaterials{};
 	NovaraGame* m_pGame{};

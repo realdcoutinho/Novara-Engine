@@ -155,7 +155,7 @@ public:
 private:
 	Logger() = default;
 
-	//static bool ProcessLog(LogLevel level, const LogString& fmt, std::wformat_args args);
+	static bool ProcessLog(LogLevel level, const LogString& fmt, std::wformat_args args);
 	static std::wstring ProcessError(const LogString& fmt, const std::wstring& msg, const std::wstring& filename, const std::wstring& functionName);
 
 	//TIMER 

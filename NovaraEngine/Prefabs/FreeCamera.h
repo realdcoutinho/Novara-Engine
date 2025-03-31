@@ -1,4 +1,5 @@
 #pragma once
+
 class FreeCamera final : public GameObject
 {
 public:
