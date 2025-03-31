@@ -48,12 +48,12 @@ add_library(NovaraEngine
  "Misc/Material.cpp" 
  "Utils/PhysxHelper.h" 
  "Utils/PhysxHelper.cpp" 
- "Utils/MathHelper.H" 
+ "Utils/MathHelper.h" 
  "Contents/ContentLoader.h" 
  "Managers/ContentManager.h" 
  "Managers/ContentManager.cpp" 
  "Misc/RenderTarget.h" 
- "Misc/RenderTarget.cpp")
+ "Misc/RenderTarget.cpp" "Graphics/DebugRenderer.h" "Utils/VertexHelper.h" "Utils/VertexHelper.cpp" "Graphics/DebugRenderer.cpp" "Utils/EffectHelper.h" "Utils/EffectHelper.cpp" "Contents/EffectLoader.h" "Contents/EffectLoader.cpp")
 
 # Optional: Add include directories for engine users
 target_include_directories(NovaraEngine PUBLIC 
@@ -70,6 +70,7 @@ target_include_directories(NovaraEngine PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/Prefabs
     ${CMAKE_CURRENT_SOURCE_DIR}/Misc
     ${CMAKE_CURRENT_SOURCE_DIR}/Contents
+    ${CMAKE_CURRENT_SOURCE_DIR}/Graphics
 
 
     # External libraries
@@ -84,71 +85,67 @@ target_include_directories(NovaraEngine PUBLIC
 
 target_precompile_headers(NovaraEngine PRIVATE PCH/EnginePCH.h)
 
-# Path para os .lib
-#link_directories(${CMAKE_SOURCE_DIR}/Libraries/PhysX/lib/checked)
+# Determine PhysX lib subfolder based on build type
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    set(PHYSX_LIB_SUBDIR "debug")
+elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
+    set(PHYSX_LIB_SUBDIR "release")
+else()
+    set(PHYSX_LIB_SUBDIR "checked")  # fallback ou para RelWithDebInfo
+endif()
 
-message(STATUS "PhysX lib path: ${CMAKE_SOURCE_DIR}/Libraries/PhysX/lib/checked")
+# Final PhysX lib path
+set(PHYSX_LIB_PATH "${CMAKE_SOURCE_DIR}/Libraries/PhysX/lib/${PHYSX_LIB_SUBDIR}")
+message(STATUS "PhysX lib path: ${PHYSX_LIB_PATH}")
 
 
-# Link required system libraries for DirectX
+
+
+
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    set(FX11_LIB_SUBDIR "debug")
+elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
+    set(FX11_LIB_SUBDIR "release")
+else()
+    set(FX11_LIB_SUBDIR "profile")  # fallback
+endif()
+
+set(FX11_LIB_PATH "${CMAKE_SOURCE_DIR}/Libraries/FX11/lib/${FX11_LIB_SUBDIR}")
+message(STATUS "FX11 lib path: ${FX11_LIB_PATH}")
+
+
+
+
+
+
 target_link_libraries(NovaraEngine PUBLIC
     d3d11
     dxgi
     d3dcompiler
+    
+    
+    "${FX11_LIB_PATH}/Effects11.lib"
 
-    "${CMAKE_SOURCE_DIR}/Libraries/PhysX/lib/checked/PhysX_64.lib"
-    "${CMAKE_SOURCE_DIR}/Libraries/PhysX/lib/checked/PhysXCharacterKinematic_static_64.lib"
-    "${CMAKE_SOURCE_DIR}/Libraries/PhysX/lib/checked/PhysXCommon_64.lib"
-    #"${CMAKE_SOURCE_DIR}/Libraries/PhysX/lib/checked/PhysXCooking_64.lib"
-    "${CMAKE_SOURCE_DIR}/Libraries/PhysX/lib/checked/PhysXExtensions_static_64.lib"
-    "${CMAKE_SOURCE_DIR}/Libraries/PhysX/lib/checked/PhysXFoundation_64.lib"
-    "${CMAKE_SOURCE_DIR}/Libraries/PhysX/lib/checked/PhysXPvdSDK_static_64.lib"
-    #"${CMAKE_SOURCE_DIR}/Libraries/PhysX/lib/checked/PhysXTask_static_64.lib"
-    #"${CMAKE_SOURCE_DIR}/Libraries/PhysX/lib/checked/PhysXVehicle_static_64.lib"
-    #"${CMAKE_SOURCE_DIR}/Libraries/PhysX/lib/checked/SceneQuery_static_64.lib"
-    #"${CMAKE_SOURCE_DIR}/Libraries/PhysX/lib/checked/SimulationController_static_64.lib"
+    "${PHYSX_LIB_PATH}/PhysX_64.lib"
+    "${PHYSX_LIB_PATH}/PhysXCharacterKinematic_static_64.lib"
+    "${PHYSX_LIB_PATH}/PhysXCommon_64.lib" # <- nota: não tem _static no nome, mas parece ser release
+    "${PHYSX_LIB_PATH}/PhysXExtensions_static_64.lib"
+    "${PHYSX_LIB_PATH}/PhysXFoundation_64.lib"
+    "${PHYSX_LIB_PATH}/PhysXPvdSDK_static_64.lib"
+    "${PHYSX_LIB_PATH}/PhysXTask_static_64.lib"
+    "${PHYSX_LIB_PATH}/PhysXVehicle_static_64.lib"
+    "${PHYSX_LIB_PATH}/SceneQuery_static_64.lib"
+    "${PHYSX_LIB_PATH}/SimulationController_static_64.lib"
 )
 
 target_compile_definitions(NovaraEngine PUBLIC PX_STATIC_LIB)
 
 
-#target_link_libraries(NovaraEngine
-#    PUBLIC
-#        PhysX_64
-#        PhysXCommon_64
-#        PhysXExtensions_static_64
-#        PhysXPvdSDK_static_64
-#        PhysXFoundation_64
-#        PhysXCharacterKinematic_static_64
-#)
-#
-#target_include_directories(NovaraEngine
-#    PUBLIC
-#        ${PHYSX_SDK_DIR}/include
-#        ${PHYSX_SDK_DIR}/source/physx/include
-#        ${PHYSX_SDK_DIR}/source/physxvehicle/include
-#)
-#
-#link_directories(
-#    ${PHYSX_SDK_DIR}/lib/${PLATFORM}  # Ex: lib/windows.x86_64.vc142.md/debug
-#)
+file(GLOB PHYSX_DLLS "${CMAKE_SOURCE_DIR}/Libraries/PhysX/bin/checked/*.dll")
 
-#set(PHYSX_LIB_DIR ${CMAKE_SOURCE_DIR}/Libraries/PhysX/lib/checked)
-#
-#target_link_libraries(NovaraEngine PUBLIC
-#    ${PHYSX_LIB_DIR}/PhysX_64.lib
-#    ${PHYSX_LIB_DIR}/PhysXCommon_64.lib
-#    ${PHYSX_LIB_DIR}/PhysXFoundation_64.lib
-#    ${PHYSX_LIB_DIR}/PhysXExtensions_static_64.lib
-#    ${PHYSX_LIB_DIR}/PhysXPvdSDK_static_64.lib
-#    ${PHYSX_LIB_DIR}/PhysXCharacterKinematic_static_64.lib
-#)
-#
-## Match PhysX release runtime with /MDd (Debug)
-#target_compile_options(NovaraEngine PRIVATE /MDd)
-#
-#if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-#    target_compile_options(NovaraEngine PRIVATE /MDd)
-#else()
-#    target_compile_options(NovaraEngine PRIVATE /MD)
-#endif()
+set(DLL_DESTINATION "${CMAKE_BINARY_DIR}/NovaraProject")
+
+foreach(DLL ${PHYSX_DLLS})
+    get_filename_component(DLL_NAME "${DLL}" NAME)
+    file(COPY "${DLL}" DESTINATION "${DLL_DESTINATION}")
+endforeach()

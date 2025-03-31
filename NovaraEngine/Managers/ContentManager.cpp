@@ -23,7 +23,7 @@ void ContentManager::Initialize(const GameContext& gameContext)
 		m_GameContext = gameContext;
 		m_IsInitialized = true;
 
-		//AddLoader(new EffectLoader);
+		AddLoader(new EffectLoader);
 		//AddLoader(new MeshFilterLoader);
 		//AddLoader(new PxConvexMeshLoader);
 		//AddLoader(new PxTriangleMeshLoader);

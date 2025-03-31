@@ -18,7 +18,7 @@ NovaraGame::~NovaraGame()
 	//Game Cleanup
 	MaterialManager::Destroy();
 	ContentManager::Release(); //TODO > Singleton
-	//DebugRenderer::Release(); //TODO > Singleton
+	DebugRenderer::Release(); //TODO > Singleton
 	InputManager::Release(); //Todo > Rename to Destroy
 	SceneManager::Destroy();
 	PhysXManager::Destroy();
@@ -320,7 +320,7 @@ HRESULT NovaraGame::InitializeGame()
 	//TextureData::CreateGUID();
 
 	ContentManager::Initialize(m_GameContext);
-	//DebugRenderer::Initialize(m_GameContext);
+	DebugRenderer::Initialize(m_GameContext);
 	InputManager::Initialize(m_GameContext);
 	PhysXManager::Create(m_GameContext);
 	//SoundManager::Create(m_GameContext); //Constructor calls Initialize

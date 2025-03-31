@@ -79,7 +79,7 @@ void GameScene::RootInitialize(const GameContext& gameContext)
 	m_SceneContext.windowHeight = static_cast<float>(gameContext.windowHeight);
 	m_SceneContext.aspectRatio = m_SceneContext.windowWidth / m_SceneContext.windowHeight;
 
-	//m_SceneContext.pGameTime = new GameTime();
+	m_SceneContext.pGameTime = new GameTime();
 	m_SceneContext.pGameTime->Reset();
 	m_SceneContext.pGameTime->Stop();
 
@@ -129,7 +129,7 @@ void GameScene::RootUpdate()
 	m_SceneContext.pGameTime->Update();
 	m_SceneContext.pInput->Update();
 	m_SceneContext.pCamera = m_pActiveCamera;
-	//m_SceneContext.frameNumber = static_cast<UINT>(GameStats::GetStats().frameNr);
+	m_SceneContext.frameNumber = static_cast<UINT>(GameStats::GetStats().frameNr);
 
 #pragma warning(push)
 #pragma warning(disable : 26812)
@@ -188,7 +188,7 @@ void GameScene::RootDraw()
 	m_pPhysxProxy->Draw(m_SceneContext);
 
 	//Draw Debug Stuff
-	//DebugRenderer::Draw(m_SceneContext);
+	DebugRenderer::Draw(m_SceneContext);
 #pragma endregion
 
 #pragma region POST-PROCESSING PASS

@@ -1,5 +1,6 @@
 #pragma once
 #include "../Base/Enumerations.h"
+#include "Xinput.h"
 
 class InputManager final
 {
@@ -25,13 +26,13 @@ public:
 	static const POINT& GetMousePosition(bool previousFrame = false) { return (previousFrame) ? m_OldMousePosition : m_CurrMousePosition; }
 	static const POINT& GetMouseMovement() { return m_MouseMovement; }
 	static const XMFLOAT2& GetMouseMovementNormalized() { return m_MouseMovementNormalized; }
-	//static XMFLOAT2 GetThumbstickPosition(bool leftThumbstick = true, GamepadIndex playerIndex = GamepadIndex::playerOne);
-	//static float GetTriggerPressure(bool leftTrigger = true, GamepadIndex playerIndex = GamepadIndex::playerOne);
+	static XMFLOAT2 GetThumbstickPosition(bool leftThumbstick = true, GamepadIndex playerIndex = GamepadIndex::playerOne);
+	static float GetTriggerPressure(bool leftTrigger = true, GamepadIndex playerIndex = GamepadIndex::playerOne);
 	static void SetVibration(float leftVibration, float rightVibration, GamepadIndex playerIndex = GamepadIndex::playerOne);
 	static BYTE GetKeyState(int key, bool previousFrame = false);
 
 	static void CursorVisible(bool visible) { ShowCursor(visible); }
-	//static bool IsGamepadConnected(GamepadIndex index) { return m_ConnectedGamepads[DWORD(index)]; }
+	static bool IsGamepadConnected(GamepadIndex index) { return m_ConnectedGamepads[DWORD(index)]; }
 
 	static bool IsKeyboardKey(InputState state, int key);
 	static bool IsMouseButton(InputState state, int button);
@@ -50,13 +51,13 @@ private:
 	static BYTE* m_pCurrKeyboardState, * m_pOldKeyboardState, * m_pKeyboardState0, * m_pKeyboardState1;
 	static POINT m_CurrMousePosition, m_OldMousePosition, m_MouseMovement;
 	static XMFLOAT2 m_MouseMovementNormalized;
-	//static XINPUT_STATE m_OldGamepadState[XUSER_MAX_COUNT], m_CurrGamepadState[XUSER_MAX_COUNT];
+	static XINPUT_STATE m_OldGamepadState[XUSER_MAX_COUNT], m_CurrGamepadState[XUSER_MAX_COUNT];
 
 	static std::chrono::time_point<std::chrono::steady_clock> m_LastUpdate;
 
 	static bool m_IsInitialized;
 	static bool m_KeyboardState0Active;
-	//static bool m_ConnectedGamepads[XUSER_MAX_COUNT];
+	static bool m_ConnectedGamepads[XUSER_MAX_COUNT];
 	static bool m_Enabled, m_UserEnabled, m_PrevEnable, m_EnableChanged;
 	static bool m_ForceToCenter;
 	static GameContext m_GameContext;
@@ -73,7 +74,7 @@ private:
 
 	static bool IsKeyboardKeyDown_unsafe(int key, bool previousFrame = false);
 	static bool IsMouseButtonDown_unsafe(int button, bool previousFrame = false);
-	//static bool IsGamepadButtonDown_unsafe(WORD button, GamepadIndex playerIndex = GamepadIndex::playerOne, bool previousFrame = false);
+	static bool IsGamepadButtonDown_unsafe(WORD button, GamepadIndex playerIndex = GamepadIndex::playerOne, bool previousFrame = false);
 
 	static bool IsKeyCodeValid(int code) { return code > KBCODE_MIN && code < KBCODE_MAX; }
 	static bool IsMouseCodeValid(int code) { return code > MSCODE_MIN && code < MSCODE_MAX; }

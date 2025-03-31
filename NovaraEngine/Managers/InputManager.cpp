@@ -9,9 +9,9 @@ bool InputManager::m_KeyboardState0Active = true;
 POINT InputManager::m_OldMousePosition = POINT();
 POINT InputManager::m_CurrMousePosition = POINT();
 POINT InputManager::m_MouseMovement = POINT();
-//XINPUT_STATE InputManager::m_OldGamepadState[XUSER_MAX_COUNT];
-//XINPUT_STATE InputManager::m_CurrGamepadState[XUSER_MAX_COUNT];
-//bool InputManager::m_ConnectedGamepads[XUSER_MAX_COUNT];
+XINPUT_STATE InputManager::m_OldGamepadState[XUSER_MAX_COUNT];
+XINPUT_STATE InputManager::m_CurrGamepadState[XUSER_MAX_COUNT];
+bool InputManager::m_ConnectedGamepads[XUSER_MAX_COUNT];
 bool InputManager::m_UserEnabled = true;
 bool InputManager::m_Enabled = false;
 bool InputManager::m_PrevEnable = false;
@@ -37,7 +37,7 @@ void InputManager::Initialize(const GameContext& gameContext)
 		if (!GetKeyboardState(m_pKeyboardState0) ||
 			!GetKeyboardState(m_pKeyboardState1))
 		{
-			//Logger::LogWarning(L"InputManager::Initialize >> Failed to GetKeyboardState.");
+			Logger::LogWarning(L"InputManager::Initialize >> Failed to GetKeyboardState.");
 		}
 
 		m_GameContext = gameContext;
@@ -95,25 +95,25 @@ void InputManager::ForceMouseToCenter(bool force)
 
 void InputManager::UpdateGamepadStates()
 {
-	//for (DWORD i = 0; i < XUSER_MAX_COUNT; ++i)
-	//{
-	//	m_OldGamepadState[i] = m_CurrGamepadState[i];
+	for (DWORD i = 0; i < XUSER_MAX_COUNT; ++i)
+	{
+		m_OldGamepadState[i] = m_CurrGamepadState[i];
 
-	//	XINPUT_STATE state;
-	//	ZeroMemory(&state, sizeof(XINPUT_STATE));
+		XINPUT_STATE state;
+		ZeroMemory(&state, sizeof(XINPUT_STATE));
 
-	//	const DWORD dwResult = XInputGetState(i, &state);
-	//	m_CurrGamepadState[i] = state;
+		const DWORD dwResult = XInputGetState(i, &state);
+		m_CurrGamepadState[i] = state;
 
-	//	if (dwResult == ERROR_SUCCESS)
-	//	{
-	//		m_ConnectedGamepads[i] = true;
-	//	}
-	//	else
-	//	{
-	//		m_ConnectedGamepads[i] = false;
-	//	}
-	//}
+		if (dwResult == ERROR_SUCCESS)
+		{
+			m_ConnectedGamepads[i] = true;
+		}
+		else
+		{
+			m_ConnectedGamepads[i] = false;
+		}
+	}
 }
 
 bool InputManager::UpdateKeyboardStates()
@@ -195,15 +195,15 @@ bool InputManager::IsGamepadButton(InputState state, WORD button, GamepadIndex p
 {
 	if (!IsGamepadCodeValid(button)) return false;
 
-	//switch (state)
-	//{
-	//case InputState::down:
-	//	return IsGamepadButtonDown_unsafe(button, playerIndex, true) && IsGamepadButtonDown_unsafe(button, playerIndex, false);
-	//case InputState::pressed:
-	//	return !IsGamepadButtonDown_unsafe(button, playerIndex, true) && IsGamepadButtonDown_unsafe(button, playerIndex, false);
-	//case InputState::released:
-	//	return IsGamepadButtonDown_unsafe(button, playerIndex, true) && !IsGamepadButtonDown_unsafe(button, playerIndex, false);
-	//}
+	switch (state)
+	{
+	case InputState::down:
+		return IsGamepadButtonDown_unsafe(button, playerIndex, true) && IsGamepadButtonDown_unsafe(button, playerIndex, false);
+	case InputState::pressed:
+		return !IsGamepadButtonDown_unsafe(button, playerIndex, true) && IsGamepadButtonDown_unsafe(button, playerIndex, false);
+	case InputState::released:
+		return IsGamepadButtonDown_unsafe(button, playerIndex, true) && !IsGamepadButtonDown_unsafe(button, playerIndex, false);
+	}
 
 	return false;
 }
@@ -290,69 +290,69 @@ bool InputManager::IsMouseButtonDown_unsafe(int button, bool previousFrame)
 	return (m_pCurrKeyboardState[button] & 0xF0) != 0;
 }
 
-////NO RANGE CHECKS
-//bool InputManager::IsGamepadButtonDown_unsafe(WORD button, GamepadIndex playerIndex, bool previousFrame)
-//{
-//	if (!m_Enabled)return false;
-//
-//	if (!m_ConnectedGamepads[int(playerIndex)])
-//		return false;
-//
-//	if (previousFrame)
-//		return (m_OldGamepadState[int(playerIndex)].Gamepad.wButtons & button) != 0;
-//
-//	return (m_CurrGamepadState[int(playerIndex)].Gamepad.wButtons & button) != 0;
-//}
-//
-//XMFLOAT2 InputManager::GetThumbstickPosition(bool leftThumbstick, GamepadIndex playerIndex)
-//{
-//	XMFLOAT2 pos;
-//	if (leftThumbstick)
-//	{
-//		pos = XMFLOAT2(m_CurrGamepadState[int(playerIndex)].Gamepad.sThumbLX, m_CurrGamepadState[int(playerIndex)].Gamepad.sThumbLY);
-//
-//		if (pos.x > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE && pos.x < XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE)pos.x = 0;
-//		if (pos.y > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE && pos.y < XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE)pos.y = 0;
-//	}
-//	else
-//	{
-//		pos = XMFLOAT2(m_CurrGamepadState[int(playerIndex)].Gamepad.sThumbRX, m_CurrGamepadState[int(playerIndex)].Gamepad.sThumbRY);
-//
-//		if (pos.x > -XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE && pos.x < XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE)pos.x = 0;
-//		if (pos.y > -XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE && pos.y < XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE)pos.y = 0;
-//	}
-//
-//	if (pos.x < 0)pos.x /= 32768;
-//	else pos.x /= 32767;
-//
-//	if (pos.y < 0)pos.y /= 32768;
-//	else pos.y /= 32767;
-//
-//	return pos;
-//}
+//NO RANGE CHECKS
+bool InputManager::IsGamepadButtonDown_unsafe(WORD button, GamepadIndex playerIndex, bool previousFrame)
+{
+	if (!m_Enabled)return false;
 
-//float InputManager::GetTriggerPressure(bool leftTrigger, GamepadIndex playerIndex)
-//{
-//	if (leftTrigger)
-//	{
-//		return m_CurrGamepadState[int(playerIndex)].Gamepad.bLeftTrigger / 255.0f;
-//	}
-//	else
-//	{
-//		return m_CurrGamepadState[int(playerIndex)].Gamepad.bRightTrigger / 255.0f;
-//	}
-//}
+	if (!m_ConnectedGamepads[int(playerIndex)])
+		return false;
+
+	if (previousFrame)
+		return (m_OldGamepadState[int(playerIndex)].Gamepad.wButtons & button) != 0;
+
+	return (m_CurrGamepadState[int(playerIndex)].Gamepad.wButtons & button) != 0;
+}
+
+XMFLOAT2 InputManager::GetThumbstickPosition(bool leftThumbstick, GamepadIndex playerIndex)
+{
+	XMFLOAT2 pos;
+	if (leftThumbstick)
+	{
+		pos = XMFLOAT2(m_CurrGamepadState[int(playerIndex)].Gamepad.sThumbLX, m_CurrGamepadState[int(playerIndex)].Gamepad.sThumbLY);
+
+		if (pos.x > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE && pos.x < XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE)pos.x = 0;
+		if (pos.y > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE && pos.y < XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE)pos.y = 0;
+	}
+	else
+	{
+		pos = XMFLOAT2(m_CurrGamepadState[int(playerIndex)].Gamepad.sThumbRX, m_CurrGamepadState[int(playerIndex)].Gamepad.sThumbRY);
+
+		if (pos.x > -XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE && pos.x < XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE)pos.x = 0;
+		if (pos.y > -XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE && pos.y < XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE)pos.y = 0;
+	}
+
+	if (pos.x < 0)pos.x /= 32768;
+	else pos.x /= 32767;
+
+	if (pos.y < 0)pos.y /= 32768;
+	else pos.y /= 32767;
+
+	return pos;
+}
+
+float InputManager::GetTriggerPressure(bool leftTrigger, GamepadIndex playerIndex)
+{
+	if (leftTrigger)
+	{
+		return m_CurrGamepadState[int(playerIndex)].Gamepad.bLeftTrigger / 255.0f;
+	}
+	else
+	{
+		return m_CurrGamepadState[int(playerIndex)].Gamepad.bRightTrigger / 255.0f;
+	}
+}
 
 void InputManager::SetVibration(float leftVibration, float rightVibration, GamepadIndex playerIndex)
 {
-	//XINPUT_VIBRATION vibration;
-	//MathHelper::Clamp<float>(leftVibration, 0.0f, 1.0f);
-	//MathHelper::Clamp<float>(rightVibration, 0.0f, 1.0f);
+	XINPUT_VIBRATION vibration;
+	MathHelper::Clamp<float>(leftVibration, 0.0f, 1.0f);
+	MathHelper::Clamp<float>(rightVibration, 0.0f, 1.0f);
 
-	//ZeroMemory(&vibration, sizeof(XINPUT_VIBRATION));
+	ZeroMemory(&vibration, sizeof(XINPUT_VIBRATION));
 
-	//vibration.wLeftMotorSpeed = static_cast<WORD>(leftVibration * 65535);
-	//vibration.wRightMotorSpeed = static_cast<WORD>(rightVibration * 65535);
+	vibration.wLeftMotorSpeed = static_cast<WORD>(leftVibration * 65535);
+	vibration.wRightMotorSpeed = static_cast<WORD>(rightVibration * 65535);
 
-	//XInputSetState(int(playerIndex), &vibration);
+	XInputSetState(int(playerIndex), &vibration);
 }

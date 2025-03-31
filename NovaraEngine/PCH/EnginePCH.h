@@ -116,7 +116,12 @@ namespace fs = std::filesystem;
 #include "SceneManager.h"
 #include "PhysXManager.h"
 #include "RenderTarget.h"
-
+#include "MathHelper.h"
+#include "VertexHelper.h"
+#include "PhysxHelper.h"
+#include "EffectHelper.h"
+#include "DebugRenderer.h"
+#include "EffectLoader.h"
 
 
 
