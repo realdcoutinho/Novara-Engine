@@ -53,7 +53,17 @@ add_library(NovaraEngine
  "Managers/ContentManager.h" 
  "Managers/ContentManager.cpp" 
  "Misc/RenderTarget.h" 
- "Misc/RenderTarget.cpp" "Graphics/DebugRenderer.h" "Utils/VertexHelper.h" "Utils/VertexHelper.cpp" "Graphics/DebugRenderer.cpp" "Utils/EffectHelper.h" "Utils/EffectHelper.cpp" "Contents/EffectLoader.h" "Contents/EffectLoader.cpp")
+ "Misc/RenderTarget.cpp" 
+ "Graphics/DebugRenderer.h" 
+ "Utils/VertexHelper.h" 
+ "Utils/VertexHelper.cpp" 
+ "Graphics/DebugRenderer.cpp" 
+ "Utils/EffectHelper.h" 
+ "Utils/EffectHelper.cpp" 
+ "Contents/EffectLoader.h" 
+ "Contents/EffectLoader.cpp" 
+ "Utils/ImguiHelper.h" 
+ "Utils/ImguiHelper.cpp")
 
 # Optional: Add include directories for engine users
 target_include_directories(NovaraEngine PUBLIC 
@@ -115,7 +125,16 @@ message(STATUS "FX11 lib path: ${FX11_LIB_PATH}")
 
 
 
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    set(IMGUI_LIB_SUBDIR "debug")
+elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
+    set(IMGUI_LIB_SUBDIR "release")
+else()
+    set(IMGUI_LIB_SUBDIR "debug")  # fallback
+endif()
 
+set(IMGUI_LIB_PATH "${CMAKE_SOURCE_DIR}/Libraries/imgui/lib/${IMGUI_LIB_SUBDIR}")
+message(STATUS "IMGUI lib path: ${IMGUI_LIB_PATH}")
 
 
 target_link_libraries(NovaraEngine PUBLIC
@@ -125,6 +144,8 @@ target_link_libraries(NovaraEngine PUBLIC
     
     
     "${FX11_LIB_PATH}/Effects11.lib"
+
+    "${IMGUI_LIB_PATH}/ImGui_x64.lib"
 
     "${PHYSX_LIB_PATH}/PhysX_64.lib"
     "${PHYSX_LIB_PATH}/PhysXCharacterKinematic_static_64.lib"

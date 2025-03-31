@@ -51,6 +51,19 @@ using namespace physx;
 #pragma warning(pop)
 //#pragma comment(lib, "DirectXTex.lib")
 
+//*XINPUT 9.1
+#include <Xinput.h>
+#pragma comment(lib, "XINPUT9_1_0.LIB")
+#pragma endregion
+
+
+#pragma region IMGUI
+#include <imgui.h>
+#include <imgui_impl_win32.h>
+#include <imgui_impl_dx11.h>
+
+#pragma comment(lib, "ImGui_x64.lib")
+#pragma endregion
 
 
 
@@ -122,13 +135,8 @@ namespace fs = std::filesystem;
 #include "EffectHelper.h"
 #include "DebugRenderer.h"
 #include "EffectLoader.h"
+#include "ImguiHelper.h"
+#include "Enumerations.h"
 
 
 
-//*XINPUT 9.1
-#include <Xinput.h>
-#pragma comment(lib, "XINPUT9_1_0.LIB")
-#pragma endregion
-
-
-//#include <gtest/gtest.h>

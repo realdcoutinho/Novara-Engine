@@ -130,7 +130,7 @@ void SceneManager::Update()
 
 	if (m_ActiveScene != nullptr)
 	{
-		//DebugRenderer::BeginFrame(m_ActiveScene->m_SceneContext.settings);
+		DebugRenderer::BeginFrame(m_ActiveScene->m_SceneContext.settings);
 		m_ActiveScene->RootUpdate();
 		return;
 	}

@@ -26,16 +26,16 @@ void GameScene::AddChild_(GameObject* pObject)
 	if (pObject->m_pParentScene)
 	{
 		if (pObject->m_pParentScene == this)
-			//Logger::LogWarning(L"GameObject is already attached to this GameScene");
-		//else
-			//Logger::LogWarning(L"GameObject is already attached to another GameScene.Detach it from it's current scene before attaching it to another one.");
+			Logger::LogWarning(L"GameObject is already attached to this GameScene");
+		else
+			Logger::LogWarning(L"GameObject is already attached to another GameScene.Detach it from it's current scene before attaching it to another one.");
 
 		return;
 	}
 
 	if (pObject->m_pParentObject)
 	{
-		//Logger::LogWarning(L"GameObject is currently attached to a GameObject. Detach it from it's current parent before attaching it to another one.");
+		Logger::LogWarning(L"GameObject is currently attached to a GameObject. Detach it from it's current parent before attaching it to another one.");
 		return;
 	}
 #endif
@@ -51,7 +51,7 @@ void GameScene::RemoveChild(GameObject* pObject, bool deleteObject)
 #if _DEBUG
 	if (it == m_pChildren.end())
 	{
-		//Logger::LogWarning(L"GameObject to remove is not attached to this GameScene!");
+		Logger::LogWarning(L"GameObject to remove is not attached to this GameScene!");
 		return;
 	}
 #endif
@@ -234,110 +234,110 @@ void GameScene::RootOnSceneDeactivated()
 
 void GameScene::RootOnGUI()
 {
-//	if (!m_SceneContext.settings.showInfoOverlay)
-//		return;
-//
-//#pragma region Main Overlay Begin
-//#pragma region Window Config
-//	static int corner = 0;
-//	//ImGuiIO& io = ImGui::GetIO();
-//	ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav;// | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoSavedSettings;
-//	if (corner != -1)
-//	{
-//		constexpr float PAD = 10.0f;
-//		const ImGuiViewport* viewport = ImGui::GetMainViewport();
-//		const ImVec2 work_pos = viewport->WorkPos; // Use work area to avoid menu-bar/task-bar, if any!
-//		const ImVec2 work_size = viewport->WorkSize;
-//		ImVec2 window_pos, window_pos_pivot;
-//		window_pos.x = (corner & 1) ? (work_pos.x + work_size.x - PAD) : (work_pos.x + PAD);
-//		window_pos.y = (corner & 2) ? (work_pos.y + work_size.y - PAD) : (work_pos.y + PAD);
-//		window_pos_pivot.x = (corner & 1) ? 1.0f : 0.0f;
-//		window_pos_pivot.y = (corner & 2) ? 1.0f : 0.0f;
-//		ImGui::SetNextWindowPos(window_pos, ImGuiCond_Always, window_pos_pivot);
-//		window_flags |= ImGuiWindowFlags_NoMove;
-//	}
-//	ImGui::SetNextWindowBgAlpha(0.15f); // Transparent background
-//#pragma endregion
-//	if (ImGui::Begin(StringUtil::utf8_encode(m_SceneName).c_str(), nullptr, window_flags))
-//	{
-//		ImGui::Dummy(ImVec2{ 150.f,0.f });
-//		ImGui::PushFont(ImguiFonts::pFont_DIN_Black_18);
-//		if (ImGui::CollapsingHeader(StringUtil::utf8_encode(m_SceneName).c_str()))
-//		{
-//			/*ImGui::Text("%s", utf8_encode(m_SceneName).c_str());*/
-//
-//			ImGui::Separator();
-//
-//			const PerfStats gameStats{ GameStats::GetStats() };
-//			ImGui::PushFont(nullptr);
-//			ImGui::Text("FPS %.1f (%.1f ms)", gameStats.averageFps_interim, gameStats.averageMs_interim);
-//			ImGui::Dummy(ImVec2{ 0,10.f });
-//			ImGui::PopFont();
-//#pragma endregion
-//#pragma region Scene Settings
-//			ImGui::PushFont(ImguiFonts::pFont_DIN_Black_16);
-//			if (ImGui::CollapsingHeader("Scene Settings", ImGuiTreeNodeFlags_DefaultOpen))
-//			{
-//				ImGui::PushFont(nullptr);
-//				ImGui::ColorEdit3("Clear Color", reinterpret_cast<float*>(&m_SceneContext.settings.clearColor), ImGuiColorEditFlags_NoInputs);
-//				ImGui::Checkbox("V-Sync", &m_SceneContext.settings.vSyncEnabled);
-//				ImGui::Dummy(ImVec2{ 0,10.f });
-//
-//				if (!DebugRenderer::IsEnabled())
-//				{
-//					ImGui::Text("*Debug Renderer [F2]");
-//				}
-//				else
-//				{
-//					ImGui::Checkbox("Draw Grid", &m_SceneContext.settings.drawGrid);
-//					ImGui::Checkbox("Draw PhysX Debug", &m_SceneContext.settings.drawPhysXDebug);
-//					ImGui::Checkbox("Draw User Debug", &m_SceneContext.settings.drawUserDebug);
-//				}
-//
-//				ImGui::Dummy(ImVec2{ 0,10.f });
-//				ImGui::PopFont(); //Default
-//			}
-//			ImGui::PopFont(); //DIN_Black_16
-//
-//#pragma endregion
-//#pragma region User Parameters
-//			if (m_SceneContext.settings.enableOnGUI)
-//			{
-//				ImGui::PushFont(ImguiFonts::pFont_DIN_Black_16);
-//				if (ImGui::CollapsingHeader("User Parameters", ImGuiTreeNodeFlags_DefaultOpen))
-//				{
-//					//User-defined GUI
-//					ImGui::PushFont(nullptr);
-//					OnGUI();
-//					ImGui::PopFont(); //Default
-//				}
-//				ImGui::PopFont(); //DIN_Black_16
-//			}
-//#pragma endregion	
-//#pragma region Main Overlay End
-//		}
-//		else
-//		{
-//			const PerfStats gameStats{ GameStats::GetStats() };
-//			ImGui::PushFont(ImguiFonts::pFont_DIN_Regular_10);
-//			ImGui::Text("FPS %.1f (%.1f ms)", gameStats.averageFps_interim, gameStats.averageMs_interim);
-//			ImGui::PopFont(); //DIN_Regular_10
-//		}
-//		ImGui::PopFont(); //DIN_Black_18
-//
-//		if (ImGui::BeginPopupContextWindow())
-//		{
-//			if (ImGui::MenuItem("Custom", nullptr, corner == -1)) corner = -1;
-//			if (ImGui::MenuItem("Top-left", nullptr, corner == 0)) corner = 0;
-//			if (ImGui::MenuItem("Top-right", nullptr, corner == 1)) corner = 1;
-//			if (ImGui::MenuItem("Bottom-left", nullptr, corner == 2)) corner = 2;
-//			if (ImGui::MenuItem("Bottom-right", nullptr, corner == 3)) corner = 3;
-//
-//			ImGui::EndPopup();
-//		}
-//	}
-//	ImGui::End();
-//#pragma endregion
+	if (!m_SceneContext.settings.showInfoOverlay)
+		return;
+
+#pragma region Main Overlay Begin
+#pragma region Window Config
+	static int corner = 0;
+	ImGuiIO& io = ImGui::GetIO();
+	ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoSavedSettings;
+	if (corner != -1)
+	{
+		constexpr float PAD = 10.0f;
+		const ImGuiViewport* viewport = ImGui::GetMainViewport();
+		const ImVec2 work_pos = viewport->WorkPos; // Use work area to avoid menu-bar/task-bar, if any!
+		const ImVec2 work_size = viewport->WorkSize;
+		ImVec2 window_pos, window_pos_pivot;
+		window_pos.x = (corner & 1) ? (work_pos.x + work_size.x - PAD) : (work_pos.x + PAD);
+		window_pos.y = (corner & 2) ? (work_pos.y + work_size.y - PAD) : (work_pos.y + PAD);
+		window_pos_pivot.x = (corner & 1) ? 1.0f : 0.0f;
+		window_pos_pivot.y = (corner & 2) ? 1.0f : 0.0f;
+		ImGui::SetNextWindowPos(window_pos, ImGuiCond_Always, window_pos_pivot);
+		window_flags |= ImGuiWindowFlags_NoMove;
+	}
+	ImGui::SetNextWindowBgAlpha(0.15f); // Transparent background
+#pragma endregion
+	if (ImGui::Begin(StringUtil::utf8_encode(m_SceneName).c_str(), nullptr, window_flags))
+	{
+		ImGui::Dummy(ImVec2{ 150.f,0.f });
+		ImGui::PushFont(ImguiFonts::pFont_DIN_Black_18);
+		if (ImGui::CollapsingHeader(StringUtil::utf8_encode(m_SceneName).c_str()))
+		{
+			ImGui::Text("%s", StringUtil::utf8_encode(m_SceneName).c_str());
+
+			ImGui::Separator();
+
+			const PerfStats gameStats{ GameStats::GetStats() };
+			ImGui::PushFont(nullptr);
+			ImGui::Text("FPS %.1f (%.1f ms)", gameStats.averageFps_interim, gameStats.averageMs_interim);
+			ImGui::Dummy(ImVec2{ 0,10.f });
+			ImGui::PopFont();
+#pragma endregion
+#pragma region Scene Settings
+			ImGui::PushFont(ImguiFonts::pFont_DIN_Black_16);
+			if (ImGui::CollapsingHeader("Scene Settings", ImGuiTreeNodeFlags_DefaultOpen))
+			{
+				ImGui::PushFont(nullptr);
+				ImGui::ColorEdit3("Clear Color", reinterpret_cast<float*>(&m_SceneContext.settings.clearColor), ImGuiColorEditFlags_NoInputs);
+				ImGui::Checkbox("V-Sync", &m_SceneContext.settings.vSyncEnabled);
+				ImGui::Dummy(ImVec2{ 0,10.f });
+
+				if (!DebugRenderer::IsEnabled())
+				{
+					ImGui::Text("*Debug Renderer [F2]");
+				}
+				else
+				{
+					ImGui::Checkbox("Draw Grid", &m_SceneContext.settings.drawGrid);
+					ImGui::Checkbox("Draw PhysX Debug", &m_SceneContext.settings.drawPhysXDebug);
+					ImGui::Checkbox("Draw User Debug", &m_SceneContext.settings.drawUserDebug);
+				}
+
+				ImGui::Dummy(ImVec2{ 0,10.f });
+				ImGui::PopFont(); //Default
+			}
+			ImGui::PopFont(); //DIN_Black_16
+
+#pragma endregion
+#pragma region User Parameters
+			if (m_SceneContext.settings.enableOnGUI)
+			{
+				ImGui::PushFont(ImguiFonts::pFont_DIN_Black_16);
+				if (ImGui::CollapsingHeader("User Parameters", ImGuiTreeNodeFlags_DefaultOpen))
+				{
+					//User-defined GUI
+					ImGui::PushFont(nullptr);
+					OnGUI();
+					ImGui::PopFont(); //Default
+				}
+				ImGui::PopFont(); //DIN_Black_16
+			}
+#pragma endregion	
+#pragma region Main Overlay End
+		}
+		else
+		{
+			const PerfStats gameStats{ GameStats::GetStats() };
+			ImGui::PushFont(ImguiFonts::pFont_DIN_Regular_10);
+			ImGui::Text("FPS %.1f (%.1f ms)", gameStats.averageFps_interim, gameStats.averageMs_interim);
+			ImGui::PopFont(); //DIN_Regular_10
+		}
+		ImGui::PopFont(); //DIN_Black_18
+
+		if (ImGui::BeginPopupContextWindow())
+		{
+			if (ImGui::MenuItem("Custom", nullptr, corner == -1)) corner = -1;
+			if (ImGui::MenuItem("Top-left", nullptr, corner == 0)) corner = 0;
+			if (ImGui::MenuItem("Top-right", nullptr, corner == 1)) corner = 1;
+			if (ImGui::MenuItem("Bottom-left", nullptr, corner == 2)) corner = 2;
+			if (ImGui::MenuItem("Bottom-right", nullptr, corner == 3)) corner = 3;
+
+			ImGui::EndPopup();
+		}
+	}
+	ImGui::End();
+#pragma endregion
 }
 
 void GameScene::RootWindowStateChanged(int state, bool active) const

@@ -5,13 +5,13 @@ UINT BaseComponent::m_ComponentCounter{};
 
 BaseComponent::BaseComponent()
 {
-	//++m_ComponentCounter;
-	//m_ComponentId = m_ComponentCounter;
+	++m_ComponentCounter;
+	m_ComponentId = m_ComponentCounter;
 }
 
 void BaseComponent::RootInitialize(const SceneContext& sceneContext)
 {
-	//assert(!m_IsInitialized); //Shouldn't be called more than once...
+	assert(!m_IsInitialized); //Shouldn't be called more than once...
 	if (m_IsInitialized) return;
 	Initialize(sceneContext);
 	m_IsInitialized = true;
@@ -19,7 +19,7 @@ void BaseComponent::RootInitialize(const SceneContext& sceneContext)
 
 void BaseComponent::RootOnSceneAttach(GameScene* pScene)
 {
-	//ASSERT_NULL(pScene, L"GameScene is NULL");
+	ASSERT_NULL(pScene, L"GameScene is NULL");
 
 	m_pScene = pScene;
 
@@ -34,7 +34,7 @@ void BaseComponent::RootOnSceneAttach(GameScene* pScene)
 
 void BaseComponent::RootOnSceneDetach(GameScene* pScene)
 {
-	//ASSERT_NULL(pScene, L"GameScene is NULL");
+	ASSERT_NULL(pScene, L"GameScene is NULL");
 
 	m_pScene = pScene;
 
@@ -47,7 +47,7 @@ TransformComponent* BaseComponent::GetTransform() const
 #if _DEBUG
 	if (m_pGameObject == nullptr)
 	{
-		//Logger::LogWarning(L"Failed to retrieve the TransformComponent. GameObject is NULL.");
+		Logger::LogWarning(L"Failed to retrieve the TransformComponent. GameObject is NULL.");
 		return nullptr;
 	}
 #endif

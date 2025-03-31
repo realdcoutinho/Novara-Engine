@@ -1,4 +1,5 @@
 #pragma once
+#include "../Base/Enumerations.h"
 
 class ControllerComponent;
 class RigidBodyComponent;
@@ -61,7 +62,7 @@ private:
 	XMFLOAT3 m_Forward{}, m_Up{}, m_Right{};
 	XMFLOAT4 m_Rotation{}, m_WorldRotation{};
 	XMFLOAT4X4 m_World{};
-	//TransformChanged m_IsTransformChanged{};
+	TransformChanged m_IsTransformChanged{};
 
 	RigidBodyComponent* m_pRigidBodyComponent{};
 	ControllerComponent* m_pControllerComponent{};

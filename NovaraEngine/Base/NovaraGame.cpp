@@ -28,10 +28,10 @@ NovaraGame::~NovaraGame()
 	//ShadowMapRenderer::Destroy();
 	Logger::Release(); //TODO > Singleton
 
-	////ImGui Cleanup
-	//ImGui_ImplDX11_Shutdown();
-	//ImGui_ImplWin32_Shutdown();
-	//ImGui::DestroyContext();
+	//ImGui Cleanup
+	ImGui_ImplDX11_Shutdown();
+	ImGui_ImplWin32_Shutdown();
+	ImGui::DestroyContext();
 
 	//DirectX Cleanup
 	SafeDelete(m_pDefaultRenderTarget);
@@ -281,32 +281,32 @@ HRESULT NovaraGame::InitializeDirectX()
 HRESULT NovaraGame::InitializeImGui() const
 {
 	// Setup Dear ImGui context
-	//IMGUI_CHECKVERSION();
-	//ImGui::CreateContext();
-	//ImGuiIO& io = ImGui::GetIO(); (void)io;
-	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
-	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
+	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+	io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
 
 	// Setup Dear ImGui style
-	//ImGui::StyleColorsDark();
-	////ImGui::StyleColorsClassic();
-	////ImguiStyles::Apply_GoldAndBlack();
-	////ImguiStyles::Apply_Custom();
+	ImGui::StyleColorsDark();
+	//ImGui::StyleColorsClassic();
+	//ImguiStyles::Apply_GoldAndBlack();
+	//ImguiStyles::Apply_Custom();
 
-	//// Load DIN Fonts
-	//ImguiHelper::Fonts::DIN::LoadFonts();
-	//ImGui::GetIO().FontDefault = ImguiFonts::pFont_DIN_Regular_14;
+	// Load DIN Fonts
+	ImguiHelper::Fonts::DIN::LoadFonts();
+	ImGui::GetIO().FontDefault = ImguiFonts::pFont_DIN_Regular_14;
 
-	//// Setup Platform/Renderer backends
-	//if (!ImGui_ImplWin32_Init(m_GameContext.windowHandle))
-	//{
-	//	HANDLE_ERROR(L"Failed to initialize ImGui. (ImGui_ImplWin32_Init");
-	//}
+	// Setup Platform/Renderer backends
+	if (!ImGui_ImplWin32_Init(m_GameContext.windowHandle))
+	{
+		HANDLE_ERROR(L"Failed to initialize ImGui. (ImGui_ImplWin32_Init");
+	}
 
-	//if (!ImGui_ImplDX11_Init(m_GameContext.d3dContext.pDevice, m_GameContext.d3dContext.pDeviceContext))
-	//{
-	//	HANDLE_ERROR(L"Failed to initialize ImGui. (ImGui_ImplDX11_Init");
-	//}
+	if (!ImGui_ImplDX11_Init(m_GameContext.d3dContext.pDevice, m_GameContext.d3dContext.pDeviceContext))
+	{
+		HANDLE_ERROR(L"Failed to initialize ImGui. (ImGui_ImplDX11_Init");
+	}
 
 
 
@@ -377,7 +377,7 @@ LRESULT CALLBACK NovaraGame::WindowsProcedureStatic(HWND hWnd, UINT message, WPA
 	return DefWindowProc(hWnd, message, wParam, lParam);
 }
 
-//extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 LRESULT NovaraGame::WindowsProcedure(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -419,8 +419,8 @@ LRESULT NovaraGame::WindowsProcedure(HWND hWnd, UINT message, WPARAM wParam, LPA
 		break;
 	}
 
-	//if (ImGui_ImplWin32_WndProcHandler(hWnd, message, wParam, lParam) > 0)
-	//	return 0;
+	if (ImGui_ImplWin32_WndProcHandler(hWnd, message, wParam, lParam) > 0)
+		return 0;
 
 	if (m_IsActive && WindowProcedureHook(hWnd, message, wParam, lParam) == 0)
 		return 0;
@@ -446,7 +446,7 @@ void NovaraGame::GameLoop() const
 
 	//******
 	//UPDATE
-	//InputManager::UpdateInputStates(ImGui::GetIO().WantCaptureMouse || ImGui::GetIO().WantCaptureKeyboard);
+	InputManager::UpdateInputStates(ImGui::GetIO().WantCaptureMouse || ImGui::GetIO().WantCaptureKeyboard);
 	SceneManager::Get()->Update();
 
 	//****
@@ -460,19 +460,19 @@ void NovaraGame::GameLoop() const
 	//Draw Scene
 	SceneManager::Get()->Draw();
 
-	////**********
-	////DRAW IMGUI
-	//ImGui_ImplDX11_NewFrame();
-	//ImGui_ImplWin32_NewFrame();
-	//ImGui::NewFrame();
+	//**********
+	//DRAW IMGUI
+	ImGui_ImplDX11_NewFrame();
+	ImGui_ImplWin32_NewFrame();
+	ImGui::NewFrame();
 
-	////bool drawDemo{ true };
-	////ImGui::ShowDemoWindow(&drawDemo);
+	bool drawDemo{ true };
+	ImGui::ShowDemoWindow(&drawDemo);
 
-	//SceneManager::Get()->OnGUI();
-	//ImGui::Render();
+	SceneManager::Get()->OnGUI();
+	ImGui::Render();
 
-	//ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
 
 

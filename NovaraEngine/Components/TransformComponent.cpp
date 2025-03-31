@@ -15,20 +15,20 @@ TransformComponent::TransformComponent() :
 
 bool TransformComponent::CheckIfDirty()
 {
-	////If Parent is dirty == update required (spatial relation)
-	//if (const GameObject* pParent = GetGameObject()->GetParent())
-	//{
-	//	if (pParent->GetTransform()->IsDirty())
-	//	{
-	//		m_IsDirty = true;
-	//		return true;
-	//	}
-	//}
+	//If Parent is dirty == update required (spatial relation)
+	if (const GameObject* pParent = GetGameObject()->GetParent())
+	{
+		if (pParent->GetTransform()->IsDirty())
+		{
+			m_IsDirty = true;
+			return true;
+		}
+	}
 
-	////RigidBody (non static), Controller or Transform changed == update required
+	//RigidBody (non static), Controller or Transform changed == update required
 	//m_IsDirty = m_pRigidBodyComponent != nullptr && !m_pRigidBodyComponent->IsStatic();
-	//m_IsDirty = m_IsDirty || m_pControllerComponent != nullptr;
-	//m_IsDirty = m_IsDirty || m_IsTransformChanged != TransformChanged::NONE;
+	m_IsDirty = m_IsDirty || m_pControllerComponent != nullptr;
+	m_IsDirty = m_IsDirty || m_IsTransformChanged != TransformChanged::NONE;
 
 	return m_IsDirty;
 }
@@ -48,7 +48,7 @@ void TransformComponent::Update(const SceneContext&)
 
 void TransformComponent::UpdateTransforms()
 {
-	//ASSERT_IF(m_pRigidBodyComponent && m_pControllerComponent, L"Single GameObject can't have a RigidBodyComponent AND ControllerComponent at the same time (remove one)")
+	ASSERT_IF(m_pRigidBodyComponent && m_pControllerComponent, L"Single GameObject can't have a RigidBodyComponent AND ControllerComponent at the same time (remove one)")
 
 		//if (m_pRigidBodyComponent && m_IsInitialized)
 		//{
@@ -105,7 +105,7 @@ void TransformComponent::Translate(float x, float y, float z)
 	////if (!CheckConstraints())
 	//	//return;
 
-	//m_IsTransformChanged |= TransformChanged::TRANSLATION;
+	m_IsTransformChanged |= TransformChanged::TRANSLATION;
 	m_Position.x = x;
 	m_Position.y = y;
 	m_Position.z = z;
@@ -118,19 +118,19 @@ void TransformComponent::Translate(const XMFLOAT3& position)
 
 void TransformComponent::Translate(const XMVECTOR& position)
 {
-	//if (!CheckConstraints())
-		//return;
+	if (!CheckConstraints())
+		return;
 
-	//m_IsTransformChanged |= TransformChanged::TRANSLATION;
+	m_IsTransformChanged |= TransformChanged::TRANSLATION;
 	XMStoreFloat3(&m_Position, position);
 }
 
 void TransformComponent::Rotate(float x, float y, float z, bool degrees)
 {
-	//if (!CheckConstraints())
-		//return;
+	if (!CheckConstraints())
+		return;
 
-	//m_IsTransformChanged |= TransformChanged::ROTATION;
+	m_IsTransformChanged |= TransformChanged::ROTATION;
 	if (degrees)
 	{
 		XMStoreFloat4(&m_Rotation,
@@ -151,26 +151,26 @@ void TransformComponent::Rotate(const XMFLOAT3& rotation, bool areDegrees)
 
 void TransformComponent::Rotate(const XMVECTOR& rotation, bool isQuaternion)
 {
-	//if (!CheckConstraints())
-		//return;
+	if (!CheckConstraints())
+		return;
 
-	//m_IsTransformChanged |= TransformChanged::ROTATION;
+	m_IsTransformChanged |= TransformChanged::ROTATION;
 	if (isQuaternion)
 	{
 		XMStoreFloat4(&m_Rotation, rotation);
 	}
 	else
 	{
-		//Logger::LogTodo(L"TransformComponent::Rotate(XMVECTOR, non-Quad) > Not Implemented Yet!");
+		Logger::LogTodo(L"TransformComponent::Rotate(XMVECTOR, non-Quad) > Not Implemented Yet!");
 	}
 }
 
 void TransformComponent::Scale(float x, float y, float z)
 {
-	////if (!CheckConstraints())
-	//	//return;
+	if (!CheckConstraints())
+		return;
 
-	//m_IsTransformChanged |= TransformChanged::SCALE;
+	m_IsTransformChanged |= TransformChanged::SCALE;
 	m_Scale.x = x;
 	m_Scale.y = y;
 	m_Scale.z = z;
@@ -189,15 +189,15 @@ void TransformComponent::Scale(const XMFLOAT3& scale)
 bool TransformComponent::CheckConstraints() const
 {
 	return true;
-	//if (!m_IsInitialized)
-	//	return true;
+	if (!m_IsInitialized)
+		return true;
 
 	//const auto rigidBody = GetGameObject()->GetComponent<RigidBodyComponent>();
 	//if (rigidBody != nullptr && rigidBody->IsStatic())
 	//{
 	//	Logger::LogWarning(L"[TransformComponent] Constraint Broken: GameObject with a static rigid body can't be transformed!");
-	//	//return false;
+	//	return false;
 	//}
 
-	//return true;
+	return true;
 }

@@ -64,36 +64,36 @@ void ControllerComponent::ApplyFilterData() const
 
 void ControllerComponent::Translate(const XMFLOAT3& pos) const
 {
-	//ASSERT_NULL_(m_pController);
-	//m_pController->setPosition(PhysxHelper::ToPxExtendedVec3(pos));
+	ASSERT_NULL_(m_pController);
+	m_pController->setPosition(PhysxHelper::ToPxExtendedVec3(pos));
 }
 
 void ControllerComponent::Move(const XMFLOAT3& displacement, float minDistance)
 {
-	//ASSERT_NULL_(m_pController);
-	//m_CollisionFlag = m_pController->move(PhysxHelper::ToPxVec3(displacement), minDistance, 0, nullptr, nullptr);
+	ASSERT_NULL_(m_pController);
+	m_CollisionFlag = m_pController->move(PhysxHelper::ToPxVec3(displacement), minDistance, 0, nullptr, nullptr);
 }
 
-//XMFLOAT3 ControllerComponent::GetPosition() const
-//{
-//	//ASSERT_NULL_(m_pController);
-//	//return PhysxHelper::ToXMFLOAT3(m_pController->getPosition());
-//}
+XMFLOAT3 ControllerComponent::GetPosition() const
+{
+	ASSERT_NULL_(m_pController);
+	return PhysxHelper::ToXMFLOAT3(m_pController->getPosition());
+}
 
-//XMFLOAT3 ControllerComponent::GetFootPosition() const
-//{
-//	//ASSERT_NULL_(m_pController);
-//	//return PhysxHelper::ToXMFLOAT3(m_pController->getFootPosition());
-//}
+XMFLOAT3 ControllerComponent::GetFootPosition() const
+{
+	ASSERT_NULL_(m_pController);
+	return PhysxHelper::ToXMFLOAT3(m_pController->getFootPosition());
+}
 
-//void ControllerComponent::SetCollisionGroup(CollisionGroup groups)
-//{
-//	m_CollisionGroups.word0 = PxU32(groups);
-//	ApplyFilterData();
-//}
-//
-//void ControllerComponent::SetCollisionIgnoreGroup(CollisionGroup ignoreGroups)
-//{
-//	m_CollisionGroups.word1 = PxU32(ignoreGroups);
-//	ApplyFilterData();
-//}
+void ControllerComponent::SetCollisionGroup(CollisionGroup groups)
+{
+	m_CollisionGroups.word0 = PxU32(groups);
+	ApplyFilterData();
+}
+
+void ControllerComponent::SetCollisionIgnoreGroup(CollisionGroup ignoreGroups)
+{
+	m_CollisionGroups.word1 = PxU32(ignoreGroups);
+	ApplyFilterData();
+}
