@@ -20,6 +20,13 @@ set(CPACK_PACKAGE_VERSION_MINOR "0")
 set(CPACK_PACKAGE_VERSION_PATCH "0")
 set(CPACK_PACKAGE_INSTALL_DIRECTORY "NovaraEngine")
 
+# Set installer output directory
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    set(CPACK_OUTPUT_FILE_PREFIX "${CMAKE_SOURCE_DIR}/Installers/Debug")
+else()
+    set(CPACK_OUTPUT_FILE_PREFIX "${CMAKE_SOURCE_DIR}/Installers/Release")
+endif()
+
 # Optional icons/license
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
 
