@@ -129,5 +129,5 @@ template<class T> int Material<T>::m_References{ 0 };
 template<class T> std::wstring Material<T>::m_EffectFile{};
 template<class T> ID3DX11Effect* Material<T>::m_pRootEffect{};
 template<class T> std::map<size_t, UINT> Material<T>::m_VariableIndexLUT{};
-//template<class T> int Material<T>::m_RootVariableIndexLUT[static_cast<UINT>(eRootVariable::COUNT)]{};
-//template<class T> std::map<size_t, MaterialTechniqueContext> Material<T>::m_Techniques{};
+template<class T> int Material<T>::m_RootVariableIndexLUT[static_cast<UINT>(eRootVariable::COUNT)]{};
+template<class T> std::map<size_t, MaterialTechniqueContext> Material<T>::m_Techniques{};
