@@ -145,7 +145,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
     set(PHYSX_LIB_SUBDIR "release")
 else()
-    set(PHYSX_LIB_SUBDIR "checked")  # fallback ou para RelWithDebInfo
+    set(PHYSX_LIB_SUBDIR "release")  # fallback ou para RelWithDebInfo
 endif()
 
 # Final PhysX lib path
@@ -161,7 +161,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
     set(FX11_LIB_SUBDIR "release")
 else()
-    set(FX11_LIB_SUBDIR "profile")  # fallback
+    set(FX11_LIB_SUBDIR "release")  # fallback
 endif()
 
 set(FX11_LIB_PATH "${CMAKE_SOURCE_DIR}/Libraries/FX11/lib/${FX11_LIB_SUBDIR}")

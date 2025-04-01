@@ -44,23 +44,28 @@ You can build and run Novara Engine using your preferred workflow:
 - Select "Open a local folder" and choose the root of the project
 - Visual Studio will detect the CMakeLists.txt file and configure the project automatically
 
-## 🎮 **Building the Game (Packaging into Installer or Zip)**
+## 🎮 **Build Instructions (Packaging into Installer or Zip)**
 
-Once the engine and game are compiled, you can package your game using **CPack** to generate a `.exe` installer or `.zip` file.
+To build the engine and generate installers, follow these steps:
 
 ### ✅ Steps:
-1. Build the project in **Release** or **Debug** mode using CLion or Visual Studio.
-2. Open a terminal and navigate to the corresponding build output folder, usually something like:
+1. Make sure Ninja is installed and properly set in your system's environment variables. 
+- You can check this by running ```ninja --version``` in a terminal.
+2. Use one of the provided batch scripts to build the engine:
 
-```cd path/to/project/cmake-build/x64-Release```
+```Build_Release.bat```
 
-3. Run the following command to package the game:
 
-```cpack -C RELEASE```
+```Build_Debug.bat```
 
-Replace `RELEASE` with `DEBUG` if you're building the Debug configuration.
+- These scripts will automatically configure and build the engine using CMake with the Ninja generator.
 
-This will generate an installer (if you're using NSIS) or a zip file containing your game under the name defined by `CPack`.
+3. After building, run:
+
+```CreateInstaller.bat```
+
+- This script uses CPack to create .exe installers for both Debug and Release builds. 
+- The resulting files will be placed in their respective Installer folders inside the build output directories.
 
 ---
 
@@ -70,16 +75,16 @@ In your `CMakeLists.txt`, you can customize the generated installer or archive b
 
 ```
 cmake
-set(CPACK_PACKAGE_NAME "NovaraGame")										# Game name
-set(CPACK_PACKAGE_VENDOR "Diogo Coutinho")									# Developer or studio
+set(CPACK_PACKAGE_NAME "NovaraGame")						# Game name
+set(CPACK_PACKAGE_VENDOR "Diogo Coutinho")					# Developer or studio
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "MyGame - built using Novara Engine")
 set(CPACK_PACKAGE_VERSION_MAJOR "1")
 set(CPACK_PACKAGE_VERSION_MINOR "0")
 set(CPACK_PACKAGE_VERSION_PATCH "0")
-set(CPACK_PACKAGE_INSTALL_DIRECTORY "NovaraGame")							# Install directory
+set(CPACK_PACKAGE_INSTALL_DIRECTORY "NovaraGame")				# Install directory
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")		# Optional license file
-set(CPACK_GENERATOR "NSIS")													# Installer format (e.g., "NSIS", "ZIP")
-set(CPACK_PACKAGE_FILE_NAME "NovaraGame${CPACK_PACKAGE_VERSION}")			# Output filename
+set(CPACK_GENERATOR "NSIS")							# Installer format (e.g., "NSIS", "ZIP")
+set(CPACK_PACKAGE_FILE_NAME "NovaraGame${CPACK_PACKAGE_VERSION}")		# Output filename
 ```
 
 ## 🔥 **Contributing**

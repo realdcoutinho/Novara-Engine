@@ -12,6 +12,30 @@ add_subdirectory(NovaraProject)
 install(TARGETS FinalGame DESTINATION bin)
 include (InstallRequiredSystemLibraries)
 
+
+
+
+## === Standardized output directories ===
+## Use the same layout for all IDEs/build tools
+#set(BIN_DIR ${CMAKE_BINARY_DIR}/bin)
+#
+#set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${BIN_DIR}/lib)
+#set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${BIN_DIR}/lib)
+#set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR})
+
+foreach(OUTPUTCONFIG Debug Release RelWithDebInfo MinSizeRel)
+    string(TOUPPER ${OUTPUTCONFIG} OUTPUTCONFIG_UPPER)
+    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${OUTPUTCONFIG_UPPER} ${BIN_DIR}/${OUTPUTCONFIG}/lib)
+    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_${OUTPUTCONFIG_UPPER} ${BIN_DIR}/${OUTPUTCONFIG}/lib)
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_${OUTPUTCONFIG_UPPER} ${BIN_DIR}/${OUTPUTCONFIG})
+endforeach()
+
+
+
+
+
+
+
 set(CPACK_PACKAGE_NAME "NovaraEngine")
 set(CPACK_PACKAGE_VENDOR "Diogo Coutinho")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "MyGame - built using Novara Engine")

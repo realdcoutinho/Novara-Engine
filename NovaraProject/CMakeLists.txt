@@ -34,6 +34,27 @@ add_custom_command(
 )
 
 
+#add_custom_command(TARGET FinalGame POST_BUILD
+#        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+#        "${CMAKE_SOURCE_DIR}/Libraries/PhysX/bin/$<CONFIG>/PhysX_64.dll"
+#        "${CMAKE_SOURCE_DIR}/Libraries/PhysX/bin/$<CONFIG>/PhysXCommon_64.dll"
+#        "${CMAKE_SOURCE_DIR}/Libraries/FMOD/bin/$<CONFIG>/fmod64.dll"
+#        "${CMAKE_SOURCE_DIR}/Libraries/FX11/bin/$<CONFIG>/Effects11.dll"
+#        $<TARGET_FILE_DIR:FinalGame>
+#)
+
+
+#add_custom_command(TARGET FinalGame POST_BUILD
+#        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+#        "${CMAKE_SOURCE_DIR}/Libraries/PhysX/bin/$<CONFIG>/PhysX_64.dll"
+#        "${CMAKE_SOURCE_DIR}/Libraries/PhysX/bin/$<CONFIG>/PhysXCommon_64.dll"
+#        "${CMAKE_SOURCE_DIR}/Libraries/PhysX/bin/$<CONFIG>/PhysXCooking_64.dll"
+#        "${CMAKE_SOURCE_DIR}/Libraries/PhysX/bin/$<CONFIG>/PhysXFoundation_64.dll"
+#        "${CMAKE_SOURCE_DIR}/Libraries/FMOD/bin/$<CONFIG>/fmod64.dll"
+#        "${CMAKE_SOURCE_DIR}/Libraries/FX11/bin/$<CONFIG>/Effects11.dll"
+#        $<TARGET_FILE_DIR:FinalGame>
+#)
+
 
 
 # Install Resources folder to install dir
