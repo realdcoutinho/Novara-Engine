@@ -408,3 +408,5 @@ cmake-build-debug
 
 *out/
 
+!Installers/Release
+!Installers/Debug

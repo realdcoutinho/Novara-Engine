@@ -1,12 +1,12 @@
-add_executable(MyGame
+add_executable(FinalGame
     main.cpp
     MainGame.cpp
     MainGame.h
          "pch.h"
          "Scenes/MinionScene.cpp"
          "Scenes/MinionScene.h"
-        "ColorMaterial.cpp"
-        "ColorMaterial.h"
+        "Materials/ColorMaterial.cpp"
+        "Materials/ColorMaterial.h"
         "Prefabs/CubePrefab.cpp"
         "Prefabs/CubePrefab.h"
         "Prefabs/SpherePrefab.h"
@@ -18,19 +18,19 @@ add_executable(MyGame
 )
 
 # Link engine
-target_link_libraries(MyGame PRIVATE NovaraEngine)
+target_link_libraries(FinalGame PRIVATE NovaraEngine)
 
 # Include engine headers
-target_include_directories(MyGame PRIVATE
+target_include_directories(FinalGame PRIVATE
     ${CMAKE_SOURCE_DIR}/NovaraEngine
 )
 
 
 add_custom_command(
-    TARGET MyGame POST_BUILD
+    TARGET FinalGame POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
             "${CMAKE_SOURCE_DIR}/NovaraProject/Resources"
-            "$<TARGET_FILE_DIR:MyGame>/Resources"
+            "$<TARGET_FILE_DIR:FinalGame>/Resources"
 )
 
 

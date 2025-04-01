@@ -28,7 +28,7 @@ Novara Engine is a **DirectX-based** game engine built from the ground up, inspi
 - MSVC Toolchain (via Visual Studio 2022 or Build Tools for Visual Studio)
 - Windows SDK
 - NSIS (optional)(https://nsis.sourceforge.io/) (for building Windows installer `.exe`)
--⚠️ GCC and Clang are not supported. This project requires the MSVC compiler due to its reliance on Windows-specific features and DirectX.
+- ⚠️ GCC and Clang are not supported. This project requires the MSVC compiler due to its reliance on Windows-specific features and DirectX.
 
 ## 🚀 **Building the Engine**
 You can build and run Novara Engine using your preferred workflow:

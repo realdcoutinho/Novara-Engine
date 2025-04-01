@@ -9,22 +9,22 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_subdirectory(NovaraEngine)
 add_subdirectory(NovaraProject)
 
-install(TARGETS MyGame DESTINATION bin)
+install(TARGETS FinalGame DESTINATION bin)
 include (InstallRequiredSystemLibraries)
 
-set(CPACK_PACKAGE_NAME "NovaraGame")
+set(CPACK_PACKAGE_NAME "NovaraEngine")
 set(CPACK_PACKAGE_VENDOR "Diogo Coutinho")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "MyGame - built using Novara Engine")
 set(CPACK_PACKAGE_VERSION_MAJOR "1")
 set(CPACK_PACKAGE_VERSION_MINOR "0")
 set(CPACK_PACKAGE_VERSION_PATCH "0")
-set(CPACK_PACKAGE_INSTALL_DIRECTORY "NovaraGame")
+set(CPACK_PACKAGE_INSTALL_DIRECTORY "NovaraEngine")
 
 # Optional icons/license
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
 
 # Set generator (you can also generate .zip or NSIS installer)
 set(CPACK_GENERATOR "NSIS") # or "NSIS" for Windows installer .exe
-set(CPACK_PACKAGE_FILE_NAME "NovaraGame${CPACK_PACKAGE_VERSION}")
+set(CPACK_PACKAGE_FILE_NAME "NovaraEngine${CPACK_PACKAGE_VERSION}")
 
 include(CPack)
