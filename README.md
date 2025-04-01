@@ -27,7 +27,8 @@ Novara Engine is a **DirectX-based** game engine built from the ground up, inspi
 - CMake (v3.10 or higher)
 - MSVC Toolchain (via Visual Studio 2022 or Build Tools for Visual Studio)
 - Windows SDK
-⚠️ GCC and Clang are not supported. This project requires the MSVC compiler due to its reliance on Windows-specific features and DirectX.
+- NSIS (optional)(https://nsis.sourceforge.io/) (for building Windows installer `.exe`)
+-⚠️ GCC and Clang are not supported. This project requires the MSVC compiler due to its reliance on Windows-specific features and DirectX.
 
 ## 🚀 **Building the Engine**
 You can build and run Novara Engine using your preferred workflow:
@@ -43,6 +44,43 @@ You can build and run Novara Engine using your preferred workflow:
 - Select "Open a local folder" and choose the root of the project
 - Visual Studio will detect the CMakeLists.txt file and configure the project automatically
 
+## 🎮 **Building the Game (Packaging into Installer or Zip)**
+
+Once the engine and game are compiled, you can package your game using **CPack** to generate a `.exe` installer or `.zip` file.
+
+### ✅ Steps:
+1. Build the project in **Release** or **Debug** mode using CLion or Visual Studio.
+2. Open a terminal and navigate to the corresponding build output folder, usually something like:
+
+```cd path/to/project/cmake-build/x64-Release```
+
+3. Run the following command to package the game:
+
+```cpack -C RELEASE```
+
+Replace `RELEASE` with `DEBUG` if you're building the Debug configuration.
+
+This will generate an installer (if you're using NSIS) or a zip file containing your game under the name defined by `CPack`.
+
+---
+
+### ⚙️ **Customizing Game Metadata**
+
+In your `CMakeLists.txt`, you can customize the generated installer or archive by changing the following:
+
+```
+cmake
+set(CPACK_PACKAGE_NAME "NovaraGame")										# Game name
+set(CPACK_PACKAGE_VENDOR "Diogo Coutinho")									# Developer or studio
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "MyGame - built using Novara Engine")
+set(CPACK_PACKAGE_VERSION_MAJOR "1")
+set(CPACK_PACKAGE_VERSION_MINOR "0")
+set(CPACK_PACKAGE_VERSION_PATCH "0")
+set(CPACK_PACKAGE_INSTALL_DIRECTORY "NovaraGame")							# Install directory
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")		# Optional license file
+set(CPACK_GENERATOR "NSIS")													# Installer format (e.g., "NSIS", "ZIP")
+set(CPACK_PACKAGE_FILE_NAME "NovaraGame${CPACK_PACKAGE_VERSION}")			# Output filename
+```
 
 ## 🔥 **Contributing**
 This is an ongoing personal project, but contributions, feedback, and suggestions are welcome!

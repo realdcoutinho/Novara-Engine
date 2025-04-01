@@ -32,3 +32,9 @@ add_custom_command(
             "${CMAKE_SOURCE_DIR}/NovaraProject/Resources"
             "$<TARGET_FILE_DIR:MyGame>/Resources"
 )
+
+
+
+
+# Install Resources folder to install dir
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/NovaraProject/Resources DESTINATION bin)

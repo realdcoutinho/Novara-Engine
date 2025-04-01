@@ -174,7 +174,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
     set(IMGUI_LIB_SUBDIR "release")
 else()
-    set(IMGUI_LIB_SUBDIR "debug")  # fallback
+    set(IMGUI_LIB_SUBDIR "release")  # fallback
 endif()
 
 set(IMGUI_LIB_PATH "${CMAKE_SOURCE_DIR}/Libraries/imgui/lib/${IMGUI_LIB_SUBDIR}")
@@ -183,14 +183,18 @@ message(STATUS "IMGUI lib path: ${IMGUI_LIB_PATH}")
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     set(FMOD_LIB_SUBDIR "debug")
+    set(FMOD_LIB_NAME "fmodL64_vc.lib")
 elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
     set(FMOD_LIB_SUBDIR "release")
+    set(FMOD_LIB_NAME "fmod64_vc.lib")
 else()
-    set(FMOD_LIB_SUBDIR "debug")  # fallback
+    set(FMOD_LIB_SUBDIR "release")  # fallback
+    set(FMOD_LIB_NAME "fmod64_vc.lib")
 endif()
 
-set(FMOD_LIB_SUBDIR "${CMAKE_SOURCE_DIR}/Libraries/FMOD/lib/${IMGUI_LIB_SUBDIR}")
-message(STATUS "FMOD lib path: ${FMOD_LIB_SUBDIR}")
+set(FMOD_LIB_PATH "${CMAKE_SOURCE_DIR}/Libraries/FMOD/lib/${FMOD_LIB_SUBDIR}")
+
+message(STATUS "FMOD lib path: ${FMOD_LIB_PATH}")
 
 
 target_link_libraries(NovaraEngine PUBLIC
@@ -202,7 +206,7 @@ target_link_libraries(NovaraEngine PUBLIC
     "${FX11_LIB_PATH}/Effects11.lib"
 
     "${IMGUI_LIB_PATH}/ImGui_x64.lib"
-        "${FMOD_LIB_SUBDIR}/fmodL64_vc.lib"
+    "${FMOD_LIB_PATH}/${FMOD_LIB_NAME}"
 
     "${PHYSX_LIB_PATH}/PhysX_64.lib"
     "${PHYSX_LIB_PATH}/PhysXCharacterKinematic_static_64.lib"
@@ -227,3 +231,8 @@ foreach(DLL ${PHYSX_DLLS})
     get_filename_component(DLL_NAME "${DLL}" NAME)
     file(COPY "${DLL}" DESTINATION "${DLL_DESTINATION}")
 endforeach()
+
+
+
+# Install PhysX DLLs into bin directory of the install folder
+install(FILES ${PHYSX_DLLS} DESTINATION bin)
