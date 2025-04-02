@@ -15,7 +15,7 @@ public:
 
 
 	static LRESULT CALLBACK WindowsProcedureStatic(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
-	//const GameContext& GetGameContext() const { return m_GameContext; }
+	const GameContext& GetGameContext() const { return m_GameContext; }
 
 	HRESULT Run(HINSTANCE hInstance);
 
@@ -50,8 +50,10 @@ private:
 	HINSTANCE m_hInstance{};
 	IDXGISwapChain* m_pSwapchain{};
 	IDXGIFactory* m_pDxgiFactory{};
-	RenderTarget* m_pDefaultRenderTarget{}, * m_pCurrentRenderTarget{};
 	D3D11_VIEWPORT m_Viewport{};
+
+	unique_ptr<RenderTarget> m_pDefaultRenderTarget{};
+	RenderTarget* m_pCurrentRenderTarget{};
 
 	GameContext m_GameContext{};
 };

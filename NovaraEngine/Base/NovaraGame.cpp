@@ -34,7 +34,7 @@ NovaraGame::~NovaraGame()
 	ImGui::DestroyContext();
 
 	//DirectX Cleanup
-	SafeDelete(m_pDefaultRenderTarget);
+	//SafeDelete(m_pDefaultRenderTarget);
 	SafeRelease(m_pDxgiFactory);
 	SafeRelease(m_pSwapchain);
 
@@ -228,7 +228,7 @@ HRESULT NovaraGame::InitializeDirectX()
 #pragma warning(pop)
 
 		//Create the default rendertarget.
-		m_pDefaultRenderTarget = new RenderTarget(m_GameContext.d3dContext);
+		m_pDefaultRenderTarget = make_unique<RenderTarget>(m_GameContext.d3dContext);
 
 	ID3D11Texture2D* pBackbuffer = nullptr;
 	HANDLE_ERROR(m_pSwapchain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(&pBackbuffer)))
@@ -486,7 +486,7 @@ void NovaraGame::GameLoop() const
 void NovaraGame::SetRenderTarget(RenderTarget* renderTarget)
 {
 	if (renderTarget == nullptr)
-		renderTarget = m_pDefaultRenderTarget;
+		renderTarget = m_pDefaultRenderTarget.get();
 
 	const auto pRTV = renderTarget->GetRenderTargetView();
 	m_GameContext.d3dContext.pDeviceContext->OMSetRenderTargets(1, &pRTV, renderTarget->GetDepthStencilView());

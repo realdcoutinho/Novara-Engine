@@ -3,6 +3,9 @@
 #include <Windows.h>
 #endif
 
+#include <wrl/client.h>
+using Microsoft::WRL::ComPtr;
+
 // DirectX core headers
 #include <d3d11.h>
 #include <dxgi.h>
@@ -122,6 +125,8 @@ namespace fs = std::filesystem;
 #include <map>
 #include <unordered_map>
 
+
+using namespace std;
 
 //ENGINE HEADERS
 #include "BaseComponent.h"

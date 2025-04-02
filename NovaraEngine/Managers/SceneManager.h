@@ -1,5 +1,4 @@
 #pragma once
-#include "EnginePCH.h"
 
 class SceneManager final : public Singleton<SceneManager>
 {
@@ -9,9 +8,9 @@ public:
 	SceneManager& operator=(const SceneManager& other) = delete;
 	SceneManager& operator=(SceneManager&& other) noexcept = delete;
 
-	void AddGameScene(GameScene* pScene);
-	void RemoveGameScene(GameScene* pScene, bool deleteObject = false);
-	void SetActiveGameScene(const std::wstring& sceneName);
+	bool AddGameScene(unique_ptr<GameScene> pScene);
+	bool RemoveGameScene(GameScene* pScene);
+	bool SetActiveGameScene(const std::wstring& sceneName);
 	void NextScene();
 	void PreviousScene();
 	GameScene* GetActiveScene() const { return m_ActiveScene; }
@@ -33,6 +32,7 @@ private:
 	void Draw() const;
 	void OnGUI() const;
 
-	std::vector<GameScene*> m_pScenes{};
-	GameScene* m_ActiveScene{}, * m_NewActiveScene{};
+	vector<unique_ptr<GameScene>> m_pScenes{};
+	GameScene* m_ActiveScene{};
+	GameScene* m_NewActiveScene{};
 };

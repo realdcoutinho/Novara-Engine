@@ -8,7 +8,7 @@ RenderTarget::RenderTarget(const D3D11Context& d3dContext) :
 
 RenderTarget::~RenderTarget(void)
 {
-	CleanUp();
+	//CleanUp();
 }
 
 void RenderTarget::CleanUp()
@@ -23,6 +23,9 @@ void RenderTarget::CleanUp()
 	SafeRelease(m_pColorShaderResourceView);
 	SafeRelease(m_pDepthShaderResourceView);
 	SafeRelease(m_pDepthStencilView);
+
+	//ReportLiveObjects();
+
 }
 
 HRESULT RenderTarget::Create(RENDERTARGET_DESC desc)
@@ -79,24 +82,24 @@ HRESULT RenderTarget::CreateColor()
 			textureDesc.CPUAccessFlags = 0;
 			textureDesc.MiscFlags = ((m_Desc.generateMipMaps_Color) ? D3D11_RESOURCE_MISC_GENERATE_MIPS : 0);
 
-			HANDLE_ERROR(m_D3DContext.pDevice->CreateTexture2D(&textureDesc, nullptr, &m_pColor));
-			m_Desc.pColor = m_pColor;
+			HANDLE_ERROR(m_D3DContext.pDevice->CreateTexture2D(&textureDesc, nullptr, m_pColor.GetAddressOf()));
+			m_Desc.pColor = m_pColor.Get();
 		}
 
 		//RENDERTARGET SRV
-		HANDLE_ERROR(m_D3DContext.pDevice->CreateRenderTargetView(m_pColor, nullptr, &m_pRenderTargetView));
+		HANDLE_ERROR(m_D3DContext.pDevice->CreateRenderTargetView(m_pColor.Get(), nullptr, m_pRenderTargetView.GetAddressOf()));
 
 		//SHADER SRV
 		if (m_Desc.enableColorSRV)
 		{
-			HANDLE_ERROR(m_D3DContext.pDevice->CreateShaderResourceView(m_pColor, nullptr, &m_pColorShaderResourceView));
+			HANDLE_ERROR(m_D3DContext.pDevice->CreateShaderResourceView(m_pColor.Get(), nullptr, m_pColorShaderResourceView.GetAddressOf()));
 		}
 	}
 	else
 	{
-		SafeRelease(m_pColor);
-		SafeRelease(m_pRenderTargetView);
-		SafeRelease(m_pColorShaderResourceView);
+		//SafeRelease(m_pColor);
+		//SafeRelease(m_pRenderTargetView);
+		//SafeRelease(m_pColorShaderResourceView);
 	}
 
 	return S_OK;
@@ -186,8 +189,8 @@ HRESULT RenderTarget::CreateDepth()
 			textureDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL | ((m_Desc.enableDepthSRV) ? D3D11_BIND_SHADER_RESOURCE : 0);
 			textureDesc.MiscFlags = 0;
 
-			HANDLE_ERROR(m_D3DContext.pDevice->CreateTexture2D(&textureDesc, nullptr, &m_pDepth));
-			m_Desc.pDepth = m_pDepth;
+			HANDLE_ERROR(m_D3DContext.pDevice->CreateTexture2D(&textureDesc, nullptr, m_pDepth.GetAddressOf()));
+			m_Desc.pDepth = m_pDepth.Get();
 		}
 
 		//DEPTHSTENCIL VIEW
@@ -198,7 +201,7 @@ HRESULT RenderTarget::CreateDepth()
 		descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
 		descDSV.Texture2D.MipSlice = 0;
 
-		HANDLE_ERROR(m_D3DContext.pDevice->CreateDepthStencilView(m_pDepth, &descDSV, &m_pDepthStencilView));
+		HANDLE_ERROR(m_D3DContext.pDevice->CreateDepthStencilView(m_pDepth.Get(), &descDSV, m_pDepthStencilView.GetAddressOf()));
 
 		//SHADER SRV
 		if (m_Desc.enableDepthSRV)
@@ -211,14 +214,14 @@ HRESULT RenderTarget::CreateDepth()
 			depthSrvDesc.Texture2D.MipLevels = 1;
 			depthSrvDesc.Texture2D.MostDetailedMip = 0;
 
-			HANDLE_ERROR(m_D3DContext.pDevice->CreateShaderResourceView(m_pDepth, &depthSrvDesc, &m_pDepthShaderResourceView));
+			HANDLE_ERROR(m_D3DContext.pDevice->CreateShaderResourceView(m_pDepth.Get(), &depthSrvDesc, m_pDepthShaderResourceView.GetAddressOf()));
 		}
 	}
 	else
 	{
-		SafeRelease(m_pDepth);
-		SafeRelease(m_pDepthStencilView);
-		SafeRelease(m_pDepthShaderResourceView);
+		//SafeRelease(m_pDepth);
+		//SafeRelease(m_pDepthStencilView);
+		//SafeRelease(m_pDepthShaderResourceView);
 	}
 
 	return S_OK;
@@ -229,7 +232,7 @@ ID3D11ShaderResourceView* RenderTarget::GetColorShaderResourceView() const
 	if (!m_Desc.enableColorSRV)
 		Logger::LogError(L"RenderTarget::GetShaderResourceView(...) > No COLOR SRV created during Creation. (Make sure to enable \'EnableColorSRV\' during RT Creation)");
 
-	return m_pColorShaderResourceView;
+	return m_pColorShaderResourceView.Get();
 }
 
 ID3D11ShaderResourceView* RenderTarget::GetDepthShaderResourceView() const
@@ -237,7 +240,7 @@ ID3D11ShaderResourceView* RenderTarget::GetDepthShaderResourceView() const
 	if (!m_Desc.enableDepthSRV)
 		Logger::LogError(L"RenderTarget::GetDepthShaderResourceView(...) > No DEPTH SRV created during Creation. (Make sure to enable \'EnableDepthSRV\' during RT Creation)");
 
-	return m_pDepthShaderResourceView;
+	return m_pDepthShaderResourceView.Get();
 }
 
 void RenderTarget::Clear(XMFLOAT4 clearColor) const

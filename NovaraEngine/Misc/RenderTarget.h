@@ -60,8 +60,8 @@ public:
 	HRESULT Create(RENDERTARGET_DESC desc);
 	void Clear(XMFLOAT4 clearColor = XMFLOAT4{ Colors::CornflowerBlue }) const;
 
-	ID3D11RenderTargetView* GetRenderTargetView() const { return m_pRenderTargetView; }
-	ID3D11DepthStencilView* GetDepthStencilView() const { return m_pDepthStencilView; }
+	ID3D11RenderTargetView* GetRenderTargetView() const { return m_pRenderTargetView.Get(); }
+	ID3D11DepthStencilView* GetDepthStencilView() const { return m_pDepthStencilView.Get(); }
 
 	ID3D11ShaderResourceView* GetColorShaderResourceView() const;
 	ID3D11ShaderResourceView* GetDepthShaderResourceView() const;
@@ -79,12 +79,20 @@ private:
 	D3D11Context m_D3DContext{};
 
 	RENDERTARGET_DESC m_Desc{};
-	ID3D11RenderTargetView* m_pRenderTargetView{ nullptr };
-	ID3D11ShaderResourceView* m_pColorShaderResourceView{ nullptr };
-	ID3D11ShaderResourceView* m_pDepthShaderResourceView{ nullptr };
-	ID3D11Texture2D* m_pColor{ nullptr };
-	ID3D11DepthStencilView* m_pDepthStencilView{ nullptr };
-	ID3D11Texture2D* m_pDepth{ nullptr };
+
+	ComPtr<ID3D11RenderTargetView> m_pRenderTargetView{};
+	ComPtr<ID3D11ShaderResourceView> m_pColorShaderResourceView{};
+	ComPtr<ID3D11ShaderResourceView> m_pDepthShaderResourceView{};
+	ComPtr<ID3D11Texture2D> m_pColor{};
+	ComPtr<ID3D11DepthStencilView> m_pDepthStencilView{};
+	ComPtr<ID3D11Texture2D> m_pDepth{};
+
+	//ID3D11RenderTargetView* m_pRenderTargetView{ nullptr };
+	//ID3D11ShaderResourceView* m_pColorShaderResourceView{ nullptr };
+	//ID3D11ShaderResourceView* m_pDepthShaderResourceView{ nullptr };
+	//ID3D11Texture2D* m_pColor{ nullptr };
+	//ID3D11DepthStencilView* m_pDepthStencilView{ nullptr };
+	//ID3D11Texture2D* m_pDepth{ nullptr };
 
 	HRESULT CreateColor();
 	HRESULT CreateDepth();
