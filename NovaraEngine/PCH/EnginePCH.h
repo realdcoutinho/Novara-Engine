@@ -168,7 +168,9 @@ namespace fs = std::filesystem;
 #include "ShadowMapMaterial.h"
 #include "ShadowMapRenderer.h"
 #include "PostProcessingMaterial.h"
-
+#include "SoundManager.h"
+#include "SpriteRenderer.h"
+#include "TextRenderer.h"
 
 
 

@@ -51,7 +51,7 @@ struct GameContext
 {
 	UINT windowWidth{ 1280 };
 	UINT windowHeight{ 720 };
-	std::wstring windowTitle{ L"Novara Engine" };
+	std::string windowTitle{ "Novara Engine" };
 	HWND windowHandle{};
 	std::wstring contentRoot{ L"./Resources/" };
 	float inputUpdateFrequency{ 0.016f };

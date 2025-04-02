@@ -20,7 +20,7 @@ struct LogString
 
 	LogStringType type{ LogStringType::Default };
 	HRESULT hresult{};
-	//FMOD_RESULT fmodResult{};
+	FMOD_RESULT fmodResult{};
 	PxErrorCode::Enum pxErrorCode{};
 
 	std::wstring_view format{};
@@ -41,9 +41,9 @@ struct LogString
 		hresult{ _hresult }, location(_location), type{ LogStringType::HResult } {
 	}
 
-	//LogString(FMOD_RESULT _fmodResult, const std::source_location& _location = std::source_location::current()) :
-	//	fmodResult{ _fmodResult }, location(_location), type{ LogStringType::Fmod } {
-	//}
+	LogString(FMOD_RESULT _fmodResult, const std::source_location& _location = std::source_location::current()) :
+		fmodResult{ _fmodResult }, location(_location), type{ LogStringType::Fmod } {
+	}
 
 	LogString(std::wstringstream::_Mystr _format, const std::source_location& _location = std::source_location::current()) :
 		format{ _format }, location(_location) {

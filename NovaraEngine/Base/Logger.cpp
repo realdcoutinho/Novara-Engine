@@ -33,7 +33,7 @@ std::map<LogLevel, WORD> Logger::m_LevelToConsoleStyle = {
 
 void Logger::Initialize()
 {
-	for (int i = 0; i < MAX_PERFORMANCE_TIMERS; ++i)
+ 	for (int i = 0; i < MAX_PERFORMANCE_TIMERS; ++i)
 		m_PerformanceTimerArr[i] = -1;
 
 	LARGE_INTEGER li;
@@ -142,7 +142,7 @@ bool Logger::ProcessLog(LogLevel level, const LogString& fmt, std::wformat_args 
 	//Validate True Error
 	if (level == LogLevel::Error) //Skip if non-error
 	{
-		//if (fmt.type == LogString::LogStringType::Fmod && fmt.fmodResult == FMOD_OK) return false;
+		if (fmt.type == LogString::LogStringType::Fmod && fmt.fmodResult == FMOD_OK) return false;
 		if (fmt.type == LogString::LogStringType::HResult && SUCCEEDED(fmt.hresult)) return false;
 	}
 
@@ -211,15 +211,15 @@ std::wstring Logger::ProcessError(const LogString& fmt, const std::wstring& msg,
 		}
 	}
 	break;
-	//case LogString::LogStringType::Fmod:
-	//{
-	//	ss << "A FMOD error was reported!\n\n";
-	//	ss << std::left << std::setw(15) << "File:" << filename << std::endl;
-	//	ss << std::left << std::setw(15) << "Function:" << functionName << " (line " << fmt.location.line() << ")" << std::endl;
-	//	ss << std::left << std::setw(15) << "Error Code:" << fmt.fmodResult << std::endl;
-	//	ss << std::left << std::setw(15) << "Description:" << FMOD_ErrorString(fmt.fmodResult);
-	//}
-	//break;
+	case LogString::LogStringType::Fmod:
+	{
+		ss << "A FMOD error was reported!\n\n";
+		ss << std::left << std::setw(15) << "File:" << filename << std::endl;
+		ss << std::left << std::setw(15) << "Function:" << functionName << " (line " << fmt.location.line() << ")" << std::endl;
+		ss << std::left << std::setw(15) << "Error Code:" << fmt.fmodResult << std::endl;
+		ss << std::left << std::setw(15) << "Description:" << FMOD_ErrorString(fmt.fmodResult);
+	}
+	break;
 	case LogString::LogStringType::PhysX:
 	{
 		ss << "A PHYSX error was reported!\n\n";

@@ -17,6 +17,12 @@ add_executable(FinalGame
         "Resources/Effects/TextRenderer.fx"
 )
 
+if (WIN32)
+    set_target_properties(FinalGame PROPERTIES
+        WIN32_EXECUTABLE TRUE
+    )
+endif()
+
 # Link engine
 target_link_libraries(FinalGame PRIVATE NovaraEngine)
 

@@ -232,7 +232,23 @@ foreach(DLL ${PHYSX_DLLS})
     file(COPY "${DLL}" DESTINATION "${DLL_DESTINATION}")
 endforeach()
 
-
-
 # Install PhysX DLLs into bin directory of the install folder
 install(FILES ${PHYSX_DLLS} DESTINATION bin)
+
+
+
+
+
+
+
+file(GLOB FMOD_DLLS "${CMAKE_SOURCE_DIR}/Libraries/FMOD/bin/${FMOD_LIB_SUBDIR}/*.dll")
+
+set(DLL_DESTINATION "${CMAKE_BINARY_DIR}/NovaraProject")
+
+foreach(DLL ${FMOD_DLLS})
+    get_filename_component(DLL_NAME "${DLL}" NAME)
+    file(COPY "${DLL}" DESTINATION "${DLL_DESTINATION}")
+endforeach()
+
+# Install FMOD DLLs into bin directory of the install folder
+install(FILES ${FMOD_DLLS} DESTINATION bin)

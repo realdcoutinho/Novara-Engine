@@ -22,10 +22,10 @@ NovaraGame::~NovaraGame()
 	InputManager::Release(); //Todo > Rename to Destroy
 	SceneManager::Destroy();
 	PhysXManager::Destroy();
-	//SoundManager::Destroy();
-	//SpriteRenderer::Destroy();
-	//TextRenderer::Destroy();
-	//ShadowMapRenderer::Destroy();
+	SoundManager::Destroy();
+	SpriteRenderer::Destroy();
+	TextRenderer::Destroy();
+	ShadowMapRenderer::Destroy();
 	Logger::Release(); //TODO > Singleton
 
 	//ImGui Cleanup
@@ -114,8 +114,8 @@ HRESULT NovaraGame::InitializeWindow()
 {
 	//1. Create Windowclass
 	//*********************
-	const auto className = L"NovaraWindowClass";
-	WNDCLASSW windowClass;
+	const auto className = "NovaraWindowClass";
+	WNDCLASS windowClass;
 	ZeroMemory(&windowClass, sizeof(WNDCLASS));
 	windowClass.hCursor = LoadCursor(nullptr, IDC_ARROW);
 	windowClass.hIcon = nullptr;
@@ -125,7 +125,7 @@ HRESULT NovaraGame::InitializeWindow()
 	windowClass.hInstance = m_hInstance;
 	windowClass.lpszClassName = className;
 
-	if (!RegisterClassW(&windowClass))
+	if (!RegisterClass(&windowClass))
 	{
 		const auto error = GetLastError();
 		HANDLE_ERROR(HRESULT_FROM_WIN32(error))
@@ -144,7 +144,7 @@ HRESULT NovaraGame::InitializeWindow()
 	const int x = outputDesc.DesktopCoordinates.left + ((outputDesc.DesktopCoordinates.right - outputDesc.DesktopCoordinates.left) / 2) - winWidth / 2;
 	const int y = (outputDesc.DesktopCoordinates.bottom - outputDesc.DesktopCoordinates.top) / 2 - winHeight / 2;
 
-	m_GameContext.windowHandle = CreateWindowW(className,
+	m_GameContext.windowHandle = CreateWindow(className,
 		m_GameContext.windowTitle.c_str(),
 		WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX,
 		x,
@@ -289,9 +289,9 @@ HRESULT NovaraGame::InitializeImGui() const
 
 	// Setup Dear ImGui style
 	ImGui::StyleColorsDark();
-	//ImGui::StyleColorsClassic();
-	//ImguiStyles::Apply_GoldAndBlack();
-	//ImguiStyles::Apply_Custom();
+	ImGui::StyleColorsClassic();
+	ImguiStyles::Apply_GoldAndBlack();
+	ImguiStyles::Apply_Custom();
 
 	// Load DIN Fonts
 	ImguiHelper::Fonts::DIN::LoadFonts();
@@ -323,12 +323,12 @@ HRESULT NovaraGame::InitializeGame()
 	DebugRenderer::Initialize(m_GameContext);
 	InputManager::Initialize(m_GameContext);
 	PhysXManager::Create(m_GameContext);
-	//SoundManager::Create(m_GameContext); //Constructor calls Initialize
+	SoundManager::Create(m_GameContext); //Constructor calls Initialize
 	MaterialManager::Create(m_GameContext);
 	SceneManager::Create(m_GameContext);
-	//SpriteRenderer::Create(m_GameContext);
-	//TextRenderer::Create(m_GameContext);
-	//ShadowMapRenderer::Create(m_GameContext);
+	SpriteRenderer::Create(m_GameContext);
+	TextRenderer::Create(m_GameContext);
+	ShadowMapRenderer::Create(m_GameContext);
 
 	//***************
 	//GAME INITIALIZE
