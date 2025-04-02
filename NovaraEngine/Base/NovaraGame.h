@@ -23,7 +23,7 @@ public:
 	RenderTarget* GetRenderTarget() const;
 
 protected:
-	virtual void OnGamePreparing(GameContext& /*gameContext*/){}
+	virtual void OnGamePreparing(GameContext& gameContext) {}
 	virtual LRESULT WindowProcedureHook(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 	virtual void Initialize() = 0;
 
@@ -36,7 +36,7 @@ private:
 	HRESULT InitializeAdapterAndOutput();
 	HRESULT InitializeWindow();
 	HRESULT InitializeDirectX();
-	HRESULT InitializePhysX() const;
+	//HRESULT InitializePhysX() const;
 	HRESULT InitializeImGui() const;
 	HRESULT InitializeGame();
 
@@ -55,4 +55,3 @@ private:
 
 	GameContext m_GameContext{};
 };
-

@@ -1,5 +1,5 @@
 #pragma once
-#include "Base/Logger.h"
+#include "../Base/Logger.h"
 
 class BinaryReader final
 {
@@ -22,9 +22,9 @@ public:
 		return value;
 	}
 
- std::wstring ReadString();
- std::wstring ReadLongString();
- std::wstring ReadNullString();
+	std::wstring ReadString();
+	std::wstring ReadLongString();
+	std::wstring ReadNullString();
 
 	int GetBufferPosition() const;
 	bool SetBufferPosition(int pos);
@@ -35,9 +35,8 @@ public:
 	void Open(char* s, UINT32 size);
 	void Close();
 
-private: 
+private:
 
 	bool m_Exists{};
-	std::istream* m_pReader{nullptr};
+	std::istream* m_pReader{ nullptr };
 };
-

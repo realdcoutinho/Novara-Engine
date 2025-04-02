@@ -1,17 +1,18 @@
-#include "stdafx.h"
+#include "EnginePCH.h"
 #include "MeshDrawComponent.h"
 
 ID3DX11EffectMatrixVariable* MeshDrawComponent::m_pWorldVar = nullptr;
 ID3DX11EffectMatrixVariable* MeshDrawComponent::m_pWvpVar = nullptr;
 
-MeshDrawComponent::MeshDrawComponent(UINT triangleCapacity, bool enableTransparency):
+MeshDrawComponent::MeshDrawComponent(UINT triangleCapacity, bool enableTransparency) :
 	m_pVertexBuffer(nullptr),
 	m_TriangleCapacity(triangleCapacity),
 	m_pEffect(nullptr),
 	m_pTechnique(nullptr),
 	m_pInputLayout(nullptr),
 	m_UseTransparency(enableTransparency)
-{}
+{
+}
 
 MeshDrawComponent::~MeshDrawComponent()
 {
@@ -116,7 +117,7 @@ void MeshDrawComponent::Draw(const SceneContext& sceneContext)
 }
 
 void MeshDrawComponent::AddQuad(VertexPosNormCol vertex1, VertexPosNormCol vertex2, VertexPosNormCol vertex3,
-                                VertexPosNormCol vertex4, bool updateBuffer)
+	VertexPosNormCol vertex4, bool updateBuffer)
 {
 	AddTriangle(TrianglePosNormCol(vertex1, vertex2, vertex3), false);
 	AddTriangle(TrianglePosNormCol(vertex3, vertex4, vertex1), updateBuffer);
@@ -129,7 +130,7 @@ void MeshDrawComponent::AddQuad(QuadPosNormCol quad, bool updateBuffer)
 }
 
 void MeshDrawComponent::AddTriangle(VertexPosNormCol vertex1, VertexPosNormCol vertex2, VertexPosNormCol vertex3,
-                                    bool updateBuffer)
+	bool updateBuffer)
 {
 	AddTriangle(TrianglePosNormCol(vertex1, vertex2, vertex3), updateBuffer);
 }

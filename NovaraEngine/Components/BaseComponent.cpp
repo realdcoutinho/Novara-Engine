@@ -1,4 +1,5 @@
-#include "stdafx.h"
+#include "EnginePCH.h"
+
 
 UINT BaseComponent::m_ComponentCounter{};
 
@@ -22,7 +23,7 @@ void BaseComponent::RootOnSceneAttach(GameScene* pScene)
 
 	m_pScene = pScene;
 
-	if(!m_IsInitialized)
+	if (!m_IsInitialized)
 	{
 		RootInitialize(pScene->GetSceneContext());
 	}
@@ -44,7 +45,7 @@ void BaseComponent::RootOnSceneDetach(GameScene* pScene)
 TransformComponent* BaseComponent::GetTransform() const
 {
 #if _DEBUG
-	if(m_pGameObject == nullptr)
+	if (m_pGameObject == nullptr)
 	{
 		Logger::LogWarning(L"Failed to retrieve the TransformComponent. GameObject is NULL.");
 		return nullptr;

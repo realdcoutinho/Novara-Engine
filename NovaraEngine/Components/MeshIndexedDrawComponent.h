@@ -1,6 +1,6 @@
 #pragma once
 
-class MeshIndexedDrawComponent final: public BaseComponent
+class MeshIndexedDrawComponent final : public BaseComponent
 {
 public:
 

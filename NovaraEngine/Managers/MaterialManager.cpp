@@ -1,10 +1,10 @@
-#include "stdafx.h"
+#include "EnginePCH.h"
 #include "MaterialManager.h"
 
 MaterialManager::~MaterialManager()
 {
 	//Delete Model Materials
-	for(auto& pMaterial:m_Materials)
+	for (auto& pMaterial : m_Materials)
 	{
 		SafeDelete(pMaterial);
 	}
@@ -70,7 +70,7 @@ void MaterialManager::RemoveMaterial(UINT materialId, bool deleteObj)
 		return;
 	}
 
-	if(IsBaseMaterial(materialId))
+	if (IsBaseMaterial(materialId))
 	{
 		if (m_Materials.size() < materialId || !m_Materials[materialId])
 		{
@@ -78,7 +78,7 @@ void MaterialManager::RemoveMaterial(UINT materialId, bool deleteObj)
 			return;
 		}
 
-		m_Materials[materialId]->ResetMaterialId();
+		//m_Materials[materialId]->ResetMaterialId();
 
 		if (deleteObj)
 		{
@@ -96,7 +96,7 @@ void MaterialManager::RemoveMaterial(UINT materialId, bool deleteObj)
 			return;
 		}
 
-		m_MaterialsPP[materialId]->ResetMaterialId();
+		//m_MaterialsPP[materialId]->ResetMaterialId();
 
 		if (deleteObj)
 		{
@@ -105,7 +105,7 @@ void MaterialManager::RemoveMaterial(UINT materialId, bool deleteObj)
 
 		m_MaterialsPP[materialId] = nullptr;
 	}
-	
+
 }
 
 void MaterialManager::RemoveMaterial(BaseMaterial* pMaterial, bool deleteObj)
@@ -117,7 +117,7 @@ void MaterialManager::RemoveMaterial(BaseMaterial* pMaterial, bool deleteObj)
 		return;
 	}
 
-	if(m_Materials[materialId] == pMaterial)
+	if (m_Materials[materialId] == pMaterial)
 	{
 		RemoveMaterial(materialId, deleteObj);
 	}

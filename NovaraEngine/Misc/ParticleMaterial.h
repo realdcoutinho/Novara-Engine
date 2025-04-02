@@ -1,5 +1,5 @@
 #pragma once
-class ParticleMaterial: public Material<ParticleMaterial>
+class ParticleMaterial : public Material<ParticleMaterial>
 {
 public:
 	ParticleMaterial();
@@ -12,4 +12,3 @@ public:
 protected:
 	void InitializeEffectVariables() override;
 };
-

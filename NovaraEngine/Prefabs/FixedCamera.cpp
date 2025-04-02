@@ -1,7 +1,7 @@
-#include "stdafx.h"
+#include "EnginePCH.h"
 #include "FixedCamera.h"
 
-void FixedCamera::Initialize(const SceneContext& )
+void FixedCamera::Initialize(const SceneContext&)
 {
 	AddComponent(new CameraComponent());
 }

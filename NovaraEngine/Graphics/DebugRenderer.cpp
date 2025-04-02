@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "EnginePCH.h"
 #include "DebugRenderer.h"
 
 ID3DX11Effect* DebugRenderer::m_pEffect = nullptr;
@@ -9,9 +9,9 @@ ID3DX11EffectMatrixVariable* DebugRenderer::m_pWvpVariable = nullptr;
 bool DebugRenderer::m_RendererEnabled = true;
 GameContext DebugRenderer::m_GameContext = {};
 
-DebugRenderer::DebugRenderGroup DebugRenderer::m_PhysXDRG = {false};
-DebugRenderer::DebugRenderGroup DebugRenderer::m_GridDRG = {true};
-DebugRenderer::DebugRenderGroup DebugRenderer::m_UserDRG = {false};
+DebugRenderer::DebugRenderGroup DebugRenderer::m_PhysXDRG = { false };
+DebugRenderer::DebugRenderGroup DebugRenderer::m_GridDRG = { true };
+DebugRenderer::DebugRenderGroup DebugRenderer::m_UserDRG = { false };
 
 void DebugRenderer::Release()
 {
@@ -25,11 +25,11 @@ void DebugRenderer::Release()
 void DebugRenderer::Initialize(const GameContext& gameContext)
 {
 
-//#ifdef _DEBUG
-//	m_RendererEnabled = true;
-//#else
-//	m_RendererEnabled = false;
-//#endif
+	//#ifdef _DEBUG
+	//	m_RendererEnabled = true;
+	//#else
+	//	m_RendererEnabled = false;
+	//#endif
 
 	m_GameContext = gameContext;
 
@@ -90,7 +90,7 @@ bool DebugRenderer::ValidateBufferDRG(DebugRenderGroup& drg)
 	if (drg.isStatic && drg.pVertexBuffer != nullptr)
 		return true;
 
-	if (drg.pVertexBuffer == nullptr || drg.bufferSize< drgSize)
+	if (drg.pVertexBuffer == nullptr || drg.bufferSize < drgSize)
 	{
 		SafeRelease(drg.pVertexBuffer);
 
@@ -109,7 +109,7 @@ bool DebugRenderer::ValidateBufferDRG(DebugRenderGroup& drg)
 
 		HANDLE_ERROR(m_GameContext.d3dContext.pDevice->CreateBuffer(&buffDesc, &initData, &drg.pVertexBuffer))
 
-		return true;
+			return true;
 	}
 
 	//Update Dynamic

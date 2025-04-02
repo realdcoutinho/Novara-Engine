@@ -399,3 +399,15 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+
+#JetBrains CLion generated Files
+.idea
+cmake-build-debug
+cmake-build-release
+
+
+*out/
+
+!Installers/Release
+!Installers/Debug

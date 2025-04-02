@@ -34,7 +34,7 @@ private:
 		ID3D11Buffer* pVertexBuffer{};
 
 		DebugRenderGroup() = default;
-		DebugRenderGroup(bool _isStatic):isStatic(_isStatic){}
+		DebugRenderGroup(bool _isStatic) :isStatic(_isStatic) {}
 
 		UINT size() const
 		{
@@ -50,8 +50,8 @@ private:
 
 	static ID3DX11Effect* m_pEffect;
 	static ID3DX11EffectTechnique* m_pTechnique;
-	static ID3D11InputLayout *m_pInputLayout;
-	static ID3DX11EffectMatrixVariable *m_pWvpVariable;
+	static ID3D11InputLayout* m_pInputLayout;
+	static ID3DX11EffectMatrixVariable* m_pWvpVariable;
 
 	static DebugRenderGroup m_PhysXDRG;
 	static DebugRenderGroup m_GridDRG;
@@ -67,4 +67,3 @@ private:
 	static void DrawDRG(const SceneContext& sceneContext, DebugRenderGroup& drg);
 	//static void CreateFixedLineList();
 };
-

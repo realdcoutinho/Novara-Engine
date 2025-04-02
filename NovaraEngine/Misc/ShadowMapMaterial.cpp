@@ -1,7 +1,7 @@
-#include "stdafx.h"
+#include "EnginePCH.h"
 #include "ShadowMapMaterial.h"
 
-ShadowMapMaterial::ShadowMapMaterial():
+ShadowMapMaterial::ShadowMapMaterial() :
 	Material(L"Effects/Shadow/ShadowMapGenerator.fx")
 {
 }

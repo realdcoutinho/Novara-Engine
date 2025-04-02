@@ -1,7 +1,7 @@
 #pragma once
 class ShadowMapMaterial;
 
-class ShadowMapRenderer: public Singleton<ShadowMapRenderer>
+class ShadowMapRenderer : public Singleton<ShadowMapRenderer>
 {
 public:
 	ShadowMapRenderer(const ShadowMapRenderer& other) = delete;
@@ -18,7 +18,7 @@ public:
 	ID3D11ShaderResourceView* GetShadowMap() const;
 	const XMFLOAT4X4& GetLightVP() const { return m_LightVP; }
 
-	void Debug_DrawDepthSRV(const XMFLOAT2& position = { 0.f,0.f }, const XMFLOAT2& scale = { 1.f,1.f }, const XMFLOAT2& pivot = {0.f,0.f}) const;
+	void Debug_DrawDepthSRV(const XMFLOAT2& position = { 0.f,0.f }, const XMFLOAT2& scale = { 1.f,1.f }, const XMFLOAT2& pivot = { 0.f,0.f }) const;
 
 protected:
 	void Initialize() override;
@@ -50,4 +50,3 @@ private:
 	static int const NUM_TYPES{ 2 };
 	MaterialTechniqueContext m_GeneratorTechniqueContexts[NUM_TYPES];
 };
-

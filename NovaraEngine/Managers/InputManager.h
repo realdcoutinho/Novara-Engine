@@ -1,4 +1,7 @@
 #pragma once
+#include "../Base/Enumerations.h"
+#include "Xinput.h"
+
 class InputManager final
 {
 public:
@@ -16,7 +19,7 @@ public:
 	static void SetEnabled(bool enabled)
 	{
 		m_UserEnabled = enabled;
-		Logger::LogDebug(L"INPUT ENABLED = {}", enabled);
+		//Logger::LogDebug(L"INPUT ENABLED = {}", enabled);
 	}
 	static bool IsEnabled() { return m_Enabled; }
 
@@ -77,4 +80,3 @@ private:
 	static bool IsMouseCodeValid(int code) { return code > MSCODE_MIN && code < MSCODE_MAX; }
 	static bool IsGamepadCodeValid(DWORD code) { return code > GPCODE_MIN && code < GPCODE_MAX; }
 };
-

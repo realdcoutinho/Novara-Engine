@@ -7,7 +7,7 @@ public:
 
 	static T* Create(const GameContext& gameContext)
 	{
-		if(!m_IsInitialized)
+		if (!m_IsInitialized)
 		{
 			m_pInstance = new T();
 			m_pInstance->m_GameContext = gameContext;
@@ -17,7 +17,7 @@ public:
 
 		return m_pInstance;
 	}
-	
+
 	static T* Get()
 	{
 		if (!m_IsInitialized) {
@@ -25,14 +25,14 @@ public:
 			return nullptr;
 		}
 
-		if(!m_pInstance)
+		if (!m_pInstance)
 		{
 			Logger::LogWarning(L"Singleton is initialized but instance in NULL");
 		}
 
 		return m_pInstance;
 	}
-	
+
 	static void Destroy()
 	{
 		delete m_pInstance;
@@ -49,7 +49,7 @@ private:
 	static T* m_pInstance;
 };
 
-template<class T> 
+template<class T>
 T* Singleton<T>::m_pInstance{};
 
 template<class T>

@@ -1,10 +1,10 @@
-#include "stdafx.h"
+#include "EnginePCH.h"
 #include "MeshIndexedDrawComponent.h"
 
 ID3DX11EffectMatrixVariable* MeshIndexedDrawComponent::m_pWorldVar = nullptr;
 ID3DX11EffectMatrixVariable* MeshIndexedDrawComponent::m_pWvpVar = nullptr;
 
-MeshIndexedDrawComponent::MeshIndexedDrawComponent(UINT vertexCapacity, UINT indexCapacity):
+MeshIndexedDrawComponent::MeshIndexedDrawComponent(UINT vertexCapacity, UINT indexCapacity) :
 	m_VertexCapacity(vertexCapacity),
 	m_IndexCapacity(indexCapacity)
 {
@@ -47,8 +47,8 @@ void MeshIndexedDrawComponent::LoadEffect(const SceneContext& sceneContext)
 	m_pTechnique->GetPassByIndex(0)->GetDesc(&PassDesc);
 	HANDLE_ERROR(sceneContext.d3dContext.pDevice->CreateInputLayout(layout, numElements, PassDesc.pIAInputSignature, PassDesc.IAInputSignatureSize, &m_pInputLayout))
 
-	if (!m_pWorldVar)
-		m_pWorldVar = m_pEffect->GetVariableBySemantic("World")->AsMatrix();
+		if (!m_pWorldVar)
+			m_pWorldVar = m_pEffect->GetVariableBySemantic("World")->AsMatrix();
 
 	if (!m_pWvpVar)
 		m_pWvpVar = m_pEffect->GetVariableBySemantic("WorldViewProjection")->AsMatrix();
@@ -151,7 +151,7 @@ void MeshIndexedDrawComponent::UpdateIndexBuffer()
 void MeshIndexedDrawComponent::Draw(const SceneContext& sceneContext)
 {
 	//Set Shader Variables
-	if(m_vecIndices.empty())
+	if (m_vecIndices.empty())
 		return;
 
 	auto& d3d = sceneContext.d3dContext;

@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "EnginePCH.h"
 #include "CubePrefab.h"
 
 CubePrefab::CubePrefab(float width, float height, float depth, const XMFLOAT4& color):

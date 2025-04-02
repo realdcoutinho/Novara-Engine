@@ -16,7 +16,7 @@ public:
 	float GetElapsed() const { return m_ElapsedGameTime; }
 	float GetTotal() const { return m_TotalGameTime; }
 	int GetFPS() const { return m_FPS; }
-	void ForceElapsedUpperbound(bool force, float upperBound = 0.03f){m_ForceElapsedUpperBound = force; m_ElapsedUpperBound = upperBound;}
+	void ForceElapsedUpperbound(bool force, float upperBound = 0.03f) { m_ForceElapsedUpperBound = force; m_ElapsedUpperBound = upperBound; }
 	bool IsRunning() const { return !m_IsStopped; }
 
 	void Start();
@@ -43,4 +43,3 @@ private:
 	float m_FpsTimer;
 	int m_FpsCount;
 };
-

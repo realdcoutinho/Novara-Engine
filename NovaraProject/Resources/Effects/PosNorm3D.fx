@@ -39,7 +39,7 @@ VS_OUTPUT VS(VS_INPUT input) {
 	// Step 1:	convert position into float4 and multiply with matWorldViewProj
 	output.pos = mul(float4(input.pos, 1.0f), gWorldViewProj);
 	// Step 2:	rotate the normal: NO TRANSLATION
-	//			this is achieved by clipping the 4x4 to a 3x3 matrix, 
+	//			this is achieved by clipping the 4x4 to a 3x3 matrix,
 	//			thus removing the postion row of the matrix
 	output.normal = normalize(mul(input.normal, (float3x3)gWorld));
 
@@ -92,4 +92,3 @@ technique11 TransparencyTech
 		SetPixelShader(CompileShader(ps_4_0, PS()));
 	}
 }
-

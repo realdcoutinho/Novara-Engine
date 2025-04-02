@@ -1,5 +1,4 @@
-
-#include "stdafx.h"
+#include "EnginePCH.h"
 
 #include "Logger.h"
 
@@ -24,7 +23,7 @@ std::map<LogLevel, std::wstring> Logger::m_LevelToStr = {
 		{LogLevel::Error, L"ERROR"},
 		{LogLevel::Todo, L"TODO"},
 };
-std::map<LogLevel,WORD> Logger::m_LevelToConsoleStyle = {
+std::map<LogLevel, WORD> Logger::m_LevelToConsoleStyle = {
 		{LogLevel::Debug, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE},
 		{LogLevel::Info, FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE},
 		{LogLevel::Warning, FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN},
@@ -141,9 +140,9 @@ void Logger::StopFileLogging()
 bool Logger::ProcessLog(LogLevel level, const LogString& fmt, std::wformat_args args)
 {
 	//Validate True Error
-	if(level == LogLevel::Error) //Skip if non-error
+	if (level == LogLevel::Error) //Skip if non-error
 	{
-		if (fmt.type == LogString::LogStringType::Fmod && fmt.fmodResult == FMOD_OK) return false;
+		//if (fmt.type == LogString::LogStringType::Fmod && fmt.fmodResult == FMOD_OK) return false;
 		if (fmt.type == LogString::LogStringType::HResult && SUCCEEDED(fmt.hresult)) return false;
 	}
 
@@ -158,7 +157,7 @@ bool Logger::ProcessLog(LogLevel level, const LogString& fmt, std::wformat_args 
 	const auto functionName = StringUtil::utf8_decode(fmt.location.function_name());
 
 	//Generate Message
-	std::wstring logMsg{ std::vformat(fmt.format, args)}; //DEFAULT FORMATTING
+	std::wstring logMsg{ std::vformat(fmt.format, args) }; //DEFAULT FORMATTING
 	if (level == LogLevel::Error) logMsg = ProcessError(fmt, logMsg, filename, functionName);
 
 	const auto full_log = std::format(L"[{}] @ {}::{} (line {})\n **{}\n\n", levelStr, filename, functionName, fmt.location.line(), logMsg);
@@ -172,7 +171,7 @@ bool Logger::ProcessLog(LogLevel level, const LogString& fmt, std::wformat_args 
 	}
 
 	//File Log
-	if(m_FileLogger)
+	if (m_FileLogger)
 	{
 		m_FileLogger->Log(full_log, true);
 	}
@@ -180,8 +179,8 @@ bool Logger::ProcessLog(LogLevel level, const LogString& fmt, std::wformat_args 
 	//Show MessageBox
 	if (level == LogLevel::Error)
 	{
-		MessageBox(0, logMsg.c_str(), L"ERROR", MB_OK | MB_ICONERROR);
-		
+		MessageBoxW(0, logMsg.c_str(), L"ERROR", MB_OK | MB_ICONERROR);
+
 #ifdef NDEBUG
 		//Shutdown if Release Build
 		exit(-1);
@@ -195,7 +194,7 @@ std::wstring Logger::ProcessError(const LogString& fmt, const std::wstring& msg,
 {
 	std::wstringstream ss{};
 
-	switch(fmt.type)
+	switch (fmt.type)
 	{
 	case LogString::LogStringType::HResult:
 	{
@@ -206,27 +205,27 @@ std::wstring Logger::ProcessError(const LogString& fmt, const std::wstring& msg,
 		ss << std::left << std::setw(15) << "Error Code:" << "0x" << std::hex << fmt.hresult << std::endl;
 		ss << std::left << std::setw(15) << "Description:" << err.ErrorMessage() << std::endl;
 
-		if(!msg.empty())
+		if (!msg.empty())
 		{
 			ss << std::left << std::setw(20) << "\nInfo: " << msg;
 		}
 	}
-		break;
-	case LogString::LogStringType::Fmod:
-	{
-		ss << "A FMOD error was reported!\n\n";
-		ss << std::left << std::setw(15) << "File:" << filename << std::endl;
-		ss << std::left << std::setw(15) << "Function:" << functionName << " (line " << fmt.location.line() << ")" << std::endl;
-		ss << std::left << std::setw(15) << "Error Code:" << fmt.fmodResult << std::endl;
-		ss << std::left << std::setw(15) << "Description:" << FMOD_ErrorString(fmt.fmodResult);
-	}
-		break;
+	break;
+	//case LogString::LogStringType::Fmod:
+	//{
+	//	ss << "A FMOD error was reported!\n\n";
+	//	ss << std::left << std::setw(15) << "File:" << filename << std::endl;
+	//	ss << std::left << std::setw(15) << "Function:" << functionName << " (line " << fmt.location.line() << ")" << std::endl;
+	//	ss << std::left << std::setw(15) << "Error Code:" << fmt.fmodResult << std::endl;
+	//	ss << std::left << std::setw(15) << "Description:" << FMOD_ErrorString(fmt.fmodResult);
+	//}
+	//break;
 	case LogString::LogStringType::PhysX:
 	{
 		ss << "A PHYSX error was reported!\n\n";
 		ss << msg;
 	}
-		break;
+	break;
 	default:
 	{
 		ss << "An error was reported!\n\n";
@@ -234,7 +233,7 @@ std::wstring Logger::ProcessError(const LogString& fmt, const std::wstring& msg,
 		ss << std::left << std::setw(15) << L"Function:" << functionName << L" (line " << fmt.location.line() << L")" << std::endl;
 		ss << std::left << std::setw(15) << L"Error Msg:" << msg;
 	}
-		break;
+	break;
 	}
 
 	return ss.str();

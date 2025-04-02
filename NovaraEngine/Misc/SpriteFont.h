@@ -48,4 +48,3 @@ public:
 private:
 	SpriteFontDesc m_FontDesc;
 };
-

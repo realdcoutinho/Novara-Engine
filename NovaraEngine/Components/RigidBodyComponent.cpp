@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "EnginePCH.h"
 #include "RigidBodyComponent.h"
 
 RigidBodyComponent::RigidBodyComponent(bool isStatic) :
@@ -25,11 +25,11 @@ const ColliderInfo& RigidBodyComponent::GetCollider(UINT colliderId) const
 
 void RigidBodyComponent::Initialize(const SceneContext&)
 {
-	if(!m_pActor)
+	if (!m_pActor)
 		CreateActor();
 
 	//Create delayed colliders
-	for(const auto& cci : m_ColliderCreationInfos)
+	for (const auto& cci : m_ColliderCreationInfos)
 	{
 		_AddCollider(*cci.pGeometry, *cci.pMaterial, cci.isTrigger, cci.localPose);
 	}
@@ -38,7 +38,7 @@ void RigidBodyComponent::Initialize(const SceneContext&)
 
 void RigidBodyComponent::OnSceneAttach(GameScene* pScene)
 {
-	if(m_pActor && !m_pActor->getScene())
+	if (m_pActor && !m_pActor->getScene())
 	{
 		pScene->GetPhysxProxy()->GetPhysxScene()->addActor(*m_pActor);
 	}
@@ -46,7 +46,7 @@ void RigidBodyComponent::OnSceneAttach(GameScene* pScene)
 
 void RigidBodyComponent::OnSceneDetach(GameScene* /*pScene*/)
 {
-	if(m_pActor)
+	if (m_pActor)
 	{
 		if (const auto pxScene = m_pActor->getScene())
 		{
@@ -75,7 +75,7 @@ UINT RigidBodyComponent::_AddCollider(const PxGeometry& geometry, const PxMateri
 	pShape->setSimulationFilterData(m_CollisionGroups);
 	pShape->setQueryFilterData(m_CollisionGroups);
 
-	if(colliderId == UINT_MAX)
+	if (colliderId == UINT_MAX)
 	{
 		colliderId = UINT(m_ColliderCreationInfos.size() + m_Colliders.size());
 	}
@@ -88,14 +88,14 @@ UINT RigidBodyComponent::_AddCollider(const PxGeometry& geometry, const PxMateri
 
 void RigidBodyComponent::RemoveCollider(const ColliderInfo& colliderInfo)
 {
-	if(colliderInfo.GetOwner() != this)
+	if (colliderInfo.GetOwner() != this)
 	{
 		Logger::LogWarning(L"[RigidBodyComponent] Failed to remove the given collider. (Incorrect owner)");
 		return;
 	}
 
 	auto it = std::find(m_Colliders.begin(), m_Colliders.end(), colliderInfo);
-	if(it == m_Colliders.end())
+	if (it == m_Colliders.end())
 	{
 		Logger::LogWarning(L"[RigidBodyComponent] Failed to remove the given collider. (Collider not found on owner)");
 		return;
@@ -109,7 +109,7 @@ void RigidBodyComponent::RemoveCollider(const ColliderInfo& colliderInfo)
 
 void RigidBodyComponent::RemoveColliders()
 {
-	for(auto& colliderInfo:m_Colliders)
+	for (auto& colliderInfo : m_Colliders)
 	{
 		PxShape* pShape = colliderInfo.GetShape();
 		m_pActor->detachShape(*pShape);
@@ -123,7 +123,7 @@ void RigidBodyComponent::RemoveColliders()
 void RigidBodyComponent::SetCollisionIgnoreGroups(CollisionGroup ignoreGroups)
 {
 	m_CollisionGroups.word1 = static_cast<UINT32>(ignoreGroups);
-	for(auto& colliderInfo : m_Colliders)
+	for (auto& colliderInfo : m_Colliders)
 	{
 		colliderInfo.GetShape()->setSimulationFilterData(m_CollisionGroups);
 	}
@@ -158,7 +158,7 @@ void RigidBodyComponent::CreateActor()
 {
 	ASSERT_IF(m_pActor != nullptr, L"CreateActor cannot be called multiple times")
 
-	const auto pPhysX = PhysXManager::Get()->GetPhysics();
+		const auto pPhysX = PhysXManager::Get()->GetPhysics();
 	const auto pPhysxScene = GetGameObject()->GetScene()->GetPhysxProxy()->GetPhysxScene();
 	const auto pTransform = GetTransform();
 
@@ -191,7 +191,7 @@ void RigidBodyComponent::SetDensity(float density) const
 void RigidBodyComponent::Translate(const XMFLOAT3& position) const
 {
 	ASSERT_NULL_(m_pActor)
-	const PxTransform localPose = PxTransform(PhysxHelper::ToPxVec3(position), PhysxHelper::ToPxQuat(GetRotation()));
+		const PxTransform localPose = PxTransform(PhysxHelper::ToPxVec3(position), PhysxHelper::ToPxQuat(GetRotation()));
 
 	if (!m_IsKinematic)
 	{
@@ -207,12 +207,12 @@ void RigidBodyComponent::Translate(const XMFLOAT3& position) const
 void RigidBodyComponent::Rotate(const XMFLOAT4& rotation) const
 {
 	ASSERT_NULL_(m_pActor)
-	const PxTransform localPose = PxTransform(PhysxHelper::ToPxVec3(GetPosition()), PhysxHelper::ToPxQuat(rotation));
+		const PxTransform localPose = PxTransform(PhysxHelper::ToPxVec3(GetPosition()), PhysxHelper::ToPxQuat(rotation));
 
 	if (!m_IsKinematic) {
 		m_pActor->setGlobalPose(localPose);
 
-		if(!m_IsStatic)
+		if (!m_IsStatic)
 			m_pActor->is<PxRigidDynamic>()->setAngularVelocity(PxVec3{ PxZero }); //Non-Kinematic Only!
 	}
 	else
@@ -300,7 +300,7 @@ void RigidBodyComponent::SetConstraint(RigidBodyConstraint flag, bool enable)
 		return;
 	}
 
-	if(m_pActor)
+	if (m_pActor)
 	{
 		//TODO: Refactor!!
 		const auto pRigidBody = m_pActor->is<PxRigidDynamic>();

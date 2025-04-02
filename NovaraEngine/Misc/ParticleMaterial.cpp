@@ -1,8 +1,9 @@
-#include "stdafx.h"
+
+#include "EnginePCH.h"
 #include "ParticleMaterial.h"
 
-ParticleMaterial::ParticleMaterial():
-Material(L"Effects/ParticleRenderer.fx")
+ParticleMaterial::ParticleMaterial() :
+	Material(L"Effects/ParticleRenderer.fx")
 {
 }
 

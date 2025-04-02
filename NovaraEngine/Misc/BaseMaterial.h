@@ -1,4 +1,6 @@
 #pragma once
+//#include "../Utils/EffectHelper.h"
+
 class BaseMaterial
 {
 public:
@@ -32,7 +34,7 @@ public:
 	void SetVariable_Vector(const std::wstring& varName, XMFLOAT3 vector) const;
 	void SetVariable_Vector(const std::wstring& varName, XMFLOAT4 vector) const;
 	void SetVariable_VectorArray(const std::wstring& varName, const float* pData, UINT count) const;
-	void SetVariable_Texture(const std::wstring& varName, const TextureData* pTexture) const;
+	//void SetVariable_Texture(const std::wstring& varName, const TextureData* pTexture) const;
 	void SetVariable_Texture(const std::wstring& varName, ID3D11ShaderResourceView* pSRV) const;
 
 	void SetTechnique(const std::wstring& techName);
@@ -42,7 +44,7 @@ public:
 	void SetMaterialName(const std::wstring& name) { m_MaterialName = name; m_MaterialNameUtf8 = StringUtil::utf8_encode(name); }
 
 	void UpdateEffectVariables(const SceneContext& sceneContext, const ModelComponent* pModelComponent);
-	void UpdateEffectVariables(const SceneContext& sceneContext, const RenderTarget* pSourceTarget);
+	//void UpdateEffectVariables(const SceneContext& sceneContext, const RenderTarget* pSourceTarget);
 
 	void DrawImGui();
 
@@ -71,15 +73,15 @@ protected:
 	void _baseInitialize(ID3DX11Effect* pRootEffect, UINT materialId);
 
 	virtual void InitializeEffectVariables() = 0;
-	virtual void OnUpdateModelVariables(const SceneContext& /*sceneContext*/, const ModelComponent* /*pModel*/) const {};
+	virtual void OnUpdateModelVariables(const SceneContext& sceneContext, const ModelComponent* pModel) const {};
 
 	MaterialTechniqueContext m_TechniqueContext{};
 	UINT m_numTechniques{};
 	std::wstring m_MaterialName;
 	std::string m_MaterialNameUtf8;
-	
+
 private:
-	UINT m_MaterialId{UINT_MAX};
+	UINT m_MaterialId{ UINT_MAX };
 	bool m_IsInitialized{};
 	bool m_DrawImGui{};
 

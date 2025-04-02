@@ -1,12 +1,12 @@
-#include "stdafx.h"
+#include "EnginePCH.h"
 #include "PostProcessingMaterial.h"
 
 ID3D11InputLayout* PostProcessingMaterial::m_pDefaultInputLayout = {};
 ID3D11Buffer* PostProcessingMaterial::m_pDefaultVertexBuffer = {};
 UINT PostProcessingMaterial::m_References = {};
 
-PostProcessingMaterial::PostProcessingMaterial(const std::wstring& effectFile):
-m_EffectFile(effectFile)
+PostProcessingMaterial::PostProcessingMaterial(const std::wstring& effectFile) :
+	m_EffectFile(effectFile)
 {
 	++m_References;
 }
@@ -16,7 +16,7 @@ PostProcessingMaterial::~PostProcessingMaterial()
 	SafeDelete(m_pOutputTarget);
 
 	--m_References;
-	if(m_References == 0)
+	if (m_References == 0)
 	{
 		SafeRelease(m_pDefaultInputLayout);
 		SafeRelease(m_pDefaultVertexBuffer);

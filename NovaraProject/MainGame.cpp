@@ -1,8 +1,8 @@
-#include "stdafx.h"
+//#include "Engin.h"
 #include "MainGame.h"
 
 /*LAB Content*/
-#define W3
+//#define W3
 // #define W4
 // #define W5
 // #define W6
@@ -13,70 +13,72 @@
 
 /*MILESTONE Content*/
 // #define MILESTONE_1
-// #define MILESTONE_2
+//// #define MILESTONE_2
+//
+//#pragma region Lab/Milestone Includes
+//#ifdef W3
+#include "Scenes/MinionScene.h"
 
-#pragma region Lab/Milestone Includes
-#ifdef W3
-#include "Scenes/Week 3/MinionScene.h"
-//#include "Scenes/Week 3/ComponentTestScene.h"
+
+////#include "Scenes/Week 3/ComponentTestScene.h"
+////#include "Scenes/Week 3/PongScene.h"
+//#endif
+//
+//#ifdef W4
+//#include "Scenes/Week 4/ModelTestScene.h"
+//#include "Scenes/Week 4/UberMaterialScene.h"
+//#include "Scenes/Week 4/SpikyScene.h"
+//#include "Scenes/Week 4/SpriteTestScene.h"
+//#endif
+//
+//#ifdef W5
+//#include "Scenes/Week 5/SoftwareSkinningScene_1.h"
+//#include "Scenes/Week 5/SoftwareSkinningScene_2.h"
+//#include "Scenes/Week 5/SoftwareSkinningScene_3.h"
+//#endif
+//
+//#ifdef W6
+//#include "Scenes/Week 6/HardwareSkinningScene.h"
+//#endif
+//
+//#ifdef W5
+//#include "Scenes/Week 7/FontTestScene.h"
+//#include "Scenes/Week 7/CharacterScene.h"
+//#include "Scenes/Week 7/PickingScene.h"
+//#endif
+//
+//#ifdef W8
+//#include "Scenes/Week 8/ShadowMappingScene.h"
+//#endif
+//
+//#ifdef W9
+//#include "Scenes/Week 9/ParticleScene.h"
+//#endif
+//
+//#ifdef W10
+//#include "Scenes/Week 10/PostProcessingScene.h"
+//#endif
+//
+//#ifdef MILESTONE_1
 //#include "Scenes/Week 3/PongScene.h"
-#endif
-
-#ifdef W4
-#include "Scenes/Week 4/ModelTestScene.h"
-#include "Scenes/Week 4/UberMaterialScene.h"
-#include "Scenes/Week 4/SpikyScene.h"
-#include "Scenes/Week 4/SpriteTestScene.h"
-#endif
-
-#ifdef W5
-#include "Scenes/Week 5/SoftwareSkinningScene_1.h"
-#include "Scenes/Week 5/SoftwareSkinningScene_2.h"
-#include "Scenes/Week 5/SoftwareSkinningScene_3.h"
-#endif
-
-#ifdef W6
-#include "Scenes/Week 6/HardwareSkinningScene.h"
-#endif
-
-#ifdef W5
-#include "Scenes/Week 7/FontTestScene.h"
-#include "Scenes/Week 7/CharacterScene.h"
-#include "Scenes/Week 7/PickingScene.h"
-#endif
-
-#ifdef W8
-#include "Scenes/Week 8/ShadowMappingScene.h"
-#endif
-
-#ifdef W9
-#include "Scenes/Week 9/ParticleScene.h"
-#endif
-
-#ifdef W10
-#include "Scenes/Week 10/PostProcessingScene.h"
-#endif
-
-#ifdef MILESTONE_1
-#include "Scenes/Week 3/PongScene.h"
-#include "Scenes/Week 4/ModelTestScene.h"
-#include "Scenes/Week 4/UberMaterialScene.h"
-#include "Scenes/Week 4/SpikyScene.h"
-#include "Scenes/Week 4/SpriteTestScene.h"
-#include "Scenes/Week 5/SoftwareSkinningScene_3.h"
-#include "Scenes/Week 6/HardwareSkinningScene.h"
-#endif
-
-#ifdef MILESTONE_2
-#include "Scenes/Week 7/FontTestScene.h"
-#include "Scenes/Week 7/CharacterScene.h"
-#include "Scenes/Week 7/PickingScene.h"
-#include "Scenes/Week 8/ShadowMappingScene.h"
-#include "Scenes/Week 9/ParticleScene.h"
-#include "Scenes/Week 10/PostProcessingScene.h"
-#endif
-
-#pragma endregion
+//#include "Scenes/Week 4/ModelTestScene.h"
+//#include "Scenes/Week 4/UberMaterialScene.h"
+//#include "Scenes/Week 4/SpikyScene.h"
+//#include "Scenes/Week 4/SpriteTestScene.h"
+//#include "Scenes/Week 5/SoftwareSkinningScene_3.h"
+//#include "Scenes/Week 6/HardwareSkinningScene.h"
+//#endif
+//
+//#ifdef MILESTONE_2
+//#include "Scenes/Week 7/FontTestScene.h"
+//#include "Scenes/Week 7/CharacterScene.h"
+//#include "Scenes/Week 7/PickingScene.h"
+//#include "Scenes/Week 8/ShadowMappingScene.h"
+//#include "Scenes/Week 9/ParticleScene.h"
+//#include "Scenes/Week 10/PostProcessingScene.h"
+//#endif
+//
+//#pragma endregion
 
 //Game is preparing
 void MainGame::OnGamePreparing(GameContext& /*gameContext*/)
@@ -92,6 +94,9 @@ void MainGame::OnGamePreparing(GameContext& /*gameContext*/)
 
 void MainGame::Initialize()
 {
+	SceneManager::Get()->AddGameScene(new MinionScene());
+
+
 
 #ifdef W3
 	SceneManager::Get()->AddGameScene(new MinionScene());
@@ -154,16 +159,16 @@ void MainGame::Initialize()
 #endif
 }
 
-LRESULT MainGame::WindowProcedureHook(HWND /*hWnd*/, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT MainGame::WindowProcedureHook(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 
-	if(message == WM_KEYUP)
+	if (message == WM_KEYUP)
 	{
 		if ((lParam & 0x80000000) != 0x80000000)
 			return -1;
 
 		//[F1] Toggle Scene Info Overlay
-		if(wParam == VK_F1)
+		if (wParam == VK_F1)
 		{
 			const auto pScene = SceneManager::Get()->GetActiveScene();
 			pScene->GetSceneSettings().Toggle_ShowInfoOverlay();
@@ -172,7 +177,7 @@ LRESULT MainGame::WindowProcedureHook(HWND /*hWnd*/, UINT message, WPARAM wParam
 		//[F2] Toggle Debug Renderer (Global)
 		if (wParam == VK_F2)
 		{
-			DebugRenderer::ToggleDebugRenderer();
+			//DebugRenderer::ToggleDebugRenderer();
 			return 0;
 
 		}
@@ -199,7 +204,7 @@ LRESULT MainGame::WindowProcedureHook(HWND /*hWnd*/, UINT message, WPARAM wParam
 			pScene->GetPhysxProxy()->NextPhysXFrame();
 		}
 	}
-	
+
 
 	return -1;
 }

@@ -7,7 +7,7 @@ class ModelAnimator;
 class ModelComponent : public BaseComponent
 {
 public:
-	ModelComponent(const std::wstring&  assetFile, bool castShadows = true);
+	ModelComponent(const std::wstring& assetFile, bool castShadows = true);
 	~ModelComponent() override;
 
 	ModelComponent(const ModelComponent& other) = delete;

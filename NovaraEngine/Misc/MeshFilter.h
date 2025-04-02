@@ -10,7 +10,8 @@ struct VertexBufferData
 		VertexStride(0),
 		VertexCount(0),
 		IndexCount(0),
-		InputLayoutID(0) {}
+		InputLayoutID(0) {
+	}
 
 	void* pDataStart;
 	ID3D11Buffer* pVertexBuffer;
@@ -185,4 +186,3 @@ private:
 	static XMFLOAT3 m_DefaultFloat3;
 	static XMFLOAT2 m_DefaultFloat2;
 };
-

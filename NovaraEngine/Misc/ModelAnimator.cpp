@@ -1,8 +1,8 @@
-#include "stdafx.h"
+#include "EnginePCH.h"
 #include "ModelAnimator.h"
 
-ModelAnimator::ModelAnimator(MeshFilter* pMeshFilter):
-	m_pMeshFilter{pMeshFilter}
+ModelAnimator::ModelAnimator(MeshFilter* pMeshFilter) :
+	m_pMeshFilter{ pMeshFilter }
 {
 	SetAnimation(0);
 }

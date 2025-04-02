@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "EnginePCH.h"
 #include "BaseMaterial.h"
 #include <ranges>
 
@@ -23,7 +23,7 @@ void BaseMaterial::_baseInitialize(ID3DX11Effect* pRootEffect, UINT materialId)
 
 	//Update Technique Pointers
 	const auto& techniqueCtxs = GetTechniques();
-	for(UINT techIndex{0}; techIndex < m_numTechniques; ++techIndex)
+	for (UINT techIndex{ 0 }; techIndex < m_numTechniques; ++techIndex)
 	{
 		auto it = techniqueCtxs.begin();
 		std::advance(it, techIndex);
@@ -32,10 +32,10 @@ void BaseMaterial::_baseInitialize(ID3DX11Effect* pRootEffect, UINT materialId)
 	}
 
 	//Retrieve Root Variables
-	for(UINT i{0}; i < static_cast<UINT>(eRootVariable::COUNT); ++i)
+	for (UINT i{ 0 }; i < static_cast<UINT>(eRootVariable::COUNT); ++i)
 	{
 		auto rootVariableIndex = GetRootVariableIndex(static_cast<eRootVariable>(i));
-		if(rootVariableIndex >= 0)
+		if (rootVariableIndex >= 0)
 		{
 			m_RootVariableLUT[i] = m_pEffect->GetVariableByIndex(static_cast<UINT>(rootVariableIndex));
 		}
@@ -108,7 +108,7 @@ void BaseMaterial::SetVariable(const std::wstring& varName, const void* pData, u
 
 void BaseMaterial::SetVariable_Scalar(const std::wstring& varName, float scalar) const
 {
-	if(const auto pShaderVariable = GetVariable(varName))
+	if (const auto pShaderVariable = GetVariable(varName))
 	{
 		HANDLE_ERROR(pShaderVariable->AsScalar()->SetFloat(scalar));
 		return;
@@ -208,17 +208,17 @@ void BaseMaterial::SetVariable_Texture(const std::wstring& varName, ID3D11Shader
 	Logger::LogWarning(L"Shader variable \'{}\' not found for \'{}\'", varName, GetEffectName());
 }
 
-void BaseMaterial::SetVariable_Texture(const std::wstring& varName, const TextureData* pTexture) const
-{
-	SetVariable_Texture(varName, pTexture->GetShaderResourceView());
-}
+//void BaseMaterial::SetVariable_Texture(const std::wstring& varName, const TextureData* pTexture) const
+//{
+//	SetVariable_Texture(varName, pTexture->GetShaderResourceView());
+//}
 
 void BaseMaterial::SetTechnique(const std::wstring& techName)
 {
 	auto& techniques = GetTechniques();
 	const auto techNameHash = std::hash<std::wstring>{}(techName);
 
-	if(techniques.contains(techNameHash))
+	if (techniques.contains(techNameHash))
 	{
 		m_TechniqueContext = techniques.at(techNameHash);
 		m_TechniqueContext.pTechnique = m_pEffect->GetTechniqueByName(StringUtil::utf8_encode(techName).c_str());
@@ -231,7 +231,7 @@ void BaseMaterial::SetTechnique(const std::wstring& techName)
 void BaseMaterial::SetTechnique(int index)
 {
 	auto& techniques = GetTechniques();
-	if(techniques.size() > index)
+	if (techniques.size() > index)
 	{
 		auto it = techniques.begin();
 		std::advance(it, index);
@@ -258,7 +258,7 @@ void BaseMaterial::DrawImGui()
 {
 	ImGui::Dummy({ 0,5.f });
 	const std::string title = std::format("Material > {} (ID#{})", m_MaterialNameUtf8.substr(6), m_MaterialId).c_str();
-	if(ImGui::Button(title.c_str())){m_DrawImGui = true;}
+	if (ImGui::Button(title.c_str())) { m_DrawImGui = true; }
 
 	if (!m_DrawImGui) return;
 

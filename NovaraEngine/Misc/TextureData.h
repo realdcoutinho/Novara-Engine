@@ -19,9 +19,8 @@ public:
 	static UUID GUID_TextureData;
 
 private:
-	ID3D11Resource *m_pTexture{};
-	ID3D11ShaderResourceView *m_pTextureShaderResourceView{};
+	ID3D11Resource* m_pTexture{};
+	ID3D11ShaderResourceView* m_pTextureShaderResourceView{};
 	XMFLOAT2 m_Dimension{};
 	std::wstring m_AssetSubPath{};
 };
-

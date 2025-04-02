@@ -1,5 +1,6 @@
 #pragma once
-class ShadowMapMaterial final: public Material<ShadowMapMaterial>
+
+class ShadowMapMaterial final : public Material<ShadowMapMaterial>
 {
 public:
 	ShadowMapMaterial();
@@ -12,4 +13,3 @@ public:
 protected:
 	void InitializeEffectVariables() override;
 };
-

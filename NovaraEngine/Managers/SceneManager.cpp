@@ -1,6 +1,5 @@
-#include "stdafx.h"
+#include "EnginePCH.h"
 #include "SceneManager.h"
-#include <algorithm>
 
 
 void SceneManager::Initialize()
@@ -9,7 +8,7 @@ void SceneManager::Initialize()
 	{
 		pScene->RootInitialize(m_GameContext);
 	}
-} 
+}
 
 SceneManager::~SceneManager()
 {
@@ -82,9 +81,9 @@ void SceneManager::PreviousScene()
 void SceneManager::SetActiveGameScene(const std::wstring& sceneName)
 {
 	const auto it = std::ranges::find_if(m_pScenes, [sceneName](const GameScene* pScene)
-	{
-		return wcscmp(pScene->m_SceneName.c_str(), sceneName.c_str()) == 0;
-	});
+		{
+			return wcscmp(pScene->m_SceneName.c_str(), sceneName.c_str()) == 0;
+		});
 
 	if (it != m_pScenes.end())
 	{
@@ -150,4 +149,3 @@ void SceneManager::OnGUI() const
 	if (m_ActiveScene != nullptr)
 		m_ActiveScene->RootOnGUI();
 }
-

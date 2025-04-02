@@ -1,5 +1,5 @@
 #pragma once
-#include "Base/Structs.h"
+#include "../Base/Structs.h"
 class PostProcessingMaterial;
 class BaseMaterial;
 class PhysxProxy;
@@ -30,9 +30,9 @@ public:
 	SceneSettings& GetSceneSettings() { return m_SceneContext.settings; }
 	CameraComponent* GetActiveCamera() const { return m_pActiveCamera; }
 
-	void AddPostProcessingEffect(PostProcessingMaterial* pMaterial);
+	//void AddPostProcessingEffect(PostProcessingMaterial* pMaterial);
 	void AddPostProcessingEffect(UINT materialId);
-	void RemovePostProcessingEffect(PostProcessingMaterial* pMaterial);
+	//void RemovePostProcessingEffect(PostProcessingMaterial* pMaterial);
 	void RemovePostProcessingEffect(UINT materialId);
 
 	PhysxProxy* GetPhysxProxy() const { return m_pPhysxProxy; }
@@ -46,7 +46,7 @@ protected:
 	virtual void PostDraw() {};
 	virtual void ShadowDraw() {};
 
-	virtual void OnGUI(){}
+	virtual void OnGUI() {}
 	virtual void OnSceneActivated() {}
 	virtual void OnSceneDeactivated() {}
 
@@ -69,6 +69,6 @@ private:
 	CameraComponent* m_pDefaultCamera{}, * m_pActiveCamera{};
 	PhysxProxy* m_pPhysxProxy{};
 
-	std::vector<PostProcessingMaterial*> m_PostProcessingMaterials{};
+	//std::vector<PostProcessingMaterial*> m_PostProcessingMaterials{};
 	NovaraGame* m_pGame{};
 };

@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "EnginePCH.h"
 #include "SpriteRenderer.h"
 
 void SpriteRenderer::Initialize()
@@ -66,21 +66,21 @@ void SpriteRenderer::UpdateBuffer(const SceneContext& /*sceneContext*/)
 	//Sort Sprites
 	//SORT BY TEXTURE
 	std::ranges::sort(m_Sprites, [](const VertexSprite& v0, const VertexSprite& v1)
-	{
-		return v0.TextureId < v1.TextureId;
-	});
+		{
+			return v0.TextureId < v1.TextureId;
+		});
 
 	//SORT BY DEPTH
 	std::ranges::sort(m_Sprites, SpriteSortByDepth);
 	std::ranges::sort(m_Sprites, [](const VertexSprite& v0, const VertexSprite& v1)
-	{
-		if (v0.TextureId == v1.TextureId)
 		{
-			return v0.TransformData.z < v1.TransformData.z;
-		}
+			if (v0.TextureId == v1.TextureId)
+			{
+				return v0.TransformData.z < v1.TransformData.z;
+			}
 
-		return false;
-	});
+			return false;
+		});
 	//------------------------
 
 	//Fill Buffer

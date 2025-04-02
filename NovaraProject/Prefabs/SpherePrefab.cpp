@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "EnginePCH.h"
 #include "SpherePrefab.h"
 
 SpherePrefab::SpherePrefab(float radius, int steps, XMFLOAT4 color) :

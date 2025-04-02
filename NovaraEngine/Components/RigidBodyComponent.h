@@ -5,9 +5,10 @@ class ColliderInfo
 {
 public:
 	ColliderInfo(UINT Id, RigidBodyComponent* pOwner, PxShape* pShape) :
-		m_ColliderId{Id},
-		m_pOwner{pOwner},
-		m_pShape(pShape){}
+		m_ColliderId{ Id },
+		m_pOwner{ pOwner },
+		m_pShape(pShape) {
+	}
 
 	PxShape* GetShape() const { return m_pShape; }
 	bool IsTrigger() const { return m_IsTrigger; }
@@ -18,7 +19,7 @@ public:
 	void SetTag(const std::wstring& tag) { m_Tag = tag; }
 	void SetTrigger(bool isTrigger)
 	{
-		if(m_pShape && m_IsTrigger != isTrigger)
+		if (m_pShape && m_IsTrigger != isTrigger)
 		{
 			m_IsTrigger = isTrigger;
 			m_pShape->setFlag(PxShapeFlag::eSIMULATION_SHAPE, !m_IsTrigger);
@@ -79,7 +80,7 @@ public:
 
 	//Shapes (Colliders)
 	template<typename T>
-	UINT AddCollider(const T& geometry, const PxMaterial& material, bool isTrigger=false, const PxTransform& localPose = PxTransform(PxIdentity));
+	UINT AddCollider(const T& geometry, const PxMaterial& material, bool isTrigger = false, const PxTransform& localPose = PxTransform(PxIdentity));
 	void RemoveCollider(const ColliderInfo& colliderInfo);
 	void RemoveColliders();
 	const std::vector<ColliderInfo>& GetColliders() const { return m_Colliders; }
@@ -127,7 +128,7 @@ UINT RigidBodyComponent::AddCollider(const T& geometry, const PxMaterial& materi
 		const UINT colliderId = UINT(m_ColliderCreationInfos.size());
 		const std::shared_ptr<PxGeometry> pGeom(new T{ geometry }); //Prevent PxGeometry Object Slicing...
 
-		m_ColliderCreationInfos.push_back({ colliderId, pGeom, &material, localPose, isTrigger});
+		m_ColliderCreationInfos.push_back({ colliderId, pGeom, &material, localPose, isTrigger });
 		return colliderId;
 	}
 

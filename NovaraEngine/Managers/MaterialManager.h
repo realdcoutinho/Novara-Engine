@@ -12,11 +12,11 @@ public:
 
 	template<typename T>
 	std::enable_if<std::is_base_of_v<BaseMaterial, T>, T>::type*
-	CreateMaterial();
+		CreateMaterial();
 
 	template<typename T>
 	std::enable_if<std::is_base_of_v<PostProcessingMaterial, T>, T>::type*
-	CreateMaterial();
+		CreateMaterial();
 
 	template<typename T>
 	std::enable_if<std::is_base_of_v<BaseMaterial, T>, T>::type*
@@ -24,7 +24,7 @@ public:
 
 	template<typename T>
 	std::enable_if<std::is_base_of_v<PostProcessingMaterial, T>, T>::type*
-	GetMaterial(UINT materialId) const;
+		GetMaterial(UINT materialId) const;
 
 	BaseMaterial* GetMaterial(UINT materialId) const;
 
@@ -59,7 +59,7 @@ MaterialManager::CreateMaterial()
 {
 	auto pMaterial = new T();
 
-	UINT newMaterialId{ UINT_MAX};
+	UINT newMaterialId{ UINT_MAX };
 	for (size_t i{ 0 }; i < m_Materials.size(); ++i)
 	{
 		if (m_Materials[i] == nullptr)
@@ -114,13 +114,13 @@ template<typename T>
 std::enable_if<std::is_base_of_v<BaseMaterial, T>, T>::type*
 MaterialManager::GetMaterial(UINT materialId) const
 {
-	if(auto pBase = GetMaterial(materialId))
+	if (auto pBase = GetMaterial(materialId))
 	{
-		if(T * pDerived = dynamic_cast<T*>(pBase))
+		if (T* pDerived = dynamic_cast<T*>(pBase))
 		{
 			return pDerived;
 		}
-		
+
 		HANDLE_ERROR(L"Failed to cast Material (BaseMaterial) with ID={} to \'{}\'", materialId, StringUtil::utf8_decode(typeid(T).name()));
 	}
 
@@ -143,4 +143,3 @@ MaterialManager::GetMaterial(UINT materialId) const
 
 	return nullptr;
 }
-

@@ -89,7 +89,7 @@ void MainGS(point VS_DATA vertex[1], inout TriangleStream<GS_DATA> triStream)
     float2 pivot = float2(0, 0); //Extract the pivot data from the VS_DATA vertex struct
     float2 scale = float2(0, 0); //Extract the scale data from the VS_DATA vertex struct
     float2 texCoord = float2(0, 0); //Initial Texture Coordinate
-	
+
 	//...
 
 	// LT----------RT //TringleStrip (LT > RT > LB, LB > RB > RT)

@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "EnginePCH.h"
 #include "LightManager.h"
 
 LightManager::LightManager()

@@ -2,21 +2,21 @@
 
 struct RENDERTARGET_DESC
 {
-	UINT width{0};
-	UINT height{0};
+	UINT width{ 0 };
+	UINT height{ 0 };
 
 	//Enable this if you want to create a DepthStencilBuffer
-	bool enableDepthBuffer{true};
+	bool enableDepthBuffer{ true };
 	//Enable this if you want to use the DepthStencilBuffer
 	//as a ShaderResourceView (Texture in a shader)
-	bool enableDepthSRV{false};
+	bool enableDepthSRV{ false };
 	//Enable this if you want to create a RenderTarget (color)
-	bool enableColorBuffer{true};
+	bool enableColorBuffer{ true };
 	//Enable this if you want to use the RenderTarget
 	//as a ShaderResourceView (Texture in a shader)
-	bool enableColorSRV{false};
+	bool enableColorSRV{ false };
 	//Generate MipMaps (ColorSRV Only)
-	bool generateMipMaps_Color{false};
+	bool generateMipMaps_Color{ false };
 
 	//Depth buffer format (DepthStencil)
 	DXGI_FORMAT depthFormat{ DXGI_FORMAT_D32_FLOAT };
@@ -24,8 +24,8 @@ struct RENDERTARGET_DESC
 	DXGI_FORMAT colorFormat{ DXGI_FORMAT_R8G8B8A8_UNORM };
 
 	//Optional: Supply one of the buffers
-	ID3D11Texture2D* pColor{nullptr};
-	ID3D11Texture2D* pDepth{nullptr};
+	ID3D11Texture2D* pColor{ nullptr };
+	ID3D11Texture2D* pDepth{ nullptr };
 
 	void IsValid()
 	{
@@ -58,7 +58,7 @@ public:
 	RenderTarget& operator=(RenderTarget&& other) noexcept = delete;
 
 	HRESULT Create(RENDERTARGET_DESC desc);
-	void Clear(XMFLOAT4 clearColor = XMFLOAT4{Colors::CornflowerBlue}) const;
+	void Clear(XMFLOAT4 clearColor = XMFLOAT4{ Colors::CornflowerBlue }) const;
 
 	ID3D11RenderTargetView* GetRenderTargetView() const { return m_pRenderTargetView; }
 	ID3D11DepthStencilView* GetDepthStencilView() const { return m_pDepthStencilView; }
@@ -77,10 +77,10 @@ public:
 private:
 
 	D3D11Context m_D3DContext{};
-	
+
 	RENDERTARGET_DESC m_Desc{};
-	ID3D11RenderTargetView* m_pRenderTargetView{nullptr};
-	ID3D11ShaderResourceView* m_pColorShaderResourceView{nullptr};
+	ID3D11RenderTargetView* m_pRenderTargetView{ nullptr };
+	ID3D11ShaderResourceView* m_pColorShaderResourceView{ nullptr };
 	ID3D11ShaderResourceView* m_pDepthShaderResourceView{ nullptr };
 	ID3D11Texture2D* m_pColor{ nullptr };
 	ID3D11DepthStencilView* m_pDepthStencilView{ nullptr };
@@ -94,8 +94,7 @@ private:
 
 	void CleanUp();
 
-	bool m_ColorBufferSupplied{false};
-	bool m_DepthBufferSupplied{false};
+	bool m_ColorBufferSupplied{ false };
+	bool m_DepthBufferSupplied{ false };
 
 };
-

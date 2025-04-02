@@ -1,17 +1,19 @@
 #pragma once
-#include "PhysX/PhysxProxy.h"
-#include "Scenegraph/GameScene.h"
+#include "../PhysX/PhysxProxy.h"
+#include "../Scenegraph/GameScene.h"
+
+
 
 namespace GameSceneExt
 {
-	inline void CreatePhysXGroundPlane(const GameScene& scene, PxMaterial* pMaterial = nullptr)
-	{
-		const auto pActor = PxGetPhysics().createRigidStatic(PxTransform{ PxQuat{PxPiDivTwo, PxVec3{0.f,0.f,1.f}} });
-		if (!pMaterial) pMaterial = PxGetPhysics().createMaterial(.5f, .5f, .5f);
-		PxRigidActorExt::createExclusiveShape(*pActor, PxPlaneGeometry{}, *pMaterial);
+	//inline void CreatePhysXGroundPlane(const GameScene& scene, PxMaterial* pMaterial = nullptr)
+	//{
+	//	//const auto pActor = PxGetPhysics().createRigidStatic(PxTransform{ PxQuat{PxPiDivTwo, PxVec3{0.f,0.f,1.f}} });
+	//	//if (!pMaterial) pMaterial = PxGetPhysics().createMaterial(.5f, .5f, .5f);
+	//	//PxRigidActorExt::createExclusiveShape(*pActor, PxPlaneGeometry{}, *pMaterial);
 
-		scene.GetPhysxProxy()->AddActor(*pActor);
-	}
+	//	//scene.GetPhysxProxy()->AddActor(*pActor);
+	//}
 }
 
 namespace StringUtil
@@ -67,4 +69,3 @@ namespace ConvertUtil
 		return reinterpret_cast<float*>(const_cast<XMFLOAT4*>(&v));
 	}
 }
-

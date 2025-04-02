@@ -1,9 +1,10 @@
-#include "stdafx.h"
+#include "EnginePCH.h"
 #include "RenderTarget.h"
 
 RenderTarget::RenderTarget(const D3D11Context& d3dContext) :
 	m_D3DContext(d3dContext)
-{}
+{
+}
 
 RenderTarget::~RenderTarget(void)
 {

@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "EnginePCH.h"
 #include "InputManager.h"
 
 PBYTE InputManager::m_pCurrKeyboardState = nullptr;
@@ -34,8 +34,8 @@ void InputManager::Initialize(const GameContext& gameContext)
 		m_pKeyboardState0 = new BYTE[256];
 		m_pKeyboardState1 = new BYTE[256];
 
-		if(!GetKeyboardState(m_pKeyboardState0) ||
-		!GetKeyboardState(m_pKeyboardState1))
+		if (!GetKeyboardState(m_pKeyboardState0) ||
+			!GetKeyboardState(m_pKeyboardState1))
 		{
 			Logger::LogWarning(L"InputManager::Initialize >> Failed to GetKeyboardState.");
 		}
@@ -143,8 +143,8 @@ void InputManager::Update()
 	if (!m_Enabled)
 		return;
 
-	if (ImGui::GetIO().WantCaptureMouseUnlessPopupClose)
-		return;
+	/*if (ImGui::GetIO().WantCaptureMouseUnlessPopupClose)
+		return;*/
 
 	//Reset previous InputAction States
 	for (auto it = m_InputActions.begin(); it != m_InputActions.end(); ++it)
@@ -212,7 +212,7 @@ void InputManager::UpdateInputStates(bool overrideEnable)
 {
 	m_Enabled = m_UserEnabled && !overrideEnable;
 
-	if(!m_Enabled && !m_EnableChanged)
+	if (!m_Enabled && !m_EnableChanged)
 	{
 		m_MouseMovement = { 0,0 };
 		m_MouseMovementNormalized = { 0.f,0.f };
@@ -247,7 +247,7 @@ void InputManager::UpdateInputStates(bool overrideEnable)
 			m_CurrMousePosition = m_OldMousePosition;
 		}
 	}
-	
+
 	m_MouseMovement.x = m_CurrMousePosition.x - m_OldMousePosition.x;
 	m_MouseMovement.y = m_CurrMousePosition.y - m_OldMousePosition.y;
 

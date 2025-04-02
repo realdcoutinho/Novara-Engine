@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "EnginePCH.h"
 #include "BinaryReader.h"
 
 BinaryReader::~BinaryReader(void)
@@ -10,11 +10,11 @@ std::wstring BinaryReader::ReadLongString()
 {
 	ASSERT_IF(m_pReader == nullptr, L"BinaryReader doesn't exist!\nUnable to read binary data...");
 	const auto stringLength = Read<UINT>();
-	
- std::wstringstream ss;
-	for(UINT i=0; i<stringLength; ++i)
+
+	std::wstringstream ss;
+	for (UINT i = 0; i < stringLength; ++i)
 	{
-		ss<<Read<wchar_t>();
+		ss << Read<wchar_t>();
 	}
 
 	return (std::wstring)ss.str();
@@ -31,7 +31,7 @@ std::wstring BinaryReader::ReadNullString()
 		return std::wstring(buff.begin(), buff.end());
 	}//Prevent C6011
 
-	return L""; 
+	return L"";
 }
 
 
@@ -39,11 +39,11 @@ std::wstring BinaryReader::ReadString()
 {
 	ASSERT_IF(m_pReader == nullptr, L"BinaryReader doesn't exist!\nUnable to read binary data...");
 	const int stringLength = (int)Read<char>();
-	
- std::wstringstream ss;
-	for(int i=0; i<stringLength; ++i)
+
+	std::wstringstream ss;
+	for (int i = 0; i < stringLength; ++i)
 	{
-		ss<<Read<char>();
+		ss << Read<char>();
 	}
 
 	return (std::wstring)ss.str();
@@ -54,8 +54,8 @@ void BinaryReader::Open(const std::wstring& binaryFile)
 	Close();
 
 	auto temp = new std::ifstream();
-	temp->open(binaryFile, std::ios::in| std::ios::binary);
-	if(temp->is_open())
+	temp->open(binaryFile, std::ios::in | std::ios::binary);
+	if (temp->is_open())
 	{
 		m_pReader = temp;
 		m_Exists = true;
@@ -84,7 +84,7 @@ void BinaryReader::Close()
 
 int BinaryReader::GetBufferPosition() const
 {
-	if(m_pReader)
+	if (m_pReader)
 	{
 		return int(m_pReader->tellg());
 	}
@@ -95,7 +95,7 @@ int BinaryReader::GetBufferPosition() const
 
 bool BinaryReader::SetBufferPosition(int pos)
 {
-	if(m_pReader)
+	if (m_pReader)
 	{
 		m_pReader->seekg(pos);
 		return true;
@@ -108,7 +108,7 @@ bool BinaryReader::SetBufferPosition(int pos)
 bool BinaryReader::MoveBufferPosition(int move)
 {
 	const auto currPos = GetBufferPosition();
-	if(currPos>0)
+	if (currPos > 0)
 	{
 		return SetBufferPosition(currPos + move);
 	}

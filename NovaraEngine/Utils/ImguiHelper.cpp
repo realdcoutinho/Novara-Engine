@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "EnginePCH.h"
 #include "ImguiHelper.h"
 
 ImFont* ImguiFonts::pFont_DIN_Black_16 = {};
@@ -85,7 +85,7 @@ void ImguiStyles::Apply_Custom(bool dark, float alpha)
 {
     ImGuiStyle& style = ImGui::GetStyle();
 
-    // light style from Pacôme Danhiez (user itamago) https://github.com/ocornut/imgui/pull/511#issuecomment-175719267
+    // light style from Pac?me Danhiez (user itamago) https://github.com/ocornut/imgui/pull/511#issuecomment-175719267
     style.Alpha = 1.0f;
     style.FrameRounding = 3.0f;
     style.Colors[ImGuiCol_Text] = ImVec4(0.00f, 0.00f, 0.00f, 1.00f);

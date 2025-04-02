@@ -1,5 +1,7 @@
 #pragma once
-class SceneManager final: public Singleton<SceneManager>
+#include "EnginePCH.h"
+
+class SceneManager final : public Singleton<SceneManager>
 {
 public:
 	SceneManager(const SceneManager& other) = delete;
@@ -34,4 +36,3 @@ private:
 	std::vector<GameScene*> m_pScenes{};
 	GameScene* m_ActiveScene{}, * m_NewActiveScene{};
 };
-

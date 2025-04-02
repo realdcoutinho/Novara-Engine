@@ -13,7 +13,7 @@ struct TextRenderGroup
 	UINT bufferSize{};
 };
 
-class TextRenderer final: public Singleton<TextRenderer>
+class TextRenderer final : public Singleton<TextRenderer>
 {
 public:
 	TextRenderer(const TextRenderer& other) = delete;
@@ -49,5 +49,5 @@ private:
 	std::map<SpriteFont*, TextRenderGroup> m_TextRenderGroups{};
 
 	UINT m_TotalCharacters{};
-	UINT m_BufferSize{100};
+	UINT m_BufferSize{ 100 };
 };

@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "EnginePCH.h"
 #include "GameStats.h"
 
 #include <numeric>
@@ -8,19 +8,19 @@ bool GameStats::m_ResetPending = false;
 bool GameStats::m_InterimUpdated = true;
 std::chrono::time_point<std::chrono::steady_clock> GameStats::m_FrameStart = {};
 std::chrono::time_point<std::chrono::steady_clock> GameStats::m_InterimStart = {};
-int GameStats::m_FrameTimingCount = 20; 
+int GameStats::m_FrameTimingCount = 20;
 float GameStats::m_InterimDelay = 1.f;
 std::deque<float> GameStats::m_FrameMsTimings = {};
 PerfStats GameStats::m_Stats = {};
 
 void GameStats::BeginFrame()
 {
-	if(m_IsMeasuring)
+	if (m_IsMeasuring)
 	{
 		Logger::LogWarning(L"GameStats::BeginFrame >> EndFrame not called. Invalid measurement.");
 	}
 
-	if(m_ResetPending)
+	if (m_ResetPending)
 	{
 		m_Stats.Reset();
 		m_InterimUpdated = true;
@@ -31,7 +31,7 @@ void GameStats::BeginFrame()
 	m_FrameStart = std::chrono::steady_clock::now();
 	m_IsMeasuring = true;
 
-	if(m_InterimUpdated)
+	if (m_InterimUpdated)
 	{
 		m_InterimStart = m_FrameStart;
 		m_InterimUpdated = false;
@@ -43,7 +43,7 @@ void GameStats::BeginFrame()
 void GameStats::EndFrame()
 {
 #pragma warning(disable:4244)
-	if(!m_IsMeasuring)
+	if (!m_IsMeasuring)
 	{
 		Logger::LogWarning(L"GameStats::EndFrame >> BeginFrame not called. Invalid measurement.");
 		return;
@@ -56,7 +56,7 @@ void GameStats::EndFrame()
 
 	m_FrameMsTimings.push_back(elapsedMs);
 
-	if(m_FrameMsTimings.size() > m_FrameTimingCount)
+	if (m_FrameMsTimings.size() > m_FrameTimingCount)
 	{
 		m_FrameMsTimings.pop_front();
 	}
@@ -69,7 +69,7 @@ void GameStats::EndFrame()
 
 #pragma warning(disable:4189)
 	const auto lastUpdate = std::chrono::duration_cast<std::chrono::seconds>(frameEnd - m_InterimStart).count();
-	if(lastUpdate > m_InterimDelay)
+	if (lastUpdate > m_InterimDelay)
 	{
 		m_InterimUpdated = true;
 		m_Stats.averageFps_interim = m_Stats.averageFps;

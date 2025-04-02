@@ -1,7 +1,8 @@
-#include "stdafx.h"
+#include "EnginePCH.h"
 #include "NovaraGame.h"
+#include <Windows.h>
 
-NovaraGame::NovaraGame():
+NovaraGame::NovaraGame() :
 	m_IsActive(true)
 {
 	Logger::Initialize();
@@ -21,10 +22,10 @@ NovaraGame::~NovaraGame()
 	InputManager::Release(); //Todo > Rename to Destroy
 	SceneManager::Destroy();
 	PhysXManager::Destroy();
-	SoundManager::Destroy();
-	SpriteRenderer::Destroy();
-	TextRenderer::Destroy();
-	ShadowMapRenderer::Destroy();
+	//SoundManager::Destroy();
+	//SpriteRenderer::Destroy();
+	//TextRenderer::Destroy();
+	//ShadowMapRenderer::Destroy();
 	Logger::Release(); //TODO > Singleton
 
 	//ImGui Cleanup
@@ -37,7 +38,7 @@ NovaraGame::~NovaraGame()
 	SafeRelease(m_pDxgiFactory);
 	SafeRelease(m_pSwapchain);
 
-	if(m_GameContext.d3dContext.pDeviceContext)
+	if (m_GameContext.d3dContext.pDeviceContext)
 	{
 		m_GameContext.d3dContext.pDeviceContext->ClearState();
 		m_GameContext.d3dContext.pDeviceContext->Flush();
@@ -45,7 +46,7 @@ NovaraGame::~NovaraGame()
 	}
 
 	SafeRelease(m_GameContext.d3dContext.pDevice);
-	
+
 }
 
 void NovaraGame::ValidateGameContext()
@@ -67,16 +68,16 @@ HRESULT NovaraGame::Run(HINSTANCE hInstance)
 	//INITIALIZE
 	//**********
 	HANDLE_ERROR(InitializeAdapterAndOutput())
-	HANDLE_ERROR(InitializeWindow())
-	HANDLE_ERROR(InitializeDirectX())
-	HANDLE_ERROR(InitializeImGui())
-	HANDLE_ERROR(InitializeGame())
+		HANDLE_ERROR(InitializeWindow())
+		HANDLE_ERROR(InitializeDirectX())
+		HANDLE_ERROR(InitializeImGui())
+		HANDLE_ERROR(InitializeGame())
 
-	MSG msg;
+		MSG msg;
 	ZeroMemory(&msg, sizeof(MSG));
-	while(msg.message != WM_QUIT)
+	while (msg.message != WM_QUIT)
 	{
-		while(PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
+		while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
 		{
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
@@ -96,12 +97,12 @@ HRESULT NovaraGame::InitializeAdapterAndOutput()
 {
 	HANDLE_ERROR(CreateDXGIFactory(__uuidof(IDXGIFactory), reinterpret_cast<void**>(&m_pDxgiFactory)))
 
-	if(!m_GameContext.d3dContext.pAdapter)
-	{	
-		HANDLE_ERROR(m_pDxgiFactory->EnumAdapters(0, &m_GameContext.d3dContext.pAdapter))
-	}
+		if (!m_GameContext.d3dContext.pAdapter)
+		{
+			HANDLE_ERROR(m_pDxgiFactory->EnumAdapters(0, &m_GameContext.d3dContext.pAdapter))
+		}
 
-	if(!m_GameContext.d3dContext.pOutput)
+	if (!m_GameContext.d3dContext.pOutput)
 	{
 		HANDLE_ERROR(m_GameContext.d3dContext.pAdapter->EnumOutputs(0, &m_GameContext.d3dContext.pOutput))
 	}
@@ -113,8 +114,8 @@ HRESULT NovaraGame::InitializeWindow()
 {
 	//1. Create Windowclass
 	//*********************
-	const auto className = "NovaraWindowClass";
-	WNDCLASS windowClass;
+	const auto className = L"NovaraWindowClass";
+	WNDCLASSW windowClass;
 	ZeroMemory(&windowClass, sizeof(WNDCLASS));
 	windowClass.hCursor = LoadCursor(nullptr, IDC_ARROW);
 	windowClass.hIcon = nullptr;
@@ -124,7 +125,7 @@ HRESULT NovaraGame::InitializeWindow()
 	windowClass.hInstance = m_hInstance;
 	windowClass.lpszClassName = className;
 
-	if(!RegisterClass(&windowClass))
+	if (!RegisterClassW(&windowClass))
 	{
 		const auto error = GetLastError();
 		HANDLE_ERROR(HRESULT_FROM_WIN32(error))
@@ -135,27 +136,27 @@ HRESULT NovaraGame::InitializeWindow()
 	DXGI_OUTPUT_DESC outputDesc{};
 	HANDLE_ERROR(m_GameContext.d3dContext.pOutput->GetDesc(&outputDesc))
 
-	RECT r = {0, 0, LONG(m_GameContext.windowWidth), LONG(m_GameContext.windowHeight) };
+		RECT r = { 0, 0, LONG(m_GameContext.windowWidth), LONG(m_GameContext.windowHeight) };
 	AdjustWindowRect(&r, WS_OVERLAPPEDWINDOW, false);
 	const auto winWidth = r.right - r.left;
 	const auto winHeight = r.bottom - r.top;
 
-	const int x = outputDesc.DesktopCoordinates.left + ((outputDesc.DesktopCoordinates.right - outputDesc.DesktopCoordinates.left)/2) - winWidth/2;
-	const int y = (outputDesc.DesktopCoordinates.bottom - outputDesc.DesktopCoordinates.top)/2 - winHeight/2;
+	const int x = outputDesc.DesktopCoordinates.left + ((outputDesc.DesktopCoordinates.right - outputDesc.DesktopCoordinates.left) / 2) - winWidth / 2;
+	const int y = (outputDesc.DesktopCoordinates.bottom - outputDesc.DesktopCoordinates.top) / 2 - winHeight / 2;
 
-	m_GameContext.windowHandle = CreateWindow(className,
-									m_GameContext.windowTitle.c_str(),
-									WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX, 
-									x, 
-									y, 
-									winWidth, 
-									winHeight, 
-									NULL,
-									nullptr, 
-									m_hInstance, 
-									this);
+	m_GameContext.windowHandle = CreateWindowW(className,
+		m_GameContext.windowTitle.c_str(),
+		WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX,
+		x,
+		y,
+		winWidth,
+		winHeight,
+		NULL,
+		nullptr,
+		m_hInstance,
+		this);
 
-	if(!m_GameContext.windowHandle)
+	if (!m_GameContext.windowHandle)
 	{
 		HANDLE_ERROR(HRESULT_FROM_WIN32(GetLastError()))
 	}
@@ -176,26 +177,26 @@ HRESULT NovaraGame::InitializeDirectX()
 	//Create DX11 Device & Context
 	UINT createDeviceFlags = 0;
 
-	#if defined(DEBUG) || defined(_DEBUG)
-		createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
-	#endif
+#if defined(DEBUG) || defined(_DEBUG)
+	createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
+#endif
 
 #pragma warning(push)
 #pragma warning(disable: 26812)
 	D3D_FEATURE_LEVEL featureLevel = D3D_FEATURE_LEVEL_11_0;
 	HANDLE_ERROR(D3D11CreateDevice(m_GameContext.d3dContext.pAdapter,
-								D3D_DRIVER_TYPE_UNKNOWN,
-								nullptr,
-								createDeviceFlags,
-								nullptr,0,
-								D3D11_SDK_VERSION,
-								&m_GameContext.d3dContext.pDevice,
-								&featureLevel,
-								&m_GameContext.d3dContext.pDeviceContext))
+		D3D_DRIVER_TYPE_UNKNOWN,
+		nullptr,
+		createDeviceFlags,
+		nullptr, 0,
+		D3D11_SDK_VERSION,
+		&m_GameContext.d3dContext.pDevice,
+		&featureLevel,
+		&m_GameContext.d3dContext.pDeviceContext))
 #pragma warning(pop)
-	
 
-	ASSERT_IF(featureLevel < D3D_FEATURE_LEVEL_10_0, L"Feature level 10.0+ not supported on this device!");
+
+		ASSERT_IF(featureLevel < D3D_FEATURE_LEVEL_10_0, L"Feature level 10.0+ not supported on this device!");
 
 	if (featureLevel < D3D_FEATURE_LEVEL_11_0)
 	{
@@ -220,33 +221,33 @@ HRESULT NovaraGame::InitializeDirectX()
 	swapChainDesc.OutputWindow = m_GameContext.windowHandle;
 	swapChainDesc.Windowed = true;
 	swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
-	swapChainDesc.Flags = 0 ;
+	swapChainDesc.Flags = 0;
 #pragma warning(push)
 #pragma warning(disable: 6387)
 	HANDLE_ERROR(m_pDxgiFactory->CreateSwapChain(m_GameContext.d3dContext.pDevice, &swapChainDesc, &m_pSwapchain))
 #pragma warning(pop)
 
-	//Create the default rendertarget.
-	m_pDefaultRenderTarget = new RenderTarget(m_GameContext.d3dContext);
-	
-	ID3D11Texture2D *pBackbuffer = nullptr;
+		//Create the default rendertarget.
+		m_pDefaultRenderTarget = new RenderTarget(m_GameContext.d3dContext);
+
+	ID3D11Texture2D* pBackbuffer = nullptr;
 	HANDLE_ERROR(m_pSwapchain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(&pBackbuffer)))
 
-	RENDERTARGET_DESC rtDesc;
+		RENDERTARGET_DESC rtDesc;
 	rtDesc.pColor = pBackbuffer;
 	HANDLE_ERROR(m_pDefaultRenderTarget->Create(rtDesc))
 
-	//Set Default Rendertarget 
-	SetRenderTarget(nullptr);
+		//Set Default Rendertarget 
+		SetRenderTarget(nullptr);
 
 	//TODO: Logger::LogTodo(L"Viewport ownership, Novaragame");
-	m_Viewport.Width	= static_cast<FLOAT>(m_GameContext.windowWidth);
-	m_Viewport.Height	= static_cast<FLOAT>(m_GameContext.windowHeight);
+	m_Viewport.Width = static_cast<FLOAT>(m_GameContext.windowWidth);
+	m_Viewport.Height = static_cast<FLOAT>(m_GameContext.windowHeight);
 	m_Viewport.TopLeftX = 0;
 	m_Viewport.TopLeftY = 0;
 	m_Viewport.MinDepth = 0.0f;
 	m_Viewport.MaxDepth = 1.0f;
-	m_GameContext.d3dContext.pDeviceContext->RSSetViewports(1,&m_Viewport);
+	m_GameContext.d3dContext.pDeviceContext->RSSetViewports(1, &m_Viewport);
 
 #ifdef _DEBUG
 	ID3D11Debug* pDebug{};
@@ -282,9 +283,9 @@ HRESULT NovaraGame::InitializeImGui() const
 	// Setup Dear ImGui context
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
-	//ImGuiIO& io = ImGui::GetIO(); (void)io;
-	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
-	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
+	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+	io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
 
 	// Setup Dear ImGui style
 	ImGui::StyleColorsDark();
@@ -297,12 +298,12 @@ HRESULT NovaraGame::InitializeImGui() const
 	ImGui::GetIO().FontDefault = ImguiFonts::pFont_DIN_Regular_14;
 
 	// Setup Platform/Renderer backends
-	if(!ImGui_ImplWin32_Init(m_GameContext.windowHandle))
+	if (!ImGui_ImplWin32_Init(m_GameContext.windowHandle))
 	{
 		HANDLE_ERROR(L"Failed to initialize ImGui. (ImGui_ImplWin32_Init");
 	}
 
-	if(!ImGui_ImplDX11_Init(m_GameContext.d3dContext.pDevice, m_GameContext.d3dContext.pDeviceContext))
+	if (!ImGui_ImplDX11_Init(m_GameContext.d3dContext.pDevice, m_GameContext.d3dContext.pDeviceContext))
 	{
 		HANDLE_ERROR(L"Failed to initialize ImGui. (ImGui_ImplDX11_Init");
 	}
@@ -316,18 +317,18 @@ HRESULT NovaraGame::InitializeGame()
 {
 	//******************
 	//MANAGER INITIALIZE
-	TextureData::CreateGUID();
+	//TextureData::CreateGUID();
 
 	ContentManager::Initialize(m_GameContext);
 	DebugRenderer::Initialize(m_GameContext);
 	InputManager::Initialize(m_GameContext);
 	PhysXManager::Create(m_GameContext);
-	SoundManager::Create(m_GameContext); //Constructor calls Initialize
+	//SoundManager::Create(m_GameContext); //Constructor calls Initialize
 	MaterialManager::Create(m_GameContext);
 	SceneManager::Create(m_GameContext);
-	SpriteRenderer::Create(m_GameContext);
-	TextRenderer::Create(m_GameContext);
-	ShadowMapRenderer::Create(m_GameContext);
+	//SpriteRenderer::Create(m_GameContext);
+	//TextRenderer::Create(m_GameContext);
+	//ShadowMapRenderer::Create(m_GameContext);
 
 	//***************
 	//GAME INITIALIZE
@@ -362,14 +363,14 @@ void NovaraGame::StateChanged(int state, bool active)
 
 LRESULT CALLBACK NovaraGame::WindowsProcedureStatic(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	if(message == WM_CREATE)
+	if (message == WM_CREATE)
 	{
 		const auto pCS = reinterpret_cast<CREATESTRUCT*>(lParam);
 		SetWindowLongPtr(hWnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(pCS->lpCreateParams));
 	}
 	else
 	{
-		if(const auto pThisGame = reinterpret_cast<NovaraGame*>(GetWindowLongPtr(hWnd, GWLP_USERDATA))) 
+		if (const auto pThisGame = reinterpret_cast<NovaraGame*>(GetWindowLongPtr(hWnd, GWLP_USERDATA)))
 			return pThisGame->WindowsProcedure(hWnd, message, wParam, lParam);
 	}
 
@@ -380,48 +381,48 @@ extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg
 
 LRESULT NovaraGame::WindowsProcedure(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	switch(message)
+	switch (message)
 	{
-		case WM_DESTROY:
-			PostQuitMessage(0);
-			return 0;
-		case WM_ACTIVATE:
-			if (wParam == WA_ACTIVE || wParam == WA_CLICKACTIVE)StateChanged(1, true);
-			else StateChanged(1, false);
+	case WM_DESTROY:
+		PostQuitMessage(0);
+		return 0;
+	case WM_ACTIVATE:
+		if (wParam == WA_ACTIVE || wParam == WA_CLICKACTIVE)StateChanged(1, true);
+		else StateChanged(1, false);
 
-			return 0;
-		case WM_SIZE:
-			if (wParam == SIZE_MINIMIZED) StateChanged(0, false);
-			else if (wParam == SIZE_RESTORED) StateChanged(0, true);
-			return 0;
-		case WM_SETFOCUS:
-			if (HWND(wParam) == m_GameContext.windowHandle)
-			{
-				StateChanged(1, true);
-				return 0;
-			}
-			break;
-		case WM_KILLFOCUS:
-			if (HWND(wParam) == m_GameContext.windowHandle)
-			{
-				StateChanged(1, false);
-				return 0;
-			}
-			break;
-		case WM_ENTERSIZEMOVE:
-			StateChanged(0, false);
-			StateChanged(1, false);
-			break;
-		case WM_EXITSIZEMOVE:
-			StateChanged(0, true);
+		return 0;
+	case WM_SIZE:
+		if (wParam == SIZE_MINIMIZED) StateChanged(0, false);
+		else if (wParam == SIZE_RESTORED) StateChanged(0, true);
+		return 0;
+	case WM_SETFOCUS:
+		if (HWND(wParam) == m_GameContext.windowHandle)
+		{
 			StateChanged(1, true);
-			break;
+			return 0;
+		}
+		break;
+	case WM_KILLFOCUS:
+		if (HWND(wParam) == m_GameContext.windowHandle)
+		{
+			StateChanged(1, false);
+			return 0;
+		}
+		break;
+	case WM_ENTERSIZEMOVE:
+		StateChanged(0, false);
+		StateChanged(1, false);
+		break;
+	case WM_EXITSIZEMOVE:
+		StateChanged(0, true);
+		StateChanged(1, true);
+		break;
 	}
 
 	if (ImGui_ImplWin32_WndProcHandler(hWnd, message, wParam, lParam) > 0)
 		return 0;
 
-	if(m_IsActive && WindowProcedureHook(hWnd, message, wParam, lParam) == 0)
+	if (m_IsActive && WindowProcedureHook(hWnd, message, wParam, lParam) == 0)
 		return 0;
 
 	return DefWindowProc(hWnd, message, wParam, lParam);
@@ -465,8 +466,8 @@ void NovaraGame::GameLoop() const
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 
-	//bool drawDemo{ true };
-	//ImGui::ShowDemoWindow(&drawDemo);
+	bool drawDemo{ true };
+	ImGui::ShowDemoWindow(&drawDemo);
 
 	SceneManager::Get()->OnGUI();
 	ImGui::Render();
@@ -484,7 +485,7 @@ void NovaraGame::GameLoop() const
 
 void NovaraGame::SetRenderTarget(RenderTarget* renderTarget)
 {
-	if(renderTarget == nullptr)
+	if (renderTarget == nullptr)
 		renderTarget = m_pDefaultRenderTarget;
 
 	const auto pRTV = renderTarget->GetRenderTargetView();

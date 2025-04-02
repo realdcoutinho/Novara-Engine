@@ -34,4 +34,3 @@ private:
 	bool m_IsPlaying{}, m_Reversed{}, m_ClipSet{};
 	float m_TickCount{}, m_AnimationSpeed{ 1.f };
 };
-

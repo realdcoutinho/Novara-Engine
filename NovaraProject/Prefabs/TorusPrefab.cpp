@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "EnginePCH.h"
 #include "TorusPrefab.h"
 
 TorusPrefab::TorusPrefab(float majorRadius, unsigned int majorRadiusSteps, float minorRadius, unsigned int minorRadiusSteps,

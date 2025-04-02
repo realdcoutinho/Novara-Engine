@@ -7,7 +7,8 @@ public:
 
 	VertexPosCol() = default;
 	VertexPosCol(XMFLOAT3 pos, XMFLOAT4 col) :
-		Position(pos), Color(col) {}
+		Position(pos), Color(col) {
+	}
 
 	XMFLOAT3 Position = {};
 	XMFLOAT4 Color = {};
@@ -19,7 +20,8 @@ public:
 
 	VertexPosNormCol() = default;
 	VertexPosNormCol(XMFLOAT3 pos, XMFLOAT3 norm, XMFLOAT4 col) :
-		Position(pos), Normal(norm), Color(col) {}
+		Position(pos), Normal(norm), Color(col) {
+	}
 
 	XMFLOAT3 Position = {};
 	XMFLOAT3 Normal = {};
@@ -32,7 +34,8 @@ public:
 
 	VertexPosNormTex() = default;
 	VertexPosNormTex(XMFLOAT3 pos, XMFLOAT3 norm, XMFLOAT2 texCoord) :
-		Position(pos), Normal(norm), TexCoord(texCoord) {}
+		Position(pos), Normal(norm), TexCoord(texCoord) {
+	}
 
 	XMFLOAT3 Position = {};
 	XMFLOAT3 Normal = {};
@@ -45,7 +48,8 @@ public:
 
 	QuadPosNormCol() = default;
 	QuadPosNormCol(VertexPosNormCol vert1, VertexPosNormCol vert2, VertexPosNormCol vert3, VertexPosNormCol vert4) :
-		Vertex1(vert1), Vertex2(vert2), Vertex3(vert3), Vertex4(vert4) {}
+		Vertex1(vert1), Vertex2(vert2), Vertex3(vert3), Vertex4(vert4) {
+	}
 
 	VertexPosNormCol Vertex1 = {};
 	VertexPosNormCol Vertex2 = {};
@@ -59,7 +63,8 @@ public:
 
 	TrianglePosNormCol() = default;
 	TrianglePosNormCol(VertexPosNormCol vert1, VertexPosNormCol vert2, VertexPosNormCol vert3) :
-		Vertex1(vert1), Vertex2(vert2), Vertex3(vert3) {}
+		Vertex1(vert1), Vertex2(vert2), Vertex3(vert3) {
+	}
 
 	VertexPosNormCol Vertex1 = {};
 	VertexPosNormCol Vertex2 = {};
@@ -73,7 +78,8 @@ public:
 
 	VertexPosTex() = default;
 	VertexPosTex(XMFLOAT3 pos, XMFLOAT2 uv) :
-		Position(pos), UV(uv) {}
+		Position(pos), UV(uv) {
+	}
 
 	XMFLOAT3 Position = {};
 	XMFLOAT2 UV = {};
@@ -85,7 +91,8 @@ public:
 
 	QuadPosTex() = default;
 	QuadPosTex(VertexPosTex vert1, VertexPosTex vert2, VertexPosTex vert3, VertexPosTex vert4) :
-		Vertex1(vert1), Vertex2(vert2), Vertex3(vert3), Vertex4(vert4) {}
+		Vertex1(vert1), Vertex2(vert2), Vertex3(vert3), Vertex4(vert4) {
+	}
 
 	VertexPosTex Vertex1 = {};
 	VertexPosTex Vertex2 = {};
@@ -126,7 +133,7 @@ struct VertexText
 struct VertexParticle
 {
 	XMFLOAT3 Position{};
-	XMFLOAT4 Color{XMFLOAT4{Colors::White}};
-	float Size{5.f};
-	float Rotation{0.f};
+	XMFLOAT4 Color{ XMFLOAT4{Colors::White} };
+	float Size{ 5.f };
+	float Rotation{ 0.f };
 };

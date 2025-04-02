@@ -18,9 +18,9 @@ struct LogString
 		Fmod
 	};
 
-	LogStringType type{LogStringType::Default};
+	LogStringType type{ LogStringType::Default };
 	HRESULT hresult{};
-	FMOD_RESULT fmodResult{};
+	//FMOD_RESULT fmodResult{};
 	PxErrorCode::Enum pxErrorCode{};
 
 	std::wstring_view format{};
@@ -29,26 +29,33 @@ struct LogString
 #pragma warning(push)
 #pragma warning(disable:26812)
 	LogString(PxErrorCode::Enum _pxErrorCode, const std::wstring& _format, const std::source_location& _location = std::source_location::current()) :
-		pxErrorCode{ _pxErrorCode }, format{ _format }, location(_location), type{ LogStringType::PhysX }{}
+		pxErrorCode{ _pxErrorCode }, format{ _format }, location(_location), type{ LogStringType::PhysX } {
+	}
 #pragma warning(pop)
 
 	LogString(HRESULT _hresult, const std::wstring& _format, const std::source_location& _location = std::source_location::current()) :
-		hresult{ _hresult }, format{_format}, location(_location), type{ LogStringType::HResult }{}
+		hresult{ _hresult }, format{ _format }, location(_location), type{ LogStringType::HResult } {
+	}
 
 	LogString(HRESULT _hresult, const std::source_location& _location = std::source_location::current()) :
-		hresult{ _hresult }, location(_location), type{LogStringType::HResult}{}
+		hresult{ _hresult }, location(_location), type{ LogStringType::HResult } {
+	}
 
-	LogString(FMOD_RESULT _fmodResult, const std::source_location& _location = std::source_location::current()) :
-		fmodResult{ _fmodResult }, location(_location), type{ LogStringType::Fmod }{}
+	//LogString(FMOD_RESULT _fmodResult, const std::source_location& _location = std::source_location::current()) :
+	//	fmodResult{ _fmodResult }, location(_location), type{ LogStringType::Fmod } {
+	//}
 
 	LogString(std::wstringstream::_Mystr _format, const std::source_location& _location = std::source_location::current()) :
-		format{ _format }, location(_location){}
+		format{ _format }, location(_location) {
+	}
 
 	LogString(const wchar_t* _format, const std::source_location& _location = std::source_location::current()) :
-		format{ _format }, location(_location){}
+		format{ _format }, location(_location) {
+	}
 
 	LogString(const std::wstring_view& _format, const std::source_location& _location = std::source_location::current()) :
-		format{_format}, location(_location){}
+		format{ _format }, location(_location) {
+	}
 };
 
 class Logger final
@@ -65,7 +72,7 @@ class Logger final
 
 		virtual void Log(const std::wstring& message, bool appendTimestamp = false)
 		{
-			if(appendTimestamp)
+			if (appendTimestamp)
 			{
 				SYSTEMTIME st;
 				GetSystemTime(&st);
@@ -78,7 +85,7 @@ class Logger final
 		}
 	};
 
-	class FileLogger final: public BaseLogger
+	class FileLogger final : public BaseLogger
 	{
 		std::wstring m_filename;
 	public:
@@ -104,7 +111,7 @@ class Logger final
 		}
 	};
 
-	class ConsoleLogger final: public BaseLogger
+	class ConsoleLogger final : public BaseLogger
 	{
 	public:
 		ConsoleLogger()

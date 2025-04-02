@@ -2,6 +2,8 @@
 
 class TransformComponent;
 class GameObject;
+class SceneContext;
+class GameScene;
 
 class BaseComponent
 {
@@ -21,15 +23,15 @@ public:
 protected:
 
 	virtual void Initialize(const SceneContext& sceneContext) = 0;
-	virtual void PostInitialize(const SceneContext& /*sceneContext*/){}
-	virtual void Update(const SceneContext& /*sceneContext*/){}
-	virtual void Draw(const SceneContext& /*sceneContext*/){}
+	virtual void PostInitialize(const SceneContext& sceneContext) {}
+	virtual void Update(const SceneContext& sceneContext) {}
+	virtual void Draw(const SceneContext& sceneContext) {}
 	virtual void ShadowMapDraw(const SceneContext&) {} //update_W9
 	virtual void PostDraw(const SceneContext&) {} //update_W9
-	virtual void OnOwnerAttach(GameObject* /*pOwner*/) {}
-	virtual void OnOwnerDetach(GameObject* /*pPreviousOwner*/) {}
-	virtual void OnSceneAttach(GameScene* /*pScene*/) {}
-	virtual void OnSceneDetach(GameScene* /*pScene*/) {}
+	virtual void OnOwnerAttach(GameObject* pOwner) {}
+	virtual void OnOwnerDetach(GameObject* pPreviousOwner) {}
+	virtual void OnSceneAttach(GameScene* pScene) {}
+	virtual void OnSceneDetach(GameScene* pScene) {}
 
 	GameObject* m_pGameObject{};
 	GameScene* m_pScene{};
@@ -49,5 +51,3 @@ private:
 
 	static UINT m_ComponentCounter;
 };
-
-

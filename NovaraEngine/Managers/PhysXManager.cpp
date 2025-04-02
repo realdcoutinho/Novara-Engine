@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "EnginePCH.h"
 #include "PhysXManager.h"
 
 #define PVD_HOST "127.0.0.1"
@@ -54,7 +54,7 @@ void PhysXManager::Initialize()
 
 	//Try to connect with the PVD
 	ToggleVisualDebuggerConnection();
-} 
+}
 
 PhysXManager::~PhysXManager()
 {
@@ -98,7 +98,7 @@ PxScene* PhysXManager::CreateScene(GameScene* pScene) const
 	const auto physxScene = m_pPhysics->createScene(sceneDesc);
 	ASSERT_IF(physxScene == nullptr, L"Scene creation failed!")
 
-	return physxScene;
+		return physxScene;
 }
 
 bool PhysXManager::ToggleVisualDebuggerConnection() const

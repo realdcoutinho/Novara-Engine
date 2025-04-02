@@ -16,11 +16,11 @@ struct D3D11Context
 
 struct SceneSettings
 {
-	bool showInfoOverlay{true};
+	bool showInfoOverlay{ true };
 	bool enableOnGUI{ false };
 
-	bool drawPhysXDebug{true};
-	bool drawGrid{true};
+	bool drawPhysXDebug{ true };
+	bool drawGrid{ true };
 	bool drawUserDebug{ true };
 
 	bool vSyncEnabled{ true };
@@ -49,9 +49,9 @@ struct SceneContext
 
 struct GameContext
 {
-	UINT windowWidth{1280};
-	UINT windowHeight{720};
-	std::wstring windowTitle{L"Novara Engine"};
+	UINT windowWidth{ 1280 };
+	UINT windowHeight{ 720 };
+	std::wstring windowTitle{ L"Novara Engine" };
 	HWND windowHandle{};
 	std::wstring contentRoot{ L"./Resources/" };
 	float inputUpdateFrequency{ 0.016f };

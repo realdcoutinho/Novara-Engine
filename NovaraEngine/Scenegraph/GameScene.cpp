@@ -1,7 +1,7 @@
-#include "stdafx.h"
+#include "EnginePCH.h"
 #include "GameScene.h"
 
-GameScene::GameScene(std::wstring sceneName):
+GameScene::GameScene(std::wstring sceneName) :
 	m_SceneName(std::move(sceneName))
 {
 }
@@ -64,7 +64,7 @@ void GameScene::RemoveChild(GameObject* pObject, bool deleteObject)
 	if (deleteObject)
 	{
 		SafeDelete(pObject);
-	}		
+	}
 }
 
 void GameScene::RootInitialize(const GameContext& gameContext)
@@ -85,7 +85,7 @@ void GameScene::RootInitialize(const GameContext& gameContext)
 	m_SceneContext.pGameTime->Stop();
 
 	m_SceneContext.pInput = new InputManager();
-	m_SceneContext.pLights = new LightManager();
+	//m_SceneContext.pLights = new LightManager();
 
 	m_SceneContext.d3dContext = gameContext.d3dContext;
 
@@ -134,7 +134,7 @@ void GameScene::RootUpdate()
 
 #pragma warning(push)
 #pragma warning(disable : 26812)
-	SoundManager::Get()->GetSystem()->update();
+	//SoundManager::Get()->GetSystem()->update();
 #pragma warning(pop)
 
 	//User-Scene Update
@@ -155,16 +155,16 @@ void GameScene::RootDraw()
 	//SHADOW_PASS
 	//+++++++++++
 	//TODO_W8(L"Implement Shadow Pass")
-	//1. BEGIN > ShadowMapRenderer::Begin (Initiate the ShadowPass)
-	//2. DRAW_LOOP > For every GameObject (m_pChildren), call GameObject::RootShadowMapDraw
-	//3. END > ShadowMapRenderer::End (Terminate the ShadowPass)
+		//1. BEGIN > ShadowMapRenderer::Begin (Initiate the ShadowPass)
+		//2. DRAW_LOOP > For every GameObject (m_pChildren), call GameObject::RootShadowMapDraw
+		//3. END > ShadowMapRenderer::End (Terminate the ShadowPass)
 #pragma endregion
 
 #pragma region USER PASS
 	//USER_PASS
 	//+++++++++
 	//User-Scene Draw
-	Draw();
+		Draw();
 
 	//Object-Scene Draw
 	for (const auto pChild : m_pChildren)
@@ -173,10 +173,10 @@ void GameScene::RootDraw()
 	}
 
 	//SpriteRenderer Draw
-	SpriteRenderer::Get()->Draw(m_SceneContext);
+	//SpriteRenderer::Get()->Draw(m_SceneContext);
 
 	//TextRenderer Draw
-	TextRenderer::Get()->Draw(m_SceneContext);
+	//TextRenderer::Get()->Draw(m_SceneContext);
 
 	//Object-Scene Post-Draw
 	PostDraw();
@@ -198,24 +198,24 @@ void GameScene::RootDraw()
 
 	//TODO_W10(L"Add Post-Processing PASS logic")
 
-	//No need to swap RenderTargets is there aren't any PP Effects...
-	if (m_PostProcessingMaterials.size() > 0)
-	{
-		//1. [PREV_RT & INIT_RT] Retrieve the current RenderTarget (NovaraGame::GetRenderTarget, every scene has access to the NovaraGame > m_pGame)
+		//No need to swap RenderTargets is there aren't any PP Effects...
+		//if (m_PostProcessingMaterials.size() > 0)
+		//{
+		//	//1. [PREV_RT & INIT_RT] Retrieve the current RenderTarget (NovaraGame::GetRenderTarget, every scene has access to the NovaraGame > m_pGame)
 
-		//2. Iterate the vector of PostProcessingMaterials (m_PostProcessingMaterials)
-		//		For Each Material
-		//			- If the material is disabled, skip
-		//			- Call the Draw function, the Source RenderTarget is our PREV_RT
-		//			- After drawing the effect, we want to swap PREV_RT with output from material we just used to draw with
+		//	//2. Iterate the vector of PostProcessingMaterials (m_PostProcessingMaterials)
+		//	//		For Each Material
+		//	//			- If the material is disabled, skip
+		//	//			- Call the Draw function, the Source RenderTarget is our PREV_RT
+		//	//			- After drawing the effect, we want to swap PREV_RT with output from material we just used to draw with
 
-		//3. All Materials are applied after each other, time to draw the final result to the screen
-		//		- If PREV_RT is still equal to INIT_RT, do nothing (means no PP effect was applied, nothing has changed)
-		//		- Else, reset the RenderTarget of the game to default (NovaraGame::SetRenderTarget)
-		//		- Use SpriteRenderer::DrawImmediate to render the ShaderResourceView from PREV_RT to the screen
+		//	//3. All Materials are applied after each other, time to draw the final result to the screen
+		//	//		- If PREV_RT is still equal to INIT_RT, do nothing (means no PP effect was applied, nothing has changed)
+		//	//		- Else, reset the RenderTarget of the game to default (NovaraGame::SetRenderTarget)
+		//	//		- Use SpriteRenderer::DrawImmediate to render the ShaderResourceView from PREV_RT to the screen
 
-		//Done!
-	}
+		//	//Done!
+		//}
 #pragma endregion
 }
 
@@ -351,27 +351,27 @@ void GameScene::RootWindowStateChanged(int state, bool active) const
 	}
 }
 
-void GameScene::AddPostProcessingEffect(PostProcessingMaterial* pMaterial)
-{
-	m_PostProcessingMaterials.push_back(pMaterial);
-}
+//void GameScene::AddPostProcessingEffect(PostProcessingMaterial* pMaterial)
+//{
+//	m_PostProcessingMaterials.push_back(pMaterial);
+//}
+//
+//void GameScene::AddPostProcessingEffect(UINT materialId)
+//{
+//	AddPostProcessingEffect(MaterialManager::Get()->GetMaterial<PostProcessingMaterial>(materialId));
+//}
+//
+//void GameScene::RemovePostProcessingEffect(UINT materialId)
+//{
+//	RemovePostProcessingEffect(MaterialManager::Get()->GetMaterial<PostProcessingMaterial>(materialId));
+//}
+//
+//void GameScene::RemovePostProcessingEffect(PostProcessingMaterial* pMaterial)
+//{
+//	if (std::ranges::find(m_PostProcessingMaterials, pMaterial) != m_PostProcessingMaterials.end())
+//		m_PostProcessingMaterials.erase(std::ranges::remove(m_PostProcessingMaterials, pMaterial).begin());
+//}
 
-void GameScene::AddPostProcessingEffect(UINT materialId)
-{
-	AddPostProcessingEffect(MaterialManager::Get()->GetMaterial<PostProcessingMaterial>(materialId));
-}
-
-void GameScene::RemovePostProcessingEffect(UINT materialId)
-{
-	RemovePostProcessingEffect(MaterialManager::Get()->GetMaterial<PostProcessingMaterial>(materialId));
-}
-
-void GameScene::RemovePostProcessingEffect(PostProcessingMaterial* pMaterial)
-{
-	if (std::ranges::find(m_PostProcessingMaterials, pMaterial) != m_PostProcessingMaterials.end())
-		m_PostProcessingMaterials.erase(std::ranges::remove(m_PostProcessingMaterials, pMaterial).begin());
-}
- 
 void GameScene::SetActiveCamera(CameraComponent* pCameraComponent)
 {
 	//Prevent recursion!

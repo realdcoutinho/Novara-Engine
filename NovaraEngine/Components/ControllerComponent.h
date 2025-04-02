@@ -19,7 +19,7 @@ public:
 
 	XMFLOAT3 GetPosition() const;
 	XMFLOAT3 GetFootPosition() const;
-	PxControllerCollisionFlags GetCollisionFlags() const {return m_CollisionFlag;}
+	PxControllerCollisionFlags GetCollisionFlags() const { return m_CollisionFlag; }
 	PxController* GetPxController() const { return m_pController; }
 
 protected:
@@ -39,4 +39,3 @@ private:
 
 	void ApplyFilterData() const;
 };
-

@@ -1,7 +1,7 @@
-#include "stdafx.h"
+#include "EnginePCH.h"
 #include "FreeCamera.h"
 
-void FreeCamera::Initialize(const SceneContext& )
+void FreeCamera::Initialize(const SceneContext&)
 {
 	m_pCamera = new CameraComponent();
 	AddComponent(m_pCamera);
@@ -46,6 +46,10 @@ void FreeCamera::Update(const SceneContext& sceneContext)
 		if (!mouseMoved)
 		{
 			look = InputManager::GetThumbstickPosition(false);
+		}
+		if (mouseMoved)
+		{
+			Logger::LogDebug(L"Test");
 		}
 
 		//CALCULATE TRANSFORMS

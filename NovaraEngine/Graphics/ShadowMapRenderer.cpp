@@ -1,6 +1,6 @@
-#include "stdafx.h"
+#include "EnginePCH.h"
 #include "ShadowMapRenderer.h"
-#include "Misc/ShadowMapMaterial.h"
+//#include "Misc/ShadowMapMaterial.h"
 
 ShadowMapRenderer::~ShadowMapRenderer()
 {

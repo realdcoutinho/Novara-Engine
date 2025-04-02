@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "EnginePCH.h"
 #include "MeshFilter.h"
 XMFLOAT4 MeshFilter::m_DefaultColor = XMFLOAT4(1, 0, 0, 1);
 XMFLOAT4 MeshFilter::m_DefaultFloat4 = XMFLOAT4(0, 0, 0, 0);
@@ -183,17 +183,17 @@ const VertexBufferData& MeshFilter::GetVertexBufferData(UINT inputLayoutId, UINT
 {
 	ASSERT_IF_(subMeshId >= m_Meshes.size())
 
-	const int possibleBuffer = GetVertexBufferId(inputLayoutId, subMeshId);
+		const int possibleBuffer = GetVertexBufferId(inputLayoutId, subMeshId);
 	ASSERT_IF(possibleBuffer < 0, L"No VertexBufferInformation for given inputLayoutId found!")
 
-	return m_Meshes[subMeshId].buffers.vertexbuffers[possibleBuffer];
+		return m_Meshes[subMeshId].buffers.vertexbuffers[possibleBuffer];
 }
 
 const VertexBufferData& MeshFilter::GetVertexBufferData(const SceneContext& sceneContext, BaseMaterial* pMaterial, UINT8 subMeshId)
 {
 	ASSERT_IF_(subMeshId >= m_Meshes.size())
 
-	auto& techniqueContext = pMaterial->GetTechniqueContext();
+		auto& techniqueContext = pMaterial->GetTechniqueContext();
 	const int possibleBuffer = GetVertexBufferId(techniqueContext.inputLayoutID, subMeshId);
 
 	if (possibleBuffer < 0)

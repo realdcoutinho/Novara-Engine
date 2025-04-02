@@ -1,5 +1,5 @@
 
-#include "stdafx.h"
+#include "EnginePCH.h"
 #include "EffectHelper.h"
 
 const std::wstring EffectHelper::m_empty = L"";
@@ -190,5 +190,5 @@ bool EffectHelper::BuildInputLayout(ID3D11Device* pDevice, ID3DX11EffectTechniqu
 	pTechnique->GetPassByIndex(0)->GetDesc(&PassDesc);
 	HANDLE_ERROR(pDevice->CreateInputLayout(&layoutDesc[0], static_cast<UINT>(layoutDesc.size()), PassDesc.pIAInputSignature, PassDesc.IAInputSignatureSize, pInputLayout))
 
-	return true; //redundant return...
+		return true; //redundant return...
 }

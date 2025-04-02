@@ -13,7 +13,7 @@ public:
 class ImguiStyles
 {
 public:
-	static void Apply_GoldAndBlack();
+    static void Apply_GoldAndBlack();
     static void Apply_Custom(bool dark = true, float alpha = 0.5f);
 };
 
@@ -1399,9 +1399,9 @@ namespace ImguiHelper
 #pragma warning( push )
 #pragma warning( disable : 0135)
                 ImguiFonts::pFont_DIN_Black_18 = CREATE_IMFONT(DIN_Black, 18)
-                ImguiFonts::pFont_DIN_Black_16 = CREATE_IMFONT(DIN_Black, 16)
-                ImguiFonts::pFont_DIN_Regular_14 = CREATE_IMFONT(DIN_Regular, 14)
-            	ImguiFonts::pFont_DIN_Regular_10 = CREATE_IMFONT(DIN_Regular, 10)
+                    ImguiFonts::pFont_DIN_Black_16 = CREATE_IMFONT(DIN_Black, 16)
+                    ImguiFonts::pFont_DIN_Regular_14 = CREATE_IMFONT(DIN_Regular, 14)
+                    ImguiFonts::pFont_DIN_Regular_10 = CREATE_IMFONT(DIN_Regular, 10)
 #pragma warning( pop )
             }
 #pragma endregion
@@ -1411,8 +1411,8 @@ namespace ImguiHelper
 
 namespace ImGui
 {
-	inline bool InputFloatRange(const char* label, float* min, float* max, const char* format = "%.3f", ImGuiInputTextFlags flags = 0)
-	{
+    inline bool InputFloatRange(const char* label, float* min, float* max, const char* format = "%.3f", ImGuiInputTextFlags flags = 0)
+    {
         float bounds[2] = { *min, *max };
         if (InputFloat2(label, bounds, format, flags))
         {
@@ -1422,7 +1422,7 @@ namespace ImGui
         }
 
         return false;
-	}
+    }
 
     inline bool SliderUInt(const char* label, UINT* value, UINT min, UINT max, const char* format = "%d", ImGuiSliderFlags flags = 0)
     {
@@ -1434,7 +1434,7 @@ namespace ImGui
             *value = static_cast<UINT>(iValue);
             return true;
         }
-        
+
         return false;
     }
 }

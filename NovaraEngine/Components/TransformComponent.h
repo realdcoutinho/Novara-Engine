@@ -1,4 +1,5 @@
 #pragma once
+#include "../Base/Enumerations.h"
 
 class ControllerComponent;
 class RigidBodyComponent;

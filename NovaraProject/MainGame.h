@@ -1,4 +1,7 @@
 #pragma once
+#include "EnginePCH.h"
+#include "NovaraGame.h"
+
 class MainGame final : public NovaraGame
 {
 public:
@@ -14,4 +17,3 @@ protected:
 	void Initialize() override;
 	LRESULT WindowProcedureHook(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) override;
 };
-

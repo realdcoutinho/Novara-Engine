@@ -1,14 +1,14 @@
-#include "stdafx.h"
+#include "EnginePCH.h"
 #include "ControllerComponent.h"
 
-ControllerComponent::ControllerComponent(const PxCapsuleControllerDesc& controllerDesc):
+ControllerComponent::ControllerComponent(const PxCapsuleControllerDesc& controllerDesc) :
 	m_ControllerDesc{ controllerDesc }
 {
 }
 
 void ControllerComponent::Initialize(const SceneContext& /*sceneContext*/)
 {
-	if(!m_IsInitialized)
+	if (!m_IsInitialized)
 	{
 		//TODO_W7(L"Complete the ControllerComponent Intialization")
 	}
@@ -55,8 +55,8 @@ void ControllerComponent::ApplyFilterData() const
 #pragma warning (disable: 6385)
 			const auto shape = shapes[i];
 #pragma warning (pop)
-			shape->setSimulationFilterData(m_CollisionGroups);
-			shape->setQueryFilterData(m_CollisionGroups);
+			//shape->setSimulationFilterData(m_CollisionGroups);
+			//shape->setQueryFilterData(m_CollisionGroups);
 		}
 		delete[] shapes;
 	}

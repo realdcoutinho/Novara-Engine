@@ -1,13 +1,13 @@
 #pragma once
 
-	template<class T>
-	class Material: public BaseMaterial
+template<class T>
+class Material : public BaseMaterial
 
 {
 public:
 	Material(const std::wstring& effectFile)
 	{
-		if(!m_EffectInstanceLoaded)
+		if (!m_EffectInstanceLoaded)
 			m_EffectFile = effectFile;
 
 		++m_References;
@@ -16,11 +16,11 @@ public:
 	~Material() override
 	{
 		--m_References;
-		if(m_References <= 0)
+		if (m_References <= 0)
 		{
 			m_VariableIndexLUT.clear();
 
-			for(auto& pair:m_Techniques)
+			for (auto& pair : m_Techniques)
 			{
 				//SafeRelease(pair.second.pTechnique);
 				SafeRelease(pair.second.pInputLayout);
@@ -70,7 +70,7 @@ public:
 
 				auto semanticStr = std::string(variableDesc.Semantic);
 				std::ranges::transform(semanticStr, semanticStr.begin(), ::tolower);
-				if(m_RootVariableSemanticLUT.contains(semanticStr))
+				if (m_RootVariableSemanticLUT.contains(semanticStr))
 				{
 					m_RootVariableIndexLUT[static_cast<UINT>(m_RootVariableSemanticLUT[semanticStr])] = i;
 				}
@@ -125,7 +125,7 @@ private:
 };
 
 template<class T> bool Material<T>::m_EffectInstanceLoaded{};
-template<class T> int Material<T>::m_References{0};
+template<class T> int Material<T>::m_References{ 0 };
 template<class T> std::wstring Material<T>::m_EffectFile{};
 template<class T> ID3DX11Effect* Material<T>::m_pRootEffect{};
 template<class T> std::map<size_t, UINT> Material<T>::m_VariableIndexLUT{};

@@ -1,4 +1,5 @@
 #pragma once
+#include "../Utils/Macros.h"
 
 #pragma region InputManager
 enum class GamepadIndex : DWORD
@@ -25,7 +26,8 @@ struct InputAction
 		mouseButtonCode(-1),
 		gamepadButtonCode(0),
 		playerIndex(GamepadIndex::playerOne),
-		isTriggered(false) {}
+		isTriggered(false) {
+	}
 
 	InputAction(int actionID, InputState triggerState = InputState::pressed, int keyboardCode = -1, int mouseButtonCode = -1, WORD gamepadButtonCode = 0, GamepadIndex playerIndex = GamepadIndex::playerOne) :
 		actionID(actionID),
@@ -34,7 +36,8 @@ struct InputAction
 		mouseButtonCode(mouseButtonCode),
 		gamepadButtonCode(gamepadButtonCode),
 		playerIndex(playerIndex),
-		isTriggered(false) {}
+		isTriggered(false) {
+	}
 
 	int actionID;
 	InputState triggerState;

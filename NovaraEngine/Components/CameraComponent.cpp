@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "EnginePCH.h"
 #include "CameraComponent.h"
 
 CameraComponent::CameraComponent() :
@@ -60,11 +60,11 @@ void CameraComponent::SetActive(bool active)
 	ASSERT_IF(!pScene, L"Failed to set active camera. Parent game scene is null");
 
 	m_IsActive = active;
-	pScene->SetActiveCamera(active?this:nullptr); //Switch to default camera if active==false
+	pScene->SetActiveCamera(active ? this : nullptr); //Switch to default camera if active==false
 }
 
-GameObject* CameraComponent::Pick(CollisionGroup /*ignoreGroups*/) const
-{
-	//TODO_W7(L"Implement Picking Logic")
-	return nullptr;
-}
+//GameObject* CameraComponent::Pick(CollisionGroup /*ignoreGroups*/) const
+//{
+//	//TODO_W7(L"Implement Picking Logic")
+//	return nullptr;
+//}
