@@ -28,7 +28,7 @@ public:
 	const XMFLOAT4X4& GetViewInverse() const { return m_ViewInverse; }
 	const XMFLOAT4X4& GetViewProjectionInverse() const { return m_ViewProjectionInverse; }
 
-	//GameObject* Pick(CollisionGroup ignoreGroups = CollisionGroup::None) const;
+	GameObject* Pick(CollisionGroup ignoreGroups = CollisionGroup::None) const;
 
 protected:
 

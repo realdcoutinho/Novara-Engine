@@ -19,29 +19,39 @@ public:
 	GameObject& operator=(const GameObject& other) = delete;
 	GameObject& operator=(GameObject&& other) noexcept = delete;
 
+
+
+
+
 	template<typename T>
 	std::enable_if_t<std::is_base_of_v<GameObject, T>, T*>
-		AddChild(T* pObject)
+		AddChild(unique_ptr<T> pObject)
 	{
-		AddChild_(pObject);
-		return pObject;
+		auto pTempObject = pObject.get();
+		AddChild_(std::move(pObject));
+		return pTempObject;
 	}
 	void RemoveChild(GameObject* obj, bool deleteObject = false);
 
 	template<typename T>
 	std::enable_if_t<std::is_base_of_v<BaseComponent, T>, T*>
-		AddComponent(T* pComp)
+		AddComponent(unique_ptr<T> pComp)
 	{
-		AddComponent_(pComp);
-		return pComp;
+		auto pTempComp = pComp.get();
+		AddComponent_(std::move(pComp));
+		return pTempComp;
 	}
+
+
+
+
 	void RemoveComponent(BaseComponent* pComponent, bool deleteObject = false);
 	void OnTrigger(GameObject* pTriggerObject, GameObject* pOtherObject, PxTriggerAction action) const;
 
 	const std::wstring& GetTag() const { return m_Tag; }
 	void SetTag(const std::wstring& tag) { m_Tag = tag; }
 
-	TransformComponent* GetTransform() const { return m_pTransform; }
+	TransformComponent* GetTransform() const { return m_pTransform.get(); }
 
 	GameScene* GetScene() const;
 	GameObject* GetParent() const { return m_pParentObject; }
@@ -59,15 +69,15 @@ public:
 	T* GetComponent(bool searchChildren = false)
 	{
 		const type_info& ti = typeid(T);
-		for (auto* component : m_pComponents)
+		for (const auto& component : m_pComponents)
 		{
 			if (component && typeid(*component) == ti)
-				return static_cast<T*>(component);
+				return static_cast<T*>(component.get());
 		}
 
 		if (searchChildren)
 		{
-			for (auto* child : m_pChildren)
+			for (const auto& child : m_pChildren)
 			{
 				if (child->GetComponent<T>(searchChildren) != nullptr)
 					return child->GetComponent<T>(searchChildren);
@@ -83,20 +93,20 @@ public:
 		const type_info& ti = typeid(T);
 		std::vector<T*> components;
 
-		for (auto* component : m_pComponents)
+		for (const auto& component : m_pComponents)
 		{
 			if (component && typeid(*component) == ti)
-				components.push_back(static_cast<T*>(component));
+				components.push_back(static_cast<T*>(component.get()));
 		}
 
 		if (searchChildren)
 		{
-			for (auto* child : m_pChildren)
+			for (const auto& child : m_pChildren)
 			{
 				auto childComponents = child->GetComponents<T>(searchChildren);
 
-				for (auto* childComp : childComponents)
-					components.push_back(static_cast<T*>(childComp));
+				for (const auto& childComp : childComponents)
+					components.push_back(static_cast<T*>(childComp.get()));
 			}
 		}
 
@@ -107,10 +117,10 @@ public:
 	T* GetChild()
 	{
 		const type_info& ti = typeid(T);
-		for (auto* child : m_pChildren)
+		for (const auto& child : m_pChildren)
 		{
 			if (child && typeid(*child) == ti)
-				return static_cast<T*>(child);
+				return static_cast<T*>(child.get());
 		}
 		return nullptr;
 	}
@@ -121,10 +131,10 @@ public:
 		const type_info& ti = typeid(T);
 		std::vector<T*> children;
 
-		for (auto* child : m_pChildren)
+		for (const auto& child : m_pChildren)
 		{
 			if (child && typeid(*child) == ti)
-				children.push_back(static_cast<T*>(child));
+				children.push_back(static_cast<T*>(child.get()));
 		}
 		return children;
 	}
@@ -153,16 +163,16 @@ private:
 	void RootOnSceneAttach(GameScene* pScene);
 	void RootOnSceneDetach(GameScene* pScene);
 
-	void AddChild_(GameObject* pObject);
-	void AddComponent_(BaseComponent* pComponent);
+	void AddChild_(unique_ptr<GameObject> pObject);
+	void AddComponent_(unique_ptr<BaseComponent> pComponent);
 
-	std::vector<GameObject*> m_pChildren{};
-	std::vector<BaseComponent*> m_pComponents{};
+	std::vector<unique_ptr<GameObject>> m_pChildren{};
+	std::vector<unique_ptr<BaseComponent>> m_pComponents{};
 
 	bool m_IsInitialized{}, m_IsActive{};
 	GameScene* m_pParentScene{};
 	GameObject* m_pParentObject{};
-	TransformComponent* m_pTransform{};
+	unique_ptr<TransformComponent> m_pTransform{};
 	PhysicsCallback m_OnTriggerCallback{};
 	std::wstring m_Tag{};
 };

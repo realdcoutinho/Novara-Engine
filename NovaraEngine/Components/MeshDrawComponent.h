@@ -29,16 +29,17 @@ protected:
 
 private:
 
-	static ID3DX11EffectMatrixVariable* m_pWorldVar, * m_pWvpVar;
+	static ComPtr<ID3DX11EffectMatrixVariable> m_pWorldVar;
+	static ComPtr<ID3DX11EffectMatrixVariable> m_pWvpVar;
 
 	std::vector<TrianglePosNormCol> m_vecTriangles;
-	ID3D11Buffer* m_pVertexBuffer;
+	ComPtr<ID3D11Buffer> m_pVertexBuffer;
 	UINT m_TriangleCapacity;
 	bool m_UseTransparency{};
 
-	ID3DX11Effect* m_pEffect;
-	ID3DX11EffectTechnique* m_pTechnique;
-	ID3D11InputLayout* m_pInputLayout;
+	ComPtr<ID3DX11Effect> m_pEffect;
+	ComPtr<ID3DX11EffectTechnique> m_pTechnique;
+	ComPtr<ID3D11InputLayout> m_pInputLayout;
 
 	void LoadEffect(const SceneContext& sceneContext);
 	void InitializeBuffer(const SceneContext& sceneContext);

@@ -12,15 +12,15 @@ GameScene::~GameScene()
 	SafeDelete(m_SceneContext.pInput);
 	SafeDelete(m_SceneContext.pLights);
 
-	for (auto pChild : m_pChildren)
-	{
-		SafeDelete(pChild);
-	}
+	//for (auto pChild : m_pChildren)
+	//{
+	//	SafeDelete(pChild);
+	//}
 
 	SafeDelete(m_pPhysxProxy);
 }
 
-void GameScene::AddChild_(GameObject* pObject)
+void GameScene::AddChild_(unique_ptr<GameObject> pObject)
 {
 #if _DEBUG
 	if (pObject->m_pParentScene)
@@ -41,13 +41,19 @@ void GameScene::AddChild_(GameObject* pObject)
 	}
 #endif
 
-	m_pChildren.push_back(pObject);
 	pObject->RootOnSceneAttach(this);
+	m_pChildren.push_back(std::move(pObject));
+
 }
 
 void GameScene::RemoveChild(GameObject* pObject, bool deleteObject)
 {
-	const auto it = std::ranges::find(m_pChildren, pObject);
+	auto objectMatcher = [pObject](const std::unique_ptr<GameObject>& gObject)
+		{
+			return gObject.get() == pObject;
+		};
+
+	const auto it = std::ranges::find_if(m_pChildren, objectMatcher);
 
 #if _DEBUG
 	if (it == m_pChildren.end())
@@ -57,13 +63,20 @@ void GameScene::RemoveChild(GameObject* pObject, bool deleteObject)
 	}
 #endif
 
-	m_pChildren.erase(it);
+	//m_pChildren.erase(it);
 	pObject->m_pParentScene = nullptr;
 	pObject->RootOnSceneDetach(this);
 
 	if (deleteObject)
 	{
-		SafeDelete(pObject);
+		//SafeDelete(pObject);
+		m_pChildren.erase(it);
+	}
+	else 
+	{
+		//should I add to a different scene? I am not sure.
+		// if you remove an objectr from a snce either I pass a scento determine where to move ownership to, 
+		// or I simply remove it
 	}
 }
 
@@ -94,19 +107,27 @@ void GameScene::RootInitialize(const GameContext& gameContext)
 	m_pPhysxProxy->Initialize(this);
 
 	//Create DefaultCamera
-	const auto pFreeCamera = new FreeCamera();
+	//the camera used to be cons... ehy???
+
+	unique_ptr<FreeCamera> pFreeCamera = make_unique<FreeCamera>();
+
 	pFreeCamera->SetRotation(30, 0);
-	pFreeCamera->GetTransform()->Translate(0, 50, -80);
-	AddChild(pFreeCamera);
+	pFreeCamera->GetComponent<TransformComponent>()->Translate(0, 50, -80);
+	
+	//pFreeCamera->GetTransform()->Translate(0, 50, -80);
 
 	m_pDefaultCamera = pFreeCamera->GetComponent<CameraComponent>();
+	
+	
+	AddChild(std::move(pFreeCamera));
+
 	SetActiveCamera(m_pDefaultCamera); //Also sets pCamera in SceneContext
 
 	//User-Scene Initialize
 	Initialize();
 
 	//Root-Scene Initialize
-	for (const auto pChild : m_pChildren)
+	for (const auto& pChild : m_pChildren)
 	{
 		pChild->RootInitialize(m_SceneContext);
 	}
@@ -117,7 +138,7 @@ void GameScene::RootInitialize(const GameContext& gameContext)
 void GameScene::RootPostInitialize()
 {
 	//Root-Scene Initialize
-	for (const auto pChild : m_pChildren)
+	for (const auto& pChild : m_pChildren)
 	{
 		pChild->RootPostInitialize(m_SceneContext);
 	}
@@ -141,7 +162,7 @@ void GameScene::RootUpdate()
 	Update();
 
 	//Root-Scene Update
-	for (const auto pChild : m_pChildren)
+	for (const auto& pChild : m_pChildren)
 	{
 		pChild->RootUpdate(m_SceneContext);
 	}
@@ -167,7 +188,7 @@ void GameScene::RootDraw()
 		Draw();
 
 	//Object-Scene Draw
-	for (const auto pChild : m_pChildren)
+	for (const auto& pChild : m_pChildren)
 	{
 		pChild->RootDraw(m_SceneContext);
 	}
@@ -180,7 +201,7 @@ void GameScene::RootDraw()
 
 	//Object-Scene Post-Draw
 	PostDraw();
-	for (const auto pChild : m_pChildren)
+	for (const auto& pChild : m_pChildren)
 	{
 		pChild->RootPostDraw(m_SceneContext);
 	}

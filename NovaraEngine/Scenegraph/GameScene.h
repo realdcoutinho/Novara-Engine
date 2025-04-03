@@ -18,12 +18,14 @@ public:
 
 	template<typename T>
 	std::enable_if_t<std::is_base_of_v<GameObject, T>, T*>
-		AddChild(T* pObject)
+		AddChild(unique_ptr<T> pObject)
 	{
-		AddChild_(pObject);
-		return pObject;
+		auto pTempObject = pObject.get();
+		AddChild_(std::move(pObject));
+		return pTempObject;
 	}
-	void AddChild_(GameObject* pObject);
+
+	void AddChild_(unique_ptr<GameObject> pObject);
 	void RemoveChild(GameObject* pObject, bool deleteObject = false);
 
 	const SceneContext& GetSceneContext() const { return m_SceneContext; }
@@ -63,7 +65,7 @@ private:
 	void RootOnGUI();
 	void RootWindowStateChanged(int state, bool active) const;
 
-	std::vector<GameObject*> m_pChildren{};
+	std::vector<unique_ptr<GameObject>> m_pChildren{};
 	bool m_IsInitialized{};
 	std::wstring m_SceneName{};
 	CameraComponent* m_pDefaultCamera{}, * m_pActiveCamera{};

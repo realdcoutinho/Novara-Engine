@@ -4,21 +4,21 @@
 
 GameObject::GameObject() :
 	m_IsActive(true),
-	m_pTransform(new TransformComponent{})
+	m_pTransform(make_unique<TransformComponent>())
 {
-	AddComponent(m_pTransform);
+	AddComponent(std::move(m_pTransform));
 }
 GameObject::~GameObject()
 {
-	for (BaseComponent* pComp : m_pComponents)
-	{
-		SafeDelete(pComp);
-	}
+	//for (BaseComponent* pComp : m_pComponents)
+	//{
+	//	SafeDelete(pComp);
+	//}
 
-	for (GameObject* pChild : m_pChildren)
-	{
-		SafeDelete(pChild);
-	}
+	//for (GameObject* pChild : m_pChildren)
+	//{
+	//	SafeDelete(pChild);
+	//}
 }
 
 void GameObject::RootInitialize(const SceneContext& sceneContext)
@@ -34,13 +34,13 @@ void GameObject::RootInitialize(const SceneContext& sceneContext)
 
 
 	//Root-Component Initialization
-	for (BaseComponent* pComp : m_pComponents)
+	for (const unique_ptr<BaseComponent>& pComp : m_pComponents)
 	{
 		pComp->RootInitialize(sceneContext);
 	}
 
 	//Root-Object Initialization
-	for (GameObject* pChild : m_pChildren)
+	for (const unique_ptr<GameObject>& pChild : m_pChildren)
 	{
 		pChild->RootInitialize(sceneContext);
 	}
@@ -53,13 +53,13 @@ void GameObject::RootPostInitialize(const SceneContext& sceneContext)
 	PostInitialize(sceneContext);
 
 	//Root-Component Initialization
-	for (BaseComponent* pComp : m_pComponents)
+	for (const unique_ptr<BaseComponent>& pComp : m_pComponents)
 	{
 		pComp->PostInitialize(sceneContext);
 	}
 
 	//Root-Object Initialization
-	for (GameObject* pChild : m_pChildren)
+	for (const unique_ptr<GameObject>& pChild : m_pChildren)
 	{
 		pChild->RootPostInitialize(sceneContext);
 	}
@@ -71,13 +71,13 @@ void GameObject::RootUpdate(const SceneContext& sceneContext)
 	Update(sceneContext);
 
 	//Component Update
-	for (BaseComponent* pComp : m_pComponents)
+	for (const unique_ptr<BaseComponent>& pComp : m_pComponents)
 	{
 		pComp->Update(sceneContext);
 	}
 
 	//Root-Object Update
-	for (GameObject* pChild : m_pChildren)
+	for (const unique_ptr<GameObject>& pChild : m_pChildren)
 	{
 		pChild->RootUpdate(sceneContext);
 	}
@@ -88,13 +88,13 @@ void GameObject::RootDraw(const SceneContext& sceneContext)
 	Draw(sceneContext);
 
 	//Component Draw
-	for (BaseComponent* pComp : m_pComponents)
+	for (const unique_ptr<BaseComponent>& pComp : m_pComponents)
 	{
 		pComp->Draw(sceneContext);
 	}
 
 	//Root-Object Draw
-	for (GameObject* pChild : m_pChildren)
+	for (const unique_ptr<GameObject>& pChild : m_pChildren)
 	{
 		pChild->RootDraw(sceneContext);
 	}
@@ -105,14 +105,14 @@ void GameObject::RootPostDraw(const SceneContext& sceneContext)
 	PostDraw(sceneContext);
 
 	//Component Post-Draw
-	for (BaseComponent* pComp : m_pComponents)
+	for (const unique_ptr<BaseComponent>& pComp : m_pComponents)
 	{
 		if (pComp->m_enablePostDraw)
 			pComp->PostDraw(sceneContext);
 	}
 
 	//Root-Object Post-Draw
-	for (GameObject* pChild : m_pChildren)
+	for (const unique_ptr<GameObject>& pChild : m_pChildren)
 	{
 		pChild->RootPostDraw(sceneContext);
 	}
@@ -121,14 +121,14 @@ void GameObject::RootPostDraw(const SceneContext& sceneContext)
 void GameObject::RootShadowMapDraw(const SceneContext& sceneContext) const
 {
 	//Component Shadow-Draw
-	for (BaseComponent* pComp : m_pComponents)
+	for (const unique_ptr<BaseComponent>& pComp : m_pComponents)
 	{
 		if (pComp->m_enableShadowMapDraw)
 			pComp->ShadowMapDraw(sceneContext);
 	}
 
 	//Root-Object Shadow-Draw
-	for (GameObject* pChild : m_pChildren)
+	for (const unique_ptr<GameObject>& pChild : m_pChildren)
 	{
 		pChild->RootShadowMapDraw(sceneContext);
 	}
@@ -151,13 +151,13 @@ void GameObject::RootOnSceneAttach(GameScene* pScene)
 	OnSceneAttach(pScene);
 
 	//Signal Components
-	for (BaseComponent* pComponent : m_pComponents)
+	for (const unique_ptr<BaseComponent>& pComp : m_pComponents)
 	{
-		pComponent->RootOnSceneAttach(pScene);
+		pComp->RootOnSceneAttach(pScene);
 	}
 
 	//Signal Children
-	for (GameObject* pChild : m_pChildren)
+	for (const unique_ptr<GameObject>& pChild : m_pChildren)
 	{
 		pChild->RootOnSceneAttach(pScene);
 	}
@@ -171,13 +171,13 @@ void GameObject::RootOnSceneDetach(GameScene* pScene)
 	OnSceneDetach(pScene);
 
 	//Signal Components
-	for (BaseComponent* pComponent : m_pComponents)
+	for (const unique_ptr<BaseComponent>& pComp : m_pComponents)
 	{
-		pComponent->RootOnSceneDetach(pScene);
+		pComp->RootOnSceneDetach(pScene);
 	}
 
 	//Signal Children
-	for (GameObject* pChild : m_pChildren)
+	for (const unique_ptr<GameObject>& pChild : m_pChildren)
 	{
 		pChild->RootOnSceneDetach(pScene);
 	}
@@ -186,7 +186,7 @@ void GameObject::RootOnSceneDetach(GameScene* pScene)
 	m_pParentScene = nullptr;
 }
 
-void GameObject::AddChild_(GameObject* pObject)
+void GameObject::AddChild_(unique_ptr<GameObject> pObject)
 {
 #if _DEBUG
 	if (pObject->m_pParentObject)
@@ -208,7 +208,7 @@ void GameObject::AddChild_(GameObject* pObject)
 
 	//Set parent & add to Children list
 	pObject->m_pParentObject = this;
-	m_pChildren.push_back(pObject);
+	//m_pChildren.push_back(std::move(pObject));
 
 	//Signal object (Attached to parent)
 	pObject->OnParentAttach(this);
@@ -216,21 +216,39 @@ void GameObject::AddChild_(GameObject* pObject)
 	//Signal object & children (Attached to scenegraph)
 	if (GameScene* pScene = GetScene())
 		pObject->RootOnSceneAttach(pScene);
+
+	//moved this down because its now a unique_ptr
+	m_pChildren.push_back(std::move(pObject));
 }
 
 void GameObject::RemoveChild(GameObject* obj, bool deleteObject)
 {
-	const auto it = std::ranges::find(m_pChildren, obj);
+
+	//takes in a unique_ptr from pScnes
+	auto objectMatcher = [obj](const std::unique_ptr<GameObject>& gObject)
+		{
+			return gObject.get() == obj;
+		};
+
+	bool wasRemoved = std::erase_if(m_pChildren, objectMatcher) > 0;
+
+	//const auto it = std::ranges::find(m_pChildren, obj);
 
 #if _DEBUG
-	if (it == m_pChildren.end())
+	//if (it == m_pChildren.end())
+	//{
+	//	Logger::LogWarning(L"GameObject::RemoveChild > GameObject to remove is not attached to this GameObject!");
+	//	return;
+	//}
+
+	if(!wasRemoved)
 	{
 		Logger::LogWarning(L"GameObject::RemoveChild > GameObject to remove is not attached to this GameObject!");
-		return;
+	return;
 	}
 #endif
 
-	m_pChildren.erase(it);
+	//m_pChildren.erase(it);
 
 	//Reset object parent pointer
 	obj->m_pParentObject = nullptr;
@@ -248,16 +266,16 @@ void GameObject::RemoveChild(GameObject* obj, bool deleteObject)
 	}
 }
 
-void GameObject::AddComponent_(BaseComponent* pComponent)
+void GameObject::AddComponent_(unique_ptr<BaseComponent> pComponent)
 {
 #if _DEBUG
-	if (typeid(*pComponent) == typeid(TransformComponent) && HasComponent<TransformComponent>())
+	if (typeid(pComponent.get()) == typeid(TransformComponent) && HasComponent<TransformComponent>())
 	{
 		Logger::LogWarning(L"GameObject::AddComponent > GameObject can contain only one TransformComponent!");
 		return;
 	}
 
-	for (auto* pComp : m_pComponents)
+	for (const auto& pComp : m_pComponents)
 	{
 		if (pComp == pComponent)
 		{
@@ -267,7 +285,7 @@ void GameObject::AddComponent_(BaseComponent* pComponent)
 	}
 #endif
 
-	m_pComponents.push_back(pComponent);
+
 	pComponent->m_pGameObject = this;
 
 	//Signal Component (Attached to GameObject)
@@ -276,11 +294,22 @@ void GameObject::AddComponent_(BaseComponent* pComponent)
 	//If object is already part of scenegraph, signal component about the 'new' scene
 	if (GameScene* pScene = GetScene())
 		pComponent->RootOnSceneAttach(pScene);
+
+
+	m_pComponents.push_back(std::move(pComponent));
 }
 
 void GameObject::RemoveComponent(BaseComponent* pComponent, bool deleteObject)
 {
-	auto it = find(m_pComponents.begin(), m_pComponents.end(), pComponent);
+	//auto it = find(m_pComponents.begin(), m_pComponents.end(), pComponent);
+
+
+	auto CompMatcher = [pComponent](const std::unique_ptr<BaseComponent>& Comp)
+		{
+			return Comp.get() == pComponent;
+		};
+
+	const auto it = std::ranges::find_if(m_pComponents, CompMatcher);
 
 #if _DEBUG
 	if (it == m_pComponents.end())
@@ -296,7 +325,7 @@ void GameObject::RemoveComponent(BaseComponent* pComponent, bool deleteObject)
 	}
 #endif
 
-	m_pComponents.erase(it);
+//	m_pComponents.erase(it);
 	pComponent->m_pGameObject = nullptr;
 
 	//Signal about GameObject detach
@@ -304,7 +333,12 @@ void GameObject::RemoveComponent(BaseComponent* pComponent, bool deleteObject)
 
 	if (deleteObject)
 	{
-		SafeDelete(pComponent);
+		//SafeDelete(pComponent);
+		m_pComponents.erase(it);
+	}
+	else
+	{
+		/// Pass Ownership to another gameobject
 	}
 }
 

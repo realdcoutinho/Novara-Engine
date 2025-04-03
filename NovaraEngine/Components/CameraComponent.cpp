@@ -63,8 +63,8 @@ void CameraComponent::SetActive(bool active)
 	pScene->SetActiveCamera(active ? this : nullptr); //Switch to default camera if active==false
 }
 
-//GameObject* CameraComponent::Pick(CollisionGroup /*ignoreGroups*/) const
-//{
-//	//TODO_W7(L"Implement Picking Logic")
-//	return nullptr;
-//}
+GameObject* CameraComponent::Pick(CollisionGroup ignoreGroups) const
+{
+	//TODO_W7(L"Implement Picking Logic")
+	return nullptr;
+}

@@ -166,8 +166,8 @@ private:
 
 	static HANDLE m_ConsoleHandle;
 
-	static ConsoleLogger* m_ConsoleLogger;
-	static FileLogger* m_FileLogger;
+	static unique_ptr<ConsoleLogger> m_ConsoleLogger;
+	static unique_ptr<FileLogger> m_FileLogger;
 
 	static std::map<LogLevel, std::wstring> m_LevelToStr;
 	static std::map<LogLevel, WORD> m_LevelToConsoleStyle;

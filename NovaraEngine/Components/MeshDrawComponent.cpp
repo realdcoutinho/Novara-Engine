@@ -1,8 +1,8 @@
 #include "EnginePCH.h"
 #include "MeshDrawComponent.h"
 
-ID3DX11EffectMatrixVariable* MeshDrawComponent::m_pWorldVar = nullptr;
-ID3DX11EffectMatrixVariable* MeshDrawComponent::m_pWvpVar = nullptr;
+ComPtr<ID3DX11EffectMatrixVariable> MeshDrawComponent::m_pWorldVar = nullptr;
+ComPtr<ID3DX11EffectMatrixVariable> MeshDrawComponent::m_pWvpVar = nullptr;
 
 MeshDrawComponent::MeshDrawComponent(UINT triangleCapacity, bool enableTransparency) :
 	m_pVertexBuffer(nullptr),
@@ -16,8 +16,8 @@ MeshDrawComponent::MeshDrawComponent(UINT triangleCapacity, bool enableTranspare
 
 MeshDrawComponent::~MeshDrawComponent()
 {
-	SafeRelease(m_pInputLayout);
-	SafeRelease(m_pVertexBuffer);
+	//SafeRelease(m_pInputLayout);
+	//SafeRelease(m_pVertexBuffer);
 }
 
 void MeshDrawComponent::Initialize(const SceneContext& sceneContext)
@@ -31,7 +31,7 @@ void MeshDrawComponent::LoadEffect(const SceneContext& sceneContext)
 {
 	m_pEffect = ContentManager::Load<ID3DX11Effect>(L"Effects\\PosNormCol3D.fx");
 	m_pTechnique = m_pEffect->GetTechniqueByIndex(int(m_UseTransparency));
-	EffectHelper::BuildInputLayout(sceneContext.d3dContext.pDevice, m_pTechnique, &m_pInputLayout);
+	EffectHelper::BuildInputLayout(sceneContext.d3dContext.pDevice, m_pTechnique.Get(), m_pInputLayout.GetAddressOf());
 
 	if (!m_pWorldVar)
 		m_pWorldVar = m_pEffect->GetVariableBySemantic("World")->AsMatrix();
@@ -43,7 +43,9 @@ void MeshDrawComponent::LoadEffect(const SceneContext& sceneContext)
 void MeshDrawComponent::InitializeBuffer(const SceneContext& sceneContext)
 {
 	if (m_pVertexBuffer)
-		SafeRelease(m_pVertexBuffer);
+		m_pVertexBuffer.Reset();
+		
+		//SafeRelease(m_pVertexBuffer);
 
 	//*************
 	//VERTEX BUFFER
@@ -54,7 +56,7 @@ void MeshDrawComponent::InitializeBuffer(const SceneContext& sceneContext)
 	vertexBuffDesc.Usage = D3D11_USAGE::D3D11_USAGE_DYNAMIC;
 	vertexBuffDesc.MiscFlags = 0;
 
-	sceneContext.d3dContext.pDevice->CreateBuffer(&vertexBuffDesc, nullptr, &m_pVertexBuffer);
+	sceneContext.d3dContext.pDevice->CreateBuffer(&vertexBuffDesc, nullptr, m_pVertexBuffer.GetAddressOf());
 }
 
 void MeshDrawComponent::UpdateBuffer() const
@@ -80,9 +82,9 @@ void MeshDrawComponent::UpdateBuffer() const
 		}
 
 		D3D11_MAPPED_SUBRESOURCE mappedResource;
-		d3d11.pDeviceContext->Map(m_pVertexBuffer, 0, D3D11_MAP_WRITE_NO_OVERWRITE, 0, &mappedResource);
+		d3d11.pDeviceContext->Map(m_pVertexBuffer.Get(), 0, D3D11_MAP_WRITE_NO_OVERWRITE, 0, &mappedResource);
 		memcpy(mappedResource.pData, m_vecTriangles.data(), sizeof(TrianglePosNormCol) * size);
-		d3d11.pDeviceContext->Unmap(m_pVertexBuffer, 0);
+		d3d11.pDeviceContext->Unmap(m_pVertexBuffer.Get(), 0);
 	}
 }
 
@@ -101,11 +103,11 @@ void MeshDrawComponent::Draw(const SceneContext& sceneContext)
 	m_pWvpVar->SetMatrix(reinterpret_cast<float*>(&wvp));
 
 	d3d11.pDeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	d3d11.pDeviceContext->IASetInputLayout(m_pInputLayout);
+	d3d11.pDeviceContext->IASetInputLayout(m_pInputLayout.Get());
 
 	constexpr UINT offset = 0;
 	constexpr UINT stride = sizeof(VertexPosNormCol);
-	d3d11.pDeviceContext->IASetVertexBuffers(0, 1, &m_pVertexBuffer, &stride, &offset);
+	d3d11.pDeviceContext->IASetVertexBuffers(0, 1, m_pVertexBuffer.GetAddressOf(), &stride, &offset);
 
 	D3DX11_TECHNIQUE_DESC techDesc{};
 	m_pTechnique->GetDesc(&techDesc);

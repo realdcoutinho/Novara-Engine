@@ -3,5 +3,5 @@
 
 void FixedCamera::Initialize(const SceneContext&)
 {
-	AddComponent(new CameraComponent());
+	AddComponent(std::move(make_unique<CameraComponent>()));
 }

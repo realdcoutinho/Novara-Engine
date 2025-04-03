@@ -12,8 +12,8 @@ __int64 Logger::m_PerformanceTimerArr[] = { 0 };
 double Logger::m_PcFreq = 0.0;
 HANDLE Logger::m_ConsoleHandle = nullptr;
 
-Logger::ConsoleLogger* Logger::m_ConsoleLogger = nullptr;
-Logger::FileLogger* Logger::m_FileLogger = nullptr;
+unique_ptr<Logger::ConsoleLogger> Logger::m_ConsoleLogger = nullptr;
+unique_ptr<Logger::FileLogger> Logger::m_FileLogger = nullptr;
 bool Logger::m_AppendTimestamp = false;
 
 std::map<LogLevel, std::wstring> Logger::m_LevelToStr = {
@@ -67,7 +67,7 @@ void Logger::Initialize()
 
 		//Set ConsoleHandle
 		m_ConsoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
-		m_ConsoleLogger = new ConsoleLogger();
+		m_ConsoleLogger =  make_unique<ConsoleLogger>();
 
 		//Disable Close-Button
 		HWND hwnd = GetConsoleWindow();
@@ -82,8 +82,8 @@ void Logger::Initialize()
 
 void Logger::Release()
 {
-	SafeDelete(m_ConsoleLogger);
-	SafeDelete(m_FileLogger);
+	//SafeDelete(m_ConsoleLogger);
+	//SafeDelete(m_FileLogger);
 }
 
 int Logger::StartPerformanceTimer()
@@ -127,14 +127,15 @@ void Logger::ClearConsole()
 
 void Logger::StartFileLogging(const std::wstring& fileName)
 {
-	SafeDelete(m_FileLogger);
+	//SafeDelete(m_FileLogger);
 
-	m_FileLogger = new FileLogger(fileName);
+
+	m_FileLogger = make_unique<FileLogger>(fileName);
 }
 
 void Logger::StopFileLogging()
 {
-	SafeDelete(m_FileLogger);
+	//SafeDelete(m_FileLogger);
 }
 
 bool Logger::ProcessLog(LogLevel level, const LogString& fmt, std::wformat_args args)

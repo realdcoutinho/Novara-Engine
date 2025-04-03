@@ -3,8 +3,9 @@
 
 void FreeCamera::Initialize(const SceneContext&)
 {
-	m_pCamera = new CameraComponent();
-	AddComponent(m_pCamera);
+	auto pCamera = make_unique<CameraComponent>();
+	m_pCamera = pCamera.get();
+	AddComponent(std::move(pCamera));
 }
 
 void FreeCamera::SetRotation(float pitch, float yaw)

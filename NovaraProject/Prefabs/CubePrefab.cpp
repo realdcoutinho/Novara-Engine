@@ -16,7 +16,7 @@ CubePrefab(dimensions.x, dimensions.y, dimensions.z, color)
 void CubePrefab::Initialize(const SceneContext&)
 {
 	//Create Cube
-	const auto pMesh = new MeshDrawComponent(12);
+	const auto pMesh = make_unique<MeshDrawComponent>(12);
 
 	const float halfWidth = m_Width / 2.f;
 	const float halfHeight = m_Height / 2.f;
@@ -70,5 +70,5 @@ void CubePrefab::Initialize(const SceneContext&)
 		VertexPosNormCol(XMFLOAT3(-halfWidth, -halfHeight, halfDepth), XMFLOAT3(0, -1, 0), m_Color)
 	);
 
-	AddComponent(pMesh);
+	//AddComponent(std::move(pMesh));
 }
