@@ -35,8 +35,8 @@ NovaraGame::~NovaraGame()
 
 	//DirectX Cleanup
 	//SafeDelete(m_pDefaultRenderTarget);
-	SafeRelease(m_pDxgiFactory);
-	SafeRelease(m_pSwapchain);
+	//SafeRelease(m_pDxgiFactory);
+	//SafeRelease(m_pSwapchain);
 
 	if (m_GameContext.d3dContext.pDeviceContext)
 	{
@@ -95,7 +95,7 @@ HRESULT NovaraGame::Run(HINSTANCE hInstance)
 #pragma region
 HRESULT NovaraGame::InitializeAdapterAndOutput()
 {
-	HANDLE_ERROR(CreateDXGIFactory(__uuidof(IDXGIFactory), reinterpret_cast<void**>(&m_pDxgiFactory)))
+	HANDLE_ERROR(CreateDXGIFactory(__uuidof(IDXGIFactory), reinterpret_cast<void**>(m_pDxgiFactory.GetAddressOf())))
 
 		if (!m_GameContext.d3dContext.pAdapter)
 		{
@@ -224,7 +224,7 @@ HRESULT NovaraGame::InitializeDirectX()
 	swapChainDesc.Flags = 0;
 #pragma warning(push)
 #pragma warning(disable: 6387)
-	HANDLE_ERROR(m_pDxgiFactory->CreateSwapChain(m_GameContext.d3dContext.pDevice, &swapChainDesc, &m_pSwapchain))
+	HANDLE_ERROR(m_pDxgiFactory->CreateSwapChain(m_GameContext.d3dContext.pDevice, &swapChainDesc, m_pSwapchain.GetAddressOf()))
 #pragma warning(pop)
 
 		//Create the default rendertarget.

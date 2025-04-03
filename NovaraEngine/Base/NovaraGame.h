@@ -48,8 +48,8 @@ private:
 	LRESULT WindowsProcedure(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 	HINSTANCE m_hInstance{};
-	IDXGISwapChain* m_pSwapchain{};
-	IDXGIFactory* m_pDxgiFactory{};
+	ComPtr<IDXGISwapChain> m_pSwapchain{};
+	ComPtr<IDXGIFactory> m_pDxgiFactory{};
 	D3D11_VIEWPORT m_Viewport{};
 
 	unique_ptr<RenderTarget> m_pDefaultRenderTarget{};

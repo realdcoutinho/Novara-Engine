@@ -8,23 +8,23 @@ RenderTarget::RenderTarget(const D3D11Context& d3dContext) :
 
 RenderTarget::~RenderTarget(void)
 {
-	//CleanUp();
+	CleanUp();
 }
 
 void RenderTarget::CleanUp()
 {
-	//if (!m_ColorBufferSupplied)
-	SafeRelease(m_pColor);
-
-	//if (!m_DepthBufferSupplied)
-	SafeRelease(m_pDepth);
-
-	SafeRelease(m_pRenderTargetView);
-	SafeRelease(m_pColorShaderResourceView);
-	SafeRelease(m_pDepthShaderResourceView);
-	SafeRelease(m_pDepthStencilView);
-
-	//ReportLiveObjects();
+	////if (!m_ColorBufferSupplied)
+	//SafeRelease(m_pColor);
+	//
+	////if (!m_DepthBufferSupplied)
+	//SafeRelease(m_pDepth);
+	//
+	//SafeRelease(m_pRenderTargetView);
+	//SafeRelease(m_pColorShaderResourceView);
+	//SafeRelease(m_pDepthShaderResourceView);
+	//SafeRelease(m_pDepthStencilView);
+	//
+	////ReportLiveObjects();
 
 }
 
@@ -49,7 +49,7 @@ HRESULT RenderTarget::CreateColor()
 {
 	if (m_Desc.pColor)
 	{
-		m_pColor = m_Desc.pColor;
+		m_pColor.Attach(m_Desc.pColor);
 
 		D3D11_TEXTURE2D_DESC texDesc;
 		ZeroMemory(&texDesc, sizeof(texDesc));
