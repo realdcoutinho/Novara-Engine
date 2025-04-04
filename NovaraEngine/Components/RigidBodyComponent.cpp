@@ -40,7 +40,7 @@ void RigidBodyComponent::OnSceneAttach(GameScene* pScene)
 {
 	if (m_pActor && !m_pActor->getScene())
 	{
-		pScene->GetPhysxProxy()->GetPhysxScene()->addActor(*m_pActor);
+		pScene->GetPhysxProxy().GetPhysxScene()->addActor(*m_pActor);
 	}
 }
 
@@ -57,12 +57,12 @@ void RigidBodyComponent::OnSceneDetach(GameScene* /*pScene*/)
 
 void RigidBodyComponent::OnOwnerAttach(GameObject* pOwner)
 {
-	pOwner->GetTransform()->SetRigidBodyComponent(this);
+	pOwner->GetTransform().SetRigidBodyComponent(this);
 }
 
 void RigidBodyComponent::OnOwnerDetach(GameObject* pOwner)
 {
-	pOwner->GetTransform()->SetRigidBodyComponent(nullptr);
+	pOwner->GetTransform().SetRigidBodyComponent(nullptr);
 }
 
 #pragma region Collider Logic
@@ -159,14 +159,14 @@ void RigidBodyComponent::CreateActor()
 	ASSERT_IF(m_pActor != nullptr, L"CreateActor cannot be called multiple times")
 
 		const auto pPhysX = PhysXManager::Get()->GetPhysics();
-	const auto pPhysxScene = GetGameObject()->GetScene()->GetPhysxProxy()->GetPhysxScene();
-	const auto pTransform = GetTransform();
+	const auto pPhysxScene = GetGameObject().GetScene()->GetPhysxProxy().GetPhysxScene();
+	const auto& pTransform = GetTransform();
 
 	if (m_IsStatic)
-		m_pActor = pPhysX->createRigidStatic(PxTransform(PhysxHelper::ToPxVec3(pTransform->GetPosition()), PhysxHelper::ToPxQuat(pTransform->GetRotation())));
+		m_pActor = pPhysX->createRigidStatic(PxTransform(PhysxHelper::ToPxVec3(pTransform.GetPosition()), PhysxHelper::ToPxQuat(pTransform.GetRotation())));
 	else
 	{
-		m_pActor = pPhysX->createRigidDynamic(PxTransform(PhysxHelper::ToPxVec3(pTransform->GetPosition()), PhysxHelper::ToPxQuat(pTransform->GetRotation())));
+		m_pActor = pPhysX->createRigidDynamic(PxTransform(PhysxHelper::ToPxVec3(pTransform.GetPosition()), PhysxHelper::ToPxQuat(pTransform.GetRotation())));
 		m_pActor->is<PxRigidDynamic>()->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, m_IsKinematic);
 
 		if (m_InitialConstraints != RigidBodyConstraint::None)

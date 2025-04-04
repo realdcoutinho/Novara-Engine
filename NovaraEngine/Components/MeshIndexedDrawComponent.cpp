@@ -155,7 +155,7 @@ void MeshIndexedDrawComponent::Draw(const SceneContext& sceneContext)
 		return;
 
 	auto& d3d = sceneContext.d3dContext;
-	auto world = XMLoadFloat4x4(&GetTransform()->GetWorld());
+	auto world = XMLoadFloat4x4(&GetTransform().GetWorld());
 	const auto viewProjection = XMLoadFloat4x4(&sceneContext.pCamera->GetViewProjection());
 
 	m_pWorldVar->SetMatrix(reinterpret_cast<float*>(&world));

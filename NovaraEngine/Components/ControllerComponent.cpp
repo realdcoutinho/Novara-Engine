@@ -32,12 +32,12 @@ void ControllerComponent::OnSceneAttach(GameScene*)
 
 void ControllerComponent::OnOwnerAttach(GameObject* pOwner)
 {
-	pOwner->GetTransform()->SetControllerComponent(this);
+	pOwner->GetTransform().SetControllerComponent(this);
 }
 
 void ControllerComponent::OnOwnerDetach(GameObject* pOwner)
 {
-	pOwner->GetTransform()->SetControllerComponent(nullptr);
+	pOwner->GetTransform().SetControllerComponent(nullptr);
 }
 
 void ControllerComponent::ApplyFilterData() const

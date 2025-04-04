@@ -142,10 +142,10 @@ void ModelComponent::SetMaterial(BaseMaterial* pMaterial, UINT8 submeshId)
 	m_Materials[submeshId] = pMaterial;
 	m_MaterialChanged = true;
 
-	if (m_IsInitialized && GetScene())
+	if (m_IsInitialized && &GetScene())
 	{
 		ASSERT_IF(m_pMeshFilter->GetMeshCount() <= submeshId, L"Invalid SubMeshID({}) for current MeshFilter({} submeshes)", submeshId, m_pMeshFilter->GetMeshCount())
-			m_pMeshFilter->BuildVertexBuffer(GetScene()->GetSceneContext(), pMaterial, submeshId);
+			m_pMeshFilter->BuildVertexBuffer(GetScene().GetSceneContext(), pMaterial, submeshId);
 		m_MaterialChanged = false;
 	}
 }

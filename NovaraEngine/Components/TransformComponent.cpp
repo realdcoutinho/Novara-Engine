@@ -16,9 +16,9 @@ TransformComponent::TransformComponent() :
 bool TransformComponent::CheckIfDirty()
 {
 	//If Parent is dirty == update required (spatial relation)
-	if (const GameObject* pParent = GetGameObject()->GetParent())
+	if (const GameObject* pParent = GetGameObject().GetParent())
 	{
-		if (pParent->GetTransform()->IsDirty())
+		if (pParent->GetTransform().IsDirty())
 		{
 			m_IsDirty = true;
 			return true;
@@ -73,7 +73,7 @@ void TransformComponent::UpdateTransforms()
 
 	if (const auto pParent = m_pGameObject->GetParent())
 	{
-		const auto parentWorld = XMLoadFloat4x4(&pParent->GetTransform()->m_World);
+		const auto parentWorld = XMLoadFloat4x4(&pParent->GetTransform().m_World);
 		world *= parentWorld;
 	}
 

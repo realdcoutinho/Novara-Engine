@@ -176,6 +176,7 @@ using namespace std;
 #include "SoundManager.h"
 #include "SpriteRenderer.h"
 #include "TextRenderer.h"
+#include "LightManager.h"
 
 
 

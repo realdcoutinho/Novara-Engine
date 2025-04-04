@@ -33,9 +33,9 @@ void CameraComponent::Update(const SceneContext& sceneContext)
 		projection = XMMatrixOrthographicLH(viewWidth, viewHeight, m_NearPlane, m_FarPlane);
 	}
 
-	const XMVECTOR worldPosition = XMLoadFloat3(&GetTransform()->GetWorldPosition());
-	const XMVECTOR lookAt = XMLoadFloat3(&GetTransform()->GetForward());
-	const XMVECTOR upVec = XMLoadFloat3(&GetTransform()->GetUp());
+	const XMVECTOR worldPosition = XMLoadFloat3(&GetTransform().GetWorldPosition());
+	const XMVECTOR lookAt = XMLoadFloat3(&GetTransform().GetForward());
+	const XMVECTOR upVec = XMLoadFloat3(&GetTransform().GetUp());
 
 	const XMMATRIX view = XMMatrixLookAtLH(worldPosition, worldPosition + lookAt, upVec);
 	const XMMATRIX viewInv = XMMatrixInverse(nullptr, view);
@@ -52,11 +52,9 @@ void CameraComponent::SetActive(bool active)
 {
 	if (m_IsActive == active) return;
 
-	const auto pGameObject = GetGameObject();
-	ASSERT_IF(!pGameObject, L"Failed to set active camera. Parent game object is null");
+	const auto& pGameObject = GetGameObject();
+	const auto pScene = pGameObject.GetScene();
 
-	if (!pGameObject) return; //help the compiler... (C6011)
-	const auto pScene = pGameObject->GetScene();
 	ASSERT_IF(!pScene, L"Failed to set active camera. Parent game scene is null");
 
 	m_IsActive = active;

@@ -51,7 +51,7 @@ public:
 	const std::wstring& GetTag() const { return m_Tag; }
 	void SetTag(const std::wstring& tag) { m_Tag = tag; }
 
-	TransformComponent* GetTransform() const { return m_pTransform.get(); }
+	TransformComponent& GetTransform() const { return *m_pTransform; }
 
 	GameScene* GetScene() const;
 	GameObject* GetParent() const { return m_pParentObject; }
@@ -169,10 +169,11 @@ private:
 	std::vector<unique_ptr<GameObject>> m_pChildren{};
 	std::vector<unique_ptr<BaseComponent>> m_pComponents{};
 
-	bool m_IsInitialized{}, m_IsActive{};
+	bool m_IsInitialized{};
+	bool m_IsActive{};
 	GameScene* m_pParentScene{};
 	GameObject* m_pParentObject{};
-	unique_ptr<TransformComponent> m_pTransform{};
+	TransformComponent* m_pTransform{};
 	PhysicsCallback m_OnTriggerCallback{};
 	std::wstring m_Tag{};
 };

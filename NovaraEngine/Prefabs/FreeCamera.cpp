@@ -54,9 +54,9 @@ void FreeCamera::Update(const SceneContext& sceneContext)
 		}
 
 		//CALCULATE TRANSFORMS
-		const auto forward = XMLoadFloat3(&GetTransform()->GetForward());
-		const auto right = XMLoadFloat3(&GetTransform()->GetRight());
-		auto currPos = XMLoadFloat3(&GetTransform()->GetPosition());
+		const auto forward = XMLoadFloat3(&GetTransform().GetForward());
+		const auto right = XMLoadFloat3(&GetTransform().GetRight());
+		auto currPos = XMLoadFloat3(&GetTransform().GetPosition());
 		const auto elapsedTime = sceneContext.pGameTime->GetElapsed();
 
 		currPos += forward * move.y * currSpeed * elapsedTime;
@@ -65,7 +65,7 @@ void FreeCamera::Update(const SceneContext& sceneContext)
 		m_TotalYaw += look.x * m_RotationSpeed * elapsedTime;
 		m_TotalPitch += look.y * m_RotationSpeed * elapsedTime;
 
-		GetTransform()->Rotate(m_TotalPitch, m_TotalYaw, 0);
-		GetTransform()->Translate(currPos);
+		GetTransform().Rotate(m_TotalPitch, m_TotalYaw, 0);
+		GetTransform().Translate(currPos);
 	}
 }

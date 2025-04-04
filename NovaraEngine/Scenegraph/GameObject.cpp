@@ -3,10 +3,11 @@
 #include <algorithm>
 
 GameObject::GameObject() :
-	m_IsActive(true),
-	m_pTransform(make_unique<TransformComponent>())
+	m_IsActive(true)
 {
-	AddComponent(std::move(m_pTransform));
+	auto pTransformComp = make_unique<TransformComponent>();
+	m_pTransform = pTransformComp.get();
+	AddComponent(std::move(pTransformComp));
 }
 GameObject::~GameObject()
 {

@@ -8,16 +8,16 @@ GameScene::GameScene(std::wstring sceneName) :
 
 GameScene::~GameScene()
 {
-	SafeDelete(m_SceneContext.pGameTime);
-	SafeDelete(m_SceneContext.pInput);
-	SafeDelete(m_SceneContext.pLights);
+	//SafeDelete(m_SceneContext.pGameTime);
+	//SafeDelete(m_SceneContext.pInput);
+	//SafeDelete(m_SceneContext.pLights);
 
 	//for (auto pChild : m_pChildren)
 	//{
 	//	SafeDelete(pChild);
 	//}
 
-	SafeDelete(m_pPhysxProxy);
+	//SafeDelete(m_pPhysxProxy);
 }
 
 void GameScene::AddChild_(unique_ptr<GameObject> pObject)
@@ -93,17 +93,17 @@ void GameScene::RootInitialize(const GameContext& gameContext)
 	m_SceneContext.windowHeight = static_cast<float>(gameContext.windowHeight);
 	m_SceneContext.aspectRatio = m_SceneContext.windowWidth / m_SceneContext.windowHeight;
 
-	m_SceneContext.pGameTime = new GameTime();
+	m_SceneContext.pGameTime = make_unique<GameTime>();
 	m_SceneContext.pGameTime->Reset();
 	m_SceneContext.pGameTime->Stop();
 
-	m_SceneContext.pInput = new InputManager();
-	//m_SceneContext.pLights = new LightManager();
+	m_SceneContext.pInput = make_unique<InputManager>();
+	m_SceneContext.pLights = make_unique<LightManager>();
 
 	m_SceneContext.d3dContext = gameContext.d3dContext;
 
 	// Initialize Physx
-	m_pPhysxProxy = new PhysxProxy();
+	m_pPhysxProxy = make_unique<PhysxProxy>();
 	m_pPhysxProxy->Initialize(this);
 
 	//Create DefaultCamera
@@ -111,15 +111,16 @@ void GameScene::RootInitialize(const GameContext& gameContext)
 
 	unique_ptr<FreeCamera> pFreeCamera = make_unique<FreeCamera>();
 
-	pFreeCamera->SetRotation(30, 0);
-	pFreeCamera->GetComponent<TransformComponent>()->Translate(0, 50, -80);
-	
-	//pFreeCamera->GetTransform()->Translate(0, 50, -80);
-
-	m_pDefaultCamera = pFreeCamera->GetComponent<CameraComponent>();
-	
-	
+	pFreeCamera->SetRotation(30, 0);	
+	pFreeCamera->GetTransform().Translate(0, 50, -80);
+	auto tempCam = pFreeCamera.get();
 	AddChild(std::move(pFreeCamera));
+
+
+	m_pDefaultCamera = tempCam->GetComponent<CameraComponent>();
+	
+	
+
 
 	SetActiveCamera(m_pDefaultCamera); //Also sets pCamera in SceneContext
 

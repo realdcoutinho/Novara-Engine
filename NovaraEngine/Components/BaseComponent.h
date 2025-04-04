@@ -15,9 +15,9 @@ public:
 	BaseComponent& operator=(const BaseComponent& other) = delete;
 	BaseComponent& operator=(BaseComponent&& other) noexcept = delete;
 
-	GameObject* GetGameObject() const { return m_pGameObject; }
-	GameScene* GetScene() const { return m_pScene; }
-	TransformComponent* GetTransform() const;
+	GameObject& GetGameObject() const { return *m_pGameObject; }
+	GameScene& GetScene() const { return *m_pScene; }
+	TransformComponent& GetTransform() const;
 	UINT GetComponentId() const { return m_ComponentId; }
 
 protected:

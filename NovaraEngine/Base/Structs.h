@@ -33,10 +33,11 @@ struct SceneSettings
 
 struct SceneContext
 {
-	InputManager* pInput{};
-	LightManager* pLights{};
+	unique_ptr<InputManager> pInput{};
+	unique_ptr<LightManager> pLights{};
+	unique_ptr<GameTime> pGameTime{};
 	CameraComponent* pCamera{};
-	GameTime* pGameTime{};
+
 	D3D11Context d3dContext{};
 
 	float windowWidth{};

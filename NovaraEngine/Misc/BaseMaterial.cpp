@@ -54,7 +54,7 @@ void BaseMaterial::UpdateEffectVariables(const SceneContext& sceneContext, const
 		m_LastUpdateID = pModelComponent->GetComponentId();
 
 		//Update Root Variables
-		auto world = XMLoadFloat4x4(&pModelComponent->GetTransform()->GetWorld());
+		auto world = XMLoadFloat4x4(&pModelComponent->GetTransform().GetWorld());
 		auto view = XMLoadFloat4x4(&sceneContext.pCamera->GetView());
 
 		if (m_RootVariableLUT[static_cast<UINT>(eRootVariable::WORLD)])

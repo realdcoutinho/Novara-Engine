@@ -42,15 +42,15 @@ void BaseComponent::RootOnSceneDetach(GameScene* pScene)
 	OnSceneDetach(pScene);
 }
 
-TransformComponent* BaseComponent::GetTransform() const
+TransformComponent& BaseComponent::GetTransform() const
 {
-#if _DEBUG
-	if (m_pGameObject == nullptr)
-	{
-		Logger::LogWarning(L"Failed to retrieve the TransformComponent. GameObject is NULL.");
-		return nullptr;
-	}
-#endif
+//#if _DEBUG
+//	if (m_pGameObject == nullptr)
+//	{
+//		Logger::LogWarning(L"Failed to retrieve the TransformComponent. GameObject is NULL.");
+//		return nullptr;
+//	}
+//#endif
 
 	return m_pGameObject->GetTransform();
 }
