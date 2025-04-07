@@ -1,5 +1,4 @@
 #pragma once
-#include "EnginePCH.h"
 
 class MinionScene final : public GameScene
 {

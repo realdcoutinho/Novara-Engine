@@ -177,7 +177,8 @@ using namespace std;
 #include "SpriteRenderer.h"
 #include "TextRenderer.h"
 #include "LightManager.h"
-
+#include "FixedCamera.h"
+#include "RigidBodyComponent.h"
 
 
 

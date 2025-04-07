@@ -158,8 +158,12 @@ void RigidBodyComponent::CreateActor()
 {
 	ASSERT_IF(m_pActor != nullptr, L"CreateActor cannot be called multiple times")
 
-		const auto pPhysX = PhysXManager::Get()->GetPhysics();
-	const auto pPhysxScene = GetGameObject().GetScene()->GetPhysxProxy().GetPhysxScene();
+	const auto pPhysX = PhysXManager::Get()->GetPhysics();
+
+	const auto& gO = GetGameObject();
+	const auto gameScene = gO.GetScene();
+	const auto& proxy = gameScene->GetPhysxProxy();
+	const auto pPhysxScene = proxy.GetPhysxScene();
 	const auto& pTransform = GetTransform();
 
 	if (m_IsStatic)

@@ -18,6 +18,7 @@
 //#pragma region Lab/Milestone Includes
 //#ifdef W3
 #include "Scenes/MinionScene.h"
+#include "Scenes/Pong.h"
 
 
 ////#include "Scenes/Week 3/ComponentTestScene.h"
@@ -99,7 +100,11 @@ void MainGame::Initialize()
 	{
 		Logger::LogWarning(L"Scene not added");
 	}
-
+	auto scenePong = std::make_unique<Pong>();
+	if (!SceneManager::Get()->AddGameScene(std::move(scenePong)))
+	{
+		Logger::LogWarning(L"Scene not added");
+	}
 
 
 #ifdef W3

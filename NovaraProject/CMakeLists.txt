@@ -15,7 +15,7 @@ add_executable(FinalGame
         "Resources/Effects/PosNormCol3D.fx"
         "Resources/Effects/SpriteRenderer.fx"
         "Resources/Effects/TextRenderer.fx"
-)
+ "Scenes/Pong.cpp")
 
 if (WIN32)
     set_target_properties(FinalGame PROPERTIES

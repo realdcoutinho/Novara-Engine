@@ -7,60 +7,60 @@ float PhysxProxy::m_PhysXStepTime{ 0.f };
 
 PhysxProxy::~PhysxProxy()
 {
-	//if (m_pControllerManager != nullptr)
-	//	m_pControllerManager->release();
-	//if (m_pPhysxScene != nullptr)
-	//	m_pPhysxScene->release();
+	if (m_pControllerManager != nullptr)
+		m_pControllerManager->release();
+	if (m_pPhysxScene != nullptr)
+		m_pPhysxScene->release();
 }
 
 void PhysxProxy::Initialize(GameScene* pParent)
 {
-	//if (m_IsInitialized)
-	//{
-	//	Logger::LogWarning(L"Multiple Initialization attempts!");
-	//	return;
-	//}
+	if (m_IsInitialized)
+	{
+		Logger::LogWarning(L"Multiple Initialization attempts!");
+		return;
+	}
 
-	//m_pPhysxScene = PhysXManager::Get()->CreateScene(pParent);
-	//ASSERT_IF(!m_pPhysxScene, L"Failed to create physx scene!")
+	m_pPhysxScene = PhysXManager::Get()->CreateScene(pParent);
+	ASSERT_IF(!m_pPhysxScene, L"Failed to create physx scene!")
 
-	//m_pPhysxScene->setVisualizationParameter(PxVisualizationParameter::eSCALE, 1.0f);
-	//m_pPhysxScene->setVisualizationParameter(PxVisualizationParameter::eCOLLISION_SHAPES, 1.0f);
-	//m_pPhysxScene->setVisualizationParameter(PxVisualizationParameter::eJOINT_LIMITS, 1.0f);
-	//m_pPhysxScene->setVisualizationParameter(PxVisualizationParameter::eJOINT_LOCAL_FRAMES, 1.0f);
-	//m_pPhysxScene->setSimulationEventCallback(this);
+	m_pPhysxScene->setVisualizationParameter(PxVisualizationParameter::eSCALE, 1.0f);
+	m_pPhysxScene->setVisualizationParameter(PxVisualizationParameter::eCOLLISION_SHAPES, 1.0f);
+	m_pPhysxScene->setVisualizationParameter(PxVisualizationParameter::eJOINT_LIMITS, 1.0f);
+	m_pPhysxScene->setVisualizationParameter(PxVisualizationParameter::eJOINT_LOCAL_FRAMES, 1.0f);
+	m_pPhysxScene->setSimulationEventCallback(this);
 
-	//if (!m_pPhysxScene) return; //Prevent C6011
-	//m_pControllerManager = PxCreateControllerManager(*m_pPhysxScene);
-	//ASSERT_IF(m_pControllerManager == nullptr, L"Failed to create controller manager!")
+	if (!m_pPhysxScene) return; //Prevent C6011
+	m_pControllerManager = PxCreateControllerManager(*m_pPhysxScene);
+	ASSERT_IF(m_pControllerManager == nullptr, L"Failed to create controller manager!")
 
-	//	m_IsInitialized = true;
+		m_IsInitialized = true;
 }
 
 void PhysxProxy::Update(const SceneContext& sceneContext) const
 {
-	//if (sceneContext.pGameTime->IsRunning() && sceneContext.pGameTime->GetElapsed() > 0)
-	//{
-	//	if (m_PhysXFrameStepping)
-	//	{
-	//		if (m_PhysXStepTime > 0.f)
-	//		{
-	//			m_pPhysxScene->simulate(m_PhysXStepTime);
-	//			m_pPhysxScene->fetchResults(true);
-	//			m_PhysXStepTime = 0.f;
-	//		}
-	//		else if (m_PhysXStepTime < 0.f)
-	//		{
-	//			m_pPhysxScene->simulate(sceneContext.pGameTime->GetElapsed());
-	//			m_pPhysxScene->fetchResults(true);
-	//		}
-	//	}
-	//	else
-	//	{
-	//		m_pPhysxScene->simulate(sceneContext.pGameTime->GetElapsed());
-	//		m_pPhysxScene->fetchResults(true);
-	//	}
-	//}
+	if (sceneContext.pGameTime->IsRunning() && sceneContext.pGameTime->GetElapsed() > 0)
+	{
+		if (m_PhysXFrameStepping)
+		{
+			if (m_PhysXStepTime > 0.f)
+			{
+				m_pPhysxScene->simulate(m_PhysXStepTime);
+				m_pPhysxScene->fetchResults(true);
+				m_PhysXStepTime = 0.f;
+			}
+			else if (m_PhysXStepTime < 0.f)
+			{
+				m_pPhysxScene->simulate(sceneContext.pGameTime->GetElapsed());
+				m_pPhysxScene->fetchResults(true);
+			}
+		}
+		else
+		{
+			m_pPhysxScene->simulate(sceneContext.pGameTime->GetElapsed());
+			m_pPhysxScene->fetchResults(true);
+		}
+	}
 
 //#ifdef _DEBUG
 //	//Send Camera to PVD
@@ -76,8 +76,8 @@ void PhysxProxy::Update(const SceneContext& sceneContext) const
 
 void PhysxProxy::Draw(const SceneContext& sceneContext) const
 {
-	//if (sceneContext.settings.drawPhysXDebug)
-		//DebugRenderer::DrawPhysX(m_pPhysxScene);
+	if (sceneContext.settings.drawPhysXDebug)
+		DebugRenderer::DrawPhysX(m_pPhysxScene);
 }
 
 void PhysxProxy::onTrigger(PxTriggerPair* pairs, PxU32 count)
@@ -111,11 +111,11 @@ bool PhysxProxy::Raycast(const PxVec3& origin, const PxVec3& unitDir, const PxRe
 	const PxQueryFilterData& filterData, PxQueryFilterCallback* filterCall,
 	const PxQueryCache* cache) const
 {
-	//if (m_pPhysxScene != nullptr)
-	//{
-	//	return m_pPhysxScene->raycast(origin, unitDir, distance, hitCall, hitFlags, filterData, filterCall, cache);
-	//}
+	if (m_pPhysxScene != nullptr)
+	{
+		return m_pPhysxScene->raycast(origin, unitDir, distance, hitCall, hitFlags, filterData, filterCall, cache);
+	}
 
-	////Logger::LogWarning(L"Raycast failed. Physics scene is a null pointer");
+	Logger::LogWarning(L"Raycast failed. Physics scene is a null pointer");
 	return false;
 }
