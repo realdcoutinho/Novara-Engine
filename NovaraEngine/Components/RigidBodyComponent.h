@@ -1,6 +1,10 @@
 #pragma once
+#include "Enumerations.h"
+#include "BaseComponent.h"
 
 #pragma region ColliderInfo
+
+class RigidBodyComponent;
 class ColliderInfo
 {
 public:

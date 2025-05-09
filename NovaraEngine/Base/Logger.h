@@ -8,6 +8,23 @@ enum class LogLevel : UINT
 	Todo = 0x16
 };
 
+
+#include <memory>
+#include <xstring>
+#include <format>
+#include <map>
+#include <ostream>
+#include <fstream>
+#include <iostream>
+
+#include "../Libraries/FMOD/include/fmod_common.h"
+#include "foundation/PxErrors.h" 
+
+#include <source_location>
+
+using namespace physx;
+using namespace std;
+
 struct LogString
 {
 	enum class LogStringType
@@ -21,7 +38,7 @@ struct LogString
 	LogStringType type{ LogStringType::Default };
 	HRESULT hresult{};
 	FMOD_RESULT fmodResult{};
-	PxErrorCode::Enum pxErrorCode{};
+	physx::PxErrorCode::Enum pxErrorCode{};
 
 	std::wstring_view format{};
 	std::source_location location{};
@@ -45,9 +62,9 @@ struct LogString
 		fmodResult{ _fmodResult }, location(_location), type{ LogStringType::Fmod } {
 	}
 
-	LogString(std::wstringstream::_Mystr _format, const std::source_location& _location = std::source_location::current()) :
-		format{ _format }, location(_location) {
-	}
+	//LogString(std::wstringstream::_Mystr _format, const std::source_location& _location = std::source_location::current()) :
+	//	format{ _format }, location(_location) {
+	//}
 
 	LogString(const wchar_t* _format, const std::source_location& _location = std::source_location::current()) :
 		format{ _format }, location(_location) {

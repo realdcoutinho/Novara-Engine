@@ -1,5 +1,7 @@
 #pragma once
-//Resharper Disable All
+#include "Base/Structs.h"
+class RenderTarget;
+struct SceneContext;
 
 class PostProcessingMaterial
 {

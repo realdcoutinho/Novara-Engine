@@ -1,5 +1,9 @@
 #pragma once
 
+#include "../Scenegraph/GameObject.h"
+class SceneContext;
+class CameraComponent;
+
 class FreeCamera final : public GameObject
 {
 public:

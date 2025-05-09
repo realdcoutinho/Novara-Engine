@@ -1,4 +1,16 @@
 #pragma once
+#include "BaseComponent.h"
+
+
+struct TrianglePosNormCol;
+struct QuadPosNormCol;
+struct VertexPosNormCol;
+struct VertexPosCol;
+struct SceneContext;
+//struct ID3DX11EffectMatrixVariable;
+//struct ID3DX11Effect;
+//struct ID3DX11EffectTechnique;
+//struct ID3D11InputLayout;
 
 class MeshDrawComponent : public BaseComponent
 {

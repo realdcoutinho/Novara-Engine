@@ -1,6 +1,8 @@
-
+#pragma once
 #include "EnginePCH.h"
 #include "EffectHelper.h"
+#include "Utils.h"
+#include "Logger.h"
 
 const std::wstring EffectHelper::m_empty = L"";
 std::map<ILSemantic, std::wstring> EffectHelper::m_IlSemanticName = create_map();

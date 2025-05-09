@@ -1,5 +1,10 @@
 #pragma once
-#include "EnginePCH.h"
+//#include "EnginePCH.h"
+#include "GameScene.h"
+
+class GameObject;
+class RigidBodyComponent;
+class FreeCamera;
 
 class MinionScene final : public GameScene
 {

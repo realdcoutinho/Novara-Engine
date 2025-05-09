@@ -1,6 +1,17 @@
 #pragma once
 //#include "../Utils/EffectHelper.h"
 
+
+
+#include "../Utils/Utils.h"
+#include "EffectHelper.h"
+
+#include <xstring>
+
+struct D3D11Context;
+class ModelComponent;
+
+
 class BaseMaterial
 {
 public:

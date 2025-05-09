@@ -1,4 +1,7 @@
 #pragma once
+#include "ContentManager.h"
+#include "BaseMaterial.h"
+
 
 template<class T>
 class Material : public BaseMaterial

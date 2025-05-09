@@ -2,6 +2,9 @@
 
 //CONVEX MESH
 //***********
+
+#include "ContentLoader.h"
+
 class PxConvexMeshLoader : public ContentLoader<PxConvexMesh>
 {
 public:

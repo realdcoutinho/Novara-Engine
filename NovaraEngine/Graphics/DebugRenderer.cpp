@@ -1,5 +1,10 @@
 #include "EnginePCH.h"
 #include "DebugRenderer.h"
+#include "CameraComponent.h"
+#include "PhysxHelper.h"
+#include "ContentManager.h"
+#include "EffectHelper.h"
+#include "VertexHelper.h"
 
 ID3DX11Effect* DebugRenderer::m_pEffect = nullptr;
 ID3DX11EffectTechnique* DebugRenderer::m_pTechnique = nullptr;

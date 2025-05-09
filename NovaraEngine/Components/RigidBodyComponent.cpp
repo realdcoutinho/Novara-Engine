@@ -1,5 +1,9 @@
 #include "EnginePCH.h"
 #include "RigidBodyComponent.h"
+#include "TransformComponent.h"
+#include "PhysXManager.h"
+#include "PhysxHelper.h"
+
 
 RigidBodyComponent::RigidBodyComponent(bool isStatic) :
 	m_IsStatic(isStatic),

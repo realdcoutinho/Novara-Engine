@@ -1,4 +1,7 @@
 #pragma once
+
+#include "GameObject.h"
+
 class CubePrefab final : public GameObject
 {
 public:

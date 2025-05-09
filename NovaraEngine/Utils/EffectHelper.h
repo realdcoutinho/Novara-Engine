@@ -1,4 +1,7 @@
 #pragma once
+
+#include "Macros.h"
+
 //Input Layout Description
 enum class ILSemantic : UINT
 {

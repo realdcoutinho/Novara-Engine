@@ -1,10 +1,14 @@
 #pragma once
+#include "Singleton.h"
+
 struct ContentLoadInfo
 {
 	fs::path assetFullPath{};
 	std::wstring assetSubPath{};
 	void* pUserData{};
 };
+
+struct GameContext;
 
 class BaseLoader
 {

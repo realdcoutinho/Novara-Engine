@@ -1,5 +1,10 @@
 #pragma once
 #include "ContentLoader.h"
+#include "Logger.h"
+#include "Macros.h"
+#include "Singleton.h"
+#include "SpriteFont.h"
+
 
 class ContentManager
 {

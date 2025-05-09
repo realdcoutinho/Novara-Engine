@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Structs.h"
+
 class RenderTarget;
 
 class NovaraGame
@@ -15,7 +17,7 @@ public:
 
 
 	static LRESULT CALLBACK WindowsProcedureStatic(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
-	const GameContext& GetGameContext() const { return m_GameContext; }
+	//const GameContext& GetGameContext() const { return m_GameContext; }
 
 	HRESULT Run(HINSTANCE hInstance);
 

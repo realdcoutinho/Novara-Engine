@@ -1,5 +1,7 @@
 #include "EnginePCH.h"
 #include "MaterialManager.h"
+#include "BaseMaterial.h"
+#include "PostProcessingMaterial.h"
 
 MaterialManager::~MaterialManager()
 {

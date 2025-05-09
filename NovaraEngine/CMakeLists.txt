@@ -109,6 +109,81 @@ add_library(NovaraEngine
         "Managers/SoundManager.cpp"
         "Managers/SoundManager.h")
 
+
+
+
+
+
+
+
+
+
+
+
+
+## Declare engine library (apenas ficheiros .cpp!)
+#add_library(NovaraEngine
+#    Base/NovaraGame.cpp
+#    Scenegraph/GameObject.cpp
+#    Components/BaseComponent.cpp
+#    Components/TransformComponent.cpp
+#    Scenegraph/GameScene.cpp
+#    Components/ControllerComponent.cpp
+#    Components/CameraComponent.cpp
+#    Base/Logger.cpp
+#    PhysX/PhysxProxy.cpp
+#    PhysX/PhysxErrorCallback.cpp
+#    Prefabs/FixedCamera.cpp
+#    Prefabs/FreeCamera.cpp
+#    Managers/InputManager.cpp
+#    Base/GameTime.cpp
+#    Base/GameStats.cpp
+#    Managers/SceneManager.cpp
+#    Managers/PhysXManager.cpp
+#    Managers/LightManager.cpp
+#    Managers/MaterialManager.cpp
+#    Misc/BaseMaterial.cpp
+#    Misc/Material.cpp
+#    Utils/PhysxHelper.cpp
+#    Managers/ContentManager.cpp
+#    Misc/RenderTarget.cpp
+#    Graphics/DebugRenderer.cpp
+#    Utils/VertexHelper.cpp
+#    Utils/EffectHelper.cpp
+#    Contents/EffectLoader.cpp
+#    Utils/ImguiHelper.cpp
+#    Components/MeshDrawComponent.cpp
+#    Components/MeshIndexedDrawComponent.cpp
+#    Components/ModelComponent.cpp
+#    Misc/MeshFilter.cpp
+#    Misc/TextureData.cpp
+#    Misc/ModelAnimator.cpp
+#    Components/ParticleEmitterComponent.cpp
+#    Components/RigidBodyComponent.cpp
+#    Components/SpriteComponent.CPP    # <-- ok manter .CPP se for mesmo esse nome
+#    Contents/MeshFilterLoader.CPP     # <-- mesmo caso aqui
+#    Utils/BinaryReader.cpp
+#    Contents/PxMeshLoader.cpp
+#    Contents/SpriteFontLoader.cpp
+#    Misc/SpriteFont.cpp
+#    Contents/TextureDataLoader.cpp
+#    Graphics/ShadowMapRenderer.cpp
+#    Misc/ShadowMapMaterial.cpp
+#    Graphics/SpriteRenderer.cpp
+#    Graphics/TextRenderer.cpp
+#    Misc/PostProcessingMaterial.cpp
+#    Misc/ParticleMaterial.cpp
+#    Managers/SoundManager.cpp
+#)
+
+
+
+        
+   add_compile_options(/wd26495)
+   add_compile_options(/wd26495) # Disable warning C26495: Variable is uninitialized.
+
+
+
 # Optional: Add include directories for engine users
 target_include_directories(NovaraEngine PUBLIC 
 

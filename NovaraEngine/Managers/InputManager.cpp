@@ -1,5 +1,7 @@
 #include "EnginePCH.h"
 #include "InputManager.h"
+#include "MathHelper.H"
+#include "Logger.h"
 
 PBYTE InputManager::m_pCurrKeyboardState = nullptr;
 PBYTE InputManager::m_pOldKeyboardState = nullptr;

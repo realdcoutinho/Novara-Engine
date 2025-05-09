@@ -1,6 +1,7 @@
 #pragma once
 #include "../Base/Enumerations.h"
 #include "Xinput.h"
+#include "Structs.h"
 
 class InputManager final
 {

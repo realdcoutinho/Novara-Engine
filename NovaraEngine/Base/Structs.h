@@ -1,10 +1,24 @@
 #pragma once
+
+#include <d3d11.h>
+#include <dxgi.h>
+#include <DirectXColors.h>
+#include <DirectXMath.h>
+#include <memory>
+#include <xstring>
+
+
+
+
+using namespace std;
+
 class CameraComponent;
 class InputManager;
 class LightManager;
 class GameTime;
 class NovaraGame;
 class MaterialManager;
+
 
 struct D3D11Context
 {
@@ -24,7 +38,15 @@ struct SceneSettings
 	bool drawUserDebug{ true };
 
 	bool vSyncEnabled{ true };
-	XMFLOAT4 clearColor{ Colors::CornflowerBlue };
+	//XMFLOAT4 clearColor{ DirectX::Colors::CornflowerBlue };
+	DirectX::XMFLOAT4 clearColor;
+
+	SceneSettings()
+		: clearColor()
+	{
+		// Convert DirectX::Colors::CornflowerBlue to XMFLOAT4
+		DirectX::XMStoreFloat4(&clearColor, DirectX::Colors::CornflowerBlue);
+	}
 
 	void Toggle_ShowInfoOverlay() { showInfoOverlay = !showInfoOverlay; }
 	bool Toggle_DrawPhysXDebug() { drawPhysXDebug = !drawPhysXDebug; }

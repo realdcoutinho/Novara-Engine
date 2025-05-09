@@ -1,4 +1,4 @@
-#include "EnginePCH.h"
+//#include "EnginePCH.h"
 #include "GameTime.h"
 
 GameTime::GameTime() :

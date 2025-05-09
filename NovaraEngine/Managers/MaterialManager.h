@@ -1,4 +1,6 @@
 #pragma once
+#include "Singleton.h"
+
 class BaseMaterial;
 class PostProcessingMaterial;
 

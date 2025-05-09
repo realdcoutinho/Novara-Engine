@@ -1,5 +1,7 @@
 #include "EnginePCH.h"
 #include "ShadowMapRenderer.h"
+#include "RenderTarget.h"
+
 //#include "Misc/ShadowMapMaterial.h"
 
 ShadowMapRenderer::~ShadowMapRenderer()

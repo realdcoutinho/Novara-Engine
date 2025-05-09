@@ -1,5 +1,7 @@
 #include "EnginePCH.h"
 #include "SpriteComponent.h"
+#include "ContentManager.h"
+
 
 SpriteComponent::SpriteComponent(const std::wstring& spriteAsset, const XMFLOAT2& pivot, const XMFLOAT4& color) :
 	m_SpriteAsset(spriteAsset),

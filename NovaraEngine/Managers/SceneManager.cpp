@@ -1,6 +1,7 @@
 #include "EnginePCH.h"
 #include "SceneManager.h"
-
+#include "GameStats.h"
+#include "DebugRenderer.h"
 
 void SceneManager::Initialize()
 {
@@ -19,7 +20,7 @@ bool SceneManager::AddGameScene(unique_ptr<GameScene> pScene)
 	//check if scene already exists in vector
 	if(std::ranges::find(m_pScenes, pScene) != m_pScenes.end())
 	{
-		Logger::LogWarning(L"Scene " + pScene.get()->m_SceneName + L" already exists!");
+		//Logger::LogWarning(L"Scene " + pScene.get()->m_SceneName + L" already exists!");
 		return false;
 	}
 

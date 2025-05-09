@@ -1,4 +1,9 @@
 #pragma once
+#include "BaseComponent.h"
+#include "Enumerations.h"
+
+class GameObject;
+
 
 class CameraComponent : public BaseComponent
 {

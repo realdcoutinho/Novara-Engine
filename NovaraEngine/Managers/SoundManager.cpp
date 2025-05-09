@@ -1,5 +1,6 @@
 #include "EnginePCH.h"
 #include "SoundManager.h"
+#include "Macros.h"
 
 SoundManager::SoundManager()
 {

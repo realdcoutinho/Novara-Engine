@@ -1,5 +1,7 @@
 #include "EnginePCH.h"
 #include "TextureDataLoader.h"
+#include "TextureData.h"
+#include "Macros.h"
 
 TextureData* TextureDataLoader::LoadContent(const ContentLoadInfo& loadInfo)
 {

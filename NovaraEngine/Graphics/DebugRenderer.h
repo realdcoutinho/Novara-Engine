@@ -1,4 +1,13 @@
 #pragma once
+#include "Macros.h"
+#include "VertexHelper.h"
+
+
+struct GameContext;
+struct SceneContext;
+struct SceneSettings;
+
+
 class DebugRenderer final
 {
 public:

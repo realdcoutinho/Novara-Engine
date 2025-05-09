@@ -1,6 +1,9 @@
 #pragma once
 
 #pragma region MeshFilter Helper Structs
+
+#include "EffectHelper.h"
+
 struct VertexBufferData
 {
 	VertexBufferData() :
@@ -130,6 +133,11 @@ struct SubMeshFilter
 	}
 };
 #pragma endregion
+
+
+class BaseMaterial;
+struct SceneContext;
+struct D3D11Context;
 
 class MeshFilter final
 {

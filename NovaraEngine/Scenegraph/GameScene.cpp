@@ -1,5 +1,17 @@
+#pragma once
 #include "EnginePCH.h"
 #include "GameScene.h"
+#include "TransformComponent.h"
+#include "CameraComponent.h"
+#include "InputManager.h"
+#include "FreeCamera.h"
+#include "GameTime.h"
+#include "GameStats.h"
+#include "DebugRenderer.h"
+#include "ImguiHelper.h"
+#include "LightManager.h"
+
+using namespace std;
 
 GameScene::GameScene(std::wstring sceneName) :
 	m_SceneName(std::move(sceneName))

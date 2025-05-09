@@ -1,8 +1,10 @@
 #pragma once
 #include "../Base/Enumerations.h"
+#include "../Components/BaseComponent.h"
 
 class ControllerComponent;
 class RigidBodyComponent;
+class BaseComponent;
 
 class TransformComponent : public BaseComponent
 {

@@ -1,4 +1,6 @@
 #pragma once
+#include "SoundManager.h"
+#include "Singleton.h"
 class SoundManager final: public Singleton<SoundManager>
 {
 public:

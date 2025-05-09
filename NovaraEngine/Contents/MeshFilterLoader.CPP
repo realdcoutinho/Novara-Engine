@@ -1,6 +1,7 @@
 #include "EnginePCH.h"
 #include "MeshFilterLoader.h"
-
+#include "MeshFilter.h"
+#include "BinaryReader.h"
 
 MeshFilter* MeshFilterLoader::LoadContent(const ContentLoadInfo& loadInfo)
 {

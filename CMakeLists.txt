@@ -31,9 +31,7 @@ foreach(OUTPUTCONFIG Debug Release RelWithDebInfo MinSizeRel)
 endforeach()
 
 
-
-
-
+   
 
 
 set(CPACK_PACKAGE_NAME "NovaraEngine")

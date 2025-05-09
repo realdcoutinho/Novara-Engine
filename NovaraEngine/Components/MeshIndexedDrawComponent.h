@@ -1,4 +1,8 @@
 #pragma once
+#include "BaseComponent.h"
+#include "VertexHelper.h"
+
+struct VertexPosNormCol;
 
 class MeshIndexedDrawComponent final : public BaseComponent
 {

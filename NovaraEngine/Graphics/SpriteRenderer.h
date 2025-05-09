@@ -1,4 +1,9 @@
 #pragma once
+#include "Singleton.h"
+#include "VertexHelper.h"
+
+class TextureData;
+
 class SpriteRenderer final : public Singleton<SpriteRenderer>
 {
 public:

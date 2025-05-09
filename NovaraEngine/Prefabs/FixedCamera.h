@@ -1,4 +1,6 @@
 #pragma once
+#include "GameObject.h"
+
 class FixedCamera final : public GameObject
 {
 public:

@@ -1,5 +1,8 @@
 #pragma once
-
+#include "Enumerations.h"
+#include "BaseComponent.h"
+class BaseScene;
+struct SceneContext;
 class ControllerComponent : public BaseComponent
 {
 public:

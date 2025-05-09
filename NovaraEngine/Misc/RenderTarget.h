@@ -1,4 +1,7 @@
 #pragma once
+#include "Macros.h"
+#include "Utils.h"
+#include "Logger.h"
 
 struct RENDERTARGET_DESC
 {

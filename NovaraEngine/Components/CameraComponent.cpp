@@ -1,5 +1,10 @@
 #include "EnginePCH.h"
 #include "CameraComponent.h"
+#include "TransformComponent.h"
+#include "GameObject.h"
+#include "GameScene.h"
+#include "Macros.h"
+#include "Logger.h"
 
 CameraComponent::CameraComponent() :
 	m_FarPlane(2500.0f),

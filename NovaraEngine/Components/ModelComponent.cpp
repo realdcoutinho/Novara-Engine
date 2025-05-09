@@ -1,5 +1,10 @@
-#include "EnginePCH.h"
 #include "ModelComponent.h"
+#include "MaterialManager.h"
+#include "MeshFilter.h"
+#include "ModelAnimator.h"
+#include "ContentManager.h"
+#include "BaseMaterial.h"
+
 
 ModelComponent::ModelComponent(const std::wstring& assetFile, bool castShadows) :
 	m_AssetFile(assetFile),

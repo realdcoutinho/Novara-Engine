@@ -1,5 +1,10 @@
 #include "EnginePCH.h"
 #include "ControllerComponent.h"
+#include "TransformComponent.h"
+#include "PhysxHelper.h"
+#include "GameObject.h"
+#include "GameScene.h"
+#include "Logger.h"
 
 ControllerComponent::ControllerComponent(const PxCapsuleControllerDesc& controllerDesc) :
 	m_ControllerDesc{ controllerDesc }

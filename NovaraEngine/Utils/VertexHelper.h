@@ -1,5 +1,6 @@
 #pragma once
 //Resharper Disable All
+#include "MathHelper.h"
 
 struct VertexPosCol
 {

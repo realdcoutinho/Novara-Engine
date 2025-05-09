@@ -1,5 +1,7 @@
-
-
+#include "TransformComponent.h"
+#include "Logger.h"
+#include "GameObject.h"
+#include "Macros.h"
 TransformComponent::TransformComponent() :
 	m_Position{ 0, 0, 0 },
 	m_WorldPosition{ 0, 0, 0 },

@@ -1,4 +1,8 @@
 #pragma once
+#include "Logger.h"
+
+#include "MeshFilter.h"
+
 class ModelAnimator final
 {
 public:

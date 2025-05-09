@@ -3,6 +3,7 @@
 
 class MeshFilter;
 class ModelAnimator;
+class BaseMaterial;
 
 class ModelComponent : public BaseComponent
 {

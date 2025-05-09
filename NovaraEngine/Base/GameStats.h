@@ -1,6 +1,7 @@
 #pragma once
 #include <chrono>
 #include <deque>
+#include "Singleton.h"
 
 class GameStats final
 {

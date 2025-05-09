@@ -1,4 +1,6 @@
 #pragma once
+#include "Logger.h"
+#include "Utils.h"
 
 template<class T>
 class Singleton

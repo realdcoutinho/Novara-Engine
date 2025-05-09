@@ -1,6 +1,7 @@
 #include "EnginePCH.h"
 #include "CubePrefab.h"
-
+#include "VertexHelper.h"
+#include "MeshDrawComponent.h"
 CubePrefab::CubePrefab(float width, float height, float depth, const XMFLOAT4& color):
 	m_Width(width),
 	m_Height(height),
