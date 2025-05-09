@@ -1,6 +1,10 @@
 #pragma once
 
 #include "Macros.h"
+#include <map>
+#include <sstream>
+
+using namespace std;
 
 //Input Layout Description
 enum class ILSemantic : UINT

@@ -2,6 +2,8 @@
 #include "../Base/Enumerations.h"
 #include "Xinput.h"
 #include "Structs.h"
+#include <map>
+#include <chrono>
 
 class InputManager final
 {

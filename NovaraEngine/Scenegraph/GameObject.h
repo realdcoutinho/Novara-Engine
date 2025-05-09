@@ -1,6 +1,7 @@
 #pragma once
 #include <functional>
 #include "BaseComponent.h"
+#include "GameScene.h"
 enum class PxTriggerAction
 {
 	ENTER,

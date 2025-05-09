@@ -1,5 +1,6 @@
 #pragma once
 #include "BaseComponent.h"
+#include <string>
 
 class MeshFilter;
 class ModelAnimator;

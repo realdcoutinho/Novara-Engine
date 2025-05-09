@@ -1,10 +1,10 @@
 
-#ifdef _WIN32
-#include <Windows.h>
-#endif
+//ifdef _WIN32
+//include <Windows.h>
+//endif
 
-#include <wrl/client.h>
-using Microsoft::WRL::ComPtr;
+//#include <wrl/client.h>
+//using Microsoft::WRL::ComPtr;
 
 // DirectX core headers
 #include <d3d11.h>
@@ -60,13 +60,13 @@ using namespace physx;
 #pragma endregion
 
 
-#pragma region IMGUI
-#include <imgui.h>
-#include <imgui_impl_win32.h>
-#include <imgui_impl_dx11.h>
-
-#pragma comment(lib, "ImGui_x64.lib")
-#pragma endregion
+//#pragma region IMGUI
+//#include <imgui.h>
+//#include <imgui_impl_win32.h>
+//#include <imgui_impl_dx11.h>
+//
+//#pragma comment(lib, "ImGui_x64.lib")
+//#pragma endregion
 
 
 
@@ -91,42 +91,42 @@ using namespace physx;
 
 
 
-//Core
-#include <wchar.h>
-#include <string>
-#include <memory>
-#include <locale.h>
-#include <codecvt>
-#include <cwctype>
-
-//STL
-#include <algorithm>
-#include <functional>
-
-//Misc
-#include <source_location>
-#include <filesystem>
-#include <format>
-#include <codeanalysis\warnings.h>
-#include <rpc.h>
-#include <typeinfo>
-namespace fs = std::filesystem;
-#pragma endregion
-
-
-
-//Streams
-#include <iostream>
-#include <fstream>
-#include <sstream>
-
-//Containers
-#include <vector>
-#include <map>
-#include <unordered_map>
+////Core
+//#include <wchar.h>
+//#include <string>
+//#include <memory>
+//#include <locale.h>
+//#include <codecvt>
+//#include <cwctype>
+//
+////STL
+//#include <algorithm>
+//#include <functional>
+//
+////Misc
+//#include <source_location>
+//#include <filesystem>
+//#include <format>
+//#include <codeanalysis\warnings.h>
+//#include <rpc.h>
+//#include <typeinfo>
+//namespace fs = std::filesystem;
+//#pragma endregion
 
 
-using namespace std;
+
+////Streams
+//#include <iostream>
+//#include <fstream>
+//#include <sstream>
+//
+////Containers
+//#include <vector>
+//#include <map>
+//#include <unordered_map>
+
+
+//using namespace std;
 
 //ENGINE HEADERS
 //#include "BaseComponent.h"

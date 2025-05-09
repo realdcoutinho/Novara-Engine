@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Structs.h"
+#include <wrl/client.h>
+using Microsoft::WRL::ComPtr;
 
 class RenderTarget;
 

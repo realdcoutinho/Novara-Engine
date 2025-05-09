@@ -1,5 +1,9 @@
-#include "EnginePCH.h"
+//#include "EnginePCH.h"
 #include "BinaryReader.h"
+#include <string>
+#include <sstream>
+
+using namespace std;
 
 BinaryReader::~BinaryReader(void)
 {

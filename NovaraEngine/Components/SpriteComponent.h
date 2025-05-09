@@ -1,5 +1,7 @@
 #pragma once
 #include "BaseComponent.h"
+#include <string>
+
 
 class TextureData;
 

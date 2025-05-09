@@ -1,6 +1,8 @@
 #pragma once
 #include "Enumerations.h"
 #include "BaseComponent.h"
+#include <string>
+#include <memory>
 
 #pragma region ColliderInfo
 

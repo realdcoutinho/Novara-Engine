@@ -1,5 +1,7 @@
 #pragma once
 #include "Singleton.h"
+#include <filesystem>
+namespace fs = std::filesystem;
 
 struct ContentLoadInfo
 {

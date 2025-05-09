@@ -1,6 +1,7 @@
 #pragma once
 #include "BaseComponent.h"
-
+#include <wrl/client.h>
+using Microsoft::WRL::ComPtr;
 
 struct TrianglePosNormCol;
 struct QuadPosNormCol;

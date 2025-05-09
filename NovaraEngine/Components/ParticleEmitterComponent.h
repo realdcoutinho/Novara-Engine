@@ -2,6 +2,7 @@
 
 #include "VertexHelper.h"
 #include "BaseComponent.h"
+#include <string>
 
 class ParticleMaterial;
 

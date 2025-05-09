@@ -1,10 +1,11 @@
 //#include "EnginePCH.h"
 #include "Logger.h"
 #include "Utils.h"
-
+#include <sstream>
 #include <fcntl.h>
 #include <iomanip>
 #include <comdef.h>
+#include <filesystem>
 
 namespace fs = std::filesystem;
 
