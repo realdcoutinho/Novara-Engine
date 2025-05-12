@@ -164,6 +164,26 @@ void RigidBodyComponent::CreateActor()
 	ASSERT_IF(m_pActor != nullptr, L"CreateActor cannot be called multiple times")
 
 		const auto pPhysX = PhysXManager::Get()->GetPhysics();
+
+	auto& go = GetGameObject();
+	auto scene = go.GetScene();
+	if (!scene)
+	{
+		Logger::LogWarning(L"RigidBodyComponent: Cannot create actor without a scene");
+		return;
+	}
+	PhysxProxy& pPhysxScene1 = scene->GetPhysxProxy();
+	auto PxScene = pPhysxScene1.GetPhysxScene();
+	if (!PxScene)
+	{
+		Logger::LogWarning(L"RigidBodyComponent: Cannot create actor without a scene");
+		return;
+	}
+
+
+
+
+
 	const auto pPhysxScene = GetGameObject().GetScene()->GetPhysxProxy().GetPhysxScene();
 	const auto& pTransform = GetTransform();
 
