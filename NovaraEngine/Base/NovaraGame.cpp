@@ -1,6 +1,8 @@
-//#include "EnginePCH.h"
+#pragma once
 #include "NovaraGame.h"
-#include <Windows.h>
+
+//#include <Windows.h>
+
 #include "InputManager.h"
 #include "GameStats.h"
 #include "MaterialManager.h"

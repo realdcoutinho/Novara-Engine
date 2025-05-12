@@ -1,5 +1,6 @@
-#include "EnginePCH.h"
+#pragma once
 #include "SpriteComponent.h"
+
 #include "ContentManager.h"
 
 

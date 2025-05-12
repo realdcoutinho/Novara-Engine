@@ -1,12 +1,4 @@
-#pragma once
-enum class LogLevel : UINT
-{
-	Debug = 0x1,
-	Info = 0x2,
-	Warning = 0x4,
-	Error = 0x8,
-	Todo = 0x16
-};
+
 
 
 #include <memory>
@@ -17,6 +9,8 @@ enum class LogLevel : UINT
 #include <fstream>
 #include <iostream>
 
+#include <DirectXTex.h>
+
 #include "../Libraries/FMOD/include/fmod_common.h"
 #include "foundation/PxErrors.h" 
 
@@ -24,6 +18,16 @@ enum class LogLevel : UINT
 
 using namespace physx;
 using namespace std;
+
+#pragma once
+enum class LogLevel : UINT
+{
+	Debug = 0x1,
+	Info = 0x2,
+	Warning = 0x4,
+	Error = 0x8,
+	Todo = 0x16
+};
 
 struct LogString
 {

@@ -1,4 +1,5 @@
-#include "EnginePCH.h"
+#pragma once
+
 #include "InputManager.h"
 #include "MathHelper.H"
 #include "Logger.h"

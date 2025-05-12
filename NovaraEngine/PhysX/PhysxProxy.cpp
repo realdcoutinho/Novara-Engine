@@ -1,4 +1,5 @@
-#include "EnginePCH.h"
+#pragma once
+
 #include "PhysxProxy.h"
 //#include <characterkinematic/PxControllerManager.h>
 

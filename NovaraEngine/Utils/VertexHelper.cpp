@@ -1,5 +1,5 @@
 
-#include "EnginePCH.h"
+#pragma once
 #include "VertexHelper.h"
 
 //Prevents Warning LNK4221 > Caused by empty source files in a Library

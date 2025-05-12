@@ -1,4 +1,4 @@
-#include "EnginePCH.h"
+#pragma once
 #include "CubePrefab.h"
 #include "VertexHelper.h"
 #include "MeshDrawComponent.h"

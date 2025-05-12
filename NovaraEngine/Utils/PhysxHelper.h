@@ -1,5 +1,15 @@
 #pragma once
 
+#include <Windows.h>
+
+
+#include "DirectXMath.h"
+using namespace DirectX;
+
+#include <PxPhysicsAPI.h>
+using namespace physx;
+
+
 namespace PhysxHelper
 {
 	inline PxVec3 ToPxVec3(const XMFLOAT3& vec)

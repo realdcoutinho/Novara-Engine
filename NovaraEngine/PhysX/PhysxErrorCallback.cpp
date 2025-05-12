@@ -1,4 +1,5 @@
-#include "EnginePCH.h"
+#pragma once
+
 #include "PhysxErrorCallback.h"
 
 #include <string>

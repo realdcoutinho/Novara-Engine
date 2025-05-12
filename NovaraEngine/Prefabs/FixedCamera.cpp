@@ -1,5 +1,6 @@
-#include "EnginePCH.h"
+#pragma once
 #include "FixedCamera.h"
+
 #include "CameraComponent.h"
 
 void FixedCamera::Initialize(const SceneContext&)

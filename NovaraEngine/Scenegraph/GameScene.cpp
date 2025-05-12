@@ -1,5 +1,5 @@
 #pragma once
-#include "EnginePCH.h"
+
 #include "GameScene.h"
 #include "TransformComponent.h"
 #include "CameraComponent.h"

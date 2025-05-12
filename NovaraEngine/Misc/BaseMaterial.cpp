@@ -1,6 +1,8 @@
-#include "EnginePCH.h"
+#pragma once
 #include "BaseMaterial.h"
+
 #include <ranges>
+
 #include "TransformComponent.h"
 #include "CameraComponent.h"
 #include "ModelComponent.h"

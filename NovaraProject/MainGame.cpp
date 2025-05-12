@@ -1,4 +1,5 @@
 //#include "Engin.h"
+#pragma once
 #include "MainGame.h"
 #include "SceneManager.h"
 

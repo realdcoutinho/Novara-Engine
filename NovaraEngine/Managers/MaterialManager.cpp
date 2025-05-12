@@ -1,4 +1,4 @@
-#include "EnginePCH.h"
+#pragma once
 #include "MaterialManager.h"
 #include "BaseMaterial.h"
 #include "PostProcessingMaterial.h"

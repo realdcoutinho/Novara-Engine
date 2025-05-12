@@ -1,4 +1,4 @@
-#include "EnginePCH.h"
+#pragma once
 #include "MeshFilter.h"
 #include "BaseMaterial.h"
 #include "Logger.h"

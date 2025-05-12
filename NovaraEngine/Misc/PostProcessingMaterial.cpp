@@ -1,5 +1,6 @@
-#include "EnginePCH.h"
+#pragma once
 #include "PostProcessingMaterial.h"
+
 #include "RenderTarget.h"
 #include "ContentManager.h"
 #include "EffectHelper.h"

@@ -1,6 +1,7 @@
 #pragma once
-#include "EnginePCH.h"
+#pragma once
 #include "TextureData.h"
+
 #include "Macros.h"
 #include "Logger.h"
 

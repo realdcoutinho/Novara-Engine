@@ -1,5 +1,6 @@
-#include "EnginePCH.h"
+#pragma once
 #include "TextRenderer.h"
+
 #include "ContentManager.h"
 #include "EffectHelper.h"
 #include "VertexHelper.h"

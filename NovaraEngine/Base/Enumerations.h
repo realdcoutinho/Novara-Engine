@@ -1,4 +1,7 @@
 #pragma once
+
+#include <DirectXTex.h>
+
 #include "../Utils/Macros.h"
 
 #pragma region InputManager

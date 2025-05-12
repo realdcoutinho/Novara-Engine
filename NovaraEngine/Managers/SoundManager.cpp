@@ -1,5 +1,6 @@
-#include "EnginePCH.h"
+#pragma once
 #include "SoundManager.h"
+
 #include "Macros.h"
 
 SoundManager::SoundManager()

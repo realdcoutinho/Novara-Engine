@@ -1,5 +1,6 @@
-#include "EnginePCH.h"
+#pragma once
 #include "PhysXManager.h"
+
 #include "NovaraSimulationFilterShader.h"
 #include "PhysxAllocator.h"
 #include "PhysxErrorCallback.h"

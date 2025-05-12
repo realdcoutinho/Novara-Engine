@@ -1,5 +1,8 @@
 #pragma once
 
+#include "DirectXMath.h"
+using namespace DirectX;
+
 #pragma region MeshFilter Helper Structs
 
 #include "EffectHelper.h"

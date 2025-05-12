@@ -1,5 +1,6 @@
-#include "EnginePCH.h"
+#pragma once
 #include "ShadowMapRenderer.h"
+
 #include "RenderTarget.h"
 
 //#include "Misc/ShadowMapMaterial.h"

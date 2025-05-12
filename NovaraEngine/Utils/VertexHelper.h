@@ -1,5 +1,8 @@
 #pragma once
-//Resharper Disable All
+
+#include <DirectXColors.h>
+using namespace DirectX;
+
 #include "MathHelper.h"
 
 struct VertexPosCol

@@ -1,6 +1,12 @@
 #pragma once
-#include "SoundManager.h"
 #include "Singleton.h"
+
+#pragma warning(disable: 4505 26812)
+#include "fmod.hpp" //Precompiled Header
+#include "fmod_errors.h"
+#pragma warning(pop)
+
+
 class SoundManager final: public Singleton<SoundManager>
 {
 public:

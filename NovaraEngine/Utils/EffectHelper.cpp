@@ -1,5 +1,8 @@
 #pragma once
-#include "EnginePCH.h"
+#include <cmath>
+#include <map>
+	
+
 #include "EffectHelper.h"
 #include "Utils.h"
 #include "Logger.h"

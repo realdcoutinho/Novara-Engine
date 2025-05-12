@@ -1,4 +1,13 @@
 #pragma once
+
+//#pragma warning(push)
+//#pragma warning ( disable : ALL_CODE_ANALYSIS_WARNINGS)
+#include <DirectXTex.h>
+//#pragma warning(pop)
+
+#include <DirectXMath.h>
+using namespace DirectX;
+
 #include "../Base/Enumerations.h"
 #include "../Components/BaseComponent.h"
 

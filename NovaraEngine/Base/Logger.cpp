@@ -1,13 +1,20 @@
-//#include "EnginePCH.h"
-#include "Logger.h"
-#include "Utils.h"
+#pragma once
+
+
 #include <sstream>
 #include <fcntl.h>
 #include <iomanip>
 #include <comdef.h>
 #include <filesystem>
-
 namespace fs = std::filesystem;
+
+#pragma warning(disable: 4505 26812)
+#include "fmod.hpp" //Precompiled Header
+#include "fmod_errors.h"
+#pragma warning(pop)
+
+#include "Logger.h"
+#include "Utils.h"
 
 __int64 Logger::m_PerformanceTimerArr[] = { 0 };
 double Logger::m_PcFreq = 0.0;

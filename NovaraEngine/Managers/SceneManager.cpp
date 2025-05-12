@@ -1,4 +1,5 @@
-#include "EnginePCH.h"
+#pragma once
+
 #include "SceneManager.h"
 #include "GameStats.h"
 #include "DebugRenderer.h"

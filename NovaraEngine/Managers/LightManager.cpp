@@ -1,5 +1,3 @@
-#include "EnginePCH.h"
-
 #pragma once
 #include "LightManager.h"
 

@@ -1,5 +1,13 @@
 #pragma once
 
+#include <vector>
+#include <Windows.h>
+
+#include "DirectXMath.h"
+using namespace DirectX;
+
+
+
 enum class LightType : uint32_t
 {
 	Point = 0,

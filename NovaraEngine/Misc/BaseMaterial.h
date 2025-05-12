@@ -1,12 +1,10 @@
 #pragma once
-//#include "../Utils/EffectHelper.h"
+#include <xstring>
 
-
+#include <d3dx11effect.h>
 
 #include "../Utils/Utils.h"
 #include "EffectHelper.h"
-
-#include <xstring>
 
 struct D3D11Context;
 class ModelComponent;

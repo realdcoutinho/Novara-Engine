@@ -1,6 +1,12 @@
 #pragma once
+
+#include <DirectXMath.h>
+using namespace DirectX;
+
 #include "../PhysX/PhysxProxy.h"
 #include "../Scenegraph/GameScene.h"
+
+
 
 
 

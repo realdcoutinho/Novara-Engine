@@ -1,4 +1,4 @@
-#include "EnginePCH.h"
+#pragma once
 #include "SpriteFontLoader.h"
 #include "BinaryReader.h"
 #include "SpriteFont.h"

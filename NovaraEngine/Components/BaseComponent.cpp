@@ -1,7 +1,7 @@
-//#include "EnginePCH.h"
 #pragma once
-#include "Logger.h"
 #include "BaseComponent.h"
+
+#include "Logger.h"
 #include "GameObject.h"
 #include "TransformComponent.h"
 #include "GameScene.h"

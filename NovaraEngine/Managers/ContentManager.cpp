@@ -1,5 +1,6 @@
-#include "EnginePCH.h"
+#pragma once
 #include "ContentManager.h"
+
 #include "EffectLoader.h"
 
 std::vector<BaseLoader*> ContentManager::m_Loaders = std::vector<BaseLoader*>();

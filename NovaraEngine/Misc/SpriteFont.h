@@ -1,6 +1,10 @@
 #pragma once
 #include "Misc/TextureData.h"
 
+#include <string>
+#include <unordered_map>
+
+
 #pragma region Helper Structs
 struct FontMetric
 {

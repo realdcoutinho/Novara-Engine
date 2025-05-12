@@ -1,5 +1,7 @@
 #pragma once
 
+#include <DirectXTex.h>
+
 #pragma region SafeRelease/SafeDelete
 #define SafeRelease(pInterface)\
 	if(pInterface != nullptr)\

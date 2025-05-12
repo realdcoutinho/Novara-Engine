@@ -1,5 +1,7 @@
-#include "EnginePCH.h"
+#pragma once
+
 #include "DebugRenderer.h"
+
 #include "CameraComponent.h"
 #include "PhysxHelper.h"
 #include "ContentManager.h"

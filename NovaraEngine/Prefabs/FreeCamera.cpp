@@ -1,5 +1,6 @@
-//#include "EnginePCH.h"
+#pragma once
 #include "FreeCamera.h"
+
 #include "TransformComponent.h"
 #include "CameraComponent.h"
 #include "BaseComponent.h"

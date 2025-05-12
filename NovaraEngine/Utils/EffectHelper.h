@@ -1,11 +1,14 @@
 #pragma once
 
-#include "Macros.h"
+
+
 #include <map>
 #include <sstream>
-
 using namespace std;
 
+#include <d3dx11effect.h>
+
+#include "Macros.h"
 //Input Layout Description
 enum class ILSemantic : UINT
 {

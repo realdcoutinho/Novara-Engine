@@ -1,4 +1,5 @@
-#include "EnginePCH.h"
+#pragma once
+
 #include "ModelAnimator.h"
 
 ModelAnimator::ModelAnimator(MeshFilter* pMeshFilter) :

@@ -1,5 +1,6 @@
-#include "EnginePCH.h"
+#pragma once
 #include "RigidBodyComponent.h"
+
 #include "TransformComponent.h"
 #include "PhysXManager.h"
 #include "PhysxHelper.h"

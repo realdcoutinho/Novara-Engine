@@ -1,7 +1,10 @@
-#include "EnginePCH.h"
-#include "GameStats.h"
+#pragma once
+
 
 #include <numeric>
+
+#include "GameStats.h"
+
 
 bool GameStats::m_IsMeasuring = false;
 bool GameStats::m_ResetPending = false;

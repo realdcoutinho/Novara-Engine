@@ -1,5 +1,7 @@
-#include "EnginePCH.h"
+#pragma once
+
 #include "MeshIndexedDrawComponent.h"
+
 #include "TransformComponent.h"
 #include "CameraComponent.h"
 #include "ContentManager.h"

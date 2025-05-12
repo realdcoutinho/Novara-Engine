@@ -1,4 +1,5 @@
-#include "EnginePCH.h"
+#pragma once
+
 #include "RenderTarget.h"
 
 RenderTarget::RenderTarget(const D3D11Context& d3dContext) :

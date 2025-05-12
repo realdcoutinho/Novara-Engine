@@ -1,4 +1,4 @@
-#include "EnginePCH.h"
+#pragma once
 #include "ControllerComponent.h"
 #include "TransformComponent.h"
 #include "PhysxHelper.h"

@@ -1,4 +1,4 @@
-#include "EnginePCH.h"
+#pragma once
 #include "MeshDrawComponent.h"
 #include "TransformComponent.h"
 #include "CameraComponent.h"

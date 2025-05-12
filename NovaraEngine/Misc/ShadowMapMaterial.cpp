@@ -1,4 +1,4 @@
-#include "EnginePCH.h"
+#pragma once
 #include "ShadowMapMaterial.h"
 
 ShadowMapMaterial::ShadowMapMaterial() :

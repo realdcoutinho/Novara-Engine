@@ -1,4 +1,8 @@
 #pragma once
+
+#include <PxPhysicsAPI.h>
+using namespace physx;
+
 #include "../Base/Structs.h"
 
 

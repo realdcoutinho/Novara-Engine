@@ -1,4 +1,4 @@
-//#include "EnginePCH.h"
+#pragma once
 #include "BinaryReader.h"
 #include <string>
 #include <sstream>

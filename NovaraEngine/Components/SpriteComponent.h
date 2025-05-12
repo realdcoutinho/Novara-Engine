@@ -1,6 +1,11 @@
 #pragma once
-#include "BaseComponent.h"
+
 #include <string>
+
+#include <DirectXColors.h>
+using namespace DirectX;
+
+#include "BaseComponent.h"
 
 
 class TextureData;

@@ -1,8 +1,17 @@
 #pragma once
-#include "Enumerations.h"
-#include "BaseComponent.h"
+
 #include <string>
 #include <memory>
+
+#include "DirectXMath.h"
+using namespace DirectX;
+
+#include <PxPhysicsAPI.h>
+using namespace physx;
+
+#include "Enumerations.h"
+#include "BaseComponent.h"
+
 
 #pragma region ColliderInfo
 

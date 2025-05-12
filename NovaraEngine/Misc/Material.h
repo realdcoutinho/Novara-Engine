@@ -1,4 +1,7 @@
 #pragma once
+
+#include <d3dx11effect.h>
+
 #include "ContentManager.h"
 #include "BaseMaterial.h"
 

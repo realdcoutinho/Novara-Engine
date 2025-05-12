@@ -1,4 +1,4 @@
-#include "EnginePCH.h"
+#pragma once
 #include "MeshFilterLoader.h"
 #include "MeshFilter.h"
 #include "BinaryReader.h"

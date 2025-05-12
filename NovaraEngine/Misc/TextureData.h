@@ -1,6 +1,12 @@
 #pragma once
 #include <string>
 
+#include <d3dx11effect.h>
+
+#include "DirectXMath.h"
+using namespace DirectX;
+
+
 class TextureData
 {
 public:

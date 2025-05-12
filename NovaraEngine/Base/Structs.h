@@ -1,13 +1,13 @@
 #pragma once
 
+
+#include <memory>
+#include <xstring>
+
 #include <d3d11.h>
 #include <dxgi.h>
 #include <DirectXColors.h>
 #include <DirectXMath.h>
-#include <memory>
-#include <xstring>
-
-
 
 
 using namespace std;

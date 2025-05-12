@@ -1,5 +1,6 @@
 //Precompiled Header [ALWAYS ON TOP IN CPP]
-//#include "stdafx.h"
+
+#pragma once
 #include "MinionScene.h"
 
 //#include "Prefabs/CubePrefab.h"

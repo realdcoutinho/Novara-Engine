@@ -1,7 +1,11 @@
 #pragma once
-#include "BaseComponent.h"
+
 #include <wrl/client.h>
 using Microsoft::WRL::ComPtr;
+
+#include <d3dx11effect.h>
+
+#include "BaseComponent.h"
 
 struct TrianglePosNormCol;
 struct QuadPosNormCol;
