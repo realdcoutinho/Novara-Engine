@@ -1,5 +1,16 @@
-#include "EnginePCH.h"
+#pragma once
+
 #include "PhysxProxy.h"
+
+#include "PhysXManager.h"
+#include "Macros.h"
+#include "Logger.h"
+#include "DebugRenderer.h"
+#include "PhysxHelper.h"
+#include "Structs.h"
+#include "GameTime.h"
+#include "CameraComponent.h"
+#include "TransformComponent.h"
 //#include <characterkinematic/PxControllerManager.h>
 
 bool PhysxProxy::m_PhysXFrameStepping{ false };
@@ -62,16 +73,17 @@ void PhysxProxy::Update(const SceneContext& sceneContext) const
 		}
 	}
 
-//#ifdef _DEBUG
-//	//Send Camera to PVD
-//	if (m_pPhysxScene->getScenePvdClient())
-//	{
-//		const auto pCameraTransform = sceneContext.pCamera->GetTransform();
-//		XMFLOAT3 cameraTarget{};
-//		XMStoreFloat3(&cameraTarget, XMLoadFloat3(&pCameraTransform->GetWorldPosition()) + (XMLoadFloat3(&pCameraTransform->GetForward()) * 10.f));
-//		m_pPhysxScene->getScenePvdClient()->updateCamera("SceneCam", PhysxHelper::ToPxVec3(pCameraTransform->GetWorldPosition()), PhysxHelper::ToPxVec3(pCameraTransform->GetUp()), PhysxHelper::ToPxVec3(cameraTarget));
-//	}
-//#endif
+#ifdef _DEBUG
+	//Send Camera to PVD
+	if (m_pPhysxScene->getScenePvdClient())
+	{
+		const auto& pCameraTransform = sceneContext.pCamera->GetTransform();
+		XMFLOAT3 cameraTarget{};
+	
+		XMStoreFloat3(&cameraTarget, XMLoadFloat3(&pCameraTransform.GetWorldPosition()) + (XMLoadFloat3(&pCameraTransform.GetForward()) * 10.f));
+		m_pPhysxScene->getScenePvdClient()->updateCamera("SceneCam", PhysxHelper::ToPxVec3(pCameraTransform.GetWorldPosition()), PhysxHelper::ToPxVec3(pCameraTransform.GetUp()), PhysxHelper::ToPxVec3(cameraTarget));
+	}
+#endif
 }
 
 void PhysxProxy::Draw(const SceneContext& sceneContext) const
@@ -82,28 +94,28 @@ void PhysxProxy::Draw(const SceneContext& sceneContext) const
 
 void PhysxProxy::onTrigger(PxTriggerPair* pairs, PxU32 count)
 {
-	//for (PxU32 i = 0; i < count; i++)
-	//{
-	//	// ignore pairs when shapes have been deleted
-	//	if (pairs[i].flags & (PxTriggerPairFlag::eREMOVED_SHAPE_TRIGGER | PxTriggerPairFlag::
-	//		eREMOVED_SHAPE_OTHER))
-	//		continue;
+	for (PxU32 i = 0; i < count; i++)
+	{
+		// ignore pairs when shapes have been deleted
+		if (pairs[i].flags & (PxTriggerPairFlag::eREMOVED_SHAPE_TRIGGER | PxTriggerPairFlag::
+			eREMOVED_SHAPE_OTHER))
+			continue;
 
-	//	const auto triggerComponent = reinterpret_cast<BaseComponent*>(((pairs[i].triggerShape)->getActor())->userData);
-	//	const auto otherComponent = reinterpret_cast<BaseComponent*>(((pairs[i].otherShape)->getActor())->userData);
+		const auto triggerComponent = reinterpret_cast<BaseComponent*>(((pairs[i].triggerShape)->getActor())->userData);
+		const auto otherComponent = reinterpret_cast<BaseComponent*>(((pairs[i].otherShape)->getActor())->userData);
 
 
-	//	if (triggerComponent != nullptr && otherComponent != nullptr)
-	//	{
-	//		GameObject* trigger = triggerComponent->GetGameObject();
-	//		GameObject* other = otherComponent->GetGameObject();
+		if (triggerComponent != nullptr && otherComponent != nullptr)
+		{
+			auto trigger = &triggerComponent->GetGameObject();
+			auto other = &otherComponent->GetGameObject();
 
-	//		if (pairs[i].status & PxPairFlag::eNOTIFY_TOUCH_FOUND)
-	//			trigger->OnTrigger(trigger, other, PxTriggerAction::ENTER);
-	//		else if (pairs[i].status & PxPairFlag::eNOTIFY_TOUCH_LOST)
-	//			trigger->OnTrigger(trigger, other, PxTriggerAction::LEAVE);
-	//	}
-	//}
+			if (pairs[i].status & PxPairFlag::eNOTIFY_TOUCH_FOUND)
+				trigger->OnTrigger(trigger, other, PxTriggerAction::ENTER);
+			else if (pairs[i].status & PxPairFlag::eNOTIFY_TOUCH_LOST)
+				trigger->OnTrigger(trigger, other, PxTriggerAction::LEAVE);
+		}
+	}
 }
 
 bool PhysxProxy::Raycast(const PxVec3& origin, const PxVec3& unitDir, const PxReal distance,

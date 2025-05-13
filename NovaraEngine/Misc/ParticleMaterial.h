@@ -1,4 +1,6 @@
 #pragma once
+#include "Material.h"
+
 class ParticleMaterial : public Material<ParticleMaterial>
 {
 public:

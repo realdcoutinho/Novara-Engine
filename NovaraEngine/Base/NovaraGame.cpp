@@ -1,6 +1,24 @@
-#include "EnginePCH.h"
+#pragma once
 #include "NovaraGame.h"
-#include <Windows.h>
+
+//#include <Windows.h>
+
+#include "InputManager.h"
+#include "GameStats.h"
+#include "MaterialManager.h"
+#include "SceneManager.h"
+#include "PhysXManager.h"
+#include "RenderTarget.h"
+#include "DebugRenderer.h"
+#include "ImguiHelper.h"
+#include "ContentManager.h"
+#include "SoundManager.h"
+#include "SpriteRenderer.h"
+#include "TextRenderer.h"
+#include "ShadowMapRenderer.h"
+#include "Logger.h"
+
+
 
 NovaraGame::NovaraGame() :
 	m_IsActive(true)

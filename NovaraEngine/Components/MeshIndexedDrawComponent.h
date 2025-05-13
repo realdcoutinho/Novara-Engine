@@ -1,5 +1,12 @@
 #pragma once
 
+#include <d3dx11effect.h>
+
+#include "BaseComponent.h"
+#include "VertexHelper.h"
+
+struct VertexPosNormCol;
+
 class MeshIndexedDrawComponent final : public BaseComponent
 {
 public:

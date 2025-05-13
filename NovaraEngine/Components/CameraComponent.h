@@ -1,5 +1,16 @@
 #pragma once
 
+#include <DirectXTex.h>
+#include <DirectXMath.h>
+using namespace DirectX;
+
+
+#include "BaseComponent.h"
+#include "Enumerations.h"
+
+class GameObject;
+
+
 class CameraComponent : public BaseComponent
 {
 public:

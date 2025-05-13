@@ -1,8 +1,16 @@
-#include "EnginePCH.h"
+#pragma once
+
 #include "PhysxErrorCallback.h"
+
+#include <string>
+#include <sstream>
+
 
 #pragma warning(push)
 #pragma warning(disable: 26812)
+
+using namespace std;
+
 void PhysxErrorCallback::reportError(PxErrorCode::Enum code, const char* message, const char* file, int line)
 {
 	std::wstringstream ss;

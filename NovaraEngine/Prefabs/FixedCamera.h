@@ -1,4 +1,8 @@
 #pragma once
+#include "GameObject.h"
+
+class CameraComponent;
+
 class FixedCamera final : public GameObject
 {
 public:
@@ -11,4 +15,7 @@ public:
 
 protected:
 	void Initialize(const SceneContext& sceneContext) override;
+
+private:
+	CameraComponent* m_pCamera{};
 };

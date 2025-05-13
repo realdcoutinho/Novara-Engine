@@ -1,5 +1,22 @@
 #pragma once
 
+#include <wrl/client.h>
+using Microsoft::WRL::ComPtr;
+
+#include <d3dx11effect.h>
+
+#include "BaseComponent.h"
+
+struct TrianglePosNormCol;
+struct QuadPosNormCol;
+struct VertexPosNormCol;
+struct VertexPosCol;
+struct SceneContext;
+//struct ID3DX11EffectMatrixVariable;
+//struct ID3DX11Effect;
+//struct ID3DX11EffectTechnique;
+//struct ID3D11InputLayout;
+
 class MeshDrawComponent : public BaseComponent
 {
 public:

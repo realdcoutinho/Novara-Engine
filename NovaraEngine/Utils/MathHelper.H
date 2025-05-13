@@ -1,5 +1,15 @@
 #pragma once
 
+
+#include <cstdlib> 
+#include <cmath>
+#include <Windows.h>
+
+#include <DirectXMath.h>
+using namespace DirectX;
+
+
+
 namespace MathHelper
 {
 	inline XMFLOAT3 QuaternionToEuler(XMFLOAT4 q)

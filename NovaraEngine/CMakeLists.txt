@@ -1,113 +1,60 @@
-# Declare engine library
+# Declare engine library (apenas ficheiros .cpp!)
 add_library(NovaraEngine
     Base/NovaraGame.cpp
- "Scenegraph/GameObject.h" 
- "Scenegraph/GameObject.cpp" 
- "Components/BaseComponent.h" 
- "Components/BaseComponent.cpp" 
- "Components/TransformComponent.cpp" 
- "Scenegraph/GameScene.h" 
- "Scenegraph/GameScene.cpp" 
- "Base/Structs.h" 
- "Components/ControllerComponent.h" 
- "Components/ControllerComponent.cpp" 
- "Components/CameraComponent.h" 
- "Components/CameraComponent.cpp" 
- "Base/Logger.cpp" 
- "Base/Logger.h" 
- "PhysX/PhysxProxy.h" 
- "PhysX/PhysxProxy.cpp" 
- "PhysX/NovaraSimulationFilterShader.h"  
- "PhysX/PhysxErrorCallback.cpp" 
- "PhysX/PhysxErrorCallback.h" 
- "Prefabs/FixedCamera.h" 
- "Prefabs/FixedCamera.cpp" 
- "Prefabs/FreeCamera.h" 
- "Prefabs/FreeCamera.cpp" 
- "Managers/InputManager.h" 
- "Managers/InputManager.cpp" 
- "Base/Enumerations.h" 
- "Utils/Utils.h" 
- "Utils/Macros.h" 
- "Utils/Singleton.h" 
- "Base/GameTime.h" 
- "Base/GameTime.cpp" 
- "Base/GameStats.h" 
- "Base/GameStats.cpp" 
- "Managers/SceneManager.h" 
- "Managers/SceneManager.cpp" 
- "Managers/PhysXManager.h" 
- "Managers/PhysXManager.cpp" 
- "Managers/LightManager.h" 
- "Managers/LightManager.cpp" 
- "Managers/MaterialManager.h" 
- "Managers/MaterialManager.cpp" 
- "Misc/BaseMaterial.h" 
- "Misc/BaseMaterial.cpp" 
- "Misc/Material.h" 
- "Misc/Material.cpp" 
- "Utils/PhysxHelper.h" 
- "Utils/PhysxHelper.cpp" 
- "Utils/MathHelper.h" 
- "Contents/ContentLoader.h" 
- "Managers/ContentManager.h" 
- "Managers/ContentManager.cpp" 
- "Misc/RenderTarget.h" 
- "Misc/RenderTarget.cpp" 
- "Graphics/DebugRenderer.h" 
- "Utils/VertexHelper.h" 
- "Utils/VertexHelper.cpp" 
- "Graphics/DebugRenderer.cpp" 
- "Utils/EffectHelper.h" 
- "Utils/EffectHelper.cpp" 
- "Contents/EffectLoader.h" 
- "Contents/EffectLoader.cpp" 
- "Utils/ImguiHelper.h" 
- "Utils/ImguiHelper.cpp"
-        "Components/MeshDrawComponent.h"
-        "Components/MeshDrawComponent.cpp"
-        "Components/MeshIndexedDrawComponent.h"
-        "Components/MeshIndexedDrawComponent.cpp"
-        "Components/ModelComponent.h"
-        "Components/ModelComponent.cpp"
-        "Misc/MeshFilter.h"
-        "Misc/MeshFilter.cpp"
-        "Misc/TextureData.h"
-        "Misc/TextureData.cpp"
-        "Misc/ModelAnimator.h"
-        "Misc/ModelAnimator.cpp"
-        "Components/ParticleEmitterComponent.h"
-        "Components/ParticleEmitterComponent.cpp"
-        "Components/RigidBodyComponent.h"
-        "Components/RigidBodyComponent.cpp"
-        "Components/SpriteComponent.h"
-        "Components/SpriteComponent.CPP"
-        "Contents/MeshFilterLoader.h"
-        "Contents/MeshFilterLoader.CPP"
-        "Utils/BinaryReader.h"
-        "Utils/BinaryReader.cpp"
-        "Contents/PxMeshLoader.h"
-        "Contents/PxMeshLoader.cpp"
-        "Contents/SpriteFontLoader.h"
-        "Contents/SpriteFontLoader.cpp"
-        "Misc/SpriteFont.h"
-        "Misc/SpriteFont.cpp"
-        "Contents/TextureDataLoader.h"
-        "Contents/TextureDataLoader.cpp"
-        "Graphics/ShadowMapRenderer.h"
-        "Graphics/ShadowMapRenderer.cpp"
-        "Misc/ShadowMapMaterial.h"
-        "Misc/ShadowMapMaterial.cpp"
-        "Graphics/SpriteRenderer.h"
-        "Graphics/SpriteRenderer.cpp"
-        "Graphics/TextRenderer.h"
-        "Graphics/TextRenderer.cpp"
-        "Misc/PostProcessingMaterial.h"
-        "Misc/PostProcessingMaterial.cpp"
-        "Misc/ParticleMaterial.h"
-        "Misc/ParticleMaterial.cpp"
-        "Managers/SoundManager.cpp"
-        "Managers/SoundManager.h")
+    Scenegraph/GameObject.cpp
+    Components/BaseComponent.cpp
+    Components/TransformComponent.cpp
+    Scenegraph/GameScene.cpp
+    Components/ControllerComponent.cpp
+    Components/CameraComponent.cpp
+    Base/Logger.cpp
+    PhysX/PhysxProxy.cpp
+    PhysX/PhysxErrorCallback.cpp
+    Prefabs/FixedCamera.cpp
+    Prefabs/FreeCamera.cpp
+    Managers/InputManager.cpp
+    Base/GameTime.cpp
+    Base/GameStats.cpp
+    Managers/SceneManager.cpp
+    Managers/PhysXManager.cpp
+    Managers/LightManager.cpp
+    Managers/MaterialManager.cpp
+    Misc/BaseMaterial.cpp
+    Misc/Material.cpp
+    Utils/PhysxHelper.cpp
+    Managers/ContentManager.cpp
+    Misc/RenderTarget.cpp
+    Graphics/DebugRenderer.cpp
+    Utils/VertexHelper.cpp
+    Utils/EffectHelper.cpp
+    Contents/EffectLoader.cpp
+    Utils/ImguiHelper.cpp
+    Components/MeshDrawComponent.cpp
+    Components/MeshIndexedDrawComponent.cpp
+    Components/ModelComponent.cpp
+    Misc/MeshFilter.cpp
+    Misc/TextureData.cpp
+    Misc/ModelAnimator.cpp
+    Components/ParticleEmitterComponent.cpp
+    Components/RigidBodyComponent.cpp
+    Components/SpriteComponent.CPP    # <-- ok manter .CPP se for mesmo esse nome
+    Contents/MeshFilterLoader.CPP     # <-- mesmo caso aqui
+    Utils/BinaryReader.cpp
+    Contents/PxMeshLoader.cpp
+    Contents/SpriteFontLoader.cpp
+    Misc/SpriteFont.cpp
+    Contents/TextureDataLoader.cpp
+    Graphics/ShadowMapRenderer.cpp
+    Misc/ShadowMapMaterial.cpp
+    Graphics/SpriteRenderer.cpp
+    Graphics/TextRenderer.cpp
+    Misc/PostProcessingMaterial.cpp
+    Misc/ParticleMaterial.cpp
+    Managers/SoundManager.cpp
+)
+
+add_compile_options(/wd26495)
+add_compile_options(/wd26495) # Disable warning C26495: Variable is uninitialized.
 
 # Optional: Add include directories for engine users
 target_include_directories(NovaraEngine PUBLIC 
@@ -126,7 +73,6 @@ target_include_directories(NovaraEngine PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/Contents
     ${CMAKE_CURRENT_SOURCE_DIR}/Graphics
 
-
     # External libraries
     ${CMAKE_SOURCE_DIR}/Libraries/FX11/include
     ${CMAKE_SOURCE_DIR}/Libraries/DirectXTex/include
@@ -136,6 +82,7 @@ target_include_directories(NovaraEngine PUBLIC
     ${CMAKE_SOURCE_DIR}/Libraries/vld/include
 
 )
+
 
 target_precompile_headers(NovaraEngine PRIVATE PCH/EnginePCH.h)
 
@@ -151,6 +98,20 @@ endif()
 # Final PhysX lib path
 set(PHYSX_LIB_PATH "${CMAKE_SOURCE_DIR}/Libraries/PhysX/lib/${PHYSX_LIB_SUBDIR}")
 message(STATUS "PhysX lib path: ${PHYSX_LIB_PATH}")
+
+
+# Determine PhysX lib subfolder based on build type
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    set(DIRECTX_LIB_SUBDIR "debug")
+elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
+    set(DIRECTX_LIB_SUBDIR "release")
+else()
+    set(DIRECTX_LIB_SUBDIR "release")  # fallback ou para RelWithDebInfo
+endif()
+
+# Final PhysX lib path
+set(DIRECTX_LIB_PATH "${CMAKE_SOURCE_DIR}/Libraries/DirectXTex/lib/${DIRECTX_LIB_SUBDIR}")
+message(STATUS "DirectXTex lib path: ${DIRECTX_LIB_PATH}")
 
 
 
@@ -201,6 +162,8 @@ target_link_libraries(NovaraEngine PUBLIC
     d3d11
     dxgi
     d3dcompiler
+
+    Xinput9_1_0
     
     
     "${FX11_LIB_PATH}/Effects11.lib"
@@ -218,7 +181,10 @@ target_link_libraries(NovaraEngine PUBLIC
     "${PHYSX_LIB_PATH}/PhysXVehicle_static_64.lib"
     "${PHYSX_LIB_PATH}/SceneQuery_static_64.lib"
     "${PHYSX_LIB_PATH}/SimulationController_static_64.lib"
+
+    "${DIRECTX_LIB_PATH}/DirectXTex.lib"
 )
+
 
 target_compile_definitions(NovaraEngine PUBLIC PX_STATIC_LIB)
 

@@ -1,5 +1,7 @@
-#include "EnginePCH.h"
+#pragma once
+
 #include "ParticleEmitterComponent.h"
+#include "ImguiHelper.h"
 //#include "Misc/ParticleMaterial.h"
 
 ParticleMaterial* ParticleEmitterComponent::m_pParticleMaterial{};

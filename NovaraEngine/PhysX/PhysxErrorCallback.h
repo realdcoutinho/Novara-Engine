@@ -1,4 +1,8 @@
 #pragma once
+
+#include <PxPhysicsAPI.h>
+using namespace physx;
+
 #include <foundation/PxErrorCallback.h>
 
 class PhysxErrorCallback final : public PxErrorCallback

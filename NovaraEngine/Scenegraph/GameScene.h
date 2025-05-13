@@ -1,10 +1,18 @@
 #pragma once
 #include "../Base/Structs.h"
+#include <xstring>
+#include <memory>
+#include <vector>
+#include "../Scenegraph/GameObject.h"
+
+
 class PostProcessingMaterial;
 class BaseMaterial;
 class PhysxProxy;
 class CameraComponent;
-class GameObject;
+struct GameContext;
+
+using namespace std;
 
 class GameScene
 {
@@ -53,10 +61,13 @@ protected:
 	virtual void OnSceneDeactivated() {}
 
 	SceneContext m_SceneContext{};
+
+
+
 private:
 	friend class SceneManager;
 
-	void RootInitialize(const GameContext& /*gameContext*/);
+	void RootInitialize(const GameContext& gameContext);
 	void RootPostInitialize();
 	void RootUpdate();
 	void RootDraw();

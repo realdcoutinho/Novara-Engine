@@ -1,4 +1,7 @@
-#include "EnginePCH.h"
+#pragma once
+
+#include <DirectXTex.h>
+
 #include "GameTime.h"
 
 GameTime::GameTime() :

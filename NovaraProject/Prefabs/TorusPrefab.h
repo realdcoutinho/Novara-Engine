@@ -1,4 +1,11 @@
 #pragma once
+#include "GameObject.h"
+
+#include <DirectXMath.h>
+using namespace DirectX;
+
+struct SceneContext;
+
 class TorusPrefab final : public GameObject
 {
 

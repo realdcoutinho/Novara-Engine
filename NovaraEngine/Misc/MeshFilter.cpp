@@ -1,5 +1,10 @@
-#include "EnginePCH.h"
+#pragma once
 #include "MeshFilter.h"
+#include "BaseMaterial.h"
+#include "Logger.h"
+
+
+
 XMFLOAT4 MeshFilter::m_DefaultColor = XMFLOAT4(1, 0, 0, 1);
 XMFLOAT4 MeshFilter::m_DefaultFloat4 = XMFLOAT4(0, 0, 0, 0);
 XMFLOAT3 MeshFilter::m_DefaultFloat3 = XMFLOAT3(0, 0, 0);

@@ -1,5 +1,9 @@
-#include "EnginePCH.h"
+#pragma once
+#pragma once
 #include "TextureData.h"
+
+#include "Macros.h"
+#include "Logger.h"
 
 UUID TextureData::GUID_TextureData{ 0,0,0,0 };
 

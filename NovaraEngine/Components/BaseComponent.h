@@ -1,9 +1,11 @@
 #pragma once
+#include <DirectXTex.h>
 
 class TransformComponent;
 class GameObject;
 class SceneContext;
 class GameScene;
+
 
 class BaseComponent
 {

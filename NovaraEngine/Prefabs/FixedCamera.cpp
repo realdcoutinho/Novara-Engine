@@ -1,7 +1,11 @@
-#include "EnginePCH.h"
+#pragma once
 #include "FixedCamera.h"
+
+#include "CameraComponent.h"
 
 void FixedCamera::Initialize(const SceneContext&)
 {
-	AddComponent(std::move(make_unique<CameraComponent>()));
+	auto pCamera = make_unique<CameraComponent>();
+	m_pCamera = pCamera.get();
+	AddComponent(std::move(pCamera));
 }

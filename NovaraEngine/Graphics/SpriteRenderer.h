@@ -1,4 +1,12 @@
 #pragma once
+#include "Singleton.h"
+
+#include <d3dx11effect.h>
+
+#include "VertexHelper.h"
+
+class TextureData;
+
 class SpriteRenderer final : public Singleton<SpriteRenderer>
 {
 public:

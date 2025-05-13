@@ -1,5 +1,10 @@
-#include "EnginePCH.h"
+#pragma once
 #include "PostProcessingMaterial.h"
+
+#include "RenderTarget.h"
+#include "ContentManager.h"
+#include "EffectHelper.h"
+#include "VertexHelper.h"
 
 ID3D11InputLayout* PostProcessingMaterial::m_pDefaultInputLayout = {};
 ID3D11Buffer* PostProcessingMaterial::m_pDefaultVertexBuffer = {};

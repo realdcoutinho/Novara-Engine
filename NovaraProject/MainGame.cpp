@@ -1,8 +1,10 @@
 //#include "Engin.h"
+#pragma once
 #include "MainGame.h"
+#include "SceneManager.h"
 
 /*LAB Content*/
-//#define W3
+#define W3
 // #define W4
 // #define W5
 // #define W6
@@ -18,11 +20,10 @@
 //#pragma region Lab/Milestone Includes
 //#ifdef W3
 #include "Scenes/MinionScene.h"
-#include "Scenes/Pong.h"
 
 
 ////#include "Scenes/Week 3/ComponentTestScene.h"
-////#include "Scenes/Week 3/PongScene.h"
+#include "Scenes/PongScene.h"
 //#endif
 //
 //#ifdef W4
@@ -95,22 +96,18 @@ void MainGame::OnGamePreparing(GameContext& /*gameContext*/)
 
 void MainGame::Initialize()
 {
-	auto scene = std::make_unique<MinionScene>();
-	if (!SceneManager::Get()->AddGameScene(std::move(scene)))
-	{
-		Logger::LogWarning(L"Scene not added");
-	}
-	auto scenePong = std::make_unique<Pong>();
-	if (!SceneManager::Get()->AddGameScene(std::move(scenePong)))
-	{
-		Logger::LogWarning(L"Scene not added");
-	}
+	//auto scene = std::make_unique<MinionScene>();
+	//if (!SceneManager::Get()->AddGameScene(std::move(scene)))
+	//{
+	//	Logger::LogWarning(L"Scene not added");
+	//}
+
 
 
 #ifdef W3
-	SceneManager::Get()->AddGameScene(new MinionScene());
+	SceneManager::Get()->AddGameScene(make_unique<MinionScene>());
 	//SceneManager::Get()->AddGameScene(new ComponentTestScene());
-	//SceneManager::Get()->AddGameScene(new PongScene());
+	SceneManager::Get()->AddGameScene(make_unique<PongScene>());
 #endif
 
 #ifdef W4

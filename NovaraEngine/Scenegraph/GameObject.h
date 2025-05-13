@@ -1,11 +1,18 @@
 #pragma once
 #include <functional>
+#include "BaseComponent.h"
+#include "GameScene.h"
 
 enum class PxTriggerAction
 {
 	ENTER,
 	LEAVE
 };
+
+
+class TransformComponent;
+class GameScene;
+class SceneContext;
 
 class GameObject
 {
@@ -31,16 +38,9 @@ public:
 		AddChild_(std::move(pObject));
 		return pTempObject;
 	}
+
 	void RemoveChild(GameObject* obj, bool deleteObject = false);
 
-	template<typename T>
-	std::enable_if_t<std::is_base_of_v<BaseComponent, T>, T*>
-		AddComponent(unique_ptr<T> pComp)
-	{
-		auto pTempComp = pComp.get();
-		AddComponent_(std::move(pComp));
-		return pTempComp;
-	}
 
 
 
@@ -59,6 +59,17 @@ public:
 	void SetOnTriggerCallBack(PhysicsCallback callback);
 
 #pragma region
+
+	template<typename T>
+	std::enable_if_t<std::is_base_of_v<BaseComponent, T>, T*>
+		AddComponent(unique_ptr<T> pComp)
+	{
+		auto pTempComp = pComp.get();
+		AddComponent_(std::move(pComp));
+		return pTempComp;
+	}
+
+
 	template <class T>
 	bool HasComponent(bool searchChildren = false)
 	{

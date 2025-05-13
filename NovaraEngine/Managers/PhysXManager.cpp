@@ -1,5 +1,10 @@
-#include "EnginePCH.h"
+#pragma once
 #include "PhysXManager.h"
+
+#include "NovaraSimulationFilterShader.h"
+#include "PhysxAllocator.h"
+#include "PhysxErrorCallback.h"
+#include "Macros.h"
 
 #define PVD_HOST "127.0.0.1"
 #define PVD_PORT 5425

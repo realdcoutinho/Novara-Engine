@@ -1,4 +1,9 @@
 #pragma once
+#include "Macros.h"
+#include "Utils.h"
+#include "Logger.h"
+#include <wrl/client.h>
+using Microsoft::WRL::ComPtr;
 
 struct RENDERTARGET_DESC
 {

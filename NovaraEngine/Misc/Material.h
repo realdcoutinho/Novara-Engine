@@ -1,5 +1,11 @@
 #pragma once
 
+#include <d3dx11effect.h>
+
+#include "ContentManager.h"
+#include "BaseMaterial.h"
+
+
 template<class T>
 class Material : public BaseMaterial
 

@@ -10,12 +10,15 @@ add_executable(FinalGame
         "Prefabs/CubePrefab.cpp"
         "Prefabs/CubePrefab.h"
         "Prefabs/SpherePrefab.h"
+        "Prefabs/SpherePrefab.cpp"
         "Prefabs/TorusPrefab.h"
         "Resources/Effects/PosNorm3D.fx"
         "Resources/Effects/PosNormCol3D.fx"
         "Resources/Effects/SpriteRenderer.fx"
         "Resources/Effects/TextRenderer.fx"
- "Scenes/Pong.cpp")
+        "Scenes/PongScene.h" 
+        "Scenes/PongScene.cpp"
+)
 
 if (WIN32)
     set_target_properties(FinalGame PROPERTIES
@@ -29,6 +32,17 @@ target_link_libraries(FinalGame PRIVATE NovaraEngine)
 # Include engine headers
 target_include_directories(FinalGame PRIVATE
     ${CMAKE_SOURCE_DIR}/NovaraEngine
+    ${CMAKE_SOURCE_DIR}/NovaraEngine/Base
+    ${CMAKE_SOURCE_DIR}/NovaraEngine/Components
+    ${CMAKE_SOURCE_DIR}/NovaraEngine/PCH
+    ${CMAKE_SOURCE_DIR}/NovaraEngine/Scenegraph
+    ${CMAKE_SOURCE_DIR}/NovaraEngine/PhysX
+    ${CMAKE_SOURCE_DIR}/NovaraEngine/Managers
+    ${CMAKE_SOURCE_DIR}/NovaraEngine/Utils
+    ${CMAKE_SOURCE_DIR}/NovaraEngine/Prefabs
+    ${CMAKE_SOURCE_DIR}/NovaraEngine/Misc
+    ${CMAKE_SOURCE_DIR}/NovaraEngine/Contents
+    ${CMAKE_SOURCE_DIR}/NovaraEngine/Graphics
 )
 
 

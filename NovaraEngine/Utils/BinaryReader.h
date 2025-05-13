@@ -1,5 +1,6 @@
 #pragma once
 #include "../Base/Logger.h"
+#include "Macros.h"
 
 class BinaryReader final
 {

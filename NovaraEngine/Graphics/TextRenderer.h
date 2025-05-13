@@ -1,4 +1,10 @@
 #pragma once
+
+#include <d3dx11effect.h>
+
+#include "Singleton.h"
+
+
 struct TextCache
 {
 	const std::wstring text{};
@@ -12,6 +18,10 @@ struct TextRenderGroup
 	UINT bufferStart{};
 	UINT bufferSize{};
 };
+
+
+struct VertexText;
+class SpriteFont;
 
 class TextRenderer final : public Singleton<TextRenderer>
 {

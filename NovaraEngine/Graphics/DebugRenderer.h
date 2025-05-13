@@ -1,4 +1,21 @@
 #pragma once
+#pragma once
+
+#include <d3dx11effect.h>
+
+#include <PxPhysicsAPI.h>
+using namespace physx;
+
+#include "Macros.h"
+#include "VertexHelper.h"
+#include "GameScene.h"
+
+
+struct GameContext;
+struct SceneContext;
+struct SceneSettings;
+
+
 class DebugRenderer final
 {
 public:

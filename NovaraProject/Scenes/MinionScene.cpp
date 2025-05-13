@@ -1,11 +1,13 @@
 //Precompiled Header [ALWAYS ON TOP IN CPP]
-//#include "stdafx.h"
-#include "EnginePCH.h"
+
+#pragma once
 #include "MinionScene.h"
 
 //#include "Prefabs/CubePrefab.h"
 //#include "Prefabs/SpherePrefab.h"
-
+#include "Logger.h"
+#include "ImguiHelper.h"
+#include "GameObject.h"
 
 MinionScene::MinionScene() :
 	GameScene(L"MinionScene") 
@@ -19,7 +21,7 @@ void MinionScene::Initialize()
 	//m_SceneContext.settings.drawGrid = true;
 	m_SceneContext.settings.enableOnGUI = true;
 
-	Logger::LogInfo(L"Welcome, humble Minion!");
+	//Logger::LogInfo(L"Welcome, humble Minion!");
 }
 
 void MinionScene::Update()
@@ -34,7 +36,7 @@ void MinionScene::Draw()
 
 void MinionScene::OnGUI()
 {
-	ImGui::Text("This only activates if\n SceneSettings.enableOnGUI is True.\n\n");
-	ImGui::Text("Use ImGui to add custom\n controllable scene parameters!");
-	ImGui::ColorEdit3("Demo ClearColor", &m_SceneContext.settings.clearColor.x, ImGuiColorEditFlags_NoInputs);
+	//ImGui::Text("This only activates if\n SceneSettings.enableOnGUI is True.\n\n");
+	//ImGui::Text("Use ImGui to add custom\n controllable scene parameters!");
+	//ImGui::ColorEdit3("Demo ClearColor", &m_SceneContext.settings.clearColor.x, ImGuiColorEditFlags_NoInputs);
 }

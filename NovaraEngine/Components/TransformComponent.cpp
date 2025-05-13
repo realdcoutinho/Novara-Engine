@@ -1,4 +1,10 @@
-
+#pragma once
+#include "TransformComponent.h"
+#include "Logger.h"
+#include "GameObject.h"
+#include "Macros.h"
+#include "RigidBodyComponent.h"
+#include "ControllerComponent.h"
 
 TransformComponent::TransformComponent() :
 	m_Position{ 0, 0, 0 },
@@ -26,7 +32,7 @@ bool TransformComponent::CheckIfDirty()
 	}
 
 	//RigidBody (non static), Controller or Transform changed == update required
-	//m_IsDirty = m_pRigidBodyComponent != nullptr && !m_pRigidBodyComponent->IsStatic();
+	m_IsDirty = m_pRigidBodyComponent != nullptr && !m_pRigidBodyComponent->IsStatic();
 	m_IsDirty = m_IsDirty || m_pControllerComponent != nullptr;
 	m_IsDirty = m_IsDirty || m_IsTransformChanged != TransformChanged::NONE;
 
@@ -50,19 +56,19 @@ void TransformComponent::UpdateTransforms()
 {
 	ASSERT_IF(m_pRigidBodyComponent && m_pControllerComponent, L"Single GameObject can't have a RigidBodyComponent AND ControllerComponent at the same time (remove one)")
 
-		//if (m_pRigidBodyComponent && m_IsInitialized)
-		//{
-		//	if (isSet(m_IsTransformChanged, TransformChanged::TRANSLATION))m_pRigidBodyComponent->Translate(m_Position);
-		//	else m_Position = m_pRigidBodyComponent->GetPosition();
+		if (m_pRigidBodyComponent && m_IsInitialized)
+		{
+			if (isSet(m_IsTransformChanged, TransformChanged::TRANSLATION))m_pRigidBodyComponent->Translate(m_Position);
+			else m_Position = m_pRigidBodyComponent->GetPosition();
 
-		//	if (isSet(m_IsTransformChanged, TransformChanged::ROTATION)) m_pRigidBodyComponent->Rotate(m_Rotation);
-		//	else m_Rotation = m_pRigidBodyComponent->GetRotation();
-		//}
-		//else if (m_pControllerComponent && m_IsInitialized)
-		//{
-		//	if (isSet(m_IsTransformChanged, TransformChanged::TRANSLATION)) m_pControllerComponent->Translate(m_Position);
-		//	else m_Position = m_pControllerComponent->GetPosition();
-		//}
+			if (isSet(m_IsTransformChanged, TransformChanged::ROTATION)) m_pRigidBodyComponent->Rotate(m_Rotation);
+			else m_Rotation = m_pRigidBodyComponent->GetRotation();
+		}
+		else if (m_pControllerComponent && m_IsInitialized)
+		{
+			if (isSet(m_IsTransformChanged, TransformChanged::TRANSLATION)) m_pControllerComponent->Translate(m_Position);
+			else m_Position = m_pControllerComponent->GetPosition();
+		}
 
 	//Calculate World Matrix
 	//**********************
@@ -192,12 +198,12 @@ bool TransformComponent::CheckConstraints() const
 	if (!m_IsInitialized)
 		return true;
 
-	//const auto rigidBody = GetGameObject()->GetComponent<RigidBodyComponent>();
-	//if (rigidBody != nullptr && rigidBody->IsStatic())
-	//{
-	//	Logger::LogWarning(L"[TransformComponent] Constraint Broken: GameObject with a static rigid body can't be transformed!");
-	//	return false;
-	//}
+	const auto rigidBody = GetGameObject().GetComponent<RigidBodyComponent>();
+	if (rigidBody != nullptr && rigidBody->IsStatic())
+	{
+		Logger::LogWarning(L"[TransformComponent] Constraint Broken: GameObject with a static rigid body can't be transformed!");
+		return false;
+	}
 
 	return true;
 }

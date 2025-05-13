@@ -1,4 +1,9 @@
 #pragma once
+
+#include <d3dx11effect.h>
+
+#include "ContentManager.h"
+
 class EffectLoader : public ContentLoader<ID3DX11Effect>
 {
 public:

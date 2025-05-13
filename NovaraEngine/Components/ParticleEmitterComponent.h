@@ -1,4 +1,9 @@
 #pragma once
+
+#include "VertexHelper.h"
+#include "BaseComponent.h"
+#include <string>
+
 class ParticleMaterial;
 
 struct ParticleEmitterSettings
@@ -31,6 +36,11 @@ struct Particle
 	float initialSize{};
 	float sizeChange{};
 };
+
+
+class TextureData;
+struct SceneContext;
+class TextureData;
 
 class ParticleEmitterComponent : public BaseComponent
 {

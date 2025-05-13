@@ -1,4 +1,7 @@
 #pragma once
+#include "Singleton.h"
+
+class GameScene;
 
 class SceneManager final : public Singleton<SceneManager>
 {

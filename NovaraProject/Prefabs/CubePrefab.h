@@ -1,4 +1,15 @@
 #pragma once
+
+#include "GameObject.h"
+#include <DirectXColors.h>
+#include <DirectXMath.h>
+
+
+using namespace DirectX;
+
+struct SceneContext;
+
+
 class CubePrefab final : public GameObject
 {
 public:

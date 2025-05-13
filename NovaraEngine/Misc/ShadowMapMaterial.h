@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Material.h"
+
 class ShadowMapMaterial final : public Material<ShadowMapMaterial>
 {
 public:

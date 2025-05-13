@@ -1,5 +1,12 @@
-#include "EnginePCH.h"
+#pragma once
 #include "FreeCamera.h"
+
+#include "TransformComponent.h"
+#include "CameraComponent.h"
+#include "BaseComponent.h"
+#include "InputManager.h"
+#include "GameTime.h"
+#include "Logger.h"
 
 void FreeCamera::Initialize(const SceneContext&)
 {

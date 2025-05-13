@@ -1,6 +1,16 @@
-#include "EnginePCH.h"
+#pragma once
 #include "BaseMaterial.h"
+
 #include <ranges>
+
+#include "TransformComponent.h"
+#include "CameraComponent.h"
+#include "ModelComponent.h"
+#include "SpriteFont.h"
+#include "ContentManager.h"
+#include "ImguiHelper.h"
+
+
 
 std::map<std::string, BaseMaterial::eRootVariable> BaseMaterial::m_RootVariableSemanticLUT = {
 		{"world", eRootVariable::WORLD},

@@ -1,5 +1,10 @@
 #pragma once
-//Resharper Disable All
+#include <d3dx11effect.h>
+
+#include "Base/Structs.h"
+
+class RenderTarget;
+struct SceneContext;
 
 class PostProcessingMaterial
 {

@@ -1,4 +1,15 @@
 #pragma once
+#include <DirectXMath.h>
+using namespace DirectX;
+
+#include <PxPhysicsAPI.h>
+using namespace physx;
+
+#include "Enumerations.h"
+#include "BaseComponent.h"
+
+class BaseScene;
+struct SceneContext;
 
 class ControllerComponent : public BaseComponent
 {

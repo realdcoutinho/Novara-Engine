@@ -1,6 +1,21 @@
 #pragma once
 
+#include <string>
+#include <memory>
+
+#include "DirectXMath.h"
+using namespace DirectX;
+
+#include <PxPhysicsAPI.h>
+using namespace physx;
+
+#include "Enumerations.h"
+#include "BaseComponent.h"
+
+
 #pragma region ColliderInfo
+
+class RigidBodyComponent;
 class ColliderInfo
 {
 public:
@@ -88,7 +103,7 @@ public:
 
 protected:
 
-	void Initialize(const SceneContext& /*sceneContext*/) override;
+	void Initialize(const SceneContext& sceneContext) override;
 	void OnSceneAttach(GameScene* pScene) override;
 	void OnSceneDetach(GameScene* pScene) override;
 	void OnOwnerAttach(GameObject*) override;

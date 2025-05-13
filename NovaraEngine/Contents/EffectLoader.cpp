@@ -1,5 +1,10 @@
-#include "EnginePCH.h"
+#pragma once
+
 #include "EffectLoader.h"
+
+#include <d3d11.h>
+#include <dxgi.h>
+#include <d3dcompiler.h>
 
 ID3DX11Effect* EffectLoader::LoadContent(const ContentLoadInfo& loadInfo)
 {

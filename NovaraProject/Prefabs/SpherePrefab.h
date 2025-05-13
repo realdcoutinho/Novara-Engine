@@ -1,4 +1,14 @@
 #pragma once
+#include "GameObject.h"
+#include <DirectXColors.h>
+#include <DirectXMath.h>
+
+
+using namespace DirectX;
+
+struct SceneContext;
+
+
 class SpherePrefab final : public GameObject
 {
 public:

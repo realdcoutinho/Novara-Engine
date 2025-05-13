@@ -1,4 +1,4 @@
-#include "EnginePCH.h"
+#pragma once
 #include "ImguiHelper.h"
 
 ImFont* ImguiFonts::pFont_DIN_Black_16 = {};

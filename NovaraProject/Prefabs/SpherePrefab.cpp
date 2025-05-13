@@ -1,17 +1,22 @@
-#include "EnginePCH.h"
+#pragma once
 #include "SpherePrefab.h"
+
+#include "VertexHelper.h"
+#include "MeshDrawComponent.h"
+#include "MeshIndexedDrawComponent.h"
 
 SpherePrefab::SpherePrefab(float radius, int steps, XMFLOAT4 color) :
 	m_Radius(radius),
 	m_Steps(steps),
 	m_Color(color)
 {
+
 }
 
-void SpherePrefab::Initialize(const SceneContext& )
+void SpherePrefab::Initialize(const SceneContext& sceneContext)
 {
 	const auto vertCount = m_Steps * (m_Steps - 1) + 2;
-	const auto pMesh = new MeshIndexedDrawComponent(vertCount, (m_Steps - 2) * m_Steps * 6 + 6 * m_Steps);
+	auto pMesh = make_unique<MeshIndexedDrawComponent>(vertCount, (m_Steps - 2) * m_Steps * 6 + 6 * m_Steps);
 
 	//Vertices
 	const float deltaTheta = XM_PI / m_Steps;
@@ -93,5 +98,5 @@ void SpherePrefab::Initialize(const SceneContext& )
 	}
 
 
-	AddComponent(pMesh);
+	AddComponent(std::move(pMesh));
 }

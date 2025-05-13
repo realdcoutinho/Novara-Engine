@@ -1,4 +1,4 @@
-#include "EnginePCH.h"
+#pragma once
 #include "SpriteFont.h"
 
 SpriteFont::SpriteFont(const SpriteFontDesc& fontDesc) :

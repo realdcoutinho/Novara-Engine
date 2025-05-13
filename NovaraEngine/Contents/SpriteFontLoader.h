@@ -1,5 +1,5 @@
 #pragma once
-
+#include "ContentLoader.h"
 class SpriteFont;
 
 class SpriteFontLoader : public ContentLoader<SpriteFont>

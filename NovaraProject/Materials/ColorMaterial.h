@@ -1,4 +1,6 @@
 #pragma once
+#include "BaseMaterial.h"
+#include "Material.h"
 
 class ColorMaterial final: public Material<ColorMaterial>
 {

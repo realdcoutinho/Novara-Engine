@@ -1,5 +1,10 @@
-#include "EnginePCH.h"
+#pragma once
+#include "BaseComponent.h"
 
+#include "Logger.h"
+#include "GameObject.h"
+#include "TransformComponent.h"
+#include "GameScene.h"
 
 UINT BaseComponent::m_ComponentCounter{};
 
@@ -44,13 +49,16 @@ void BaseComponent::RootOnSceneDetach(GameScene* pScene)
 
 TransformComponent& BaseComponent::GetTransform() const
 {
-//#if _DEBUG
-//	if (m_pGameObject == nullptr)
-//	{
-//		Logger::LogWarning(L"Failed to retrieve the TransformComponent. GameObject is NULL.");
-//		return nullptr;
-//	}
-//#endif
+	static TransformComponent dummyTransform; // risky: shared across all calls!
+
+#if _DEBUG
+	if (m_pGameObject == nullptr)
+	{
+		Logger::LogWarning(L"Failed to retrieve the TransformComponent. GameObject is NULL.");
+		//return nullptr;
+		return dummyTransform;
+	}
+#endif
 
 	return m_pGameObject->GetTransform();
 }

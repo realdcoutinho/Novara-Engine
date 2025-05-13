@@ -1,4 +1,9 @@
 #pragma once
+#include "GameScene.h"
+
+class GameObject;
+class RigidBodyComponent;
+class FreeCamera;
 
 class MinionScene final : public GameScene
 {

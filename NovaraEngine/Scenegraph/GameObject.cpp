@@ -1,6 +1,10 @@
-#include "EnginePCH.h"
+#pragma once
 #include "GameObject.h"
+
 #include <algorithm>
+
+#include "TransformComponent.h"
+#include "Logger.h"
 
 GameObject::GameObject() :
 	m_IsActive(true)

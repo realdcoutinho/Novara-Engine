@@ -1,5 +1,11 @@
-#include "EnginePCH.h"
+#pragma once
+
 #include "MeshIndexedDrawComponent.h"
+
+#include "TransformComponent.h"
+#include "CameraComponent.h"
+#include "ContentManager.h"
+#include "EffectHelper.h"
 
 ID3DX11EffectMatrixVariable* MeshIndexedDrawComponent::m_pWorldVar = nullptr;
 ID3DX11EffectMatrixVariable* MeshIndexedDrawComponent::m_pWvpVar = nullptr;

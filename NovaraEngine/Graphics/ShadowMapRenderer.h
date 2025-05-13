@@ -1,5 +1,13 @@
 #pragma once
+
+#include "EffectHelper.h"
+#include "Singleton.h"
+
 class ShadowMapMaterial;
+class RenderTarget;
+class MeshFilter;
+
+
 
 class ShadowMapRenderer : public Singleton<ShadowMapRenderer>
 {

@@ -1,2 +1,2 @@
 #pragma once
-#include "EnginePCH.h"
+#include "../NovaraEngine/SceneGraph/GameObject.h"

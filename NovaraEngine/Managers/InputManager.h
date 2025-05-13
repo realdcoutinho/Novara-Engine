@@ -1,6 +1,17 @@
 #pragma once
-#include "../Base/Enumerations.h"
+
+#include <DirectXMath.h>
+using namespace DirectX;
+
+#include <map>
+#include <chrono>
+
 #include "Xinput.h"
+
+
+#include "../Base/Enumerations.h"
+#include "Structs.h"
+
 
 class InputManager final
 {

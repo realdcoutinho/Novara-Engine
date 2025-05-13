@@ -1,5 +1,4 @@
 #pragma once
-#include "EnginePCH.h"
 #include "NovaraGame.h"
 
 class MainGame final : public NovaraGame

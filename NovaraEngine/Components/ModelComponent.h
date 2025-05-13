@@ -1,8 +1,10 @@
 #pragma once
 #include "BaseComponent.h"
+#include <string>
 
 class MeshFilter;
 class ModelAnimator;
+class BaseMaterial;
 
 class ModelComponent : public BaseComponent
 {

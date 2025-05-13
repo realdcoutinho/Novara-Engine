@@ -1,4 +1,10 @@
 #pragma once
+
+#include "ContentLoader.h"
+
+class BinaryReader;	
+class MeshFilter;
+
 class MeshFilterLoader : public ContentLoader<MeshFilter>
 {
 public:
