@@ -103,7 +103,7 @@ public:
 
 protected:
 
-	void Initialize(const SceneContext& /*sceneContext*/) override;
+	void Initialize(const SceneContext& sceneContext) override;
 	void OnSceneAttach(GameScene* pScene) override;
 	void OnSceneDetach(GameScene* pScene) override;
 	void OnOwnerAttach(GameObject*) override;

@@ -14,6 +14,7 @@ using namespace DirectX;
 #pragma warning(pop)
 
 class RigidBodyComponent;
+class CubePrefab;
 
 class PongScene final : public GameScene
 {
@@ -28,27 +29,37 @@ public:
 
 protected:
 	void Initialize() override;
+	void PostInitialize() override;
 	void Update() override;
 
 	PxPhysics& m_Physx{ PxGetPhysics() };
+	PxMaterial* m_pBouncyMaterial{ nullptr };
+
+	//void InitializePeddles();
+
+	CubePrefab* InitializePlayer(XMFLOAT3& position);
 
 
-	void InitializePeddles();
-	GameObject* m_pLeftPeddle{ nullptr };
-	XMFLOAT3 m_pLeftPos{};
+	CubePrefab* m_pPlayerOne{ nullptr };
+	CubePrefab* m_pPlayerTwo{ nullptr };
+	XMFLOAT3 m_PlayerOnePos{};
+	XMFLOAT3 m_PlayerTwoPos{};
+
+
 	RigidBodyComponent* m_pLeftTrigger{ nullptr };
 	GameObject* m_pRightPeddle{ nullptr };
 	XMFLOAT3 m_pRightPos{};
 	RigidBodyComponent* m_pRightTrigger{ nullptr };
+	GameObject* m_pCamera{ nullptr };
 
-	//void PeddleMovement();
+	void PeddleMovement();
 	float m_Speed{ 15.0f };
 	float m_Size{ 8 };
 
-	//void InitializeBall();
+	void InitializeBall();
 	GameObject* m_pBall{ nullptr };
 
-	//void InitializeBorders();
+	void InitializeBorders();
 	RigidBodyComponent* m_pTopWall{ nullptr };
 	RigidBodyComponent* m_pBottomWall{ nullptr };
 	RigidBodyComponent* m_pLeftWall{ nullptr };
@@ -56,12 +67,12 @@ protected:
 	bool m_OutOfBounds{ false };
 
 
-	//void BallMovement();
+	void BallMovement();
 	XMFLOAT3 m_BallSpeed{};
 
 	virtual void OnSceneActivated() override;
 
-	//void Reset();
+	void Reset();
 	bool m_GameStarted{ false };
 
 

@@ -55,6 +55,11 @@ struct SceneSettings
 
 struct SceneContext
 {
+	InputManager& GetInput() const { return *pInput.get(); }
+	LightManager& GetLights() const { return *pLights.get(); }
+	GameTime& GetGameTime() const { return *pGameTime.get(); }
+
+
 	unique_ptr<InputManager> pInput{};
 	unique_ptr<LightManager> pLights{};
 	unique_ptr<GameTime> pGameTime{};

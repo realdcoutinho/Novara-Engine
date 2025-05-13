@@ -1,7 +1,9 @@
 #pragma once
-#include "GameObject.h"	
-
+#include "GameObject.h"
+#include <DirectXColors.h>
 #include <DirectXMath.h>
+
+
 using namespace DirectX;
 
 struct SceneContext;

@@ -96,11 +96,11 @@ void MainGame::OnGamePreparing(GameContext& /*gameContext*/)
 
 void MainGame::Initialize()
 {
-	auto scene = std::make_unique<MinionScene>();
-	if (!SceneManager::Get()->AddGameScene(std::move(scene)))
-	{
-		Logger::LogWarning(L"Scene not added");
-	}
+	//auto scene = std::make_unique<MinionScene>();
+	//if (!SceneManager::Get()->AddGameScene(std::move(scene)))
+	//{
+	//	Logger::LogWarning(L"Scene not added");
+	//}
 
 
 

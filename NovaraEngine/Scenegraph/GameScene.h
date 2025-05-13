@@ -61,6 +61,9 @@ protected:
 	virtual void OnSceneDeactivated() {}
 
 	SceneContext m_SceneContext{};
+
+
+
 private:
 	friend class SceneManager;
 

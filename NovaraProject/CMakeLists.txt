@@ -10,12 +10,15 @@ add_executable(FinalGame
         "Prefabs/CubePrefab.cpp"
         "Prefabs/CubePrefab.h"
         "Prefabs/SpherePrefab.h"
+        "Prefabs/SpherePrefab.cpp"
         "Prefabs/TorusPrefab.h"
         "Resources/Effects/PosNorm3D.fx"
         "Resources/Effects/PosNormCol3D.fx"
         "Resources/Effects/SpriteRenderer.fx"
         "Resources/Effects/TextRenderer.fx"
- "Scenes/PongScene.h" "Scenes/PongScene.cpp")
+        "Scenes/PongScene.h" 
+        "Scenes/PongScene.cpp"
+)
 
 if (WIN32)
     set_target_properties(FinalGame PROPERTIES
