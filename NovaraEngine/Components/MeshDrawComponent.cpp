@@ -6,8 +6,11 @@
 #include "EffectHelper.h"
 #include "VertexHelper.h"
 
-ComPtr<ID3DX11EffectMatrixVariable> MeshDrawComponent::m_pWorldVar = nullptr;
-ComPtr<ID3DX11EffectMatrixVariable> MeshDrawComponent::m_pWvpVar = nullptr;
+//ComPtr<ID3DX11EffectMatrixVariable> MeshDrawComponent::m_pWorldVar = nullptr;
+//ComPtr<ID3DX11EffectMatrixVariable> MeshDrawComponent::m_pWvpVar = nullptr;
+
+ID3DX11EffectMatrixVariable* MeshDrawComponent::m_pWorldVar = nullptr;
+ID3DX11EffectMatrixVariable* MeshDrawComponent::m_pWvpVar = nullptr;
 
 MeshDrawComponent::MeshDrawComponent(UINT triangleCapacity, bool enableTransparency) :
 	m_pVertexBuffer(nullptr),

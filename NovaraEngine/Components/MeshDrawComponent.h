@@ -46,8 +46,10 @@ protected:
 
 private:
 
-	static ComPtr<ID3DX11EffectMatrixVariable> m_pWorldVar;
-	static ComPtr<ID3DX11EffectMatrixVariable> m_pWvpVar;
+	//static ComPtr<ID3DX11EffectMatrixVariable> m_pWorldVar;
+	//static ComPtr<ID3DX11EffectMatrixVariable> m_pWvpVar;
+
+	static ID3DX11EffectMatrixVariable* m_pWorldVar, * m_pWvpVar;
 
 	std::vector<TrianglePosNormCol> m_vecTriangles;
 	ComPtr<ID3D11Buffer> m_pVertexBuffer;
